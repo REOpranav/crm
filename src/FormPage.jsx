@@ -1,21 +1,51 @@
 import React from 'react'
-import {Row , Form ,Input ,InputNumber ,Button} from 'antd'
+import {Row , Form ,Input,message ,InputNumber ,Button} from 'antd'
 import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const FormPage = () => {
+    const navigation = useNavigate()
     const [form] = Form.useForm()
+    
+  function navigate() {
+    navigation('/')
+  }
+
+  function messageSuccess(){
+     message.success('Sucessfully created a Lead')
+  }
+
     const layout = {
         labelCol: {
           span: 9,
         },
         wrapperCol: {
           span: 16,
-        },
+        },  
       };
 
- function onFinish(values) {
+  const onFinish = (values)=>{
+     axios.post('http://localhost:3000/leads',values)
+      .then(res => {
+        if (res.status == 201) {
+          messageSuccess();
+        }
+    }).catch(err => {
+      if (err.response) {
+        message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    })
+
+    setTimeout(()=>{
+      navigate()
+    },1*1000)
     
- }
+  }
 
   return (
     <Row style={{padding:'10px'}}>

@@ -1,0 +1,18 @@
+{
+  "leads": [
+    {
+      "id": "6b7b",
+      "firstName": "vadivel",
+      "secoundName": "secounf",
+      "company": "zappy",
+      "annual revenue": 1
+    },
+    {
+      "id": "ecf2",
+      "firstName": "as",
+      "secoundName": "sx",
+      "company": "s",
+      "annual revenue": 0
+    }
+  ]
+}
