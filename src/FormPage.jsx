@@ -3,24 +3,26 @@ import {Row , Form ,Input,message ,InputNumber ,Button , Flex} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import './Formpage.css'
+
+ // this is message ele from antd
+  function messageSuccess(){
+    message.success('Sucessfully created a Lead')
+  }
 
 const FormPage = () => {
-  const navigation = useNavigate()
-  
-  //this is for navigation
-  function navigate() {
-      navigation('/leadboard')
-    }
 
+  const navigation = useNavigate() //this is for navigation 
   const [formData,setFormData] = useState({
-    firstname : '',
-    lastname:'',
-    email:'',
-    mobile:'',
-    companyName:'',
-    annualrevenue: ''
+      firstname : '',
+      lastname:'',
+      email:'',
+      mobile:'',
+      companyName:'',
+      annualrevenue: ''
   })
 
+  // this is handle chanhge function
   const handleChange = (e)=>{
        const {name,value} = e.target
        setFormData((prevData) => ({
@@ -29,51 +31,82 @@ const FormPage = () => {
       }));
   }
 
+  //this function for get data from form and make post request
   const onFinish = (e)=>{
     e.preventDefault()
-      axios.post('http://localhost:3000/leads',formData)
-      .then(res => {
-        if (res.status == 201) {
-          messageSuccess();
-          console.log(res.data);
-        }
-    }).catch(err => {
-      if (err.response) {
-        message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
-      } else if (err.request) {
-        message.error('Error: No response from server.');
-      } else {
-        message.error('Error: ' + err.message);
-      }
-  })
+        axios.post('http://localhost:3000/leads',formData)
+          .then(res => {
+            if (res.status == 201) {
+              messageSuccess();
+              console.log(res.data);
+            }
+        }).catch(err => {
+          if (err.response) {
+            message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+          } else if (err.request) {
+            message.error('Error: No response from server.');
+          } else {
+            message.error('Error: ' + err.message);
+          }
+      })
 
-  // this is message ele from antd
-  function messageSuccess(){
-     message.success('Sucessfully created a Lead')
+        setTimeout(()=>{
+            navigate()
+        },1 * 900)  
+}
+
+  // this for navigation
+    function navigate() {
+      navigation('/leadboard')
+    }
+  
+  // This for cancelling form
+    function cancelForm() {
+      navigate('/leadBoard')
     }
 
-    setTimeout(()=>{
-      navigate()
-     },1 * 900)  
+  // validation Form
+  function validation(leadFormValues) {
+    let errorvalues = {}
+    if (!leadFormValues.firstname.trim()) {
+        errorvalues.firstname = 'First Name is Required'
+    }
+
+    if (!leadFormValues.lastname.trim()) {
+        errorvalues.lastname = 'Last Name is Required'
+    }
+    
+    if (!leadFormValues.email.trim()) {
+        errorvalues.email = 'Email Id is Required'
+    }
+    
+    if (!leadFormValues.mobile.trim()) {
+        errorvalues.mobile = 'Mobile Number is Required'
+    }
+    return errorvalues
   }
 
-  // this for cancelling form
-  function cancelForm() {
-      navigate('/leadBoard')
+  //checking tthe form fileds are filled or not
+  function checkForSubmitting(event) {
+    let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0 // if it was greater than 0 that mean not fill the manditory field
+    if (checkHavingErrorInInputField) {
+       onFinish(event)
+     }else{
+       message.error('Fill the Manditory Form Fields')
+     }
   }
 
   return (
-  <div>
-    
-    <Row justify={'end'}>
+  <div>  
+    <Row justify={'end'} style={{padding:'10px'}}>
       <Flex gap="small">
-        <Button type='primary'  onClick={onFinish} >Submit</Button>
         <Button type='primary' danger onClick={cancelForm}>Cancel</Button>
+        <Button type='primary' onClick={checkForSubmitting} >Submit</Button>
       </Flex>
     </Row>
 
     <Row>
-         <form onSubmit={onFinish}>
+         <form onSubmit={checkForSubmitting}>
             <p>
                 <label for="firstname"></label>
                 <input type="text" name="firstname" id="firstname" placeholder="First Name" value={formData.firstname} onChange={handleChange} /> <br />
@@ -82,32 +115,32 @@ const FormPage = () => {
 
             <p>
                 <label for="lastname"></label>
-                <input type="text" name="lastname" id="lastname" placeholder="Last Name" value={formData.lastname} onChange={handleChange}  /> <br />
+                <input type="text" name="lastname" id="lastname" placeholder="Last Name" value={formData.lastname} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="email"></label>
-                <input type="email" name="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange} /> <br />
+                <input type="email" name="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="mobile"></label>
-                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" value={formData.mobile} onChange={handleChange} /> <br />
+                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="companyName"></label>
-                <input type="text" name="companyName" id="companyName" placeholder="company Name" value={formData.companyName} onChange={handleChange} /> <br />
+                <input type="text" name="companyName" id="companyName" placeholder="company Name" value={formData.companyName} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
 
             <p>
                 <label for="annualrevenue"></label>
-                <input type="number" name="annualrevenue" id="annualrevenue" placeholder="Annual Revenue" value={formData.annualrevenue} onChange={handleChange} /> <br />
+                <input type="number" name="annualrevenue" id="annualrevenue" placeholder="Annual Revenue" value={formData.annualrevenue} onChange={handleChange}/> <br />
                 <span></span>
             </p>
          </form>

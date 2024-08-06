@@ -84,16 +84,18 @@ const LeadBoard = () => {
             dataIndex: 'annualRevenue',
             key: 'annualRevenue',
           },
+          
+          
         ]
 
   return (
     <div>     
-          <Row justify={'end'} style={{border:'1px solid black',padding:'10px'}}>
+          <Row justify={'end'} style={{padding:'10px'}}>
                 <Button type='primary' onClick={formNavigate}>Create Lead</Button>
           </Row>
           
-          <Row>
-             <Table columns={column} dataSource={data} style={{width : '100%'}}/>
+          <Row justify={'center'}>
+             <Table columns={column} dataSource={data} style={{width : '80%'}} pagination={false} bordered scroll={{y: 400 }}/>
           </Row>
             
 
