@@ -1,18 +1,30 @@
 {
   "leads": [
     {
-      "id": "6b7b",
-      "firstName": "vadivel",
-      "secoundName": "secounf",
-      "company": "zappy",
-      "annual revenue": 1
+      "id": "8bf9",
+      "firstname": "kevin",
+      "lastname": "eleven",
+      "email": "eleven@gmail.com",
+      "mobile": "1000",
+      "annualrevenue": "299000"
     },
     {
-      "id": "ecf2",
-      "firstName": "as",
-      "secoundName": "sx",
-      "company": "s",
-      "annual revenue": 0
+      "id": "7d3f",
+      "firstname": "pranav",
+      "lastname": "vadivel",
+      "email": "vadivel@gmail.com",
+      "mobile": "9993922323",
+      "companyName": "Zappyworks",
+      "annualrevenue": "10000000"
+    },
+    {
+      "id": "67b5",
+      "firstname": "water",
+      "lastname": "vadivel",
+      "email": "waster@gmail.com",
+      "mobile": "79129823",
+      "companyName": "happyWorks",
+      "annualrevenue": "9093922"
     }
   ]
 }
