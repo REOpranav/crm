@@ -3,7 +3,7 @@ import { Form ,Row} from "antd";
 import {Routes,Route} from 'react-router-dom'
 import LeadBoard from './LeadBoard';
 import FormPage from './FormPage';
-import Dashboard from './DashBoard';
+import Dashboard from './Dashboard';
 
 function App() {
   return (
