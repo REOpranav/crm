@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Row , Form ,Input,message ,InputNumber ,Button , Flex} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
@@ -10,10 +10,13 @@ import './Formpage.css'
     message.success('Sucessfully created a Lead')
   }
 
-const FormPage = () => {
 
-  const navigation = useNavigate() //this is for navigation 
+const FormPage = () => {
+  const navigation = useNavigate() //this is for navigation   
+  const [id,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
+  
   const [formData,setFormData] = useState({
+      id : JSON.stringify(id),
       firstname : '',
       lastname:'',
       email:'',
@@ -32,28 +35,26 @@ const FormPage = () => {
   }
 
   //this function for get data from form and make post request
-  const onFinish = (e)=>{
-    e.preventDefault()
+  const onFinish = (e)=>{ 
+    e.preventDefault()  
         axios.post('http://localhost:3000/leads',formData)
           .then(res => {
             if (res.status == 201) {
               messageSuccess();
-              console.log(res.data);
             }
         }).catch(err => {
           if (err.response) {
             message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
           } else if (err.request) {
-            message.error('Error: No response from server.');
+            message.error('Error: No response   from server.');
           } else {
             message.error('Error: ' + err.message);
           }
       })
-
         setTimeout(()=>{
             navigate()
-        },1 * 900)  
-}
+        },1 * 100) 
+  }
 
   // this for navigation
     function navigate() {
@@ -136,7 +137,6 @@ const FormPage = () => {
                 <input type="text" name="companyName" id="companyName" placeholder="company Name" value={formData.companyName} onChange={handleChange}/> <br />
                 <span></span>
             </p>
-
 
             <p>
                 <label for="annualrevenue"></label>
