@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Row , Form ,Input,message ,InputNumber ,Button , Flex} from 'antd'
+import {Row , Form ,Input,message ,InputNumber ,Button , Flex, Popconfirm} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -21,6 +21,7 @@ const FormPage = () => {
       lastname:'',
       email:'',
       mobile:'',
+      date:'',
       companyName:'',
       annualrevenue: ''
   })
@@ -102,7 +103,9 @@ const FormPage = () => {
     <Row justify={'end'} style={{padding:'10px'}}>
       <Flex gap="small">
         <Button type='primary' danger onClick={cancelForm}>Cancel</Button>
-        <Button type='primary' onClick={checkForSubmitting} >Submit</Button>
+        <Popconfirm title={'Are you sure to Edit this lead'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
+                <Button type='primary'>Submit</Button>  
+        </Popconfirm>
       </Flex>
     </Row>
 
@@ -110,25 +113,30 @@ const FormPage = () => {
          <form onSubmit={checkForSubmitting}>
             <p>
                 <label for="firstname"></label>
-                <input type="text" name="firstname" id="firstname" placeholder="First Name" value={formData.firstname} onChange={handleChange} /> <br />
+                <input type="text" name="firstname" id="firstname" placeholder="First Name *" value={formData.firstname} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="lastname"></label>
-                <input type="text" name="lastname" id="lastname" placeholder="Last Name" value={formData.lastname} onChange={handleChange} /> <br />
+                <input type="text" name="lastname" id="lastname" placeholder="Last Name *" value={formData.lastname} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="email"></label>
-                <input type="email" name="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange}/> <br />
+                <input type="email" name="email" id="email" placeholder="Email *" value={formData.email} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="mobile"></label>
-                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
+                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number *" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="date"></label>
+                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 

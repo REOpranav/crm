@@ -1,22 +1,43 @@
 {
   "leads": [
     {
-      "id": "141140493",
-      "firstname": "sundhar",
-      "lastname": "vadivel",
-      "email": "sundhar007@gmail.com",
-      "mobile": "7812982929",
-      "companyName": "SUN LED LETTERS",
-      "annualrevenue": "50000000"
+      "id": "522795833",
+      "firstname": "vadivel",
+      "lastname": "s",
+      "email": "pranavavadivel01@gmail.com",
+      "mobile": "7812817332",
+      "date": "",
+      "companyName": "Zappyworks",
+      "annualrevenue": "3000000"
     },
     {
-      "id": "684907342",
-      "firstname": "water ",
-      "lastname": "kumar",
-      "email": "waterkumar@gmail.com",
-      "mobile": "0012992199",
-      "companyName": "waterKumar@co",
-      "annualrevenue": "80000"
+      "id": "797489449",
+      "firstname": "scsa",
+      "lastname": "sdcs",
+      "email": "sdc",
+      "mobile": "ds",
+      "companyName": "",
+      "annualrevenue": ""
+    },
+    {
+      "id": "933461886",
+      "firstname": "iangar",
+      "lastname": "vadivel",
+      "email": "iagra@002gmail.com",
+      "mobile": "8912991882",
+      "date": "2024-08-09",
+      "companyName": "Zappyworks",
+      "annualrevenue": "1000"
+    },
+    {
+      "id": "232750256",
+      "firstname": "vaidvel",
+      "lastname": "last name",
+      "email": "pranavavadivel01@gmail.com",
+      "mobile": "0092982398",
+      "date": "2024-08-16",
+      "companyName": "Zappyworks",
+      "annualrevenue": ""
     }
   ]
 }

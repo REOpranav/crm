@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Row ,Flex ,message} from 'antd'
+import { Button, Row ,Flex ,message, Typography,Popconfirm } from 'antd'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Col } from 'antd';
 import { useNavigate } from 'react-router-dom'
+import './LeadInfo.css'
 
  /* Flow of This Components
       1. get the URL/endpoint for searching particular lead data 
@@ -18,10 +19,7 @@ import { useNavigate } from 'react-router-dom'
       7. make a the form editable
       8. make put request 
       9. changes happend
- 
  */ 
-
-
 
  // this is message ele from antd
  function messageSuccess(value){  
@@ -29,6 +27,7 @@ import { useNavigate } from 'react-router-dom'
  }
 
 const Leadinfo = () => {
+   const {Text,Title} = Typography
     const navigation = useNavigate() //this is for navigation   
     const urlParams = window.location.pathname //this code for getting url params          
     const [leadDatas,setLeadDatas] = useState([])//this wil fetch the full data from query param
@@ -39,6 +38,7 @@ const Leadinfo = () => {
       lastname:'',
       email:'',
       mobile:'',
+      date:'',
       companyName:'',
       annualrevenue:''
     })
@@ -84,6 +84,7 @@ const Leadinfo = () => {
           lastname: lead.lastname || '',
           email: lead.email || '',
           mobile: lead.mobile || '',
+          date:lead.date || '',
           companyName: lead.companyName || '',
           annualrevenue: lead.annualrevenue || ''
         });
@@ -99,9 +100,29 @@ const Leadinfo = () => {
     }));
     }
 
+  // validation Form
+  function validation(leadFormValues) {
+    let errorvalues = {}
+    if (!leadFormValues.firstname.trim()) {
+        errorvalues.firstname = 'First Name is Required'
+    }
+
+    if (!leadFormValues.lastname.trim()) {
+        errorvalues.lastname = 'Last Name is Required'
+    }
+    
+    if (!leadFormValues.email.trim()) {
+        errorvalues.email = 'Email Id is Required'
+    }
+    
+    if (!leadFormValues.mobile.trim()) {
+        errorvalues.mobile = 'Mobile Number is Required'
+    }
+    return errorvalues
+  }
   //checking tthe form fileds are filled or not
   function checkForSubmitting(e) {
-    let checkHavingErrorInInputField = true
+    let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0 // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
        onFinish(e)
      }else{
@@ -142,58 +163,61 @@ const Leadinfo = () => {
 
   return (
     <div>
-        <Row justify={'end'}>
-          <Flex gap={'small'} style={{padding:'10px'}}>
-            <Button type='primary' onClick={checkForSubmitting} >Submit</Button>
-            <Button type='default'>
-                <Link to={'/leadboard'}>LeadBoard</Link>
-            </Button>
-          </Flex>
+        <Row justify={'space-between'} align={'top'} >
+          <Col>
+            {/* <Title level={2}>Edit Page</Title> */}
+          </Col>
+          <Col>
+            <Flex gap={'small'} style={{padding:'10px'}}>
+              <Popconfirm title={'Are you sure to Edit this lead'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
+                <Button type='primary'>Submit</Button>  
+              </Popconfirm>
+              <Button type='default'>
+                  <Link to={'/leadboard'}>LeadBoard</Link>
+              </Button>
+            </Flex>
+          </Col>
+
         </Row>
 
         <Row justify={'center'}>
-          <Col>
           <form onSubmit={checkForSubmitting}>
             <p>
                 <label for="firstname"></label>
-                <input type="text" name="firstname" id="firstname" placeholder={lead.firstname} value={formData.firstname} onChange={handleChange}/> <br />
+                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}*`} value={formData.firstname} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="lastname"></label>
-                <input type="text" name="lastname" id="lastname" placeholder="Last Name" value={formData.lastname} onChange={handleChange}/> <br />
+                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} *`} value={formData.lastname} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="email"></label>
-                <input type="email" name="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange}/> <br />
+                <input type="email" name="email" id="email" placeholder={`${lead.email} *`} value={formData.email} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="mobile"></label>
-                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
+                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} *`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="companyName"></label>
-                <input type="text" name="companyName" id="companyName" placeholder="company Name" value={formData.companyName} onChange={handleChange}/> <br />
+                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName}`} value={formData.companyName} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
                 <label for="annualrevenue"></label>
-                <input type="number" name="annualrevenue" id="annualrevenue" placeholder="Annual Revenue" value={formData.annualrevenue} onChange={handleChange} /> <br />
+                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue}`} value={formData.annualrevenue} onChange={handleChange} /> <br />
                 <span></span>
             </p>
-            <p>
-              <input type="submit" />
-            </p>
          </form>
-            </Col>
         </Row>
     </div>
   )

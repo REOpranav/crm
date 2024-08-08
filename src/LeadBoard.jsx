@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button , Row ,Col ,message,Table ,Space, Flex , Typography} from 'antd'
+import {Button , Row ,Col ,message,Table ,Space, Flex , Typography , Popconfirm} from 'antd'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -11,6 +11,7 @@ function id(values) {
   let cal = parseInt(values) + parseInt(1)
   return cal
 }
+const themeColor = '#65CCB8'
 
 const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
@@ -21,6 +22,11 @@ const LeadBoard = () => {
     const formNavigate = ()=>{
         navigate('/formpage')        
     }
+
+    const homeNavigation = ()=>{
+      navigate('/')
+    }
+
 
     // this code for initial load and when lead added
     const fetching = async()=>{
@@ -100,15 +106,21 @@ const LeadBoard = () => {
           },      
         ]
 
+    
   return (
     <div>     
-          <Row justify={'end'} style={{padding:'10px'}}>
-              <Flex gap={'small'}>
-                <Link to={'/'}> <Button type='primary'>  Dashboard  </Button> </Link>  
+          <Row justify={'end'} style={{padding:'10px'}} >
+          <Space >
+              {/* <Flex gap={'small'}> */}
+                 <Button type='default' onClick={homeNavigation}>Back to Home </Button>
+                 <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
+                    <Button type='dashed'>Save & Home </Button> 
+                 </Popconfirm>
                 <Button type='primary' onClick={formNavigate}>Create Lead</Button>
-              </Flex>
+              {/* </Flex> */}
+          </Space>
+
           </Row>
-          
           <Row justify={'center'}>
             <Table columns={column} dataSource={data} pagination={false} scroll={{y: 400 }}/>
           </Row>
