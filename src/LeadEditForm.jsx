@@ -7,6 +7,7 @@ import axios from 'axios'
 import { Col } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import './LeadEditForm.css'
+import Dashboard from './Dashboard'
 
  /* Flow of This Components
       1. get the URL/endpoint for searching particular lead data 
@@ -175,6 +176,7 @@ const LeadEditForm = () => {
     }
   return (
     <div>
+      <Dashboard />
         <Row justify={'space-between'} >
           <Col>
            <Flex style={{padding:'10px',display:'flex',alignItems:'center'}} gap={'small'}>
@@ -185,7 +187,7 @@ const LeadEditForm = () => {
           <Col>
             <Flex gap={'small'} style={{padding:'10px'}}>
            
-              <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={backoneStep} onCancel={()=>message.error('Cancel Save')}>
+              <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={backoneStep} onCancel={()=>message.error('Process was cancel')}>
                 <Button type='default'>Back one step</Button>  
               </Popconfirm>
               
@@ -232,6 +234,12 @@ const LeadEditForm = () => {
             <p>
                 <label for="mobile">Mobile : </label>
                 <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
+                <span></span>
+            </p>
+            
+            <p>
+                <label for="date">closing Date : </label>
+                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 

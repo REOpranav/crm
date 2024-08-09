@@ -3,6 +3,7 @@ import {Button, message,notification, Row, Title, Typography, Menu, Flex,Space,L
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './Detail.css'
+import Dashboard from './Dashboard'
 
 const backGroundColor = '#313949'
 
@@ -37,6 +38,7 @@ const Detail = () => {
 
   return (
     <div>
+        <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}> 
                 <Flex gap={'small'}>
                     <Text style={{fontSize:'20px',textTransform:'capitalize',fontFamily:'fantasy'}}>{leadData.firstname ?leadData.firstname : 'Profile Name'} - lead</Text>
@@ -44,7 +46,7 @@ const Detail = () => {
 
                 <Flex gap={'small'}>
                     <Button type='primary'>
-                        <Link to={''}>Send Email</Link>
+                        <a href={`mailto:${leadData.email   }`}>Send Email</a>
                     </Button>
                 
                     <Button type='default'> 

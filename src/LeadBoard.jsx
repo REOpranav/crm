@@ -115,7 +115,7 @@ const LeadBoard = () => {
              <Text style={{fontSize:'16px',color:'grey'}}>Lead View</Text>
              
           </Space>
-          <Space >
+            <Space >
               {/* <Flex gap={'small'}> */}
                  <Button type='default' onClick={homeNavigation}>Back to Home </Button>
                  <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
