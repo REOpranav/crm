@@ -17,13 +17,22 @@ const FormPage = () => {
   
   const [formData,setFormData] = useState({
       id : JSON.stringify(id),
+      leadowner:'',
       firstname : '',
       lastname:'',
       email:'',
       mobile:'',
       date:'',
       companyName:'',
-      annualrevenue: ''
+      annualrevenue: '',
+      gender:'',
+      area:'',
+      state: '',
+      country: '',
+      pincode:'',
+      expectedAmount:'',
+      website:'',
+      description: ''
   })
 
   // this is handle chanhge function
@@ -111,6 +120,11 @@ const FormPage = () => {
 
     <Row>
          <form onSubmit={checkForSubmitting}>
+         <p>
+                <label for="leadowner"></label>
+                <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *" value={formData.leadowner} onChange={handleChange} /> <br />
+                <span></span>
+            </p>
             <p>
                 <label for="firstname"></label>
                 <input type="text" name="firstname" id="firstname" placeholder="First Name *" value={formData.firstname} onChange={handleChange} /> <br />
@@ -145,12 +159,53 @@ const FormPage = () => {
                 <input type="text" name="companyName" id="companyName" placeholder="company Name" value={formData.companyName} onChange={handleChange}/> <br />
                 <span></span>
             </p>
-
+            <p>
+                <label for="gender"></label>
+                <input type="text" name="gender" id="gender" placeholder="Gender" value={formData.gender} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="area"></label>
+                <input type="text" name="area" id="area" placeholder="Area" value={formData.area} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="pincode"></label>
+                <input type="number" name="pincode" id="pincode" placeholder="Pincode" value={formData.pincode} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="state"></label>
+                <input type="text" name="state" id="state" placeholder="State" value={formData.state} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="country"></label>
+                <input type="text" name="country" id="country" placeholder="Country" value={formData.country} onChange={handleChange}/> <br />
+                <span></span>
+            </p>  
+            <p>
+                <label for="expectedAmount"></label>
+                <input type="text" name="expectedAmount" id="expectedAmount" placeholder="Expected Amount" value={formData.expectedAmount} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="website"></label>
+                <input type="url" name="website" id="website" placeholder="Website" value={formData.website} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+          
             <p>
                 <label for="annualrevenue"></label>
                 <input type="number" name="annualrevenue" id="annualrevenue" placeholder="Annual Revenue" value={formData.annualrevenue} onChange={handleChange}/> <br />
                 <span></span>
             </p>
+            <p>
+                <label for="description"></label>
+                <textarea name="description" id="description" placeholder='Description' value={formData.description}  onChange={handleChange}/>
+                <span></span>
+            </p>
+
          </form>
     </Row>
     </div>

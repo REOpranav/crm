@@ -24,6 +24,8 @@ form {
   input[type="email"],
   input[type="tel"],
   input[type="date"],
+  input[type="url"],
+  textarea,
   input[type="number"] {
     width: 100%;
     padding: 8px;

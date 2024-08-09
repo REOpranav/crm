@@ -1,11 +1,11 @@
 import React from 'react'
-import {Button , Row ,Col ,message,Table ,Space, Flex , Typography , Popconfirm} from 'antd'
+import {Button , Row ,Col ,message,notification,Table ,Space, Flex , Typography , Popconfirm} from 'antd'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Leadinfo from './Leadinfo';
+import Dashboard from './Dashboard';
 
 function id(values) {
   let cal = parseInt(values) + parseInt(1)
@@ -71,7 +71,7 @@ const LeadBoard = () => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            render : (value) => <Link to={`./leadinfo/${value}`}> {value} </Link>
+            render : (value) => <Link to={`./detail/${value}`}> {value} </Link>
           },
           {
             title: 'First Name',
@@ -109,7 +109,12 @@ const LeadBoard = () => {
     
   return (
     <div>     
-          <Row justify={'end'} style={{padding:'10px'}} >
+      <Dashboard />
+          <Row justify={'space-between'} style={{padding:'10px'}} >
+          <Space>
+             <Text style={{fontSize:'16px',color:'grey'}}>Lead View</Text>
+             
+          </Space>
           <Space >
               {/* <Flex gap={'small'}> */}
                  <Button type='default' onClick={homeNavigation}>Back to Home </Button>

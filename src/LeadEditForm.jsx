@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Col } from 'antd';
 import { useNavigate } from 'react-router-dom'
-import './LeadInfo.css'
+import './LeadEditForm.css'
 
  /* Flow of This Components
       1. get the URL/endpoint for searching particular lead data 
@@ -26,7 +26,7 @@ import './LeadInfo.css'
     message.success(`Sucessfully Update the ${value.firstname} Lead Datas`)
  }
 
-const Leadinfo = () => {
+const LeadEditForm = () => {
    const {Text,Title} = Typography
     const navigation = useNavigate() //this is for navigation   
     const urlParams = window.location.pathname //this code for getting url params          
@@ -80,13 +80,22 @@ const Leadinfo = () => {
       if (lead) {
         setFormData({
           id :lead.id,
+          leadowner:lead.leadowner,
           firstname: lead.firstname || '',
           lastname: lead.lastname || '',
           email: lead.email || '',
           mobile: lead.mobile || '',
           date:lead.date || '',
           companyName: lead.companyName || '',
-          annualrevenue: lead.annualrevenue || ''
+          annualrevenue: lead.annualrevenue || '',
+          gender:lead.gender || '',
+          area:lead.area || '',
+          state:lead.state ||  '',
+          country: lead.country || '',
+          pincode:lead.pincode || '',
+          expectedAmount:lead.expectedAmount || '',
+          website:lead.website || '',
+          description:lead.description || ''
         });
       }      
     }, [lead]);
@@ -161,20 +170,35 @@ const Leadinfo = () => {
       navigation('/leadboard')
     }
 
+    function backoneStep() {
+       navigation('/leadboard/detail/180556655')
+    }
   return (
     <div>
-        <Row justify={'space-between'} align={'top'} >
+        <Row justify={'space-between'} >
           <Col>
-            {/* <Title level={2}>Edit Page</Title> */}
+           <Flex style={{padding:'10px',display:'flex',alignItems:'center'}} gap={'small'}>
+              <Text style={{fontSize:'20px',fontWeight:'bold'}}>Edit Lead</Text>
+              <Text style={{fontSize:'15px',color:'grey'}}>{`(${lead.firstname})`}</Text>
+           </Flex>
           </Col>
           <Col>
             <Flex gap={'small'} style={{padding:'10px'}}>
-              <Popconfirm title={'Are you sure to Edit this lead'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
+           
+              <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={backoneStep} onCancel={()=>message.error('Cancel Save')}>
+                <Button type='default'>Back one step</Button>  
+              </Popconfirm>
+              
+              <Popconfirm title={'Are you sure to Submit'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Submit Cancelled')}>
                 <Button type='primary'>Submit</Button>  
               </Popconfirm>
-              <Button type='default'>
-                  <Link to={'/leadboard'}>LeadBoard</Link>
-              </Button>
+              
+              <Link to={'/leadboard'}>
+                <Button type='default'>
+                    LeadBoard
+                </Button>
+              </Link>
+           
             </Flex>
           </Col>
 
@@ -182,45 +206,90 @@ const Leadinfo = () => {
 
         <Row justify={'center'}>
           <form onSubmit={checkForSubmitting}>
+          <p>
+                <label for="leadowner">Lead Owner : </label>
+                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Lead Owner *`} value={formData.leadowner} onChange={handleChange} /> <br />
+                <span></span>
+            </p>
             <p>
-                <label for="firstname"></label>
-                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}*`} value={formData.firstname} onChange={handleChange}/> <br />
+                <label for="firstname">First Name : </label>
+                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
-                <label for="lastname"></label>
-                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} *`} value={formData.lastname} onChange={handleChange}/> <br />
+                <label for="lastname">Last Name : </label>
+                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
-                <label for="email"></label>
-                <input type="email" name="email" id="email" placeholder={`${lead.email} *`} value={formData.email} onChange={handleChange}/> <br />
+                <label for="email">Email : </label>
+                <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
-                <label for="mobile"></label>
-                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} *`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
+                <label for="mobile">Mobile : </label>
+                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
                 <span></span>
             </p>
 
             <p>
-                <label for="companyName"></label>
-                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName}`} value={formData.companyName} onChange={handleChange}/> <br />
+                <label for="companyName">Company Name : </label>
+                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange}/> <br />
                 <span></span>
             </p>
 
             <p>
-                <label for="annualrevenue"></label>
-                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue}`} value={formData.annualrevenue} onChange={handleChange} /> <br />
+                <label for="annualrevenue">Annual Revenue : </label>
+                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} /> <br />
                 <span></span>
             </p>
+            <p>
+                <label for="gender">Gender : </label>
+                <input type="text" name="gender" id="gender" placeholder={`${lead.gender} - Gender`} value={formData.gender} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="area">Area : </label>
+                <input type="text" name="area" id="area" placeholder={`${lead.area} - Area`} value={formData.area} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="pincode">Pincode : </label>
+                <input type="number" name="pincode" id="pincode" placeholder={`${lead.pincode} - Pincode`} value={formData.pincode} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="state">Pincode : </label>
+                <input type="text" name="state" id="state" placeholder={`${lead.pincode} - Pincode`} value={formData.state} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="country">Country : </label>
+                <input type="text" name="country" id="country" placeholder={`${lead.country} - Country`}value={formData.country} onChange={handleChange}/> <br />
+                <span></span>
+            </p>  
+            <p>
+                <label for="expectedAmount">Expected Amount : </label>
+                <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${lead.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="website">Websites : </label>
+                <input type="url" name="website" id="website" placeholder={`${lead.website} - Websites`} value={formData.website} onChange={handleChange}/> <br />
+                <span></span>
+            </p>
+            <p>
+                <label for="description">Description : </label>
+                <textarea name="description" id="description" placeholder={`${lead.description}- Description`} value={formData.description}  onChange={handleChange}/>
+                <span></span>
+            </p> 
          </form>
         </Row>
     </div>
   )
 }
 
-export default Leadinfo
+export default LeadEditForm

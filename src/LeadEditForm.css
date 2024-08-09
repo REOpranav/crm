@@ -1,10 +1,11 @@
 form {
-    min-width:50%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 10px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: end;
   }
   
   p {
@@ -12,8 +13,7 @@ form {
   }
   
   label {
-    display: block;
-    margin-bottom: 5px;
+    display: inline;
     font-weight: bold;
     color: #333;
   }
@@ -21,8 +21,10 @@ form {
   input[type="text"],
   input[type="email"],
   input[type="tel"],
+  input[type="url"],
+  textarea,
   input[type="number"] {
-    width: 100%;
+    width: 80%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
