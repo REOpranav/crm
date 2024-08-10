@@ -9,6 +9,7 @@ import LeadEditForm from './LeadEditForm';
 import Contact from './Contact';
 import Account from './Account';
 import Deal from './Deal';
+import FormLayout from './FormLayout';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path='/formpage' element={<FormPage />} />
           <Route path='/leadboard/detail/:id' element={<Detail/>} />
           <Route path='/leadboard/detail/leadeditform/:id' element={<LeadEditForm />} />
+          <Route path='/formpage/formlayout' element={<FormLayout/>} />
+
         </Routes>
     </div>
   );

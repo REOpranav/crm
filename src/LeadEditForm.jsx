@@ -174,6 +174,7 @@ const LeadEditForm = () => {
     function backoneStep() {
        navigation('/leadboard/detail/180556655')
     }
+    
   return (
     <div>
       <Dashboard />
@@ -210,89 +211,73 @@ const LeadEditForm = () => {
           <form onSubmit={checkForSubmitting}>
           <p>
                 <label for="leadowner">Lead Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Lead Owner *`} value={formData.leadowner} onChange={handleChange} /> <br />
-                <span></span>
+                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Lead Owner *`} value={formData.leadowner} onChange={handleChange} /> 
             </p>
             <p>
                 <label for="firstname">First Name : </label>
-                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange}/>
             </p>
 
             <p>
                 <label for="lastname">Last Name : </label>
-                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange}/>
             </p>
 
             <p>
                 <label for="email">Email : </label>
-                <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange}/>
             </p>
 
             <p>
                 <label for="mobile">Mobile : </label>
-                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> <br />
-                <span></span>
+                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} />
             </p>
             
             <p>
                 <label for="date">closing Date : </label>
-                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} /> <br />
-                <span></span>
+                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} />
             </p>
 
             <p>
                 <label for="companyName">Company Name : </label>
-                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange}/>
             </p>
 
             <p>
                 <label for="annualrevenue">Annual Revenue : </label>
-                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} /> <br />
-                <span></span>
+                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
             </p>
             <p>
                 <label for="gender">Gender : </label>
-                <input type="text" name="gender" id="gender" placeholder={`${lead.gender} - Gender`} value={formData.gender} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="gender" id="gender" placeholder={`${lead.gender} - Gender`} value={formData.gender} onChange={handleChange}/>
             </p>
             <p>
                 <label for="area">Area : </label>
-                <input type="text" name="area" id="area" placeholder={`${lead.area} - Area`} value={formData.area} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="area" id="area" placeholder={`${lead.area} - Area`} value={formData.area} onChange={handleChange}/>
             </p>
             <p>
                 <label for="pincode">Pincode : </label>
-                <input type="number" name="pincode" id="pincode" placeholder={`${lead.pincode} - Pincode`} value={formData.pincode} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="number" name="pincode" id="pincode" placeholder={`${lead.pincode} - Pincode`} value={formData.pincode} onChange={handleChange}/>
             </p>
             <p>
                 <label for="state">Pincode : </label>
-                <input type="text" name="state" id="state" placeholder={`${lead.pincode} - Pincode`} value={formData.state} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="state" id="state" placeholder={`${lead.pincode} - Pincode`} value={formData.state} onChange={handleChange}/>
             </p>
             <p>
                 <label for="country">Country : </label>
-                <input type="text" name="country" id="country" placeholder={`${lead.country} - Country`}value={formData.country} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="country" id="country" placeholder={`${lead.country} - Country`}value={formData.country} onChange={handleChange}/>
             </p>  
             <p>
                 <label for="expectedAmount">Expected Amount : </label>
-                <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${lead.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${lead.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange}/>
             </p>
             <p>
                 <label for="website">Websites : </label>
-                <input type="url" name="website" id="website" placeholder={`${lead.website} - Websites`} value={formData.website} onChange={handleChange}/> <br />
-                <span></span>
+                <input type="url" name="website" id="website" placeholder={`${lead.website} - Websites`} value={formData.website} onChange={handleChange}/>
             </p>
             <p>
                 <label for="description">Description : </label>
                 <textarea name="description" id="description" placeholder={`${lead.description}- Description`} value={formData.description}  onChange={handleChange}/>
-                <span></span>
             </p> 
          </form>
         </Row>
