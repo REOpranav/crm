@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Dashboard from './Dashboard'
-import { Row ,Button,Typography,Col,Form,Flex} from 'antd'
+import { Row ,Button,Typography,Col,Form,Flex,message} from 'antd'
 import { useState } from 'react'
 import './FormLayout.css';
+import axios from 'axios'
+
+ // this is message ele from antd
+ function messageSuccess(){
+    message.success('Sucessfully created a Lead')
+  }
+
 
 const FormLayout = () => {
     const {Text} = Typography
-    const [flagForLabel,setFlagForLabel] = useState(false)
+    const [formData,setFormData] = useState([])
 
     useEffect(()=>{
         const formID = document.getElementById('pasteForm') 
@@ -26,9 +33,9 @@ const FormLayout = () => {
             })  
 
             formID.addEventListener('drop',(e)=>{
-                setFlagForLabel(true)
-                e.preventDefault( )
+                e.preventDefault()
                 formID.appendChild(targetValue)
+                setFormData(formID.children)
             })
             
             form.addEventListener('dragover',(e)=>{
@@ -37,37 +44,55 @@ const FormLayout = () => {
             
             form.addEventListener('drop',(e)=>{
                 e.preventDefault()
-            form.appendChild(targetValue)
+                form.appendChild(targetValue)
             })
-    },[])
+    },[undefined])
+    
+    const onFinish = (e)=>{ 
+        e.preventDefault()  
+            axios.post('http://localhost:3000/formLayout',formData)
+              .then(res => {
+                if (res.status == 201) {
+                  messageSuccess();
+                }
+            }).catch(err => {
+              if (err.response) {
+                message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+              } else if (err.request) {
+                message.error('Error: No response   from server.');
+              } else {
+                message.error('Error: ' + err.message);
+              }
+          })
+      }
+
 
   return (
-    <div> 
+    <div > 
        <Dashboard />
        <Row justify={'space-between'} style={{padding:'10px'}}>
             <input type="text" placeholder='Layout Name' style={{backgroundColor:'transparent',border:'none',outline:'none',fontSize:'16px',width:'20%',color:'grey'}} />
             <Flex gap={'small'}>
                 <Link to={'/formpage'}><Button type='default' >Back one step</Button></Link>
-                <Button type='primary' >Save Page Layout</Button>
+                <Button type='primary' onClick={onFinish}>Save Page Layout</Button>
             </Flex>
-
         </Row>
 
-        <Row justify={'space-around'}>
+        <Row justify={'center'}>
             <Col span={5}>
-            <form id='form' style={{width:'100%'}}> 
+            <form id='form' style={{width:'90%',minHeight:'80vh',maxHeight:'80vh',overflow:'scroll'}} > 
                 <p draggable>
                     <label for="leadowner">Lead Owner : </label>
-                    <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *"  />
+                    <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *" />
                 </p>
                 <p draggable>  
                      <label for="firstname">First Name : </label>
-                    <input type="text" name="firstname" id="firstname" placeholder="First Name *"  />
+                    <input type="text" name="firstname" id="firstname" placeholder="First Name *" />
                 </p>
 
                 <p draggable>
                     <label for="lastname">Last Name : </label>
-                    <input type="text" name="lastname" id="lastname" placeholder="Last Name *"  />
+                    <input type="text" name="lastname" id="lastname" placeholder="Last Name *" />
                 </p>
 
                 <p draggable>
@@ -128,9 +153,9 @@ const FormLayout = () => {
 
             </form>
          </Col>
+
          <Col span={19}>
-            <form style={{minHeight:'30%'}} id='pasteForm'>
-            </form>
+            <form style={{width:'90%',minHeight:'80vh',maxHeight:'80vh',overflow:'scroll'}} id='pasteForm'> </form>
          </Col>
     </Row>
 
