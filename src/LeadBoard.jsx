@@ -124,7 +124,7 @@ const LeadBoard = () => {
 
           </Row>
           <Row justify={'space-between'} id='leadSider'>   
-            <Col span={3} style={{backgroundColor:'white',display:'flex',flexDirection:'column',justifyContent:'space-around',borderRadius:'10px'}}>
+            <Col span={3} style={{backgroundColor:'white',display:'flex',flexDirection:'column',justifyContent:'space-around',borderRadius:'10px',padding:'5px',minHeight:'80vh',maxHeight:'80vh'}}>
               <label style={styles}>
                 <input type="checkbox" name="TouchedRecords" />
                   Touched Records
