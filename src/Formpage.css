@@ -16,13 +16,13 @@
     }
     
     label {
-      display: block;
       font-weight: bold;
       display: flex;
+      justify-content:left;
     }
 
     input {
-      width: 100%;
+      /* width: 100%; */
       padding: 8px;
       border: 1px solid #ddd;
       border-radius: 4px;

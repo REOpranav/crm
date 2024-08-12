@@ -10,7 +10,7 @@ const backGroundColor = '#313949'
 
 // this is message ele from antd
 function messageSuccess(){
-    message.success('Sucessfully created a Lead')
+    message.success('Sucessfully Transfer to Contact')
 }
 
 const Detail = () => {
@@ -55,7 +55,7 @@ const Detail = () => {
 
                 setTimeout(()=>{
                     navigate()
-                },1 * 1000) 
+                },1 * 100) 
 
             }).catch(err => {
               if (err.response) {
@@ -93,7 +93,7 @@ const Detail = () => {
         <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}> 
                 <Flex gap={'small'}>
-                    <Text style={{fontSize:'20px',textTransform:'capitalize',fontFamily:'fantasy'}}>{leadData.firstname ?leadData.firstname : 'Profile Name'} - lead</Text>
+                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'grey',fontWeight:'lighter'}}>{leadData.firstname ?leadData.firstname : 'Profile Name'} - lead</Text>
                 </Flex>
 
                 <Flex gap={'small'}>

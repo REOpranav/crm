@@ -28,11 +28,12 @@ import Dashboard from './Dashboard'
  }
 
 const LeadEditForm = () => {
-   const {Text,Title} = Typography
+   const {Text} = Typography
     const navigation = useNavigate() //this is for navigation   
     const urlParams = window.location.pathname //this code for getting url params          
-    const [leadDatas,setLeadDatas] = useState([])//this wil fetch the full data from query param
+    const [leadDatas,setLeadDatas] = useState([])//this will fetch the full data from query param
     const [lead,setLead] = useState([]) // this data is filter data from leaddatas
+    const [errors,setError] = useState('')
 
     const [formData,setFormData] = useState({ // this for changing the data
       firstname :'',
@@ -116,6 +117,9 @@ const LeadEditForm = () => {
     if (!leadFormValues.firstname.trim()) {
         errorvalues.firstname = 'First Name is Required'
     }
+    if (!leadFormValues.leadowner.trim()) {
+      errorvalues.firstname = 'lead owner is Required'
+   }
 
     if (!leadFormValues.lastname.trim()) {
         errorvalues.lastname = 'Last Name is Required'
@@ -135,7 +139,8 @@ const LeadEditForm = () => {
     let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0 // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
        onFinish(e)
-     }else{
+     }else{            
+       setError(validation(formData))       
        message.error('Fill the Manditory Form Fields')
      }
   }
@@ -175,14 +180,19 @@ const LeadEditForm = () => {
        window.history.back()
     }
     
+    function getInputClass(value){            
+      return errors[value] ? 'inputError' : ''
+    }
+    
+  
   return (
     <div>
       <Dashboard />
         <Row justify={'space-between'} >
           <Col>
            <Flex style={{padding:'10px',display:'flex',alignItems:'center'}} gap={'small'}>
-              <Text style={{fontSize:'20px',fontWeight:'bold'}}>Edit Lead</Text>
-              <Text style={{fontSize:'15px',color:'grey'}}>{`(${lead.firstname})`}</Text>
+              <Text style={{fontSize:'20px',fontWeight:'lighter',color:'grey'}}>Edit Lead</Text>
+              <Text style={{fontSize:'15px',color:'red'}}>{`(${lead.firstname})`}</Text>
            </Flex>
           </Col>
           <Col>
@@ -191,17 +201,17 @@ const LeadEditForm = () => {
               <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={backoneStep} onCancel={()=>message.error('Process was cancel')}>
                 <Button type='default'>Back one step</Button>  
               </Popconfirm>
-              
-              <Popconfirm title={'Are you sure to Submit'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Submit Cancelled')}>
-                <Button type='primary'>Submit</Button>  
-              </Popconfirm>
-              
+
               <Link to={'/leadboard'}>
                 <Button type='default'>
                     LeadBoard
                 </Button>
               </Link>
-           
+               
+              <Popconfirm title={'Are you sure to Submit'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Submit Cancelled')}>
+                <Button type='primary'>Submit</Button>  
+              </Popconfirm>
+              
             </Flex>
           </Col>
 
@@ -211,36 +221,36 @@ const LeadEditForm = () => {
           <form onSubmit={checkForSubmitting}>
           <p>
                 <label for="leadowner">Lead Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Lead Owner *`} value={formData.leadowner} onChange={handleChange} /> 
+                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Lead Owner *`} value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
             </p>
             <p>
                 <label for="firstname">First Name : </label>
-                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange}/>
+                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/>
             </p>
 
             <p>
                 <label for="lastname">Last Name : </label>
-                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange}/>
+                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange} className={getInputClass('lastname')}/>
             </p>
 
             <p>
                 <label for="email">Email : </label>
-                <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange}/>
+                <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')}/>
             </p>
 
             <p>
                 <label for="mobile">Mobile : </label>
-                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} />
+                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
             </p>
             
             <p>
                 <label for="date">closing Date : </label>
-                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} />
+                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange}/>
             </p>
 
             <p>
                 <label for="companyName">Company Name : </label>
-                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange}/>
+                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange} />
             </p>
 
             <p>

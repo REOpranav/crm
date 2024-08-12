@@ -93,7 +93,7 @@ const Contact = () => {
         <Dashboard /> 
         <Row justify={'space-between'} style={{padding:'10px'}} >
           <Space>
-             <Text style={{fontSize:'16px',color:'grey'}}>Contact View</Text>
+             <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>
           </Space>
             <Space>
               {/* <Flex gap={'small'}> */}

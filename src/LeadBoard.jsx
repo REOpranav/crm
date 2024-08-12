@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button , Row  ,message,Table ,Space, Typography , Popconfirm} from 'antd'
+import {Button , Row  ,message,Table ,Space, Typography , Popconfirm, Col} from 'antd'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -100,13 +100,17 @@ const LeadBoard = () => {
           },      
         ]
 
+       const styles = {
+          fontWeight:'lighter',          
+       }
 
   return (
     <div>     
       <Dashboard />
           <Row justify={'space-between'} style={{padding:'10px'}} >
           <Space>
-             <Text style={{fontSize:'16px',color:'grey'}}>Lead View</Text>
+             <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Lead View</Text>
+
           </Space>
             <Space>
               {/* <Flex gap={'small'}> */}
@@ -119,8 +123,61 @@ const LeadBoard = () => {
           </Space>
 
           </Row>
-          <Row justify={'center'}>
+          <Row justify={'space-between'} id='leadSider'>   
+            <Col span={3} style={{backgroundColor:'white',display:'flex',flexDirection:'column',justifyContent:'space-around',borderRadius:'10px'}}>
+              <label style={styles}>
+                <input type="checkbox" name="TouchedRecords" />
+                  Touched Records
+              </label>
+              <label style={styles  }>
+                <input type="checkbox" name="UntouchedRecords" />
+                  Untouched Records
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="RecordAction" />
+                  Record Action
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="RelatedRecordsAction" />
+                 Related Records Action
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="ScoringRules" />
+                  Scoring Rules
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="Locked" />
+                 Locked
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="EmailSentiment" />
+                  Email Sentiment
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="LatestEmailStatus" />
+                 Latest Email Status
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="Activities" />
+                  Activities
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="Notes" />
+                   Notes
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="Campaigns" />
+                 Campaigns
+              </label>
+              <label style={styles}>
+                <input type="checkbox" name="Cadences" />
+                Cadences
+              </label>
+            </Col>
+
+          <Col span={20} offset={1}>
             <Table columns={column} dataSource={data} pagination={false} scroll={{y: 400 }}/>
+          </Col>
           </Row>
 
     </div>
