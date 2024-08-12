@@ -63,7 +63,7 @@ const showProgress = 'http://localhost:3000/'
           </Space>
     </Row>
 
-{window.location.href == 'http://localhost:3000/' &&
+{(window.location.href == 'http://localhost:3000/') || (window.location.href === 'https://mockcrm.vercel.app') &&
     <Row style={{minHeight:'80vh'}} justify={'center'} align={'middle'} >
         <Title level={2} style={{color:'grey',fontFamily:'fantasy',opacity:'0.4'}}> DashBoard in Progress</Title>
     </Row>
