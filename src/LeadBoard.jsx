@@ -7,12 +7,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
 
-function id(values) {
-  let cal = parseInt(values) + parseInt(1)
-  return cal
-}
-const themeColor = '#65CCB8'
-
 const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
     const { Text }= Typography

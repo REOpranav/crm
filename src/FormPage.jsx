@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 
 
 const FormPage = () => {
-  const {Text,Title} = Typography
+  const {Text} = Typography
   const navigation = useNavigate() //this is for navigation   
   const [errors,setError] = useState('')
   const [id,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
@@ -52,7 +52,7 @@ const FormPage = () => {
     e.preventDefault()  
         axios.post('http://localhost:3000/leads',formData)
           .then(res => {
-            if (res.status == 201) {
+            if (res.status === 201) {
               messageSuccess();
             }
         }).catch(err => {
@@ -108,7 +108,7 @@ const FormPage = () => {
 
   //checking tthe form fileds are filled or not
   function checkForSubmitting(event) {
-    let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0  // if it was greater than 0 that mean not fill the manditory field
+    let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0  // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
        onFinish(event)
      }else{
