@@ -12,6 +12,8 @@ const iconColor = "#fff"
 
 const [searchValue,setSearchValue] = useState('')
 const showProgress = 'http://localhost:3000/'
+console.log(window.location.href === 'https://mockcrm.vercel.app');
+
 
   return (
     <div> 
