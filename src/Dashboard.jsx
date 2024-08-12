@@ -11,6 +11,7 @@ const backGroundColor = '#313949'
 const iconColor = "#fff"
 
 const [searchValue,setSearchValue] = useState('')
+const showProgress = 'http://localhost:3000/'
 
   return (
     <div> 
@@ -60,8 +61,13 @@ const [searchValue,setSearchValue] = useState('')
               </Flex>
             </Link> 
           </Space>
-
     </Row>
+
+{window.location.href == 'http://localhost:3000/' &&
+    <Row style={{minHeight:'80vh'}} justify={'center'} align={'middle'} >
+        <Title level={2} style={{color:'grey',fontFamily:'fantasy',opacity:'0.4'}}> DashBoard in Progress</Title>
+    </Row>
+}
     </div>
   )
 }
