@@ -172,7 +172,7 @@ const LeadEditForm = () => {
     }
 
     function backoneStep() {
-       navigation('/leadboard/detail/180556655')
+       window.history.back()
     }
     
   return (

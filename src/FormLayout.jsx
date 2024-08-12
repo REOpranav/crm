@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { json, Link } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import { Row ,Button,Typography,Col,Form,Flex,message} from 'antd'
 import { useState } from 'react'
@@ -73,7 +73,7 @@ const FormLayout = () => {
        <Row justify={'space-between'} style={{padding:'10px'}}>
             <input type="text" placeholder='Layout Name' style={{backgroundColor:'transparent',border:'none',outline:'none',fontSize:'16px',width:'20%',color:'grey'}} />
             <Flex gap={'small'}>
-                <Link to={'/formpage'}><Button type='default' >Back one step</Button></Link>
+                <Link to={'/formpage'}><Button type='default'>Back one step</Button></Link>
                 <Button type='primary' onClick={onFinish}>Save Page Layout</Button>
             </Flex>
         </Row>

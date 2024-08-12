@@ -63,7 +63,7 @@ const LeadBoard = () => {
             annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0
         }
         data.push(changeTOObject)
-    }    
+    }
 
     // this refers the column layout in Antd
     const column = [
@@ -106,20 +106,19 @@ const LeadBoard = () => {
           },      
         ]
 
-    
+
   return (
     <div>     
       <Dashboard />
           <Row justify={'space-between'} style={{padding:'10px'}} >
           <Space>
              <Text style={{fontSize:'16px',color:'grey'}}>Lead View</Text>
-             
           </Space>
-            <Space >
+            <Space>
               {/* <Flex gap={'small'}> */}
-                 <Button type='default' onClick={homeNavigation}>Back to Home </Button>
+                 <Button type='default' onClick={homeNavigation}>Back to Home</Button>
                  <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
-                    <Button type='dashed'>Save & Home </Button> 
+                    <Button type='dashed'>Save & Home</Button> 
                  </Popconfirm>
                 <Button type='primary' onClick={formNavigate}>Create Lead</Button>
               {/* </Flex> */}

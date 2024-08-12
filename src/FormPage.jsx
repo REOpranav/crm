@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom'
 const FormPage = () => {
   const {Text,Title} = Typography
   const navigation = useNavigate() //this is for navigation   
+  const [errors,setError] = useState('')
   const [id,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
   
   const [formData,setFormData] = useState({
@@ -81,7 +82,13 @@ const FormPage = () => {
 
   // validation Form
   function validation(leadFormValues) {
+    console.log();
+    
     let errorvalues = {}
+    if (!leadFormValues.leadowner.trim()) {
+      errorvalues.leadowner = 'Lead Owner is Required'
+    }
+
     if (!leadFormValues.firstname.trim()) {
         errorvalues.firstname = 'First Name is Required'
     }
@@ -102,12 +109,17 @@ const FormPage = () => {
 
   //checking tthe form fileds are filled or not
   function checkForSubmitting(event) {
-    let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0 // if it was greater than 0 that mean not fill the manditory field
+    let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0  // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
        onFinish(event)
      }else{
+       setError(validation(formData))
        message.error('Fill the Manditory Form Fields')
      }
+  }
+
+  function getInputClass(value){
+    return errors[value] ? 'inputError' : ''
   }
 
   return (
@@ -136,29 +148,31 @@ const FormPage = () => {
 
     <Row>
          <form onSubmit={checkForSubmitting}>
-             <p>
+            <p>
                 <label for="leadowner">Lead Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *" value={formData.leadowner} onChange={handleChange} /> 
+                <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
             </p>
+            
             <p>
                 <label for="firstname">First Name : </label>
-                <input type="text" name="firstname" id="firstname" placeholder="First Name *" value={formData.firstname} onChange={handleChange} /> 
+                <input type="text" name="firstname" id="firstname" placeholder="Lead Owner *" value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/> 
             </p>
 
             <p>
                 <label for="lastname">Last Name : </label>
-                <input type="text" name="lastname" id="lastname" placeholder="Last Name *" value={formData.lastname} onChange={handleChange} /> 
+                <input type="text" name="lastname" id="lastname" placeholder="Last Name *" value={formData.lastname} onChange={handleChange}  className={getInputClass('lastname')}/> 
             </p>
 
             <p>
                 <label for="email">Email : </label>
-                <input type="email" name="email" id="email" placeholder="Email *" value={formData.email} onChange={handleChange}/> 
+                <input type="email" name="email" id="email" placeholder="Email *" value={formData.email} onChange={handleChange}  className={getInputClass('email')}/>
             </p>
 
             <p>
                 <label for="mobile">Mobile Number : </label>
-                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number *" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} /> 
+                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number *" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange}  className={getInputClass('mobile')} /> 
             </p>
+            
             <p>
                 <label for="date">closing Date : </label>
                 <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} /> 
@@ -168,6 +182,7 @@ const FormPage = () => {
                 <label for="companyName">company Name : </label>
                 <input type="text" name="companyName" id="companyName" placeholder="company Name" value={formData.companyName} onChange={handleChange}/> 
             </p>
+           
             <p>
                 <label for="gender">Gender : </label>
                 <input type="text" name="gender" id="gender" placeholder="Gender" value={formData.gender} onChange={handleChange}/> 
