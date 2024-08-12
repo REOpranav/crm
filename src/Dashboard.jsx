@@ -1,5 +1,5 @@
 import { Menu, Row ,Typography, Image ,Space, Flex} from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,6 +9,8 @@ const { SubMenu } = Menu;
 const {Text ,Title} = Typography
 const backGroundColor = '#313949'
 const iconColor = "#fff"
+
+const [searchValue,setSearchValue] = useState('')
 
   return (
     <div> 
@@ -44,7 +46,7 @@ const iconColor = "#fff"
         </Menu>
 
         <Space size={'large'}>
-            <input type="search" name="search" id="search" placeholder='search Here'/>
+            <input type="search" name="search" id="search" placeholder='search Here' value={searchValue} onChange={(e) =>setSearchValue(e.target.value)}/>
 
             <AiFillSetting color={iconColor} />
             <Link to={'/'}>

@@ -35,7 +35,7 @@ const FormLayout = () => {
             formID.addEventListener('drop',(e)=>{
                 e.preventDefault()
                 formID.appendChild(targetValue)
-                setFormData(formID.children)
+                setFormData(formID.children) // inside the custome form
             })
             
             form.addEventListener('dragover',(e)=>{
