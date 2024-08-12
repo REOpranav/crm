@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
-import {message,Row,Col,Table, Space,Typography, Popconfirm, Button} from 'antd'
+import {message,Row,Table, Space,Typography, Popconfirm, Button} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Contact = () => {

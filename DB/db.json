@@ -1,43 +1,4 @@
 {
-  "leads": [
-    {
-      "id": "405631417",
-      "leadowner": "",
-      "firstname": "",
-      "lastname": "",
-      "email": "",
-      "mobile": "",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "180455098",
-      "leadowner": "",
-      "firstname": "",
-      "lastname": "",
-      "email": "",
-      "mobile": "",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    }
-  ],
+  "leads": [],
   "contact": []
 }

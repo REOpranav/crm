@@ -1,5 +1,4 @@
 import './App.css';
-import { Form ,Row} from "antd";
 import {Routes,Route} from 'react-router-dom'
 import LeadBoard from './LeadBoard';
 import FormPage from './FormPage';

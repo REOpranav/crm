@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button , Row ,Col ,message,notification,Table ,Space, Flex , Typography , Popconfirm} from 'antd'
+import {Button , Row  ,message,Table ,Space, Typography , Popconfirm} from 'antd'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect } from 'react';

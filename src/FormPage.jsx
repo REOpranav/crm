@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import {Row , Form ,Input,message ,InputNumber ,Button , Flex, Popconfirm,Typography} from 'antd'
+import {Row ,message ,Button , Flex, Popconfirm,Typography} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -187,10 +186,12 @@ const FormPage = () => {
                 <label for="gender">Gender : </label>
                 <input type="text" name="gender" id="gender" placeholder="Gender" value={formData.gender} onChange={handleChange}/> 
             </p>
+           
             <p>
                 <label for="area">Area : </label>
                 <input type="text" name="area" id="area" placeholder="Area" value={formData.area} onChange={handleChange}/> 
             </p>
+            
             <p>
                 <label for="pincode">Pincode : </label>
                 <input type="number" name="pincode" id="pincode" placeholder="Pincode" value={formData.pincode} onChange={handleChange}/> 
