@@ -11,15 +11,16 @@ import Searching from './Searching';
 const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
     const { Text }= Typography
-    
+
     //searching
     const [searchBy,setSearchBy] = useState('')
+    const [selectedOption, setSelectedOption] = useState('firstname'); // this id for set selection
     const [searching,setSearching] = useState('') // this searching for lead
-     const filter =  leadData.filter(value => {       
-         if (value.firstname.toLocaleLowerCase() === searching.toLocaleLowerCase()) { 
+    const filter = leadData.filter(value => {
+         if (value[selectedOption].toLocaleLowerCase() === searching.toLocaleLowerCase()) { 
             return value
          }
-      })
+        })
 
     // code for navigatingin reactg router dom
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ const LeadBoard = () => {
               const responce = await axios.get('http://localhost:3000/leads')
                 if (responce.status === 200) {
                     setLeadData(await responce.data);
+                    setSearchBy(await responce.data)
                 }
              } catch (err) {
                 if (err.response) {
@@ -48,7 +50,6 @@ const LeadBoard = () => {
                 }
             }
         }
-
     useEffect(()=>{
       fetching()
     },[undefined])
@@ -57,16 +58,16 @@ const LeadBoard = () => {
     const data = []
     for (const datas of filter.length !== 0 ? filter : leadData) {
         let changeTOObject = {
-            id:datas.id,
+            id: datas.id,
             firstName : datas.firstname,
             secondName : datas.lastname,
             emailID : datas.email,
             mobileNumber  : datas.mobile,
-            companyName:datas.companyName,
-            annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0
+            companyName: datas.companyName,
+            annualRevenue : datas.annualrevenue ? datas.annualrevenue : 0
         }
         data.push(changeTOObject)
-    }    
+    }
 
     // this refers the column layout in Antd
     const column = [
@@ -108,30 +109,25 @@ const LeadBoard = () => {
             key: 'annualRevenue',
           },      
         ]
-
-       const styles = {
-          fontWeight:'lighter', 
-       }
+    const styles = { fontWeight:'lighter' }    
 
   return (
-    <div>     
+    <div>    
       <Dashboard />
-          <Row justify={'space-between'} style={{padding:'10px'}} >
-            <Space>
-              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Lead View</Text>
-            </Space>
+          <Row justify={'space-between'} style={{padding:'10px'}}>
               <Space>
-                {/* <Flex gap={'small'}> */}
+                <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Lead View</Text>
+              </Space>
+              <Space>
                   <Button type='default' onClick={homeNavigation}>Back to Home</Button>
                   <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
                       <Button type='dashed'>Save & Home</Button> 
                   </Popconfirm>
-                  <Searching setSearchQuery={setSearching} searchQuery={searching}/>
+                  <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
                   <Button type='primary' onClick={formNavigate}>Create Lead</Button>
-                {/* </Flex> */}
               </Space>
+           </Row>
 
-          </Row>
           <Row justify={'space-between'} id='leadSider'>   
             <Col span={3} style={{backgroundColor:'white',display:'flex',flexDirection:'column',justifyContent:'space-around',borderRadius:'10px',padding:'5px',minHeight:'80vh',maxHeight:'80vh'}}>
               <label style={styles}>
@@ -184,9 +180,9 @@ const LeadBoard = () => {
               </label>
             </Col>
 
-          <Col span={20} offset={1}>
-            <Table columns={column} dataSource={data} pagination={false} scroll={{y: 400 }}/>
-          </Col>
+            <Col span={20} offset={1}>
+              <Table columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/>
+            </Col>
           </Row>
 
     </div>
