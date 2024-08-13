@@ -4,7 +4,7 @@ import axios from 'axios'
 import {message,Row,Table, Space,Typography, Popconfirm, Button} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
-const Contact = () => {
+const Contact = ({searchValue}) => {
   const navigate = useNavigate();
   const {Text} = Typography
   const [contactData,setContactData] = useState([])
@@ -90,7 +90,7 @@ const Contact = () => {
   
   return (
     <div>
-        <Dashboard /> 
+        <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}} >
           <Space>
              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>

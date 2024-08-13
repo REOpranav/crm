@@ -6,11 +6,22 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
+import Searching from './Searching';
 
 const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
     const { Text }= Typography
-  
+    
+    //searching
+    const [searching,setSearching] = useState('') // this searching for lead
+    // useEffect(()=>{
+     const filter =  leadData.filter(value => {       
+         if (value.firstname.toLocaleLowerCase() === searching.toLocaleLowerCase()) { 
+            return value
+         }
+      })
+  // },[undefined,searching])
+
     // code for navigatingin reactg router dom
     const navigate = useNavigate();
     const formNavigate = ()=>{
@@ -20,7 +31,6 @@ const LeadBoard = () => {
     const homeNavigation = ()=>{
       navigate('/')
     }
-
 
     // this code for initial load and when lead added
     const fetching = async()=>{
@@ -46,7 +56,7 @@ const LeadBoard = () => {
 
     // this code for appending field name into antd table
     const data = []
-    for (const datas of leadData) {
+    for (const datas of filter.length !== 0 ? filter : leadData) {
         let changeTOObject = {
             id:datas.id,
             firstName : datas.firstname,
@@ -57,7 +67,7 @@ const LeadBoard = () => {
             annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0
         }
         data.push(changeTOObject)
-    }
+    }    
 
     // this refers the column layout in Antd
     const column = [
@@ -101,26 +111,26 @@ const LeadBoard = () => {
         ]
 
        const styles = {
-          fontWeight:'lighter',          
+          fontWeight:'lighter', 
        }
 
   return (
     <div>     
       <Dashboard />
           <Row justify={'space-between'} style={{padding:'10px'}} >
-          <Space>
-             <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Lead View</Text>
-
-          </Space>
             <Space>
-              {/* <Flex gap={'small'}> */}
-                 <Button type='default' onClick={homeNavigation}>Back to Home</Button>
-                 <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
-                    <Button type='dashed'>Save & Home</Button> 
-                 </Popconfirm>
-                <Button type='primary' onClick={formNavigate}>Create Lead</Button>
-              {/* </Flex> */}
-          </Space>
+              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Lead View</Text>
+            </Space>
+              <Space>
+                {/* <Flex gap={'small'}> */}
+                  <Button type='default' onClick={homeNavigation}>Back to Home</Button>
+                  <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
+                      <Button type='dashed'>Save & Home</Button> 
+                  </Popconfirm>
+                  <Searching setSearchQuery={setSearching} searchQuery={searching}/>
+                  <Button type='primary' onClick={formNavigate}>Create Lead</Button>
+                {/* </Flex> */}
+              </Space>
 
           </Row>
           <Row justify={'space-between'} id='leadSider'>   
