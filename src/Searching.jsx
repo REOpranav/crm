@@ -1,11 +1,15 @@
 import React from 'react'
 
-const Searching = ({ searchQuery, setSearchQuery }) => {
+const Searching = ({ searchQuery, setSearchQuery ,listOfData}) => {
     const handleChange = (e)=>{
       setSearchQuery(e.target.value)
     }
     return (
     <div>
+           <select name="cars" id="cars">
+     
+           </select>
+
            <input type="search" 
                   name="search" 
                   id="search" 

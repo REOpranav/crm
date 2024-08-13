@@ -13,14 +13,13 @@ const LeadBoard = () => {
     const { Text }= Typography
     
     //searching
+    const [searchBy,setSearchBy] = useState('')
     const [searching,setSearching] = useState('') // this searching for lead
-    // useEffect(()=>{
      const filter =  leadData.filter(value => {       
          if (value.firstname.toLocaleLowerCase() === searching.toLocaleLowerCase()) { 
             return value
          }
       })
-  // },[undefined,searching])
 
     // code for navigatingin reactg router dom
     const navigate = useNavigate();
