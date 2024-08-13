@@ -1,44 +1,6 @@
 {
   "leads": [
     {
-      "id": "984563210",
-      "leadowner": "janedoe",
-      "firstname": "Jane",
-      "lastname": "Smith",
-      "email": "jane.smith@example.com",
-      "mobile": "8765432109",
-      "date": "2024-07-22",
-      "companyName": "Creative Solutions",
-      "annualrevenue": "750000",
-      "gender": "Female",
-      "area": "Uptown",
-      "state": "New York",
-      "country": "USA",
-      "pincode": "10001",
-      "expectedAmount": "150000",
-      "website": "https://creativesolutions.com",
-      "description": "Interested in enhancing customer engagement."
-    },
-    {
-      "id": "765432109",
-      "leadowner": "michaelbrown",
-      "firstname": "Michael",
-      "lastname": "Brown",
-      "email": "michael.brown@example.com",
-      "mobile": "7654321098",
-      "date": "2024-06-15",
-      "companyName": "FutureTech",
-      "annualrevenue": "600000",
-      "gender": "Male",
-      "area": "Suburbs",
-      "state": "Texas",
-      "country": "USA",
-      "pincode": "73301",
-      "expectedAmount": "120000",
-      "website": "https://futuretech.com",
-      "description": "Seeking a partner for new technology integration."
-    },
-    {
       "id": "234567890",
       "leadowner": "sarahconnor",
       "firstname": "Sarah",
@@ -267,6 +229,52 @@
       "expectedAmount": "100000",
       "website": "https://techinnovators.com",
       "description": "Looking for a solution to streamline operations."
+    },
+    {
+      "id": "765432109",
+      "leadowner": "michaelbrown",
+      "firstname": "Michael",
+      "lastname": "Brown",
+      "email": "michael.brown@example.com",
+      "mobile": "7654321098",
+      "date": "2024-06-15",
+      "companyName": "FutureTech",
+      "annualrevenue": "600000",
+      "gender": "Male",
+      "area": "Suburbs",
+      "state": "Texas",
+      "country": "USA",
+      "pincode": "73301",
+      "expectedAmount": "120000",
+      "website": "https://futuretech.com",
+      "description": "Seeking a partner for new technology integration."
+    },
+    {
+      "id": "ccdb",
+      "leadName": "",
+      "leadMobileNumber": "",
+      "leadEmail": "",
+      "leadArea": "",
+      "date": "13/08/2024"
+    },
+    {
+      "id": "984563210",
+      "leadowner": "pranavavadivel",
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "email": "jane.smith@example.com",
+      "mobile": "8765432109",
+      "date": "2024-07-22",
+      "companyName": "Creative Solutions",
+      "annualrevenue": "750000",
+      "gender": "Female",
+      "area": "Uptown",
+      "state": "New York",
+      "country": "USA",
+      "pincode": "10001",
+      "expectedAmount": "150000",
+      "website": "https://creativesolutions.com",
+      "description": "Interested in enhancing customer engagement."
     }
   ]
 }
