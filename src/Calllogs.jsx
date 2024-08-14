@@ -44,6 +44,8 @@ const Calllogs = ({callLogs}) => {
             setSeperateCallLogs(ans)            
          }
       },[undefined,callLogs,logData])
+      
+      console.log(seperateCallLogs.length);
 
   return (
     <div >
@@ -51,19 +53,18 @@ const Calllogs = ({callLogs}) => {
          <Text style={{color:'grey',fontWeight:'lighter',fontFamily:'monospace'}}> Open Activities </Text>
       </Row>
       
-      <Row style={{padding:'10px',backgroundColor:'#C0C0C0'}} justify={'start'}> 
+      <Row style={{padding:'10px',backgroundColor:'#C0C0C0',borderRadius:'5px'}} justify={'start'}> 
         <Text style={{color:'black',fontWeight:'lighter'}}>Call log</Text>
       </Row>
        
       <Row>
-          <Col style={{minHeight:'300px',maxHeight:'300px',minWidth:'300px',minWidth:'300px',overflow:'auto'}}>
+          <Col style={{minHeight:'100px',maxHeight:'300px',minWidth:'300px',minWidth:'300px',overflow:'auto'}}>
             {logData && seperateCallLogs.map(e => {
               return  <Row  justify={'start'} align={'middle'}  className='calllog'> <Text key={e.id} style={{fontWeight:'lighter',letterSpacing:'1px'}}>{e.date}</Text> </Row>
-            })} 
+            })}
+            {seperateCallLogs.length === 0 && <Row  justify={'center'} align={'middle'} style={{padding:'10px'}}> <Text style={{fontWeight:'lighter',letterSpacing:'1px'}}>No calls till now</Text> </Row>} 
           </Col>
        </Row>
-
-
     </div>
   )
 }

@@ -15,7 +15,7 @@ const LeadBoard = () => {
 
     //searching
     const [searchBy,setSearchBy] = useState('')
-    const [selectedOption, setSelectedOption] = useState('firstname'); // this id for set selection
+    const [selectedOption, setSelectedOption] = useState('mobile'); // this id for set selection
     const [searching,setSearching] = useState('') // this searching for lead
     const filter = leadData.filter(value => {
          if (value[selectedOption].toLocaleLowerCase() === searching.toLocaleLowerCase()) { 
