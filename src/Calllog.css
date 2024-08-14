@@ -1,0 +1,10 @@
+.calllog{
+    padding: 10px;
+    background-color: white;
+    margin-top: 2px;
+}
+
+.calllog:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}

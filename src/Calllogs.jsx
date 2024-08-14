@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Row,Typography,Col,Space} from 'antd'
+import './Calllog.css'
 
 const Calllogs = ({callLogs}) => {  
     const [logData,setLogData] = useState('')
@@ -47,12 +48,17 @@ const Calllogs = ({callLogs}) => {
   return (
     <div >
       <Row style={{padding:'10px'}} justify={'start'}>
-         <Text style={{fontFamily:'monospace',color:'grey'}}> Open Activities </Text>
+         <Text style={{color:'grey',fontWeight:'lighter',fontFamily:'monospace'}}> Open Activities </Text>
       </Row>
-       <Row >  
+      
+      <Row style={{padding:'10px',backgroundColor:'#C0C0C0'}} justify={'start'}> 
+        <Text style={{color:'black',fontWeight:'lighter'}}>Call log</Text>
+      </Row>
+       
+      <Row>
           <Col style={{minHeight:'300px',maxHeight:'300px',minWidth:'300px',minWidth:'300px',overflow:'auto'}}>
             {logData && seperateCallLogs.map(e => {
-              return  <Row style={{padding:'10px',backgroundColor:'white',marginTop:'2px'}} justify={'start'} align={'middle'}><Text key={e.id} style={{fontFamily:'monospace'}}>{e.date}</Text> </Row>
+              return  <Row  justify={'start'} align={'middle'}  className='calllog'> <Text key={e.id} style={{fontWeight:'lighter',letterSpacing:'1px'}}>{e.date}</Text> </Row>
             })} 
           </Col>
        </Row>
