@@ -2,7 +2,7 @@ import { message } from 'antd'
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Row,Typography,Col,Space} from 'antd'
+import { Row,Typography,Col} from 'antd'
 import './Calllog.css'
 
 const Calllogs = ({callLogs}) => {  

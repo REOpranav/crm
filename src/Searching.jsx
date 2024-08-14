@@ -1,5 +1,4 @@
 import React from 'react'
-import {Text} from 'antd'
 
 const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,selectedOption}) => {
     const handleChange = (e)=>{

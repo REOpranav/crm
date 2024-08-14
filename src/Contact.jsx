@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useDebugValue } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
 import {message,Row,Table, Space,Typography, Popconfirm, Button} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
+import Searching from './Searching'
 
-const Contact = ({searchValue}) => {
+const Contact = () => {
   const navigate = useNavigate();
   const {Text} = Typography
-  const [contactData,setContactData] = useState([])
+  const [contactData,setContactData] = useState([]) // store the contact data come from URL 
+  
+  // this are for searching components
+  const [searching,setSearching] = useState('') // searching input field value
+  const [searchBy,setsearchBy] = useState('') // total contact data list
+  const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
+  const filter = contactData.filter(value => {   // filtering the data (which are the data are same as selectedOption )
+    if (value[selectedOption].toLocaleLowerCase() === searching.toLocaleLowerCase()) { return value }
+   })
 
+  // this functionf fetch the datas from URL/contact 
   const fetching = async()=>{
     try {
         const responce = await axios.get('http://localhost:3000/contact')
           if (responce.status === 200) {
             setContactData(await responce.data);
+            setsearchBy(await responce.data)
           }
        } catch (err) {
           if (err.response) {
@@ -26,6 +37,7 @@ const Contact = ({searchValue}) => {
       }
   }
 
+  // this is column for tabel (antd)
   const column = [
     {
       title: 'ID',
@@ -66,8 +78,9 @@ const Contact = ({searchValue}) => {
     },      
   ]
 
+  // this is for set the fethched data into data array (for showing in table)
   const data = []
-  for (const datas of contactData) {
+  for (const datas of filter.length !== 0 ? filter :contactData) { // telling if filtered data are available show that only or show all data in webpage
       let changeTOObject = {
           id:datas.id,
           firstName : datas.firstname,
@@ -79,10 +92,12 @@ const Contact = ({searchValue}) => {
       }
       data.push(changeTOObject)
   }
+
   useEffect(()=>{
     fetching()
   },[undefined])
 
+  // navigating function (react router dom)
   const homeNavigation = ()=>{
     navigate('/')
   }
@@ -96,12 +111,11 @@ const Contact = ({searchValue}) => {
              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>
           </Space>
             <Space>
-              {/* <Flex gap={'small'}> */}
                  <Button type='default' onClick={homeNavigation}>Back to Home</Button>
                  <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
                     <Button type='dashed'>Save & Home</Button> 
                  </Popconfirm>
-              {/* </Flex> */}
+                 <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
           </Space>
 
           </Row>

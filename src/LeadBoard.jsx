@@ -13,17 +13,15 @@ const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
     const { Text }= Typography
 
-    //searching
+    // searching function
     const [searchBy,setSearchBy] = useState('')
     const [selectedOption, setSelectedOption] = useState('mobile'); // this id for set selection
     const [searching,setSearching] = useState('') // this searching for lead
     const filter = leadData.filter(value => {
-         if (value[selectedOption].toLocaleLowerCase() === searching.toLocaleLowerCase()) { 
-            return value
-         }
+         if (value[selectedOption].toLocaleLowerCase() === searching.toLocaleLowerCase()) { return value }
         })
 
-    // code for navigatingin reactg router dom
+    // code for navigatingin (react router dom)
     const navigate = useNavigate();
     const formNavigate = ()=>{
         navigate('/formpage')        
@@ -57,7 +55,7 @@ const LeadBoard = () => {
 
     // this code for appending field name into antd table
     const data = []
-    for (const datas of filter.length !== 0 ? filter : leadData) {
+    for (const datas of filter.length !== 0 ? filter : leadData) { // telling if filtered data are available show that only or show all data in webpage
         let changeTOObject = {
             id: datas.id,
             firstName : datas.firstname,
@@ -70,11 +68,11 @@ const LeadBoard = () => {
         data.push(changeTOObject)
     }
 
-    // this function was send the call log 
+    // this function for call log 
     const makeCall = (number,id) => {
       const data = {
           id : id,
-          date :moment().format('MMMM Do YYYY, h:mm:ss a')
+          date :moment().format('MMMM Do YYYY, h:mm:ss a') // used moment.js for time
       }
     
       if (number) {
@@ -82,11 +80,11 @@ const LeadBoard = () => {
           try {
                 const URL = `http://localhost:3000/logs`
                 const posting = await axios.post(URL,data) // post the data
-                if (posting.status == 201) {
+                if (posting.status === 201) {
                   message.success('Calls are stored in Call log')
                 }
                 if (posting.status === 201) {
-                   window.location.href = `tel:${number}`
+                   window.location.href = `tel:${number}` // this is simple call ('this' number)
                 }
               } catch (err) {
                 if (err.response) {
@@ -102,7 +100,7 @@ const LeadBoard = () => {
       }
     };
 
-    // this refers the column layout in Antd
+    // this refers the column layout for showing data (Antd)
     const column = [
           {
             title: 'ID',
