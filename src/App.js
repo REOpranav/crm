@@ -28,7 +28,6 @@ function App() {
           <Route path='/contactDetail/detail/:id' element={<ContactDetail/>} />
           <Route path='/leadboard/detail/leadeditform/:id' element={<LeadEditForm />} />
           <Route path='/formpage/formlayout' element={<FormLayout/>} />
-          <Route path='/calllogs/:id' element={<Calllogs />}></Route>
         </Routes>
     </div>
   );

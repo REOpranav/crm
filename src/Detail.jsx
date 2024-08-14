@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import Calllogs from './Calllogs'
 
-
 const backGroundColor = '#313949'
 
 // this is message ele from antd
@@ -18,14 +17,14 @@ function messageSuccess(){
 
 const Detail = () => {
     const [leadData,setLeadData] = useState([])
-    const {Title ,Text} = Typography // antd
-    const [formData,setFormData] = useState()
+    const {Text} = Typography // antd
+    const [callLogs,setCallLogs] = useState('')
     const navigation = useNavigate() //this is for navigation
 
     const URL = window.location.href
     const id = URL.split('/').pop()
 
-        // this code for initial load and when lead added
+    // this code for initial load and when lead added
     const fetching = async()=>{
         try {
             const responce = await axios.get(`http://localhost:3000/leads/${id}`)         
@@ -99,12 +98,16 @@ const Detail = () => {
             try {
                   const URL = `http://localhost:3000/logs`
                   const posting = await axios.post(URL,data) // post the data
-                  if (posting.status == 201) {
-                    message.success('Calls are stored in Call log')
-                  }
-                  if (posting.status === 201) {
-                     window.location.href = `tel:${number}`
-                  }
+                  const getCallLogs = await axios.get(URL)
+                    if (getCallLogs.status === 200) {
+                      setCallLogs(getCallLogs.data)                      
+                    }   
+                    if (posting.status == 201) {
+                      message.success('Calls are stored in Call log')
+                    }
+                    if (posting.status === 201) {
+                      window.location.href = `tel:${number}`
+                    }
                 } catch (err) {
                   if (err.response) {
                     message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
@@ -115,7 +118,7 @@ const Detail = () => {
                   }
                 }
               }
-            logPost()
+            logPost()            
         }
       };
       
@@ -123,7 +126,7 @@ const Detail = () => {
     function navigate() {
         navigation('/contact')
     }
-   
+
     return (
     <div>
         <Dashboard />
@@ -150,20 +153,28 @@ const Detail = () => {
                     </Button>
                 </Flex>
         </Row>
-
-        <Row justify={'space-around'}>
-            <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px'}}>
-               <Link to={`/calllogs/${id}`}> <Button type='primary' >call log</Button> </Link>
-            </Col>
-            <Col span={20} style={{backgroundColor:'white',borderRadius:'10px'}}>
-                {Object.entries(leadData).map(([key, value])=>(
-                    <Row style={{padding:'10px'}} className='leadDetail'>
-                        <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}}> {key} : </Col>
-                        <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
-                    </Row>
-                ))}
-            </Col>
-        </Row>
+      
+      <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
+          <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
+              <Button type='primary'>call log</Button> 
+          </Col>
+          
+          <Col span={20} offset={1} style={{overflow:'auto'}}>
+          <Row style={{minHeight:"100vh",maxHeight:'100vh',overflow:'auto',width:'100%'}}>
+              <Col span={24} style={{backgroundColor:'white',borderRadius:'10px'}}>
+                  {Object.entries(leadData).map(([key, value])=>( 
+                      <Row style={{padding:'10px'}} className='leadDetail'>
+                          <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}}> {key} : </Col>
+                          <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
+                      </Row>
+                  ))}
+               </Col>
+                
+              <Calllogs callLogs={callLogs}/>           
+          </Row>
+        </Col>
+      </Row>
+        
     </div>
   )
 }

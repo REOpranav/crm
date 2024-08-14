@@ -48,8 +48,10 @@ const FormLayout = () => {
             })
     },[undefined])
     
+    
     const onFinish = (e)=>{ 
         e.preventDefault()  
+    console.log(formData);
             axios.post('http://localhost:3000/formLayout',formData)
               .then(res => {
                 if (res.status == 201) {
@@ -65,7 +67,6 @@ const FormLayout = () => {
               }
           })
       }
-
 
   return (
     <div > 
