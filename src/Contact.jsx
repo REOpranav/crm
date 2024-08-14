@@ -4,6 +4,7 @@ import axios from 'axios'
 import {message,Row,Table, Space,Typography, Popconfirm, Button} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
+import moment from 'moment'
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -37,6 +38,38 @@ const Contact = () => {
       }
   }
 
+    // this function is totally for store call log
+    const makeCall = (number,id) => {
+      const data = {
+          id : id,
+          date :moment().format('MMMM Do YYYY, h:mm:ss a') // used moment.js for time
+      }
+    
+      if (number) {
+        const logPost = async()=>{
+          try {
+                const URL = `http://localhost:3000/logs`
+                const posting = await axios.post(URL,data) // post the data
+                if (posting.status === 201) {
+                  message.success('Calls are stored in Call log')
+                }
+                if (posting.status === 201) {
+                   window.location.href = `tel:${number}` // this is simple call ('this' number)
+                }
+              } catch (err) {
+                if (err.response) {
+                  message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                } else if (err.request) {
+                  message.error('Error: No response   from server.');
+                } else {
+                  message.error('Error: ' + err.message);
+                }
+              }
+            }
+          logPost()
+      }
+    };
+
   // this is column for tabel (antd)
   const column = [
     {
@@ -65,6 +98,8 @@ const Contact = () => {
       title:'Mobile Number',
       dataIndex: 'mobileNumber',
       key: 'mobileNumber',
+      render : (text,record) => <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(text,record.id)} onCancel={()=>message.error('Canceled call')}> <a> {text} </a> </Popconfirm>  
+
     },          
     {
       title:'Company Name',
@@ -96,6 +131,8 @@ const Contact = () => {
   useEffect(()=>{
     fetching()
   },[undefined])
+
+
 
   // navigating function (react router dom)
   const homeNavigation = ()=>{

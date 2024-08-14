@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {message,Typography,Row,Col,Flex,Button,Dropdown} from 'antd'
+import {message,Typography,Row,Col,Flex,Button,Dropdown,Popconfirm} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
+import moment from 'moment'
+import Calllogs from './Calllogs'
 
 const ContactDetail = () => {
     
@@ -15,6 +17,7 @@ const ContactDetail = () => {
     const {Title ,Text} = Typography // antd
     const [formData,setFormData] = useState()
     const navigation = useNavigate() //this is for navigation
+    const [callLogs,setCallLogs] = useState('')
 
     const URL = window.location.href
     const id = URL.split('/').pop()
@@ -51,6 +54,43 @@ const ContactDetail = () => {
                 label: ( <Link to={'/deal'}>Convert to Deal</Link>),
             }
         ]
+
+    // this is for store the call log
+    const makeCall = (number) => {
+        const data = {
+            id : id,
+            date :moment().format('MMMM Do YYYY, h:mm:ss a')
+        }
+      
+        if (number) {
+          const logPost = async()=>{
+            try {
+                  const URL = `http://localhost:3000/logs`
+                  const posting = await axios.post(URL,data) // post the data
+                  const getCallLogs = await axios.get(URL)
+                    if (getCallLogs.status === 200) {
+                      setCallLogs(getCallLogs.data)                      
+                    }   
+                    if (posting.status == 201) {
+                      message.success('Calls are stored in Call log')
+                    }
+                    if (posting.status === 201) {
+                      window.location.href = `tel:${number}`
+                    }
+                } catch (err) {
+                  if (err.response) {
+                    message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                  } else if (err.request) {
+                    message.error('Error: No response   from server.');
+                  } else {
+                    message.error('Error: ' + err.message);
+                  }
+                }
+              }
+            logPost()            
+        }
+      };
+    
           
   return (
     <div>
@@ -86,10 +126,13 @@ const ContactDetail = () => {
                 {Object.entries(leadData).map(([key, value])=>(
                     <Row style={{padding:'10px'}} className='leadDetail'>
                         <Col span={3} style={{textAlign:'end',textTransform:'capitalize',color:'darkblue'}}> {key} : </Col>
-                        <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank'>{value}</a> : value}</Col> 
+                        <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank'>{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm> : value}</Col> 
                     </Row>
                 ))}
             </Col>
+            <Row>
+                 <Calllogs callLogs={callLogs}/>
+            </Row>
         </Row>
 
     </div>

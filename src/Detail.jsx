@@ -170,7 +170,7 @@ const Detail = () => {
                   ))}
                </Col>
                 
-              <Calllogs callLogs={callLogs}/>           
+              <Calllogs callLogs={callLogs}/>
           </Row>
         </Col>
       </Row>
