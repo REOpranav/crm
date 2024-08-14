@@ -139,7 +139,7 @@ const FormPage = () => {
      </Flex>
       <Flex gap="small">
         <Button type='primary' danger onClick={cancelForm}>Cancel</Button>
-        <Popconfirm title={'Are you sure  '} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
+        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
           <Button type='primary'>Submit</Button>  
         </Popconfirm>
       </Flex>

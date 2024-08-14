@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Searching from './Searching';
+import moment from 'moment';
 
 const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
@@ -69,6 +70,38 @@ const LeadBoard = () => {
         data.push(changeTOObject)
     }
 
+    // this function was send the call log 
+    const makeCall = (number,id) => {
+      const data = {
+          id : id,
+          date :moment().format('MMMM Do YYYY, h:mm:ss a')
+      }
+    
+      if (number) {
+        const logPost = async()=>{
+          try {
+                const URL = `http://localhost:3000/logs`
+                const posting = await axios.post(URL,data) // post the data
+                if (posting.status == 201) {
+                  message.success('Calls are stored in Call log')
+                }
+                if (posting.status === 201) {
+                   window.location.href = `tel:${number}`
+                }
+              } catch (err) {
+                if (err.response) {
+                  message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                } else if (err.request) {
+                  message.error('Error: No response   from server.');
+                } else {
+                  message.error('Error: ' + err.message);
+                }
+              }
+            }
+          logPost()
+      }
+    };
+
     // this refers the column layout in Antd
     const column = [
           {
@@ -97,6 +130,7 @@ const LeadBoard = () => {
             title:'Mobile Number',
             dataIndex: 'mobileNumber',
             key: 'mobileNumber',
+            render : (text,record) => <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(text,record.id)} onCancel={()=>message.error('Canceled call')}> <a> {text} </a> </Popconfirm>  
           },          
           {
             title:'Company Name',

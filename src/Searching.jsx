@@ -1,4 +1,5 @@
 import React from 'react'
+import {Text} from 'antd'
 
 const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,selectedOption}) => {
     const handleChange = (e)=>{
@@ -16,12 +17,12 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
   
     return (
     <div>
-           <select id="field" value={selectedOption} onChange={handleOption} style={{padding:'5px',backgroundColor:'white',border:'1px solid #ddd',borderRadius:'4px',marginRight:'5px'}}>
+           <select id="field" value={selectedOption} onChange={handleOption} style={{padding:'7px',backgroundColor:'white',border:'1px solid #ddd',borderRadius:'4px',marginRight:'5px'}}>
               {listOfDataInArray.map(e => {
-                  return <option value={e}>{e}</option>
+                  return <option value={e} style={{textTransform:'capitalize',fontWeight:'lighter',fontFamily:'sans-serif',color:'grey'}}> {e} </option>
               })}
-           </select>           
-
+           </select>
+           <span>= </span>
            <input type="search" 
                   name="search" 
                   id="search" 

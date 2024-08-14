@@ -1,25 +1,6 @@
 {
   "leads": [
     {
-      "id": "345678901",
-      "leadowner": "alexjohnson",
-      "firstname": "Alex",
-      "lastname": "Johnson",
-      "email": "alex.johnson@example.com",
-      "mobile": "5432109876",
-      "date": "2024-04-18",
-      "companyName": "Green Energy Co.",
-      "annualrevenue": "800000",
-      "gender": "Male",
-      "area": "Riverside",
-      "state": "Colorado",
-      "country": "USA",
-      "pincode": "80201",
-      "expectedAmount": "175000",
-      "website": "https://greenenergy.com",
-      "description": "Looking for renewable energy partnerships."
-    },
-    {
       "id": "456789012",
       "leadowner": "emilywilliams",
       "firstname": "Emily",
@@ -231,14 +212,6 @@
       "description": "Seeking a partner for new technology integration."
     },
     {
-      "id": "ccdb",
-      "leadName": "",
-      "leadMobileNumber": "",
-      "leadEmail": "",
-      "leadArea": "",
-      "date": "13/08/2024"
-    },
-    {
       "id": "984563210",
       "leadowner": "pranavavadivel",
       "firstname": "Jane",
@@ -275,6 +248,39 @@
       "expectedAmount": "200000",
       "website": "https://aidynamics.com",
       "description": "Exploring AI-driven business solutions."
+    },
+    {
+      "id": "345678901",
+      "leadowner": "alexjohnson",
+      "firstname": "Alex",
+      "lastname": "Johnson",
+      "email": "alex.johnson@example.com",
+      "mobile": "5432109876",
+      "date": "2024-04-18",
+      "companyName": "Green Energy Co.",
+      "annualrevenue": "800000",
+      "gender": "Male",
+      "area": "Riverside",
+      "state": "Colorado",
+      "country": "USA",
+      "pincode": "80201",
+      "expectedAmount": "175000",
+      "website": "https://greenenergy.com",
+      "description": "Looking for renewable energy partnerships."
+    }
+  ],
+  "logs": [
+    {
+      "id": "789012345",
+      "date": "August 14th 2024, 12:28:56 am"
+    },
+    {
+      "id": "456789012",
+      "date": "August 14th 2024, 12:40:32 am"
+    },
+    {
+      "id": "456789012",
+      "date": "August 14th 2024, 1:30:21 am"
     }
   ]
 }

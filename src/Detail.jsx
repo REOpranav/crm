@@ -1,10 +1,13 @@
 import React, { useState ,useEffect} from 'react'
-import {Button, message,notification, Row, Title, Typography, Menu, Flex,Space,Layout,Col,Dropdown} from  'antd'
+import {Button, message,notification, Row, Title, Typography, Menu, Flex,Space,Layout,Col,Dropdown, Popconfirm} from  'antd'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './Detail.css'
 import Dashboard from './Dashboard'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
+import Calllogs from './Calllogs'
+
 
 const backGroundColor = '#313949'
 
@@ -68,11 +71,7 @@ const Detail = () => {
           }) 
       }
 
-    // this for navigation
-    function navigate() {
-        navigation('/contact')
-    }
-
+    // this is simple change lead to contact/account/deal
     const items = [
         {
           key: '1',
@@ -88,12 +87,49 @@ const Detail = () => {
         }
     ]
 
+    // this is for store the call log
+    const makeCall = (number) => {
+        const data = {
+            id : id,
+            date :moment().format('MMMM Do YYYY, h:mm:ss a')
+        }
+      
+        if (number) {
+          const logPost = async()=>{
+            try {
+                  const URL = `http://localhost:3000/logs`
+                  const posting = await axios.post(URL,data) // post the data
+                  if (posting.status == 201) {
+                    message.success('Calls are stored in Call log')
+                  }
+                  if (posting.status === 201) {
+                     window.location.href = `tel:${number}`
+                  }
+                } catch (err) {
+                  if (err.response) {
+                    message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                  } else if (err.request) {
+                    message.error('Error: No response   from server.');
+                  } else {
+                    message.error('Error: ' + err.message);
+                  }
+                }
+              }
+            logPost()
+        }
+      };
+      
+    // this for navigation
+    function navigate() {
+        navigation('/contact')
+    }
+   
     return (
     <div>
         <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}> 
                 <Flex gap={'small'}>
-                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'grey',fontWeight:'lighter'}}>{leadData.firstname ?leadData.firstname : 'Profile Name'} - lead</Text>
+                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'red',fontWeight:'lighter'}}>{leadData.firstname ?leadData.firstname : 'Profile Name'} - lead</Text>
                 </Flex>
 
                 <Flex gap={'small'}>
@@ -114,17 +150,16 @@ const Detail = () => {
                     </Button>
                 </Flex>
         </Row>
-      
-        <Row justify={'space-around'}>
-            <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px'}} >
-             
-            </Col>
 
+        <Row justify={'space-around'}>
+            <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px'}}>
+               <Link to={`/calllogs/${id}`}> <Button type='primary' >call log</Button> </Link>
+            </Col>
             <Col span={20} style={{backgroundColor:'white',borderRadius:'10px'}}>
                 {Object.entries(leadData).map(([key, value])=>(
-                    <Row style={{padding:'10px'}} className='leadDetail' >
+                    <Row style={{padding:'10px'}} className='leadDetail'>
                         <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}}> {key} : </Col>
-                        <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : value}</Col> 
+                        <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
                     </Row>
                 ))}
             </Col>
