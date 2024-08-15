@@ -1,19 +1,18 @@
-import { Menu, Row ,Typography, Image ,Space, Flex, Button} from 'antd';
+import { Menu, Row ,Typography, Image ,Space, Flex} from 'antd';
 import { Link } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
-import Searching from './Searching';
+import './Dashboard.css'
 
 const Dashboard = () => {
-
 const {Text ,Title} = Typography
-const backGroundColor = '#313949'
+const backGroundColor = '#422A8D'
 const iconColor = "#fff"
 
 return (
     <div> 
       <Row justify={'space-between'} style={{backgroundColor:backGroundColor}}>
         <Menu mode="horizontal" style={{backgroundColor:backGroundColor }} theme='dark'>
-          <Menu.Item >
+          <Menu.Item>
             <Link to={'/'}>
               <Image 
                   width={15}
@@ -21,28 +20,28 @@ return (
                   preview={false}                
               />
             </Link>   
-            <Text style={{marginLeft:'10px',color:'white',fontWeight:'bold'}}>Zappy CRM</Text>
+            <Text style={{marginLeft:'10px',color:'white',fontWeight:'bold'}} className='PoppinsFont'>Zappy CRM</Text>
           </Menu.Item>
 
           <Menu.Item key="leadBoard">
-           <Link to={'/leadBoard'}>Lead</Link>
+           <Link to={'/leadBoard'}  className='PoppinsFont'>Lead</Link>
           </Menu.Item>
           
             <Menu.Item key="Contact">
-              <Link to={'/contact'} > Contact</Link>
+              <Link to={'/contact'}  className='PoppinsFont'> Contact</Link>
             </Menu.Item>
           
             <Menu.Item key="Acount">
-              <Link to={'/account'}>Account</Link>       
+              <Link to={'/account'}  className='PoppinsFont'>Account</Link>       
             </Menu.Item>
          
             <Menu.Item key="deal">
-              <Link to={'/deal'}>Deal </Link>
+              <Link to={'/deal'}  className='PoppinsFont'>Deal </Link>
           </Menu.Item>
         </Menu>
 
         <Space size={'large'}>
-            <AiFillSetting color={iconColor} />
+            <AiFillSetting color={iconColor}  className='PoppinsFont'/>
             <Link to={'/'}>
               <Flex gap={'small'} align='center' style={{marginRight:'10px'}}>
               <Image  

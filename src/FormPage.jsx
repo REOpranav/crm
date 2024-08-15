@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import './Formpage.css'
 import Dashboard from './Dashboard'
 import { Link } from 'react-router-dom'
+import './Dashboard.css'
 
  // this is message ele from antd
   function messageSuccess(){
@@ -127,7 +128,7 @@ const FormPage = () => {
     <Row justify={'space-between'} style={{padding:'10px'}}>
       <Flex gap={"small"} align='center'> 
         <Text style={{fontSize:'16px',color:'grey'}}>
-            <select name="layout">
+            <select name="layout" className='PoppinsFont'>
                 <option value="Vadivel">{'vadivel'}</option>
                 <option value="sakthi">{'sakthi'}</option>  
                 <option value="Deepa">{'Deepa'}</option>  
@@ -135,18 +136,18 @@ const FormPage = () => {
             </select>
         </Text>
         
-        <Link to={'/formpage/formlayout'} > <Button type='link'>Create layout</Button> </Link>     
+        <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
      </Flex>
       <Flex gap="small">
-        <Button type='primary' danger onClick={cancelForm}>Cancel</Button>
+        <Button type='primary' danger ghost onClick={cancelForm} >Cancel</Button>
         <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
-          <Button type='primary'>Submit</Button>  
+          <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
         </Popconfirm>
       </Flex>
     </Row>
 
     <Row>
-         <form onSubmit={checkForSubmitting}>
+         <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
                 <label for="leadowner">Lead Owner : </label>
                 <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 

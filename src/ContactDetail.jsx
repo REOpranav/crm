@@ -5,6 +5,7 @@ import axios from 'axios'
 import Dashboard from './Dashboard'
 import moment from 'moment'
 import Calllogs from './Calllogs'
+import './Dashboard.css'
 
 const ContactDetail = () => {
     
@@ -97,20 +98,20 @@ const ContactDetail = () => {
         <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}> 
                 <Flex gap={'small'}>
-                    <Text style={{fontSize:'20px',textTransform:'capitalize',fontFamily:'fantasy'}}>{leadData.firstname ?leadData.firstname : 'Profile Name'} - lead</Text>
+                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'red'}} className='PoppinsFont'>{leadData.firstname ?leadData.firstname : 'Profile Name'} - Contact</Text>
                 </Flex>
 
                 <Flex gap={'small'}>
-                    <Button type='primary'>
+                    <Button type='primary' id='themeColor'>
                         <a href={`mailto:${leadData.email}`}>Send Email</a>
                     </Button>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
-                        <Button type='primary'>Convert</Button>
+                        <Button type='primary' id='themeColor'>Convert</Button>
                     </Dropdown>
            
                     <Button type='default'>
-                        <Link to={``}>Edit contact</Link> 
+                        <Link to={``} >Edit contact</Link> 
                     </Button>
                     
                     <Button type='default'>
@@ -118,23 +119,26 @@ const ContactDetail = () => {
                     </Button>
                 </Flex>
         </Row>
-      
-        <Row justify={'space-around'}>
-            <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px'}}></Col>
-
-            <Col span={20} style={{backgroundColor:'white',borderRadius:'10px'}}>
-                {Object.entries(leadData).map(([key, value])=>(
-                    <Row style={{padding:'10px'}} className='leadDetail'>
-                        <Col span={3} style={{textAlign:'end',textTransform:'capitalize',color:'darkblue'}}> {key} : </Col>
-                        <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank'>{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm> : value}</Col> 
-                    </Row>
-                ))}
-            </Col>
-            <Row>
-                 <Calllogs callLogs={callLogs}/>
-            </Row>
-        </Row>
-
+        <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
+          <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
+              <Button type='dashed' className='PoppinsFont'>call log</Button> 
+          </Col>
+          
+          <Col span={20} offset={1} style={{overflow:'auto'}}>
+          <Row style={{minHeight:"100vh",maxHeight:'100vh',overflow:'auto',width:'100%'}}>
+              <Col span={24} style={{backgroundColor:'white',borderRadius:'10px'}}>
+                  {Object.entries(leadData).map(([key, value])=>( 
+                      <Row style={{padding:'10px'}} className='leadDetail'>
+                          <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}} className='PoppinsFont'> {key} : </Col>
+                          <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1} className='PoppinsFont'> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
+                      </Row>
+                  ))}
+               </Col>
+                
+              <Calllogs callLogs={callLogs}/>
+          </Row>
+        </Col>
+      </Row>
     </div>
   )
 }

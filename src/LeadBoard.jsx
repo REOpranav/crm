@@ -156,7 +156,7 @@ const LeadBoard = () => {
                       <Button type='dashed'>Save & Home</Button> 
                   </Popconfirm>
                   <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
-                  <Button type='primary' onClick={formNavigate}>Create Lead</Button>
+                  <Button type='primary' id='themeColor' onClick={formNavigate}>Create Lead</Button>
               </Space>
            </Row>
 
