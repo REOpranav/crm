@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,selectedOption}) => {
+const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,selectedOption,calculateSymbol,setCalculateSymbol}) => {
     const handleChange = (e)=>{
       setSearchQuery(e.target.value)  
     }
@@ -9,10 +9,17 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
       setSelectedOption(e.target.value)
     }
 
+    const handlesymbol = (e)=>{
+      setCalculateSymbol(e.target.value)
+    }
+
+
     let listOfDataInArray = []
     for (const a in listOfData[0]) {
       listOfDataInArray.push(a)
     }
+
+    const symbols = ['===','==','!==','>','>=','<','<='] 
   
     return (
     <div>
@@ -21,7 +28,11 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
                   return <option value={e} style={{textTransform:'capitalize',fontWeight:'lighter',fontFamily:'sans-serif',color:'grey'}}> {e} </option>
               })}
            </select>
-           <span>= </span>
+           <select id='field' value={calculateSymbol} onChange={handlesymbol} style={{padding:'7px',backgroundColor:'white',border:'1px solid #ddd',borderRadius:'4px',marginRight:'5px'}}>
+              {symbols && symbols.map(e => {
+                return <option value={e} style={{textTransform:'capitalize',fontWeight:'lighter',fontFamily:'sans-serif',color:'grey'}}> {e} </option>
+              })}
+           </select>
            <input type="search" 
                   name="search" 
                   id="search" 
