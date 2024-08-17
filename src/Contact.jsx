@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useDebugValue } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
-import {message,Row,Table, Space,Typography, Popconfirm, Button, Col} from 'antd'
+import {message,Row,Table, Space,Typography, Popconfirm, Button, Col, Checkbox} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
 import moment from 'moment'
@@ -9,16 +9,19 @@ import moment from 'moment'
 const Contact = () => {
   const navigate = useNavigate();
   const {Text} = Typography
-  const [contactData,setContactData] = useState([]) // store the contact data come from URL 
+  const styles = { fontWeight:'lighter'}
 
+  const [contactData,setContactData] = useState([]) // store the contact data come from URL 
+  
   // this are for searching components
   const [searching,setSearching] = useState('') // searching input field value
   const [searchBy,setsearchBy] = useState('') // total contact data list
   const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
   const [calculateSymbol,setCalculateSymbol] = useState('===')
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   
   const filter = contactData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
-    const comparisonFunction  = {
+    const comparisonFunction  = {  // this object for finiding the === object
       '===' : (a,b) => a === b,
       '==' : (a,b) => a == b,
       '>' : (a,b) => a > b,
@@ -113,7 +116,6 @@ const Contact = () => {
       dataIndex: 'mobileNumber',
       key: 'mobileNumber',
       render : (text,record) => <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(text,record.id)} onCancel={()=>message.error('Canceled call')}> <a> {text} </a> </Popconfirm>  
-
     },          
     {
       title:'Company Name',
@@ -124,34 +126,64 @@ const Contact = () => {
       title: 'Annual Revenue',
       dataIndex: 'annualRevenue',
       key: 'annualRevenue',
-    },      
+    },
   ]
 
   // this is for set the fethched data into data array (for showing in table)
   const data = []
   for (const datas of filter.length !== 0 ? filter :contactData) { // telling if filtered data are available show that only or show all data in webpage
       let changeTOObject = {
+          key : datas.id,
           id:datas.id,
           firstName : datas.firstname,
           secondName : datas.lastname,
           emailID : datas.email,
           mobileNumber  : datas.mobile,
           companyName:datas.companyName,
-          annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0
+          annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0,
+          gender:datas.gender
       }
       data.push(changeTOObject)
   }
 
+  const deleteThedata = async()=>{
+    try {
+      const URL = `http://localhost:3000/contact`
+      let deleting ; 
+      for (const deleteValue of selectedRowKeys) {
+         deleting =  await axios.delete(`${URL}/${deleteValue}`)        
+      }
+      if (deleting.status == 200) {
+        message.success("sucessfully Deleted the data") 
+      }
+      setSelectedRowKeys(0)
+    } catch (err) {
+      if (err.response) {
+            message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+            message.error('Error: No response   from server.');
+      } else {
+            message.error('Error: ' + err.message);
+      }
+    }
+}
+
   useEffect(()=>{
     fetching()
-  },[undefined])
+  },[undefined,deleteThedata])
 
   // navigating function (react router dom)
   const homeNavigation = ()=>{
     navigate('/')
   }
-  const styles = { fontWeight:'lighter' }    
-  
+
+  const rowSelection = {
+    type: 'checkbox',
+    onChange: (newSelectedRowKeys) => {
+      setSelectedRowKeys(newSelectedRowKeys);
+    },
+  };
+
   return (
     <div>
         <Dashboard />
@@ -160,6 +192,7 @@ const Contact = () => {
              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>
           </Space>
             <Space>
+                 {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
                  <Button type='default' onClick={homeNavigation}>Back to Home</Button>
                  <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
                     <Button type='dashed'>Save & Home</Button> 
@@ -220,7 +253,7 @@ const Contact = () => {
               </label>
             </Col>
             <Col span={20} offset={1}>
-              <Table columns={column} dataSource={data} pagination={false} scroll={{y: 400 }}/>
+              <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400 }} size='small' />
             </Col>
 
         </Row>

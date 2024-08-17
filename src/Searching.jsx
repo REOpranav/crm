@@ -1,4 +1,5 @@
 import React from 'react'
+import './Searching.css'
 
 const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,selectedOption,calculateSymbol,setCalculateSymbol}) => {
     const handleChange = (e)=>{
@@ -12,7 +13,6 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
     const handlesymbol = (e)=>{
       setCalculateSymbol(e.target.value)
     }
-
 
     let listOfDataInArray = []
     for (const a in listOfData[0]) {
@@ -28,11 +28,13 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
                   return <option value={e} style={{textTransform:'capitalize',fontWeight:'lighter',fontFamily:'sans-serif',color:'grey'}}> {e} </option>
               })}
            </select>
+
            <select id='field' value={calculateSymbol} onChange={handlesymbol} style={{padding:'7px',backgroundColor:'white',border:'1px solid #ddd',borderRadius:'4px',marginRight:'5px'}}>
               {symbols && symbols.map(e => {
                 return <option value={e} style={{textTransform:'capitalize',fontWeight:'lighter',fontFamily:'sans-serif',color:'grey'}}> {e} </option>
               })}
            </select>
+           
            <input type="search" 
                   name="search" 
                   id="search" 

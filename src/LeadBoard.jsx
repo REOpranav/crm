@@ -17,14 +17,31 @@ const LeadBoard = () => {
     const [searchBy,setSearchBy] = useState('')
     const [selectedOption, setSelectedOption] = useState('mobile'); // this id for set selection
     const [searching,setSearching] = useState('') // this searching for lead
-    const filter = leadData.filter(value => {
-         if (value[selectedOption].toLocaleLowerCase() === searching.toLocaleLowerCase()) { return value }
-        })
+    const [calculateSymbol,setCalculateSymbol] = useState('===')
+
+    
+    const filter = leadData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
+    const comparisonFunction  = {  // this object for finiding the === object
+      '===' : (a,b) => a === b,
+      '==' : (a,b) => a == b,
+      '>' : (a,b) => a > b,
+      '>=' : (a,b) => a >= b,
+      '<=' : (a,b) => a <= b,
+      '<' : (a,b) => a < b,
+      '!==' : (a,b) => a !== b,  
+    }
+
+    const comparisonFn = comparisonFunction[calculateSymbol];    
+    const finalValues = comparisonFn(value[selectedOption].toLocaleLowerCase(),searching.toLocaleLowerCase())
+    return finalValues
+   })
+
+    const [selectedRowKeys,setselectedRowKeys] = useState([])
 
     // code for navigatingin (react router dom)
     const navigate = useNavigate();
     const formNavigate = ()=>{
-        navigate('/formpage')        
+        navigate('/formpage')
     }
 
     const homeNavigation = ()=>{
@@ -37,7 +54,7 @@ const LeadBoard = () => {
               const responce = await axios.get('http://localhost:3000/leads')
                 if (responce.status === 200) {
                     setLeadData(await responce.data);
-                    setSearchBy(await responce.data)
+                    setSearchBy(await responce.data);
                 }
              } catch (err) {
                 if (err.response) {
@@ -49,14 +66,48 @@ const LeadBoard = () => {
                 }
             }
         }
+
+   // this is for deleting the leads
+    const deleteThedata = async()=>{
+      try {
+        const URL = `http://localhost:3000/leads`
+        let deleting ; 
+        for (const deleteValue of selectedRowKeys) {
+           deleting =  await axios.delete(`${URL}/${deleteValue}`)        
+        }
+        if (deleting.status === 200) {
+          message.success("sucessfully Deleted the data") 
+        }
+        setselectedRowKeys(0)
+     
+       } catch (err) {
+        if (err.response) {
+              message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+        } else if (err.request) {
+              message.error('Error: No response   from server.');
+        } else {
+              message.error('Error: ' + err.message);
+        }
+      }    
+  }
+
+    // this is row selection object for 
+    const rowSelection = {
+      type: 'checkbox',
+      onChange: (newSelectedRowKeys) => {
+        setselectedRowKeys(newSelectedRowKeys);
+      },
+    };
+    
     useEffect(()=>{
       fetching()
-    },[undefined])
+    },[undefined,deleteThedata])
 
     // this code for appending field name into antd table
     const data = []
     for (const datas of filter.length !== 0 ? filter : leadData) { // telling if filtered data are available show that only or show all data in webpage
         let changeTOObject = {
+            key:datas.id,
             id: datas.id,
             firstName : datas.firstname,
             secondName : datas.lastname,
@@ -73,7 +124,7 @@ const LeadBoard = () => {
       const data = {
           id : id,
           date :moment().format('MMMM Do YYYY, h:mm:ss a') // used moment.js for time
-      }
+      } 
     
       if (number) {
         const logPost = async()=>{
@@ -141,7 +192,7 @@ const LeadBoard = () => {
             key: 'annualRevenue',
           },      
         ]
-    const styles = { fontWeight:'lighter' }    
+    const styles = { fontWeight:'lighter' }
 
   return (
     <div>    
@@ -151,11 +202,12 @@ const LeadBoard = () => {
                 <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Lead View</Text>
               </Space>
               <Space>
+                  {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
                   <Button type='default' onClick={homeNavigation}>Back to Home</Button>
                   <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
                       <Button type='dashed'>Save & Home</Button> 
                   </Popconfirm>
-                  <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
+                  <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol}/>
                   <Button type='primary' id='themeColor' onClick={formNavigate}>Create Lead</Button>
               </Space>
            </Row>
@@ -213,7 +265,7 @@ const LeadBoard = () => {
             </Col>
 
             <Col span={20} offset={1}>
-              <Table columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/>
+              <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/>
             </Col>
           </Row>
 
