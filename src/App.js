@@ -12,6 +12,7 @@ import FormLayout from './FormLayout';
 import ContactDetail from './ContactDetail';
 import Calllogs from './Calllogs';
 import DetailEditForm from './DetailEditForm';
+import AccountDetail from './AccountDetail';
 
 function App() {
   
@@ -29,6 +30,9 @@ function App() {
           <Route path='/leads/detail/leadeditform/:id' element={<DetailEditForm />} />
           <Route path='/contact/contactDetail/contactEditForm/:id' element={<DetailEditForm />} />
           <Route path='/formpage/formlayout' element={<FormLayout/>} />
+          <Route path='/accountdetail/detail/:id' element={<AccountDetail />} />
+          <Route path='/account/accountDetail/accountEditForm/:id' element={<DetailEditForm />} />
+
         </Routes>
     </div>
   );

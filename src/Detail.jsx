@@ -71,6 +71,32 @@ const Detail = () => {
           }) 
       }
 
+      // this code for convert lead to contact
+      const convertToAccount = async()=>{ 
+        let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
+        await axios.post('http://localhost:3000/account',dataFromLead.data) // secound post that contact form
+          .then(res => {
+            if (res.status === 201) {
+              messageSuccess();
+            }
+            axios.delete(`http://localhost:3000/leads/${id}`) // third code for deleting data in lead
+
+            setTimeout(()=>{
+                navigateToAccount()
+            },1 * 100) 
+
+          }).catch(err => {
+            if (err.response) {
+              message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+            } else if (err.request) {
+              message.error('Error: No response   from server.');
+            } else {
+              message.error('Error: ' + err.message);
+            }
+      }) 
+     }
+
+
     // this is simple change lead to contact/account/deal (line number 143)
     const items = [
         {
@@ -79,7 +105,7 @@ const Detail = () => {
         },
         {
             key: '2',
-            label: (<Link to={'/account'}> Convert to Account </Link> ),
+            label: (<Link onClick={convertToAccount}> Convert to Account </Link> ),
         },
         {
             key: '3',
@@ -163,6 +189,11 @@ const Detail = () => {
     function navigate() {
         navigation('/contact')
     }
+
+    function navigateToAccount() {
+      navigation('/account')
+  }
+
 
     return (
     <div>

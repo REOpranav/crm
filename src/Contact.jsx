@@ -10,9 +10,7 @@ const Contact = () => {
   const navigate = useNavigate();
   const {Text} = Typography
   const styles = { fontWeight:'lighter'}
-
   const [contactData,setContactData] = useState([]) // store the contact data come from URL 
-  
   // this are for searching components
   const [searching,setSearching] = useState('') // searching input field value
   const [searchBy,setsearchBy] = useState('') // total contact data list
@@ -149,7 +147,7 @@ const Contact = () => {
       dataIndex: 'mobileNumber',
       key: 'mobileNumber',
       render : (text,record) => <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(text,record.id)} onCancel={()=>message.error('Canceled call')}> <a> {text} </a> </Popconfirm>  
-    },          
+    },
     {
       title:'Company Name',
       dataIndex: 'companyName',
@@ -199,7 +197,7 @@ const Contact = () => {
             message.error('Error: ' + err.message);
       }
     }
-}
+  }
 
   useEffect(()=>{
     fetching()

@@ -45,6 +45,7 @@ const DetailEditForm = () => {
       annualrevenue:''
     })
     const checkUrl = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
+     
     const fetching = async()=>{
       try {
       const responce = await axios.get(`http://localhost:3000/${checkUrl}`)
@@ -189,7 +190,7 @@ const DetailEditForm = () => {
         <Row justify={'space-between'} >
           <Col>
            <Flex style={{padding:'10px',display:'flex',alignItems:'center'}} gap={'small'}>
-              <Text style={{fontSize:'20px',fontWeight:'lighter',color:'grey'}}>Edit Lead</Text>
+              <Text style={{fontSize:'20px',fontWeight:'lighter',color:'grey',textTransform:'capitalize'}}>Edit {`${checkUrl}`}</Text>
               <Text style={{fontSize:'15px',color:'red'}}>{`(${lead.firstname})`}</Text>
            </Flex>
           </Col>
