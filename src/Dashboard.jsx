@@ -12,20 +12,20 @@ return (
     <div> 
       <Row justify={'space-between'} style={{backgroundColor:backGroundColor}}>
         <Menu mode="horizontal" style={{backgroundColor:backGroundColor }} theme='dark'>
-          <Menu.Item>
-            <Link to={'/'}>
-              <Image 
-                  width={15}
-                  src="https://static.zohocdn.com/crm/images/crm_logo_white_c518bb417c29e9e235a64ca56ff943ec_.svg"
-                  preview={false}                
-              />
-            </Link>   
-            <Text style={{marginLeft:'10px',color:'white',fontWeight:'bold'}} className='PoppinsFont'>Zappy CRM</Text>
-          </Menu.Item>
+            <Menu.Item>
+              <Link to={'/'}>
+                <Image 
+                    width={15}
+                    src="https://static.zohocdn.com/crm/images/crm_logo_white_c518bb417c29e9e235a64ca56ff943ec_.svg"
+                    preview={false}                
+                />
+              </Link>   
+              <Text style={{marginLeft:'10px',color:'white',fontWeight:'bold'}} className='PoppinsFont'>Zappy CRM</Text>
+            </Menu.Item>
 
-          <Menu.Item key="leadBoard">
-           <Link to={'/leadBoard'}  className='PoppinsFont'>Lead</Link>
-          </Menu.Item>
+            <Menu.Item key="leadBoard">
+            <Link to={'/leads'}  className='PoppinsFont'>Lead</Link>
+            </Menu.Item>
           
             <Menu.Item key="Contact">
               <Link to={'/contact'}  className='PoppinsFont'> Contact</Link>

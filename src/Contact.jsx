@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useDebugValue } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
-import {message,Row,Table, Space,Typography, Popconfirm, Button, Col, Checkbox} from 'antd'
+import {message,Row,Table, Space,Typography, Popconfirm, Button, Col, Checkbox, Dropdown} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
 import moment from 'moment'
@@ -191,15 +191,12 @@ const Contact = () => {
           <Space>
              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>
           </Space>
-            <Space>
-                 {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
-                 <Button type='default' onClick={homeNavigation}>Back to Home</Button>
-                 <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
-                    <Button type='dashed'>Save & Home</Button> 
-                 </Popconfirm>
-                 <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol}/>
+          <Space>
+              {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
+              <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
+              <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol}/>
           </Space>
-          </Row>
+        </Row>
 
         <Row justify={'space-around'}>
          <Col span={3} style={{backgroundColor:'white',display:'flex',flexDirection:'column',justifyContent:'space-around',borderRadius:'10px',padding:'5px',minHeight:'80vh',maxHeight:'80vh'}}>

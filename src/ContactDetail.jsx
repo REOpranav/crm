@@ -9,7 +9,7 @@ import './Dashboard.css'
 
 const ContactDetail = () => {
     
- // this is message ele from antd
+    // this is message ele from antd
     function messageSuccess(){
         message.success('Sucessfully created a Lead')
     }
@@ -111,7 +111,7 @@ const ContactDetail = () => {
                     </Dropdown>
            
                     <Button type='default'>
-                        <Link to={``} >Edit contact</Link> 
+                        <Link to={`/contact/contactDetail/contactEditForm/${id}`} >Edit contact</Link> 
                     </Button>
                     
                     <Button type='default'>

@@ -27,8 +27,8 @@ import Dashboard from './Dashboard'
     message.success(`Sucessfully Update the ${value.firstname} Lead Datas`)
  }
 
-const LeadEditForm = () => {
-   const {Text} = Typography
+const DetailEditForm = () => {
+    const {Text} = Typography
     const navigation = useNavigate() //this is for navigation   
     const urlParams = window.location.pathname //this code for getting url params          
     const [leadDatas,setLeadDatas] = useState([])//this will fetch the full data from query param
@@ -44,22 +44,22 @@ const LeadEditForm = () => {
       companyName:'',
       annualrevenue:''
     })
-
+    const checkUrl = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
     const fetching = async()=>{
-    try {
-      const responce = await axios.get('http://localhost:3000/leads')
+      try {
+      const responce = await axios.get(`http://localhost:3000/${checkUrl}`)
         if (responce.status === 200) {
             setLeadDatas(await responce.data);            
         }
-     } catch (err) {
-        if (err.response) {
-            message.error('Error: ' + err.response.status +' - '+ (err.response.data.message || 'Server Error'));
-        } else if (err.request) {
-            message.error('Error: No response from server.');
-        } else {
-            message.error('Error: ' + err.message);
-        }
-     }
+      } catch (err) {
+          if (err.response) {
+              message.error('Error: ' + err.response.status +' - '+ (err.response.data.message || 'Server Error'));
+          } else if (err.request) {
+              message.error('Error: No response from server.');
+          } else {
+              message.error('Error: ' + err.message);
+          }
+      }
     }
     
     // initial fetch function occurs
@@ -118,7 +118,7 @@ const LeadEditForm = () => {
         errorvalues.firstname = 'First Name is Required'
     }
     if (!leadFormValues.leadowner.trim()) {
-      errorvalues.firstname = 'lead owner is Required'
+      errorvalues.firstname = 'owner is Required'
    }
 
     if (!leadFormValues.lastname.trim()) {
@@ -136,7 +136,7 @@ const LeadEditForm = () => {
   }
   //checking tthe form fileds are filled or not
   function checkForSubmitting(e) {
-    let checkHavingErrorInInputField = Object.keys(validation(formData)).length == 0 // if it was greater than 0 that mean not fill the manditory field
+    let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0 // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
        onFinish(e)
      }else{            
@@ -148,8 +148,8 @@ const LeadEditForm = () => {
   // this code for patch work (onlu this problem)
   const onFinish = (e) => {
     e.preventDefault();
-    const queryParam = formData.id // get the id for making Put request
-      axios.put(`http://localhost:3000/leads/${queryParam}`,formData)
+    const queryParam = formData.id // get the id for making Put request    
+      axios.put(`http://localhost:3000/${checkUrl}/${queryParam}`,formData)
       .then(res => {
         if (res.status === 200) {
           messageSuccess(res.data);
@@ -170,10 +170,9 @@ const LeadEditForm = () => {
     }, 100); 
   };
   
-
  // this for navigation
     function navigate() {
-      navigation('/leadboard')
+      navigation(`/${checkUrl}`)
     }
 
     function backoneStep() {
@@ -184,7 +183,6 @@ const LeadEditForm = () => {
       return errors[value] ? 'inputError' : ''
     }
     
-  
   return (
     <div>
       <Dashboard />
@@ -201,15 +199,9 @@ const LeadEditForm = () => {
               <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={backoneStep} onCancel={()=>message.error('Process was cancel')}>
                 <Button type='default'>Back one step</Button>  
               </Popconfirm>
-
-              <Link to={'/leadboard'}>
-                <Button type='default'>
-                    LeadBoard
-                </Button>
-              </Link>
                
               <Popconfirm title={'Are you sure to Submit'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Submit Cancelled')}>
-                <Button type='primary'>Submit</Button>  
+                <Button type='primary'>save and close</Button>  
               </Popconfirm>
               
             </Flex>
@@ -220,8 +212,8 @@ const LeadEditForm = () => {
         <Row justify={'center'}>
           <form onSubmit={checkForSubmitting}>
           <p>
-                <label for="leadowner">Lead Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Lead Owner *`} value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
+                <label for="leadowner">Owner : </label>
+                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Owner *`} value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
             </p>
             <p>
                 <label for="firstname">First Name : </label>
@@ -295,4 +287,4 @@ const LeadEditForm = () => {
   )
 }
 
-export default LeadEditForm
+export default DetailEditForm

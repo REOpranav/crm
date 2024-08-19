@@ -18,52 +18,52 @@
       "expectedAmount": "8000000000",
       "website": "",
       "description": "make a sign board in better cost"
+    },
+    {
+      "id": "957590936",
+      "leadowner": "pranavavadivek",
+      "firstname": "water",
+      "lastname": "bottle",
+      "email": "bottle@gmail.com",
+      "mobile": "9872389097",
+      "date": "2024-08-20",
+      "companyName": "Zappyworks",
+      "annualrevenue": "",
+      "gender": "male",
+      "area": "chennai",
+      "state": "Tamil Nadu",
+      "country": "india",
+      "pincode": "987603",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "325872116",
+      "leadowner": "pranavavadivel",
+      "firstname": "switch",
+      "lastname": "box",
+      "email": "bop@gmail.com",
+      "mobile": "9871282382",
+      "date": "2024-08-27",
+      "companyName": "Zoho",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "contact": [
     {
-      "id": "100017",
-      "leadowner": "pranavavadivel",
-      "firstname": "Divya",
-      "lastname": "Rao",
-      "email": "divya.rao@example.com",
-      "mobile": "9934567810",
-      "date": "2024-07-12",
-      "companyName": "Retail Innovations",
-      "annualrevenue": "680000",
-      "gender": "Female",
-      "area": "Jayanagar",
-      "state": "Karnataka",
-      "country": "India",
-      "pincode": "560041",
-      "expectedAmount": "135000",
-      "website": "https://retailinnovations.in",
-      "description": "Transforming retail with technology."
-    },
-    {
-      "id": "100018",
-      "leadowner": "pranavavadivel",
-      "firstname": "Vikas",
-      "lastname": "Kapoor",
-      "email": "vikas.kapoor@example.com",
-      "mobile": "9876543987",
-      "date": "2024-08-25",
-      "companyName": "Tech Innovators",
-      "annualrevenue": "700000",
-      "gender": "Male",
-      "area": "Powai",
-      "state": "Maharashtra",
-      "country": "India",
-      "pincode": "400076",
-      "expectedAmount": "140000",
-      "website": "https://techinnovators.in",
-      "description": "Leading in technological innovations."
-    },
-    {
       "id": "100019",
       "leadowner": "pranavavadivel",
       "firstname": "Ritu",
-      "lastname": "Singh",
+      "lastname": "Rocky",
       "email": "ritu.singh@example.com",
       "mobile": "9821678934",
       "date": "2024-09-19",
@@ -82,7 +82,7 @@
       "id": "100020",
       "leadowner": "pranavavadivel",
       "firstname": "Sunil",
-      "lastname": "Nair",
+      "lastname": "choutri",
       "email": "sunil.nair@example.com",
       "mobile": "9845671289",
       "date": "2024-10-10",
@@ -497,6 +497,22 @@
     {
       "id": "710645262",
       "date": "August 16th 2024, 6:05:22 pm"
+    },
+    {
+      "id": "710645262",
+      "date": "August 19th 2024, 10:24:15 am"
+    },
+    {
+      "id": "710645262",
+      "date": "August 19th 2024, 11:00:16 am"
+    },
+    {
+      "id": "710645262",
+      "date": "August 19th 2024, 11:00:22 am"
+    },
+    {
+      "id": "710645262",
+      "date": "August 19th 2024, 11:00:31 am"
     }
   ]
 }

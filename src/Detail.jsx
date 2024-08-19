@@ -70,7 +70,7 @@ const Detail = () => {
           }) 
       }
 
-    // this is simple change lead to contact/account/deal
+    // this is simple change lead to contact/account/deal (line number 143)
     const items = [
         {
           key: '1',
@@ -145,7 +145,7 @@ const Detail = () => {
                     </Dropdown>
            
                     <Button type='default'>
-                        <Link to={`/leadboard/detail/leadeditform/${id}`}>Edit Lead</Link> 
+                        <Link to={`/leads/detail/leadeditform/${id}`}>Edit Lead</Link> 
                     </Button>      
                     
                     <Button type='default'>

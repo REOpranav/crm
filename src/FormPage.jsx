@@ -72,7 +72,7 @@ const FormPage = () => {
 
   // this for navigation
     function navigate() {
-      navigation('/leadboard')
+      navigation('/leads')
     }
   
   // This for cancelling form
