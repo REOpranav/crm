@@ -20,7 +20,7 @@
       "description": "Exploring solutions for supply chain optimization."
     },
     {
-      "id": "789012345",
+      "id": "789012335",
       "leadowner": "davidmartinez",
       "firstname": "sundhar",
       "lastname": "Martinez",
@@ -39,7 +39,7 @@
       "description": "Exploring solutions for supply chain optimization."
     },
     {
-      "id": "789012345",
+      "id": "7849012345",
       "leadowner": "davidmartinez",
       "firstname": "mouse",
       "lastname": "Martinez",
@@ -58,7 +58,7 @@
       "description": "Exploring solutions for supply chain optimization."
     },
     {
-      "id": "789012345",
+      "id": "7890126745",
       "leadowner": "davidmartinez",
       "firstname": "bottle",
       "lastname": "Martinez",
@@ -77,7 +77,7 @@
       "description": "Exploring solutions for supply chain optimization."
     },
     {
-      "id": "789012345",
+      "id": "7890123451",
       "leadowner": "davidmartinez",
       "firstname": "noteBook",
       "lastname": "Martinez",
@@ -364,7 +364,7 @@
       "description": ""
     }
   ],
-  "logs": [
+  "callLogs": [
     {
       "id": "789012345",
       "date": "August 14th 2024, 12:28:56 am"
@@ -616,6 +616,36 @@
     {
       "id": "710645262",
       "date": "August 19th 2024, 11:47:04 am"
+    }
+  ],
+  "emailLogs": [
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:05:04 pm"
+    },
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:05:48 pm"
+    },
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:07:30 pm"
+    },
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:08:04 pm"
+    },
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:20:12 pm"
+    },
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:20:34 pm"
+    },
+    {
+      "id": "789012345",
+      "date": "August 19th 2024, 1:20:42 pm"
     }
   ]
 }

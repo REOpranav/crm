@@ -12,6 +12,7 @@ import FormLayout from './FormLayout';
 import ContactDetail from './ContactDetail';
 import Calllogs from './Calllogs';
 import DetailEditForm from './DetailEditForm';
+import Emaillog from './Emaillog';
 
 function App() {
   

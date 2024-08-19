@@ -7,6 +7,7 @@ import Dashboard from './Dashboard'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import Calllogs from './Calllogs'
+import Emaillog from './Emaillog'
 
 const backGroundColor = '#313949'
 
@@ -19,6 +20,7 @@ const Detail = () => {
     const [leadData,setLeadData] = useState([])
     const {Text} = Typography // antd
     const [callLogs,setCallLogs] = useState('')
+    const [mailLog,setMailLogs] = useState('')
     const navigation = useNavigate() //this is for navigation
 
     const URL = window.location.href
@@ -50,7 +52,7 @@ const Detail = () => {
             let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
             await axios.post('http://localhost:3000/contact',dataFromLead.data) // secound post that contact form
               .then(res => {
-                if (res.status == 201) {
+                if (res.status === 201) {
                   messageSuccess();
                 }
                 axios.delete(`http://localhost:3000/leads/${id}`) // third code for deleting data in lead
@@ -102,7 +104,7 @@ const Detail = () => {
                     if (getCallLogs.status === 200) {
                       setCallLogs(getCallLogs.data)                      
                     }   
-                    if (posting.status == 201) {
+                    if (posting.status === 201) {
                       message.success('Calls are stored in Call log')
                     }
                     if (posting.status === 201) {
@@ -121,6 +123,42 @@ const Detail = () => {
             logPost()            
         }
       };
+
+    // this is for store the Mail log
+    const makeMail = (number) => {
+      const data = {
+          id : id,
+          date :moment().format('MMMM Do YYYY, h:mm:ss a')
+      }
+    
+      if (number) {
+        const logPost = async()=>{
+          try {
+                const URL = `http://localhost:3000/emailLogs`
+                const posting = await axios.post(URL,data) // post the data
+                const getMailLog = await axios.get(URL)
+                  if (getMailLog.status === 200) {
+                    setMailLogs(getMailLog.data)                      
+                  }
+                  if (posting.status === 201) {
+                    message.success('Mail are stored in Mail log')
+                  }
+                  if (posting.status === 201) {
+                    window.location.href = `mailto:${number}`
+                  }
+              } catch (err) {
+                if (err.response) {
+                  message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                } else if (err.request) {
+                  message.error('Error: No response   from server.');
+                } else {
+                  message.error('Error: ' + err.message);
+                }
+              }
+            }
+          logPost()            
+      }
+    };
       
     // this for navigation
     function navigate() {
@@ -141,12 +179,12 @@ const Detail = () => {
                     </Button>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
-                        <Button type='primary'> Convert </Button>
+                        <Button type='primary'>Convert</Button>
                     </Dropdown>
            
                     <Button type='default'>
                         <Link to={`/leads/detail/leadeditform/${id}`}>Edit Lead</Link> 
-                    </Button>      
+                    </Button>
                     
                     <Button type='default'>
                         <Link to={'/leadboard'}>Back to Lead Board</Link> 
@@ -155,23 +193,24 @@ const Detail = () => {
         </Row>
       
       <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
-          <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
+          <Col span={3} style={{backgroundColor:'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
               <Button type='primary'>call log</Button> 
           </Col>
-          
+
           <Col span={20} offset={1} style={{overflow:'auto'}}>
-          <Row style={{minHeight:"100vh",maxHeight:'100vh',overflow:'auto',width:'100%'}}>
-              <Col span={24} style={{backgroundColor:'white',borderRadius:'10px'}}>
-                  {Object.entries(leadData).map(([key, value])=>( 
-                      <Row style={{padding:'10px'}} className='leadDetail'>
-                          <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}}> {key} : </Col>
-                          <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1}> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
-                      </Row>
-                  ))}
-               </Col>
-                
-              <Calllogs callLogs={callLogs}/>
-          </Row>
+            <Row style={{minHeight:"100vh",maxHeight:'100vh',overflow:'auto',width:'100%'}}>
+                <Col span={24} style={{backgroundColor:'white',borderRadius:'10px'}}>
+                    {Object.entries(leadData).map(([key, value])=>( 
+                        <Row style={{padding:'10px'}} className='leadDetail'>
+                            <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}}> {key} : </Col>
+                            <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1}> {key.toLocaleLowerCase() === 'email' ? <Popconfirm title={'Are you sure to mail'} okText={'Mail'} cancelText={'No'}  onConfirm={() => makeMail(value)} onCancel={()=>message.error('Mail Canceled')}> <a> {value} </a> </Popconfirm> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Call Canceled')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
+                        </Row>
+                    ))}
+                </Col> 
+                <Col span={24}>
+                    <Calllogs callLogs={callLogs} emailLog={mailLog}/>
+                </Col>
+            </Row>
         </Col>
       </Row>
         
