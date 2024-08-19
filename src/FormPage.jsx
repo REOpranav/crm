@@ -9,7 +9,7 @@ import './Dashboard.css'
 
  // this is message ele from antd
   function messageSuccess(){
-    message.success('Sucessfully created a Lead')
+    message.success('Sucessfully created')
   }
 
 
@@ -153,13 +153,13 @@ const FormPage = () => {
     <Row>
          <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
-                <label for="leadowner">Lead Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner *" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
+                <label for="leadowner"> Owner : </label>
+                <input type="text" name="leadowner" id="leadowner" placeholder="Owner *" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
             </p>
             
             <p>
                 <label for="firstname">First Name : </label>
-                <input type="text" name="firstname" id="firstname" placeholder="Lead Owner *" value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/> 
+                <input type="text" name="firstname" id="firstname" placeholder="First Owner *" value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/> 
             </p>
 
             <p>

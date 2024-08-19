@@ -45,10 +45,40 @@ const ContactDetail = () => {
             fetching()
         },[undefined])
 
+        function navigateToAccount() {
+          navigation('/account')
+        }
+
+      // this code for convert lead to contact
+      const convertToAccount = async()=>{ 
+        console.log('yes clicked');
+        let dataFromLead = await axios.get(`http://localhost:3000/contact/${id}`) // first getting the particular id
+        await axios.post('http://localhost:3000/account',dataFromLead.data) // secound post that contact form
+          .then(res => {
+            if (res.status === 201) {
+              messageSuccess();
+            }
+            axios.delete(`http://localhost:3000/contact/${id}`) // third code for deleting data in lead
+
+            setTimeout(()=>{
+                navigateToAccount()
+            },1 * 100) 
+
+          }).catch(err => {
+            if (err.response) {
+              message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+            } else if (err.request) {
+              message.error('Error: No response   from server.');
+            } else {
+              message.error('Error: ' + err.message);
+            }
+      }) 
+     }
+
         const items = [
             {
               key: '1',
-              label: (<Link to={'/account'}>Convert to Account</Link> ),
+              label: (<Link onClick={convertToAccount}>Convert to Accounts</Link> ),
             },
             {
               key: '2',
@@ -156,7 +186,7 @@ const ContactDetail = () => {
         </Row>
         <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
           <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
-              <Button type='dashed' className='PoppinsFont'>call log</Button> 
+            <Button type='default'>create Deal</Button>
           </Col>
           
           <Col span={20} offset={1} style={{overflow:'auto'}}>
@@ -172,6 +202,9 @@ const ContactDetail = () => {
 
               <Col span={24}>
                 <Calllogs callLogs={callLogs} emailLog={mailLog}/>
+              </Col>
+              <Col>
+                  
               </Col>
           </Row>
         </Col>

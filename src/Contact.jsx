@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useDebugValue } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
-import {message,Row,Table, Space,Typography, Popconfirm, Button, Col, Checkbox, Dropdown} from 'antd'
+import {message,Row,Table, Space,Typography, Popconfirm, Button, Col} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
 import moment from 'moment'
@@ -12,8 +12,8 @@ const Contact = () => {
   const styles = { fontWeight:'lighter'}
   const [contactData,setContactData] = useState([]) // store the contact data come from URL 
   // this are for searching components
-  const [searching,setSearching] = useState('') // searching input field value
-  const [searchBy,setsearchBy] = useState('') // total contact data list
+  const [searching,setSearching] = useState([]) // searching input field value
+  const [searchBy,setsearchBy] = useState([]) // total contact data list
   const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
   const [calculateSymbol,setCalculateSymbol] = useState('===')
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -30,7 +30,7 @@ const Contact = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol];    
-    const finalValues = comparisonFn(value[selectedOption].toLocaleLowerCase(),searching.toLocaleLowerCase())
+    const finalValues = comparisonFn(value[selectedOption.toLowerCase()],searching.toString())
     return finalValues
    })
 
@@ -201,7 +201,7 @@ const Contact = () => {
 
   useEffect(()=>{
     fetching()
-  },[undefined,deleteThedata])
+  },[undefined,selectedRowKeys])
 
   // navigating function (react router dom)
   const homeNavigation = ()=>{

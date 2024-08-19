@@ -101,7 +101,7 @@ const LeadBoard = () => {
     
     useEffect(()=>{
       fetching()
-    },[undefined,deleteThedata])
+    },[undefined,selectedRowKeys])
 
     // this code for appending field name into antd table
     const data = []

@@ -93,11 +93,9 @@ const Account = () => {
       }
     }
 
-    
     useEffect(()=>{
       fetching()
-    },[undefined,deleteThedata])
-
+    },[undefined,selectedRowKeys])
 
   // this is column for tabel (antd)
   const column = [
@@ -219,6 +217,10 @@ const Account = () => {
   const homeNavigation = ()=>{
     navigate('/')
   }
+  
+  const formNavigate = ()=>{
+   navigate('./formpage')
+  }
   return (
     <div>
         <Dashboard />
@@ -230,6 +232,7 @@ const Account = () => {
               {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
               <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol}/>
+              <Button type='primary' id='themeColor' onClick={formNavigate}>Create Account</Button>
           </Space>
         </Row>
 

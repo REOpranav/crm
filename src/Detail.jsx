@@ -192,7 +192,7 @@ const Detail = () => {
 
     function navigateToAccount() {
       navigation('/account')
-  }
+    }
 
 
     return (
@@ -223,10 +223,7 @@ const Detail = () => {
         </Row>
       
       <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
-          <Col span={3} style={{backgroundColor:'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
-              <Button type='primary'>call log</Button> 
-          </Col>
-
+          <Col span={3} style={{backgroundColor:'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}></Col>
           <Col span={20} offset={1} style={{overflow:'auto'}}>
             <Row style={{minHeight:"100vh",maxHeight:'100vh',overflow:'auto',width:'100%'}}>
                 <Col span={24} style={{backgroundColor:'white',borderRadius:'10px'}}>
