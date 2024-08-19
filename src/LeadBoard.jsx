@@ -129,7 +129,7 @@ const LeadBoard = () => {
       if (number) {
         const logPost = async()=>{
           try {
-                const URL = `http://localhost:3000/logs`
+                const URL = `http://localhost:3000/callLogs`
                 const posting = await axios.post(URL,data) // post the data
                 if (posting.status === 201) {
                   message.success('Calls are stored in Call log')
@@ -150,6 +150,39 @@ const LeadBoard = () => {
           logPost()
       }
     };
+    
+    // this code for storing mail log from lead page
+    const makeMail  = (number,id) => {
+      const data = {
+          id : id,
+          date :moment().format('MMMM Do YYYY, h:mm:ss a') // used moment.js for time
+      } 
+    
+      if (number) {
+        const logPost = async()=>{
+          try {
+                const URL = `http://localhost:3000/emailLogs`
+                const posting = await axios.post(URL,data) // post the data
+                if (posting.status === 201) {
+                  message.success('Mail are stored in mail log')
+                }
+                if (posting.status === 201) {
+                   window.location.href = `mailto:${number}` // this is simple call ('this' number)
+                }
+              } catch (err) {
+                if (err.response) {
+                  message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                } else if (err.request) {
+                  message.error('Error: No response   from server.');
+                } else {
+                  message.error('Error: ' + err.message);
+                }
+              }
+            }
+          logPost()
+      }
+    };
+
 
     // this refers the column layout for showing data (Antd)
     const column = [
@@ -173,7 +206,7 @@ const LeadBoard = () => {
             title:'Email Id',
             dataIndex: 'emailID',
             key: 'emailID',
-            render: (text) => <a href={`mailto:${encodeURIComponent(text)}`}>{text}</a>
+            render: (text,record) => <Popconfirm title={'Are you sure to Mail'} okText={'Mail'} cancelText={'No'}  onConfirm={() => makeMail(text,record.id)} onCancel={()=>message.error('mail canceled')}> <a> {text} </a> </Popconfirm>
           },        
           {
             title:'Mobile Number',

@@ -16,7 +16,7 @@ const ContactDetail = () => {
 
     const [leadData,setLeadData] = useState([])
     const {Title ,Text} = Typography // antd
-    const [formData,setFormData] = useState()
+    const [mailLog,setMailLogs] = useState('')
     const navigation = useNavigate() //this is for navigation
     const [callLogs,setCallLogs] = useState('')
 
@@ -66,7 +66,7 @@ const ContactDetail = () => {
         if (number) {
           const logPost = async()=>{
             try {
-                  const URL = `http://localhost:3000/logs`
+                  const URL = `http://localhost:3000/callLogs`
                   const posting = await axios.post(URL,data) // post the data
                   const getCallLogs = await axios.get(URL)
                     if (getCallLogs.status === 200) {
@@ -91,7 +91,42 @@ const ContactDetail = () => {
             logPost()            
         }
       };
+
+    // this is for store the Mail log
+    const makeMail = (number) => {      
+      const data = {
+          id : id,
+          date :moment().format('MMMM Do YYYY, h:mm:ss a')
+      }
     
+      if (number) {
+        const logPost = async()=>{
+          try {
+                const URL = `http://localhost:3000/emailLogs`
+                const posting = await axios.post(URL,data) // post the data
+                const getMailLog = await axios.get(URL)
+                  if (getMailLog.status === 200) {
+                    setMailLogs(getMailLog.data)                      
+                  }
+                  if (posting.status === 201) {
+                    message.success('Mail are stored in Mail log')
+                  }
+                  if (posting.status === 201) {
+                    window.location.href = `mailto:${number}`
+                  }
+              } catch (err) {
+                if (err.response) {
+                  message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                } else if (err.request) {
+                  message.error('Error: No response   from server.');
+                } else {
+                  message.error('Error: ' + err.message);
+                }
+              }
+            }
+          logPost()            
+      }
+    };
           
   return (
     <div>
@@ -103,7 +138,7 @@ const ContactDetail = () => {
 
                 <Flex gap={'small'}>
                     <Button type='primary' id='themeColor'>
-                        <a href={`mailto:${leadData.email}`}>Send Email</a>
+                        <a href={`mailto:${leadData.email}`} onClick={()=>makeMail(leadData.email)}>Send Email</a>
                     </Button>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
@@ -130,12 +165,14 @@ const ContactDetail = () => {
                   {Object.entries(leadData).map(([key, value])=>( 
                       <Row style={{padding:'10px'}} className='leadDetail'>
                           <Col span={3} style={{textAlign:'end',textTransform:'capitalize',mcolor:'darkblue'}} className='PoppinsFont'> {key} : </Col>
-                          <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1} className='PoppinsFont'> {key.toLocaleLowerCase() == 'email' ? <a href={`mailto:${value}`}> {value} </a> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
+                          <Col span={20} style={{textAlign:'start',color:'grey',padding:'3px',overflow:'auto'}} offset={1} className='PoppinsFont'> {key.toLocaleLowerCase() === 'email' ? <Popconfirm title={'Are you sure to mail'} okText={'Mail'} cancelText={'No'}  onConfirm={() => makeMail(value)} onCancel={()=>message.error('Mail Canceled')}> <a> {value} </a> </Popconfirm>  : key.toLocaleLowerCase() === 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ?  <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(value)} onCancel={()=>message.error('Canceled call')}> <a> {value} </a> </Popconfirm>  : value}</Col> 
                       </Row>
                   ))}
-               </Col>
-                
-              <Calllogs callLogs={callLogs}/>
+              </Col>
+
+              <Col span={24}>
+                <Calllogs callLogs={callLogs} emailLog={mailLog}/>
+              </Col>
           </Row>
         </Col>
       </Row>

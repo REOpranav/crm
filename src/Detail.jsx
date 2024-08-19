@@ -7,7 +7,6 @@ import Dashboard from './Dashboard'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import Calllogs from './Calllogs'
-import Emaillog from './Emaillog'
 
 const backGroundColor = '#313949'
 
@@ -187,7 +186,7 @@ const Detail = () => {
                     </Button>
                     
                     <Button type='default'>
-                        <Link to={'/leadboard'}>Back to Lead Board</Link> 
+                        <Link to={'/leads'}>Back to Lead Board</Link> 
                     </Button>
                 </Flex>
         </Row>
