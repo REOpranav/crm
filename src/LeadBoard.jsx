@@ -41,7 +41,7 @@ const LeadBoard = () => {
     // code for navigatingin (react router dom)
     const navigate = useNavigate();
     const formNavigate = ()=>{
-        navigate('/formpage')
+        navigate('./formpage')
     }
 
     const homeNavigation = ()=>{

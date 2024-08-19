@@ -47,11 +47,15 @@ const FormPage = () => {
         [name]: value,
       }));
   }
+  
+  // this is for finding the name fron pathname to send  post request in that URL
+  const URL = window.location.pathname
+  const moduleName = URL.split('/').filter(e => e).shift()
 
   //this function for get data from form and make post request
   const onFinish = (e)=>{ 
-    e.preventDefault()  
-        axios.post('http://localhost:3000/leads',formData)
+    e.preventDefault()
+        axios.post(`http://localhost:3000/${moduleName}`,formData)
           .then(res => {
             if (res.status === 201) {
               messageSuccess();
@@ -72,12 +76,12 @@ const FormPage = () => {
 
   // this for navigation
     function navigate() {
-      navigation('/leads')
+      navigation(`/${moduleName}`)
     }
   
   // This for cancelling form
     function cancelForm() {
-      navigate('/leadBoard')
+      navigate(`/${moduleName}`)
     }
 
   // validation Form
@@ -86,7 +90,7 @@ const FormPage = () => {
     
     let errorvalues = {}
     if (!leadFormValues.leadowner.trim()) {
-      errorvalues.leadowner = 'Lead Owner is Required'
+      errorvalues.leadowner = `${moduleName} Owner is Required`
     }
 
     if (!leadFormValues.firstname.trim()) {

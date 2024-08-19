@@ -1,5 +1,25 @@
 {
-  "leads": [],
+  "leads": [
+    {
+      "id": "318022874",
+      "leadowner": "kinsd",
+      "firstname": "kjndj",
+      "lastname": "jcdj",
+      "email": "jncdj",
+      "mobile": "6543456789",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    }
+  ],
   "contact": [
     {
       "id": "100019",
@@ -285,6 +305,63 @@
       "expectedAmount": "190000",
       "website": "https://logisticscorp.com",
       "description": "Exploring solutions for supply chain optimization."
+    },
+    {
+      "id": "282320932",
+      "leadowner": "mouse ",
+      "firstname": "pam",
+      "lastname": "dax",
+      "email": "pam@gmail.com",
+      "mobile": "9567126712",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "354441519",
+      "leadowner": "kmsd",
+      "firstname": "kncj",
+      "lastname": "ncknk",
+      "email": "nkn dkn",
+      "mobile": "knolsdjn",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "852456720",
+      "leadowner": "pranava",
+      "firstname": "BEN",
+      "lastname": "tenisen",
+      "email": "ben10@gmail.com",
+      "mobile": "8129891281",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "account": [
@@ -325,11 +402,48 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "734910564",
+      "leadowner": "pranavavadivel",
+      "firstname": "ksdnc",
+      "lastname": "mnd",
+      "email": "kncj",
+      "mobile": "kcsdjds",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "Deal": [
     {}
   ],
-  "callLogs": [],
-  "emailLogs": []
+  "callLogs": [
+    {
+      "id": "789012335",
+      "date": "August 19th 2024, 4:50:46 pm"
+    }
+  ],
+  "emailLogs": [
+    {
+      "id": "789012335",
+      "date": "August 19th 2024, 4:50:24 pm"
+    },
+    {
+      "id": "789012335",
+      "date": "August 19th 2024, 4:50:35 pm"
+    },
+    {
+      "id": "789012335",
+      "date": "August 19th 2024, 4:50:41 pm"
+    }
+  ]
 }

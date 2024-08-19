@@ -72,7 +72,7 @@ const ContactDetail = () => {
                     if (getCallLogs.status === 200) {
                       setCallLogs(getCallLogs.data)                      
                     }   
-                    if (posting.status == 201) {
+                    if (posting.status === 201) {
                       message.success('Calls are stored in Call log')
                     }
                     if (posting.status === 201) {

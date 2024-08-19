@@ -24,7 +24,9 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/account' element={<Account />} />
           <Route path='/deal' element={<Deal />} />
-          <Route path='/formpage' element={<FormPage />} />
+          <Route path='/leads/formpage' element={<FormPage />} />
+          <Route path='/contact/formpage' element={<FormPage />} />
+          <Route path='/account/formpage' element={<FormPage />} />
           <Route path='/leads/detail/:id' element={<Detail/>} />
           <Route path='/contactDetail/detail/:id' element={<ContactDetail/>} />
           <Route path='/leads/detail/leadeditform/:id' element={<DetailEditForm />} />
