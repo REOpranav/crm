@@ -13,6 +13,8 @@ import ContactDetail from './ContactDetail';
 import Calllogs from './Calllogs';
 import DetailEditForm from './DetailEditForm';
 import AccountDetail from './AccountDetail';
+import InnerDeal from './InnerDeal';
+import DealForm from './DealForm';
 
 function App() {
   
@@ -34,7 +36,12 @@ function App() {
           <Route path='/formpage/formlayout' element={<FormLayout/>} />
           <Route path='/accountdetail/detail/:id' element={<AccountDetail />} />
           <Route path='/account/accountDetail/accountEditForm/:id' element={<DetailEditForm />} />
+          
+          <Route path='/contact/dealForm/:id' element={<DealForm />} />
+          <Route path='/account/dealForm/:id' element={<DealForm />} />
 
+          <Route path='/contact/innerdeal/:id' element={<InnerDeal />} />
+          <Route path='/account/innerdeal/:id' element={<InnerDeal />} />
         </Routes>
     </div>
   );

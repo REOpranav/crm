@@ -3,6 +3,7 @@ import {message,Typography,Row,Col,Flex,Button,Dropdown,Popconfirm} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
+import InnerDeal from './InnerDeal'
 import moment from 'moment'
 import Calllogs from './Calllogs'
 import './Dashboard.css'
@@ -20,6 +21,7 @@ const ContactDetail = () => {
     const navigation = useNavigate() //this is for navigation
     const [callLogs,setCallLogs] = useState('')
 
+    // this is for get the current id
     const URL = window.location.href
     const id = URL.split('/').pop()
 
@@ -186,7 +188,7 @@ const ContactDetail = () => {
         </Row>
         <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
           <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
-            <Button type='default'>create Deal</Button>
+            <Link to={`/contact/dealForm/${id}`}><Button type='default'> create Deal </Button></Link>
           </Col>
           
           <Col span={20} offset={1} style={{overflow:'auto'}}>
@@ -203,8 +205,8 @@ const ContactDetail = () => {
               <Col span={24}>
                 <Calllogs callLogs={callLogs} emailLog={mailLog}/>
               </Col>
-              <Col>
-                  
+              <Col span={24}> 
+                  <InnerDeal id={id}/>
               </Col>
           </Row>
         </Col>

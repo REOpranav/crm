@@ -230,7 +230,7 @@ const Contact = () => {
               {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
               <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol}/>
-              <Button type='primary' id='themeColor' onClick={formNavigate}>Create Lead</Button>
+              <Button type='primary' id='themeColor' onClick={formNavigate}>Create Contact</Button>
           </Space>
         </Row>
 

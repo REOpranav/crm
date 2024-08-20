@@ -15,10 +15,10 @@ const LeadBoard = () => {
 
     // searching function
     const [searchBy,setSearchBy] = useState('')
-    const [selectedOption, setSelectedOption] = useState('mobile'); // this id for set selection
+    const [selectedOption, setSelectedOption] = useState('firstname'); // this id for set selection
     const [searching,setSearching] = useState('') // this searching for lead
     const [calculateSymbol,setCalculateSymbol] = useState('===')
-
+    const [selectedRowKeys,setselectedRowKeys] = useState([])
     
     const filter = leadData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction  = {  // this object for finiding the === object
@@ -32,11 +32,9 @@ const LeadBoard = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol];    
-    const finalValues = comparisonFn(value[selectedOption].toLocaleLowerCase(),searching.toLocaleLowerCase())
+    const finalValues = comparisonFn(value[selectedOption.toLowerCase()],searching.toLowerCase())
     return finalValues
    })
-
-    const [selectedRowKeys,setselectedRowKeys] = useState([])
 
     // code for navigatingin (react router dom)
     const navigate = useNavigate();

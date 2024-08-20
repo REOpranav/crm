@@ -123,7 +123,7 @@ const Detail = () => {
         if (number) {
           const logPost = async()=>{
             try {
-                  const URL = `http://localhost:3000/logs`
+                  const URL = `http://localhost:3000/callLogs`
                   const posting = await axios.post(URL,data) // post the data
                   const getCallLogs = await axios.get(URL)
                     if (getCallLogs.status === 200) {

@@ -1,63 +1,6 @@
 {
   "leads": [
     {
-      "id": "100014",
-      "leadowner": "pranavavadivel",
-      "firstname": "Amit",
-      "lastname": "Chatterjee",
-      "email": "amit.chatterjee@example.com",
-      "mobile": "9834567890",
-      "date": "2024-04-18",
-      "companyName": "AgroTech Solutions",
-      "annualrevenue": "690000",
-      "gender": "Male",
-      "area": "Park Street",
-      "state": "West Bengal",
-      "country": "India",
-      "pincode": "700016",
-      "expectedAmount": "140000",
-      "website": "https://agrotechsolutions.in",
-      "description": "Innovative agricultural technology."
-    },
-    {
-      "id": "100016",
-      "leadowner": "pranavavadivel",
-      "firstname": "Ravi",
-      "lastname": "Iyer",
-      "email": "ravi.iyer@example.com",
-      "mobile": "9823456712",
-      "date": "2024-06-30",
-      "companyName": "SmartHomes",
-      "annualrevenue": "810000",
-      "gender": "Male",
-      "area": "Alwarpet",
-      "state": "Tamil Nadu",
-      "country": "India",
-      "pincode": "600018",
-      "expectedAmount": "165000",
-      "website": "https://smarthomes.in",
-      "description": "Smart home automation solutions."
-    },
-    {
-      "id": "100017",
-      "leadowner": "pranavavadivel",
-      "firstname": "Divya",
-      "lastname": "Rao",
-      "email": "divya.rao@example.com",
-      "mobile": "9934567810",
-      "date": "2024-07-12",
-      "companyName": "Retail Innovations",
-      "annualrevenue": "680000",
-      "gender": "Female",
-      "area": "Jayanagar",
-      "state": "Karnataka",
-      "country": "India",
-      "pincode": "560041",
-      "expectedAmount": "135000",
-      "website": "https://retailinnovations.in",
-      "description": "Transforming retail with technology."
-    },
-    {
       "id": "100018",
       "leadowner": "pranavavadivel",
       "firstname": "Vikas",
@@ -116,25 +59,6 @@
     }
   ],
   "contact": [
-    {
-      "id": "984563210",
-      "leadowner": "pranavavadivel",
-      "firstname": "Jane",
-      "lastname": "Smith",
-      "email": "jane.smith@example.com",
-      "mobile": "8765432109",
-      "date": "2024-07-22",
-      "companyName": "Creative Solutions",
-      "annualrevenue": "750000",
-      "gender": "Female",
-      "area": "Uptown",
-      "state": "New York",
-      "country": "USA",
-      "pincode": "10001",
-      "expectedAmount": "150000",
-      "website": "https://creativesolutions.com",
-      "description": "Interested in enhancing customer engagement."
-    },
     {
       "id": "234567890",
       "leadowner": "sarahconnor",
@@ -231,25 +155,6 @@
       "description": "Interested in advancing educational technology."
     },
     {
-      "id": "789012345",
-      "leadowner": "davidmartinez",
-      "firstname": "David",
-      "lastname": "Martinez",
-      "email": "david.martinez@example.com",
-      "mobile": "1098765432",
-      "date": "2023-12-15",
-      "companyName": "Logistics Corp.",
-      "annualrevenue": "860000",
-      "gender": "Male",
-      "area": "Warehouse District",
-      "state": "Georgia",
-      "country": "USA",
-      "pincode": "30301",
-      "expectedAmount": "190000",
-      "website": "https://logisticscorp.com",
-      "description": "Exploring solutions for supply chain optimization."
-    },
-    {
       "id": "957590936",
       "leadowner": "pranavavadivek",
       "firstname": "water",
@@ -264,25 +169,6 @@
       "state": "Tamil Nadu",
       "country": "india",
       "pincode": "987603",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "8419279",
-      "leadowner": "ksdc",
-      "firstname": "knd",
-      "lastname": "jn ",
-      "email": "kjdc@gmail.com",
-      "mobile": "9876545673",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
       "expectedAmount": "",
       "website": "",
       "description": ""
@@ -313,63 +199,6 @@
       "lastname": "dax",
       "email": "pam@gmail.com",
       "mobile": "9567126712",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "354441519",
-      "leadowner": "kmsd",
-      "firstname": "kncj",
-      "lastname": "ncknk",
-      "email": "nkn dkn",
-      "mobile": "knolsdjn",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "440088216",
-      "leadowner": "sjn",
-      "firstname": "deepa",
-      "lastname": "kjnv",
-      "email": "j vdj",
-      "mobile": "0976545678",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "29238037",
-      "leadowner": "pranavavadivel",
-      "firstname": "shanmugapriya",
-      "lastname": "sundharavadivel",
-      "email": "priya@gmail.com",
-      "mobile": "9876545678",
       "date": "",
       "companyName": "",
       "annualrevenue": "",
@@ -419,6 +248,25 @@
       "expectedAmount": "170000",
       "website": "https://healthtechinnovations.in",
       "description": "Revolutionizing healthcare technology."
+    },
+    {
+      "id": "100014",
+      "leadowner": "pranavavadivel",
+      "firstname": "Amit",
+      "lastname": "Chatterjee",
+      "email": "amit.chatterjee@example.com",
+      "mobile": "9834567890",
+      "date": "2024-04-18",
+      "companyName": "AgroTech Solutions",
+      "annualrevenue": "690000",
+      "gender": "Male",
+      "area": "Park Street",
+      "state": "West Bengal",
+      "country": "India",
+      "pincode": "700016",
+      "expectedAmount": "140000",
+      "website": "https://agrotechsolutions.in",
+      "description": "Innovative agricultural technology."
     }
   ],
   "account": [
@@ -540,7 +388,7 @@
       "id": "770113563",
       "leadowner": "pranavavadivel",
       "firstname": "sri raja vadivel",
-      "lastname": "singaravadivel",
+      "lastname": "pranava",
       "email": "singaramSri@gmail.com",
       "mobile": "9876548965",
       "date": "",
@@ -573,10 +421,313 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "984563210",
+      "leadowner": "pranavavadivel",
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "email": "jane.smith@example.com",
+      "mobile": "8765432109",
+      "date": "2024-07-22",
+      "companyName": "Creative Solutions",
+      "annualrevenue": "750000",
+      "gender": "Female",
+      "area": "Uptown",
+      "state": "New York",
+      "country": "USA",
+      "pincode": "10001",
+      "expectedAmount": "150000",
+      "website": "https://creativesolutions.com",
+      "description": "Interested in enhancing customer engagement."
+    },
+    {
+      "id": "100016",
+      "leadowner": "pranavavadivel",
+      "firstname": "Ravi",
+      "lastname": "Iyer",
+      "email": "ravi.iyer@example.com",
+      "mobile": "9823456712",
+      "date": "2024-06-30",
+      "companyName": "SmartHomes",
+      "annualrevenue": "810000",
+      "gender": "Male",
+      "area": "Alwarpet",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "pincode": "600018",
+      "expectedAmount": "165000",
+      "website": "https://smarthomes.in",
+      "description": "Smart home automation solutions."
+    },
+    {
+      "id": "100017",
+      "leadowner": "pranavavadivel",
+      "firstname": "Divya",
+      "lastname": "Rao",
+      "email": "divya.rao@example.com",
+      "mobile": "9934567810",
+      "date": "2024-07-12",
+      "companyName": "Retail Innovations",
+      "annualrevenue": "680000",
+      "gender": "Female",
+      "area": "Jayanagar",
+      "state": "Karnataka",
+      "country": "India",
+      "pincode": "560041",
+      "expectedAmount": "135000",
+      "website": "https://retailinnovations.in",
+      "description": "Transforming retail with technology."
+    },
+    {
+      "id": "29238037",
+      "leadowner": "pranavavadivel",
+      "firstname": "shanmugapriya",
+      "lastname": "sundharavadivel",
+      "email": "priya@gmail.com",
+      "mobile": "9876545678",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
-  "Deal": [
-    {}
+  "deal": [
+    {
+      "id": "900842875",
+      "dealowner": "johnsmith",
+      "dealName": "Revamp Project",
+      "contactName": "Alice",
+      "amount": "15000",
+      "Pipeline": "standard",
+      "closingDate": "2024-09-15",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "589762345",
+      "dealowner": "emmadavis",
+      "dealName": "New Feature Rollout",
+      "contactName": "Robert",
+      "amount": "20000",
+      "Pipeline": "premium",
+      "closingDate": "2024-10-01",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "345678901",
+      "dealowner": "daniellee",
+      "dealName": "System Upgrade",
+      "contactName": "Sophia",
+      "amount": "12000",
+      "Pipeline": "enterprise",
+      "closingDate": "2024-09-25",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "456789012",
+      "dealowner": "michaeltaylor",
+      "dealName": "Security Enhancement",
+      "contactName": "David",
+      "amount": "18000",
+      "Pipeline": "standard",
+      "closingDate": "2024-10-10",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "567890123",
+      "dealowner": "sarajones",
+      "dealName": "Data Migration",
+      "contactName": "Emily",
+      "amount": "14000",
+      "Pipeline": "premium",
+      "closingDate": "2024-09-05",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "678901234 ",
+      "dealowner": "kevinbrown",
+      "dealName": "App Development",
+      "contactName": "James",
+      "amount": "25000",
+      "Pipeline": "enterprise",
+      "closingDate": "2024-10-20",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "957590936",
+      "dealowner": "christinemoore",
+      "dealName": "Website Redesign",
+      "contactName": "Isabella",
+      "amount": "13000",
+      "Pipeline": "standard",
+      "closingDate": "2024-08-28",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "789012345",
+      "dealowner": "brianthomas",
+      "dealName": "Cloud Migration",
+      "contactName": "Alexander",
+      "amount": "22000",
+      "Pipeline": "premium",
+      "closingDate": "2024-09-12",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "456789012 ",
+      "dealowner": "lauragarcia",
+      "dealName": "Infrastructure Setup",
+      "contactName": "Olivia",
+      "amount": "16000",
+      "Pipeline": "enterprise",
+      "closingDate": "2024-09-18",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "789012345",
+      "dealowner": "stevenwilson",
+      "dealName": "API Integration",
+      "contactName": "Charlotte",
+      "amount": "19000",
+      "Pipeline": "standard",
+      "closingDate": "2024-10-05",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "789012345",
+      "dealowner": "vinod ",
+      "dealName": "SDK Integration",
+      "contactName": "purvagam",
+      "amount": "19000",
+      "Pipeline": "standard",
+      "closingDate": "2022-10-05",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "29238037",
+      "dealowner": "Praanavavadivel",
+      "dealName": "sand shakthivel",
+      "contactName": "shakthivel",
+      "amount": "1000",
+      "Pipeline": "standard",
+      "closingDate": "2024-08-22",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    }
   ],
   "callLogs": [
     {
@@ -586,6 +737,58 @@
     {
       "id": "776380375",
       "date": "August 19th 2024, 6:18:32 pm"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:34 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:39 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:43 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:47 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:49 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:51 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:53 am"
+    },
+    {
+      "id": "984563210",
+      "date": "August 20th 2024, 11:30:57 am"
+    },
+    {
+      "id": "100016",
+      "date": "August 20th 2024, 12:47:14 pm"
+    },
+    {
+      "id": "100016",
+      "date": "August 20th 2024, 12:47:32 pm"
+    },
+    {
+      "id": "100016",
+      "date": "August 20th 2024, 12:47:52 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:48:53 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:48:58 pm"
     }
   ],
   "emailLogs": [
@@ -608,6 +811,58 @@
     {
       "id": "765432109",
       "date": "August 19th 2024, 10:39:50 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:17 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:28 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:33 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:40 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:45 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:51 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:43:57 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:44:12 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:49:22 pm"
+    },
+    {
+      "id": "100014",
+      "date": "August 20th 2024, 12:49:29 pm"
+    },
+    {
+      "id": "100018",
+      "date": "August 20th 2024, 1:39:23 pm"
+    },
+    {
+      "id": "234567890",
+      "date": "August 20th 2024, 1:39:33 pm"
+    },
+    {
+      "id": "957590936",
+      "date": "August 20th 2024, 1:47:38 pm"
     }
   ]
 }
