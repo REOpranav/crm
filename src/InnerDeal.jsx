@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import {message,Row,Table,Typography} from 'antd'
 import { Link } from 'react-router-dom'
 
-const InnerDeal = ({id}) => {  
+const InnerDeal = ({id,setSelectedRowKey}) => {  
   
   const [dealData,setDealData] = useState([])
-  const [selectedRowKeys,setselectedRowKeys] = useState([])
   const {Text} = Typography
 
   const fetching = async()=>{
@@ -28,7 +27,7 @@ const InnerDeal = ({id}) => {
 
     useEffect(()=>{
         fetching()
-    },[undefined,selectedRowKeys])
+    },[undefined])
     
     const filterParticularDeal = dealData.filter((values)=>{
         if (values.id === id) {
@@ -39,8 +38,8 @@ const InnerDeal = ({id}) => {
     // this is row selection object for 
     const rowSelection = {
         type: 'checkbox',
-        onChange: (newSelectedRowKeys) => {
-          setselectedRowKeys(newSelectedRowKeys);
+        onChange: (rowId) => {
+          setSelectedRowKey(rowId);
         },
       };
       
@@ -50,7 +49,7 @@ const InnerDeal = ({id}) => {
         title: 'Deal Name',
         dataIndex: 'dealName',
         key: 'dealName',
-        render : (value,records) => <Link to={`./detail/${records.id}`}> {value} </Link>
+        render : (value,records) => <Link to={`/deal/detail/${records.id}`}> {value} </Link>
       },
       {
         title: 'Deal Owner',
@@ -95,6 +94,7 @@ const InnerDeal = ({id}) => {
     let data = []
     for (const datas of filterParticularDeal) {
         let changeTOObject = {
+           key :datas.id,
            id : datas.id,
            dealowner:datas.dealowner,
            dealName:datas.dealName,
@@ -103,7 +103,6 @@ const InnerDeal = ({id}) => {
         }
         data.push(changeTOObject)
     }
-    console.log(data);
     
   return (
     <div>

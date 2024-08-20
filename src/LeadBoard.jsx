@@ -12,7 +12,7 @@ import moment from 'moment';
 const LeadBoard = () => {
     const [leadData,setLeadData] = useState([])
     const { Text }= Typography
-
+  
     // searching function
     const [searchBy,setSearchBy] = useState('')
     const [selectedOption, setSelectedOption] = useState('firstname'); // this id for set selection
@@ -185,15 +185,10 @@ const LeadBoard = () => {
     // this refers the column layout for showing data (Antd)
     const column = [
           {
-            title: 'ID',
-            dataIndex: 'id',
-            key: 'id',
-            render : (value) => <Link to={`./detail/${value}`}> {value} </Link>
-          },
-          {
             title: 'First Name',
             dataIndex: 'firstName',
             key: 'firstName',
+            render : (value,record) => <Link to={`./detail/${record.id}`}> {value} </Link>
           },
           {
             title: 'Second Name',

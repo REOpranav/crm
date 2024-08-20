@@ -20,6 +20,7 @@ const ContactDetail = () => {
     const [mailLog,setMailLogs] = useState('')
     const navigation = useNavigate() //this is for navigation
     const [callLogs,setCallLogs] = useState('')
+    const [selectRowKey,setSelectedRowKey] = useState('')   
 
     // this is for get the current id
     const URL = window.location.href
@@ -45,7 +46,7 @@ const ContactDetail = () => {
 
         useEffect(()=>{
             fetching()
-        },[undefined])
+        },[undefined,selectRowKey])
 
         function navigateToAccount() {
           navigation('/account')
@@ -53,7 +54,6 @@ const ContactDetail = () => {
 
       // this code for convert lead to contact
       const convertToAccount = async()=>{ 
-        console.log('yes clicked');
         let dataFromLead = await axios.get(`http://localhost:3000/contact/${id}`) // first getting the particular id
         await axios.post('http://localhost:3000/account',dataFromLead.data) // secound post that contact form
           .then(res => {
@@ -76,7 +76,8 @@ const ContactDetail = () => {
             }
       }) 
      }
-
+  
+     // this is for drop down (ANTd)
         const items = [
             {
               key: '1',
@@ -159,16 +160,41 @@ const ContactDetail = () => {
           logPost()            
       }
     };
+
+   // this is for deleting the leads
+   const dealDelete = async()=>{
+    console.log(selectRowKey); 
+    try {
+      const URL = `http://localhost:3000/deal`
+      let deleting ; 
+        for (const deleteValue of selectRowKey) {
+          deleting =  await axios.delete(`${URL}/${deleteValue}`)        
+        }
+        if (deleting.status === 200) {
+          message.success("sucessfully Deleted the data") 
+        }
+        setSelectedRowKey(0)
+      } catch (err) {
+        if (err.response) {
+              message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+        } else if (err.request) {
+              message.error('Error: No response   from server.');
+        } else {
+              message.error('Error: ' + err.message);
+        }
+      }    
+}
           
   return (
     <div>
         <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}> 
                 <Flex gap={'small'}>
-                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'red'}} className='PoppinsFont'>{contactData.firstname ?contactData.firstname : 'Profile Name'} - Contact</Text>
+                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'red',fontWeight:'normal'}} className='PoppinsFont'>{contactData.firstname ?contactData.firstname : 'Profile Name'} - Contact</Text>
                 </Flex>
 
                 <Flex gap={'small'}>
+                   {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
                     <Button type='primary' id='themeColor'>
                         <a href={`mailto:${contactData.email}`} onClick={()=>makeMail(contactData.email)}>Send Email</a>
                     </Button>
@@ -206,7 +232,7 @@ const ContactDetail = () => {
                 <Calllogs callLogs={callLogs} emailLog={mailLog}/>
               </Col>
               <Col span={24}> 
-                  <InnerDeal id={id}/>
+                <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey}/>
               </Col>
           </Row>
         </Col>

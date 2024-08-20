@@ -132,10 +132,6 @@ const Deal = () => {
         data.push(changeTOObject)
     }
 
-    const formNavigate = ()=>{
-      navigate('./formpage')
-    }
-
     const homeNavigation = ()=>{
        navigate('/')
      }
@@ -154,11 +150,9 @@ const Deal = () => {
                       <Button type='dashed'>Save & Home</Button> 
                   </Popconfirm>
                   <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol}/>
-                  <Button type='primary' id='themeColor' onClick={formNavigate}>Create Deal</Button>
               </Space>
         </Row>
         <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/>
-      
     </div>
   )
 }

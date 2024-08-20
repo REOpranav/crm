@@ -78,7 +78,7 @@ const DealForm = () => {
   
     // this for navigation
       function navigate() {
-        navigation(`/${moduleName}`)
+        navigation(`/contactDetail/detail/${id}`)
       }
     
     // This for cancelling form

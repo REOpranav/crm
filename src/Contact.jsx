@@ -121,15 +121,10 @@ const Contact = () => {
   // this is column for tabel (antd)
   const column = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      render : (value) => <Link to={`/contactDetail/detail/${value}`}> {value} </Link>
-    },
-    {
       title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
+      render : (value,record) => <Link to={`/contactDetail/detail/${record.id}`}> {value} </Link>
     },
     {
       title: 'Second Name',

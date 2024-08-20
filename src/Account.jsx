@@ -100,15 +100,10 @@ const Account = () => {
   // this is column for tabel (antd)
   const column = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      render : (value) => <Link to={`/accountdetail/detail/${value}`}> {value} </Link>
-    },
-    {
       title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
+      render : (value,record) => <Link to={`/accountdetail/detail/${record.id}`}> {value} </Link>
     },
     {
       title: 'Second Name',
@@ -202,8 +197,6 @@ const Account = () => {
           logPost()
       }
     };
-
-
 
     // this is for checkbox
     const rowSelection = {
