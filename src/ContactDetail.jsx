@@ -31,22 +31,22 @@ const ContactDetail = () => {
         try {
             const responce = await axios.get(`http://localhost:3000/contact/${id}`)         
                 if (responce.status === 200) {
-                    setContactData(await responce.data)
+                  setContactData(await responce.data)
                 }
             } catch (err) {
                 if (err.response) {
-                    message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+                  message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
                 } else if (err.request) {
-                    message.error('Error: No response from server.');
+                  message.error('Error: No response from server.');
                 } else {
-                    message.error('Error: ' + err.message);
+                  message.error('Error: ' + err.message);
                 }
               }
           }
 
         useEffect(()=>{
             fetching()
-        },[undefined,selectRowKey])
+        },[undefined,selectRowKey,setSelectedRowKey])
 
         function navigateToAccount() {
           navigation('/account')
@@ -163,7 +163,6 @@ const ContactDetail = () => {
 
    // this is for deleting the leads
    const dealDelete = async()=>{
-    console.log(selectRowKey); 
     try {
       const URL = `http://localhost:3000/deal`
       let deleting ; 

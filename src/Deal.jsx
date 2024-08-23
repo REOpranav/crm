@@ -15,7 +15,7 @@ const Deal = () => {
   const [searching,setSearching] = useState('') // this searching for lead
   const [calculateSymbol,setCalculateSymbol] = useState('===')
   const [selectedRowKeys,setselectedRowKeys] = useState([])
-  const [sortedData,setSortedData] = useState([])
+  const [sortedData,setSortedData] = useState({})
 
   // this code for initial load and when lead added
   const fetching = async()=>{
@@ -66,8 +66,8 @@ const Deal = () => {
     // this is for selecting the row key 
     const rowSelection = {
       type: 'checkbox',
-      onChange: (newSelectedRowKeys) => {
-        setselectedRowKeys(newSelectedRowKeys);        
+      onChange: (key) => {
+        setselectedRowKeys(key);  
       },
     }; 
     

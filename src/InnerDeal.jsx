@@ -39,6 +39,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
     const rowSelection = {
         type: 'checkbox',
         onChange: (rowId) => {
+          console.log(rowId);
           setSelectedRowKey(rowId);
         },
       };

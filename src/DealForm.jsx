@@ -17,6 +17,7 @@ const DealForm = () => {
     const {Text} = Typography
     const navigation = useNavigate() //this is for navigation   
     const [errors,setError] = useState('')
+    const [key,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
 
       // this is for finding the name fron pathname to send  post request in that URL
     const URL = window.location.pathname
@@ -24,6 +25,7 @@ const DealForm = () => {
     const id = URL.split('/').pop()
     
     const [dealdata,setDealData] = useState({
+        key : JSON.stringify(key),
         id : id,
         dealowner:'',
         dealName : '',
@@ -52,8 +54,6 @@ const DealForm = () => {
         }));
     }
     
-
-  
     //this function for get data from form and make post request
     const onFinish = (e)=>{ 
       e.preventDefault()
@@ -133,9 +133,6 @@ const DealForm = () => {
   return (
   <div>  
     <Dashboard />
-    <Row>
-        Deal Form
-    </Row>
     <Row justify={'space-between'} style={{padding:'10px'}}>
       <Flex gap={"small"} align='center'> 
         <Text style={{fontSize:'16px',color:'grey'}}>

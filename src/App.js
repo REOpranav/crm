@@ -41,7 +41,6 @@ function App() {
           <Route path='/account/dealForm/:id' element={<DealForm />} />
           <Route path='/contact/innerdeal/:id' element={<InnerDeal />} />
           <Route path='/account/innerdeal/:id' element={<InnerDeal />} />
-
           <Route path='/deal/detail/:id' element={<DealDetail />} />
         </Routes>
     </div>
