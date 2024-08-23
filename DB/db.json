@@ -501,14 +501,14 @@
   ],
   "deal": [
     {
-      "id": "456789012",
-      "key": "701150242",
-      "dealowner": "EMILY 2",
-      "dealName": "emily2",
-      "contactName": "emily 2",
+      "id": "345678901",
+      "key": "914313189",
+      "dealowner": "pranavavadivel",
+      "dealName": "pranavavadivel",
+      "contactName": "vadive",
       "amount": "10000",
       "Pipeline": "standard",
-      "closingDate": "2024-08-12",
+      "closingDate": "2024-08-29",
       "companyName": "",
       "email": "",
       "gender": "",
@@ -516,7 +516,7 @@
       "state": "",
       "country": "",
       "pincode": "",
-      "expectedAmount": "",
+      "expectedAmount": "10000",
       "website": "",
       "description": ""
     }

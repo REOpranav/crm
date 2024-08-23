@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {message,Row,Table,Typography} from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 const InnerDeal = ({id,setSelectedRowKey}) => {  
   
   const [dealData,setDealData] = useState([])
+  const [tableData,setTableData] = useState([])
   const {Text} = Typography
 
   const fetching = async()=>{
@@ -25,21 +26,10 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
           }
       }
 
-    useEffect(()=>{
-        fetching()
-    },[undefined])
-    
-    const filterParticularDeal = dealData.filter((values)=>{
-        if (values.id === id) {
-           return values
-        }
-    })
-    
     // this is row selection object for 
     const rowSelection = {
         type: 'checkbox',
         onChange: (rowId) => {
-          console.log(rowId);
           setSelectedRowKey(rowId);
         },
       };
@@ -92,6 +82,12 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
       },      
     ]
 
+    const filterParticularDeal = dealData.filter((values)=>{
+      if (values.id === id) {
+        return values
+      }
+    })
+  
     let data = []
     for (const datas of filterParticularDeal) {
         let changeTOObject = {
@@ -104,13 +100,17 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
         }
         data.push(changeTOObject)
     }
-    
+
+  useEffect(()=>{
+    fetching()
+  },[undefined,setDealData])
+
   return (
     <div>
         <Row style={{padding:'10px'}} justify={'start'}>
           <Text style={{color:'grey',fontWeight:'lighter',fontFamily:'monospace'}}> Deal </Text>
         </Row>
-       <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/>
+        <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/>
     </div>
   )
 }
