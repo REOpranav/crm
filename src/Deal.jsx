@@ -9,18 +9,19 @@ const Deal = () => {
   const navigate = useNavigate();
   const { Text } = Typography
 
-  const [dealData,setDealData] = useState('')
+  const [dealData,setDealData] = useState([])
   const [searchBy,setSearchBy] = useState('')
   const [selectedOption, setSelectedOption] = useState('mobile'); // this id for set selection
   const [searching,setSearching] = useState('') // this searching for lead
-  const [calculateSymbol,setCalculateSymbol] = useState('===')
+  const [calculateSymbol,setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys,setselectedRowKeys] = useState([])
-  const [sortedData,setSortedData] = useState({})
-
+  const [dealFromInformation,setDealFromInformation] = useState([]) // this is deal information  
+ 
   // this code for initial load and when lead added
   const fetching = async()=>{
       try {
           const responce = await axios.get('http://localhost:3000/deal')
+
             if (responce.status === 200) {
                 setDealData(await responce.data);
                 setSearchBy(await responce.data);
@@ -39,7 +40,7 @@ const Deal = () => {
     useEffect(()=>{
       fetching()
     },[undefined,selectedRowKeys])
-
+    
     // this is for deleting the leads
     const deleteThedata = async()=>{
       try {
@@ -80,17 +81,12 @@ const Deal = () => {
         render : (value,records) => <Link to={`./detail/${records.id}`}> {value} </Link>
       },
       {
-        title: 'Deal Owner',
-        dataIndex: 'dealowner',
-        key: 'dealowner',
-      },
-      {
         title:'Amount',
         dataIndex: 'amount',
         key: 'amount',
-      },        
+      },       
       {
-        title:'closing Date',
+        title:'Closing Date',
         dataIndex: 'closingDate',
         key: 'closingDate',
         render: (text) => {
@@ -108,33 +104,49 @@ const Deal = () => {
         }
       },          
       {
-        title:'Company Name',
-        dataIndex: 'companyName',
-        key: 'companyName',
-      },    
+        title:'Contact Name',
+        dataIndex: 'contactName',
+        key: 'contactName',
+      },
       {
-        title: 'Annual Revenue',
-        dataIndex: 'annualRevenue',
-        key: 'annualRevenue',
-      },      
-    ]
-    
+        title: 'Deal Owner',
+        dataIndex: 'dealowner',
+        key: 'dealowner',
+      },     
+    ]   
+
+    const filter = dealData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
+      const comparisonFunction  = {  // this object for finiding the === object
+        'equal to' : (a,b) => a == b,
+        'greater than' : (a,b) => a > b,
+        'greater than equal to' : (a,b) => a >= b,
+        'lesser then equal to' : (a,b) => a <= b,
+        'lesser than' : (a,b) => a < b,
+        'not equal to' : (a,b) => a !== b,  
+      }
+  
+      const comparisonFn = comparisonFunction[calculateSymbol];    
+      const finalValues = comparisonFn(value[selectedOption.toLowerCase()],searching.toString())
+      return finalValues
+     })
+     
     let data = [] // this is for handing table (antd) (my method)
-    for (const datas of dealData) {
+    for (const datas of filter.length !== 0 ? filter : dealData) {
         let changeTOObject = {
            key : datas.id,
            id : datas.id,
            dealowner:datas.dealowner,
            dealName:datas.dealName,
            amount:datas.amount,
-           closingDate:datas.closingDate
+           closingDate:datas.closingDate,
+           contactName:datas.contactName
         }
         data.push(changeTOObject)
     }
-
+      
     const homeNavigation = ()=>{
-       navigate('/')
-     }
+      navigate('/')
+    }
   
   return (
     <div>

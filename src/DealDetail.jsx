@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Button, Col, message,Typography, Row,Space} from 'antd'
 import axios from 'axios'
 import Dashboard from './Dashboard'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 const styles = { fontWeight:'lighter'}
 
@@ -42,17 +42,30 @@ const DealDetail = () => {
     const navigate = useNavigate();
     const {Text} = Typography
     const [dealDeatail,setDealDetail] = useState([])
-   
-    const URL = window.location.pathname
+    const [dealFromInformation,setDealFromInformation] = useState([])
+    
+    const URL = window.location.pathname    
     const endpoint = URL.split('/').pop()
     
     // this code for initial load and when lead added
     const fetching = async()=>{
         try {
-            const responce = await axios.get(`http://localhost:3000/deal/${endpoint}`)            
-            if (responce.status === 200) {
-                setDealDetail(await responce.data);
+            const responce = await axios.get(`http://localhost:3000/deal/${endpoint}`)
+            if ((await axios.get(`http://localhost:3000/contact/${endpoint}`)).status === 200) {
+                const respcetiveProfile = await axios.get(`http://localhost:3000/contact/${endpoint}`)
+                 if (respcetiveProfile.status === 200) {
+                    setDealFromInformation(respcetiveProfile.data)
+                 }
+            }else{
+                const respcetiveProfile = await axios.get(`http://localhost:3000/account/${endpoint}`)
+                 if (respcetiveProfile.status === 200) {
+                    setDealFromInformation(respcetiveProfile.data)
+                 }
             }
+
+             if (responce.status === 200) {
+                setDealDetail(await responce.data);
+             }
         } catch (err) {
             if (err.response) {
                 message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
@@ -74,7 +87,8 @@ const DealDetail = () => {
     }
 
     console.log(dealDeatail);
-    
+    console.log(dealFromInformation)
+     
     const currentDate = new Date();
     const parsedDate = new Date(dealDeatail.closingDate)
 
@@ -187,7 +201,7 @@ return (
                         </Row>
                     </Col>
                 </Row>
-
+{/* this code is deal informatio */}
                 <Row style={overviewStyle}>
                         <Col span={24}>
                             <Row style={{color:'black',marginBottom:'10px'}} > <Text style={overviewHeading} className='PoppinsFont'> Deal Information </Text> </Row>
@@ -206,7 +220,7 @@ return (
                             
                             <Row style={paddingStyle}>
                                 <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Contact Name </Text> </Col>
-                                <Col> <Text className='PoppinsFont'> : {dealDeatail.contactName  ? dealDeatail.contactName : '-' } </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealFromInformation.firstname  ? dealFromInformation.firstname : '-' } </Text> </Col>
                             </Row>
                             
                             <Row style={paddingStyle}>

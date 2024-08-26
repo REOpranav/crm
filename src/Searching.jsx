@@ -19,7 +19,7 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
       listOfDataInArray.push(a)
     }
 
-    const symbols = ['===','==','!==','>','>=','<','<='] 
+    const symbols = ['equal to','not equal to','greater than','greater than equal to','lesser than','lesser then equal to'] 
   
     return (
     <div>

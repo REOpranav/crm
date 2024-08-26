@@ -519,6 +519,26 @@
       "expectedAmount": "10000",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "282320932",
+      "key": "206584770",
+      "dealowner": "pranavavavdivel",
+      "dealName": "migration deal",
+      "contactName": "Dax & Pam",
+      "amount": "100000",
+      "Pipeline": "standard",
+      "closingDate": "2024-08-29",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "199",
+      "website": "",
+      "description": ""
     }
   ],
   "callLogs": [
