@@ -25,6 +25,19 @@ const styles = { fontWeight:'lighter'}
     padding:'10px'
  }
 
+ const overviewStyle = {
+    backgroundColor:'white',
+    padding:'10px',
+    marginBottom:'10px',
+ }
+
+ const overviewHeading = {
+    backgroundColor:'#5a3bb6',
+    padding:'5px',
+    color:'white',
+    borderRadius:'5px'
+ }
+
 const DealDetail = () => {
     const navigate = useNavigate();
     const {Text} = Typography
@@ -60,9 +73,11 @@ const DealDetail = () => {
         navigate('/')
     }
 
-    const currentDate = new Date();
-    const parsedDate = new Date(dealDeatail.closingDate);
+    console.log(dealDeatail);
     
+    const currentDate = new Date();
+    const parsedDate = new Date(dealDeatail.closingDate)
+
 return (
     <div>
     <Dashboard />
@@ -127,10 +142,12 @@ return (
               </label>
             </Col>
             
-            <Col span={20} offset={1} >
-                <Row style={{backgroundColor:'white',padding:'10px',marginBottom:'15px'}}>  
+            <Col span={20} offset={1}>
+                <Row style={overviewStyle}>  
                     <Row justify={'space-between'} style={{width:'100%'}}>
-                        <Col> <Text style={style} className='PoppinsFont'> {dealDeatail ? `${dealDeatail.dealName} - Deals`: 'no data found'} </Text> </Col>
+                        <Col> 
+                            <Text style={overviewHeading} className='PoppinsFont'> {dealDeatail ? `${dealDeatail.dealName} - Deals`: 'no data found'} </Text>
+                        </Col>
                         <Col> 
                             <Row style={style} className='PoppinsFont' justify={'center'}>{dealDeatail  ? `${`Closing Date`}` : ''} </Row>
                             <Row style={{backgroundColor: parsedDate < currentDate ? 'red' : 'lightGreen',}} className='PoppinsFont' justify={'center'}>{dealDeatail  ? dealDeatail.closingDate : ''} </Row>
@@ -147,7 +164,7 @@ return (
                     </Row>
                 </Row>
 
-                <Row style={{backgroundColor:'white',padding:'10px',marginBottom:'10px'}}>
+                <Row style={overviewStyle}>
                     <Col span={24}>
                         <Row style={paddingStyle}>
                              <Col span={3} style={dealDetailCss} > <Text style={style} className='PoppinsFont'> Deal Owner </Text> </Col>
@@ -168,6 +185,81 @@ return (
                             <Col span={3} style={dealDetailCss}> <Text style={style} className='PoppinsFont'> Territory </Text> </Col>
                             <Col> <Text className='PoppinsFont'>: {dealDeatail.area} </Text> </Col> 
                         </Row>
+                    </Col>
+                </Row>
+
+                <Row style={overviewStyle}>
+                        <Col span={24}>
+                            <Row style={{color:'black',marginBottom:'10px'}} > <Text style={overviewHeading} className='PoppinsFont'> Deal Information </Text> </Row>
+                        </Col>
+
+                        <Col span={12}>
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'> Deal Owner </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.dealowner  ? dealDeatail.dealowner : '-' } </Text> </Col>
+                            </Row>
+
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'> Deal Name </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.dealName ? dealDeatail.dealName : '-' } </Text> </Col>
+                            </Row>
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Contact Name </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.contactName  ? dealDeatail.contactName : '-' } </Text> </Col>
+                            </Row>
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Amount</Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.amount  ? dealDeatail.amount : '-' } </Text> </Col>
+                            </Row>
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Closing Date </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.closingDate  ? dealDeatail.closingDate : '-' } </Text> </Col>
+                            </Row>
+                        </Col>
+                        
+                        <Col span={12}>
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Company Name </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.companyName  ? dealDeatail.companyName : '-' } </Text> </Col>
+                            </Row>
+                           
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Expected Amount </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.expectedAmount ? dealDeatail.expectedAmount : '-' } </Text> </Col>
+                            </Row>    
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>State</Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.state ? dealDeatail.state : '-'} </Text> </Col>
+                            </Row>    
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Pincode</Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.pincode  ? dealDeatail.pincode : '-' } </Text> </Col>
+                            </Row>    
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Website</Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {dealDeatail.website  ? dealDeatail.website : '-' } </Text> </Col>
+                            </Row>
+                        </Col>
+                </Row>
+
+                <Row style={overviewStyle}>
+                    <Col span={24}>
+                        <Row style={{marginBottom:'10px'}} > <Text style={overviewHeading} className='PoppinsFont'> Notes </Text> </Row>
+                        <Row justify={'end'}>
+                            <Col span={24} > <textarea name="notes" id="notes" style={{width:'100%'}}></textarea> </Col>
+                            <Col style={paddingStyle}>
+                              <Space>
+                                <Button type='primary'>Add notes</Button>
+                                <Button type='default'>Cancel</Button>
+                              </Space>
+                            </Col>
+                        </Row> 
                     </Col>
                 </Row>
             </Col>
