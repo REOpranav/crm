@@ -78,7 +78,11 @@ const DealForm = () => {
   
     // this for navigation
       function navigate() {
-        navigation(`/contactDetail/detail/${id}`)
+        if (moduleName == 'account') {
+          navigation(`/accountdetail/detail/${id}`)
+        }else{
+          navigation(`/contactDetail/detail/${id}`)
+        }
       }
     
     // This for cancelling form

@@ -1,14 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {message,Row,Table,Typography} from 'antd'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const InnerDeal = ({id,setSelectedRowKey}) => {  
+const InnerDeal = ({id,setSelectedRowKey}) => {
   
   const [dealData,setDealData] = useState([])
-  const [tableData,setTableData] = useState([])
   const {Text} = Typography
-
+  
   const fetching = async()=>{
     try {
         const responce = await axios.get(`http://localhost:3000/deal`)                         

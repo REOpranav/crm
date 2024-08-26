@@ -5,12 +5,15 @@ import Calllogs from './Calllogs'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import InnerDeal from './InnerDeal'
 
 const AccountDetail = () => {
     const {Text} = Typography
     const [accountData,setAccountData] = useState([])
     const [mailLog,setMailLogs] = useState('')
     const [callLogs,setCallLogs] = useState('')
+    const [selectRowKey,setSelectedRowKey] = useState('')
+    const [deleteInnerDealRow,setDeleteInnerDealRow] = useState(false)
 
     const URL = window.location.href
     const id = URL.split('/').pop()    
@@ -120,6 +123,29 @@ const AccountDetail = () => {
       }
     };
 
+  // this is for deleting the leads
+   const dealDelete = async()=>{
+    try {
+      const URL = `http://localhost:3000/deal`
+      let deleting ;
+        for (const deleteValue of selectRowKey) {
+          deleting = await axios.delete(`${URL}/${deleteValue}`)        
+        }
+        if (deleting.status === 200) {
+          message.success("sucessfully Deleted the data")
+        }
+        setSelectedRowKey(0)
+      } catch (err) {
+        if (err.response) {
+              message.error('Error: ' + err.response.status+' - '+ (err.response.data.message || 'Server Error'));
+        } else if (err.request) {
+              message.error('Error: No response from server.');
+        } else {
+              message.error('Error: ' + err.message);
+        }
+      }    
+  }
+
   return (
     <div>
         <Dashboard />
@@ -129,6 +155,8 @@ const AccountDetail = () => {
                 </Flex>
 
                 <Flex gap={'small'}>
+                    {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
+                    
                     <Button type='primary' id='themeColor'>
                         <a href={`mailto:${accountData.email}`} onClick={()=>makeMail(accountData.email)}>Send Email</a>
                     </Button>
@@ -147,7 +175,9 @@ const AccountDetail = () => {
                 </Flex>
         </Row>
         <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
-          <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}></Col>
+          <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
+            <Link to={`/account/dealForm/${id}`}><Button type='default'> create Deal </Button></Link>          
+          </Col>
           
           <Col span={20} offset={1} style={{overflow:'auto'}}>
           <Row style={{minHeight:"100vh",maxHeight:'100vh',overflow:'auto',width:'100%'}}>
@@ -162,6 +192,9 @@ const AccountDetail = () => {
 
               <Col span={24}>
                 <Calllogs callLogs={callLogs} emailLog={mailLog}/>
+              </Col>
+              <Col span={24}> 
+                <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey} deleteInnerDealRow={deleteInnerDealRow} setDeleteInnerDealRow={setDeleteInnerDealRow}/>
               </Col>
           </Row>
         </Col>

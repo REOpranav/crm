@@ -174,25 +174,6 @@
       "description": "Exploring solutions for supply chain optimization."
     },
     {
-      "id": "282320932",
-      "leadowner": "mouse ",
-      "firstname": "pam",
-      "lastname": "dax",
-      "email": "pam@gmail.com",
-      "mobile": "9567126712",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
       "id": "100012",
       "leadowner": "pranavavadivel",
       "firstname": "Sandeep",
@@ -497,6 +478,25 @@
       "expectedAmount": "140000",
       "website": "https://techinnovators.in",
       "description": "Leading in technological innovations."
+    },
+    {
+      "id": "282320932",
+      "leadowner": "mouse ",
+      "firstname": "pam",
+      "lastname": "dax",
+      "email": "pam@gmail.com",
+      "mobile": "9567126712",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "deal": [
@@ -521,14 +521,14 @@
       "description": ""
     },
     {
-      "id": "282320932",
-      "key": "206584770",
-      "dealowner": "pranavavavdivel",
-      "dealName": "migration deal",
-      "contactName": "Dax & Pam",
-      "amount": "100000",
-      "Pipeline": "standard",
-      "closingDate": "2024-08-29",
+      "id": "765432109",
+      "key": "969885240",
+      "dealowner": "mouse",
+      "dealName": "mouse",
+      "contactName": "mouse",
+      "amount": "10000",
+      "Pipeline": "stadasd",
+      "closingDate": "2024-08-20",
       "companyName": "",
       "email": "",
       "gender": "",
@@ -536,7 +536,7 @@
       "state": "",
       "country": "",
       "pincode": "",
-      "expectedAmount": "199",
+      "expectedAmount": "002002",
       "website": "",
       "description": ""
     }

@@ -282,7 +282,6 @@ const Account = () => {
             <Col span={20} offset={1}>
               <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400 }} size='small' />
             </Col>
-
         </Row>
     </div>
   )

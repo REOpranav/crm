@@ -20,7 +20,7 @@ const ContactDetail = () => {
     const [mailLog,setMailLogs] = useState('')
     const navigation = useNavigate() //this is for navigation
     const [callLogs,setCallLogs] = useState('')
-    const [selectRowKey,setSelectedRowKey] = useState('')   
+    const [selectRowKey,setSelectedRowKey] = useState('')
 
     // this is for get the current id
     const URL = window.location.href
@@ -182,7 +182,7 @@ const ContactDetail = () => {
               message.error('Error: ' + err.message);
         }
       }    
-}
+  }
           
   return (
     <div>
