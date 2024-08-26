@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Button, Col, message,Typography, Row,Space} from 'antd'
 import axios from 'axios'
 import Dashboard from './Dashboard'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const styles = { fontWeight:'lighter'}
 
@@ -42,7 +42,8 @@ const DealDetail = () => {
     const navigate = useNavigate();
     const {Text} = Typography
     const [dealDeatail,setDealDetail] = useState([])
-    const [dealFromInformation,setDealFromInformation] = useState([])
+    const [DealInformationFromContact,setDealInformationFromContact] = useState([])
+    const [DealInformationFromAccount,setDealInformationFromAccount] = useState([])
     
     const URL = window.location.pathname    
     const endpoint = URL.split('/').pop()
@@ -51,26 +52,33 @@ const DealDetail = () => {
     const fetching = async()=>{
         try {
             const responce = await axios.get(`http://localhost:3000/deal/${endpoint}`)
-            if ((await axios.get(`http://localhost:3000/contact/${endpoint}`)).status === 200) {
-                const respcetiveProfile = await axios.get(`http://localhost:3000/contact/${endpoint}`)
-                 if (respcetiveProfile.status === 200) {
-                    setDealFromInformation(respcetiveProfile.data)
-                 }
-            }else{
-                const respcetiveProfile = await axios.get(`http://localhost:3000/account/${endpoint}`)
-                 if (respcetiveProfile.status === 200) {
-                    setDealFromInformation(respcetiveProfile.data)
-                 }
-            }
-
-             if (responce.status === 200) {
-                setDealDetail(await responce.data);
-             }
+            if (responce.status === 200) {
+                setDealDetail(await responce.data)
+            } 
+                try {
+                    const contactResponse = await axios.get(`http://localhost:3000/contact/${endpoint}`)
+                    if (contactResponse.status === 200) {
+                        setDealInformationFromContact(contactResponse.data)
+                    }
+                } catch (error) {
+                    if (error.response && error.response.status === 404) {
+                        try {
+                            const accountResponse = await axios.get(`http://localhost:3000/account/${endpoint}`)
+                            if (accountResponse.status === 200) {
+                                setDealInformationFromAccount(accountResponse.data);
+                            }
+                        } catch (accountError) {
+                            console.error("Error fetching account data:", accountError)
+                        }
+                    } else {
+                        console.error("Error fetching contact data:", error)
+                    }
+                }
         } catch (err) {
             if (err.response) {
                 message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
             } else if (err.request) {
-                message.error('Error: No response from server.');
+                message.error('Error: No response from server.')
             } else {
                 message.error('Error: ' + err.message);
             }
@@ -84,10 +92,7 @@ const DealDetail = () => {
     // navigating function (react router dom)
     const homeNavigation = ()=>{
         navigate('/')
-    }
-
-    console.log(dealDeatail);
-    console.log(dealFromInformation)
+        }
      
     const currentDate = new Date();
     const parsedDate = new Date(dealDeatail.closingDate)
@@ -201,6 +206,7 @@ return (
                         </Row>
                     </Col>
                 </Row>
+                
 {/* this code is deal informatio */}
                 <Row style={overviewStyle}>
                         <Col span={24}>
@@ -220,7 +226,12 @@ return (
                             
                             <Row style={paddingStyle}>
                                 <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Contact Name </Text> </Col>
-                                <Col> <Text className='PoppinsFont'> : {dealFromInformation.firstname  ? dealFromInformation.firstname : '-' } </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {DealInformationFromContact.firstname  ? DealInformationFromContact.firstname : '-' } </Text> </Col>
+                            </Row>
+                            
+                            <Row style={paddingStyle}>
+                                <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Account Name </Text> </Col>
+                                <Col> <Text className='PoppinsFont'> : {DealInformationFromAccount.firstname  ? DealInformationFromAccount.firstname : '-' } </Text> </Col>
                             </Row>
                             
                             <Row style={paddingStyle}>
@@ -262,6 +273,7 @@ return (
                         </Col>
                 </Row>
 
+{/* this is for notes */}
                 <Row style={overviewStyle}>
                     <Col span={24}>
                         <Row style={{marginBottom:'10px'}} > <Text style={overviewHeading} className='PoppinsFont'> Notes </Text> </Row>
