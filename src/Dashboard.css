@@ -5,5 +5,20 @@
 
 #themeColor{
      background-color: #5a3bb6;
-     
+}
+
+#myDropdown option[value="default"] {
+     display: none;
+}
+
+#myDropdown{
+     border-radius: 5px;
+     text-align: center;
+     border: 1px solid #5a3bb6 ;
+     background-color: white;
+     color:#5a3bb6 ;
+}
+
+option{
+     color: black;
 }

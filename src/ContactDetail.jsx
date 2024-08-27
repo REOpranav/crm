@@ -14,13 +14,15 @@ const ContactDetail = () => {
     function messageSuccess(){
       message.success('Sucessfully created a Lead')
     }
-
+    const navigate = useNavigate();
     const [contactData,setContactData] = useState([])
     const {Title,Text} = Typography // antd
     const [mailLog,setMailLogs] = useState('')
     const navigation = useNavigate() //this is for navigation
     const [callLogs,setCallLogs] = useState('')
     const [selectRowKey,setSelectedRowKey] = useState('')
+    const [isOpen, setIsOpen] = useState(false);
+    const [dealType,setDealType]  = useState("")
 
     // this is for get the current id
     const URL = window.location.href
@@ -78,7 +80,7 @@ const ContactDetail = () => {
      }
   
      // this is for drop down (ANTd)
-        const items = [
+      const items = [
             {
               key: '1',
               label: (<Link onClick={convertToAccount}>Convert to Accounts</Link> ),
@@ -86,8 +88,10 @@ const ContactDetail = () => {
             {
               key: '2',
               label: ( <Link to={'/deal'}>Convert to Deal</Link>),
-            }
+            },
         ]
+
+        const items3 = ["individual","organization"]
 
     // this is for store the call log
     const makeCall = (number) => {
@@ -183,7 +187,16 @@ const ContactDetail = () => {
         }
       }    
   }
-          
+
+  const individualFormPage = ()=>{
+    navigate(`/deal/individualForm/${id}`)
+  }
+
+  const organizationFormPage = ()=>{
+    navigate(`/deal/organizationForm/${id}`)
+  }
+
+
   return (
     <div>
         <Dashboard />
@@ -194,26 +207,31 @@ const ContactDetail = () => {
 
                 <Flex gap={'small'}>
                    {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
-                    <Button type='primary' id='themeColor'>
+                    <Button type='default' >
                         <a href={`mailto:${contactData.email}`} onClick={()=>makeMail(contactData.email)}>Send Email</a>
                     </Button>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
-                        <Button type='primary' id='themeColor'>Convert</Button>
+                        <Button type='default'>Convert</Button>  
                     </Dropdown>
-           
+
+                    <select id="myDropdown">
+                      <option value="default"> <Button> Create Deal </Button> </option>
+                      <option value="Individual" onClick={individualFormPage}><Button> Individual </Button></option>
+                      <option value="organization" onClick={organizationFormPage}><Button> organization </Button></option>
+                    </select> 
+
                     <Button type='default'>
-                        <Link to={`/contact/contactDetail/contactEditForm/${id}`} >Edit contact</Link> 
+                        <Link to={`/contact/contactDetail/contactEditForm/${id}`}>Edit contact</Link> 
                     </Button>
                     
-                    <Button type='default'>
+                    <Button type='primary'>
                         <Link to={'/contact'}>Back to Contact Board</Link> 
                     </Button>
                 </Flex>
         </Row>
         <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
           <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
-            <Link to={`/contact/dealForm/${id}`}><Button type='default'> create Deal </Button></Link>
           </Col>
           
           <Col span={20} offset={1} style={{overflow:'auto'}}>

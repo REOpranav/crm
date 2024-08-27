@@ -20,16 +20,20 @@ const DealForm = () => {
     const [key,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
 
       // this is for finding the name fron pathname to send  post request in that URL
-    const URL = window.location.pathname
-    const moduleName = URL.split('/').filter(e => e).shift()
+    const URL = window.location.pathname    
+    const splittingURL = URL.split('/')
+    const moduleName = splittingURL.filter(e => e).shift()
     const id = URL.split('/').pop()
+
+    console.log(splittingURL[2]);
+    
 
     const [dealdata,setDealData] = useState({
         key : JSON.stringify(key),
         id : id,
         dealowner:'',
         dealName : '',
-        contactName:'',
+        accountName:'',
         amount: '',
         Pipeline:'',
         closingDate:'',
@@ -80,6 +84,8 @@ const DealForm = () => {
       function navigate() {
         if (moduleName == 'account') {
           navigation(`/accountdetail/detail/${id}`)
+        }else if (moduleName == "deal") {
+          navigation(`/deal/detail/${id}`)
         }else{
           navigation(`/contactDetail/detail/${id}`)
         }
@@ -102,7 +108,7 @@ const DealForm = () => {
       }
   
       if (!leadFormValues.contactName.trim()) {
-          errorvalues.contactName = 'Contact Name is Required'
+          errorvalues.accountName = 'Contact Name is Required'
       }
       
       if (!leadFormValues.closingDate.trim()) {
@@ -151,7 +157,7 @@ const DealForm = () => {
         <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
      </Flex>
       <Flex gap="small">
-        <Button type='primary' danger ghost onClick={cancelForm} >Cancel</Button>
+        <Button type='primary' danger ghost onClick={cancelForm}> Cancel </Button>
         <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
           <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
         </Popconfirm>
@@ -171,7 +177,7 @@ const DealForm = () => {
             </p>
 
             <p>
-                <label for="contactName">contact Name : </label>
+                <label for="contactName">Account Name : </label>
                 <input type="text" name="contactName" id="contactName" placeholder="contact Name *" value={dealdata.contactName} onChange={handleChange}  className={getInputClass('contactName')}/> 
             </p>
 

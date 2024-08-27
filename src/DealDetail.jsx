@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Button, Col, message,Typography, Row,Space} from 'antd'
 import axios from 'axios'
 import Dashboard from './Dashboard'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,Link} from 'react-router-dom'
 
 const styles = { fontWeight:'lighter'}
 
@@ -92,7 +92,7 @@ const DealDetail = () => {
     // navigating function (react router dom)
     const homeNavigation = ()=>{
         navigate('/')
-        }
+    }
      
     const currentDate = new Date();
     const parsedDate = new Date(dealDeatail.closingDate)
@@ -102,10 +102,10 @@ return (
     <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}} >
           <Space>
-             <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>
+             <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}> Contact View </Text>
           </Space>
           <Space>
-              <Button type='default' >Edit Deal</Button>  
+              <Link to={`/deal/editDeal/${endpoint}`}> <Button type='default'> Edit Deal </Button> </Link>
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
           </Space>
         </Row>

@@ -44,11 +44,11 @@ const DetailEditForm = () => {
       companyName:'',
       annualrevenue:''
     })
-    const checkUrl = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
+    const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
      
     const fetching = async()=>{
       try {
-      const responce = await axios.get(`http://localhost:3000/${checkUrl}`)
+      const responce = await axios.get(`http://localhost:3000/${moduleName}`)
         if (responce.status === 200) {
             setLeadDatas(await responce.data);            
         }
@@ -150,7 +150,7 @@ const DetailEditForm = () => {
   const onFinish = (e) => {
     e.preventDefault();
     const queryParam = formData.id // get the id for making Put request    
-      axios.put(`http://localhost:3000/${checkUrl}/${queryParam}`,formData)
+      axios.put(`http://localhost:3000/${moduleName}/${queryParam}`,formData)
       .then(res => {
         if (res.status === 200) {
           messageSuccess(res.data);
@@ -173,7 +173,7 @@ const DetailEditForm = () => {
   
  // this for navigation
     function navigate() {
-      navigation(`/${checkUrl}`)
+      navigation(`/${moduleName}`)
     }
 
     function backoneStep() {
@@ -190,7 +190,7 @@ const DetailEditForm = () => {
         <Row justify={'space-between'} >
           <Col>
            <Flex style={{padding:'10px',display:'flex',alignItems:'center'}} gap={'small'}>
-              <Text style={{fontSize:'20px',fontWeight:'lighter',color:'grey',textTransform:'capitalize'}}>Edit {`${checkUrl}`}</Text>
+              <Text style={{fontSize:'20px',fontWeight:'lighter',color:'grey',textTransform:'capitalize'}}>Edit {`${moduleName}`}</Text>
               <Text style={{fontSize:'15px',color:'red'}}>{`(${lead.firstname})`}</Text>
            </Flex>
           </Col>

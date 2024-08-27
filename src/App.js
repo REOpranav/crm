@@ -42,6 +42,8 @@ function App() {
           <Route path='/contact/innerdeal/:id' element={<InnerDeal />} />
           <Route path='/account/innerdeal/:id' element={<InnerDeal />} />
           <Route path='/deal/detail/:id' element={<DealDetail />} />
+          <Route path='/deal/individualForm/:id' element={<DealForm />} />
+          <Route path='/deal/organizationForm/:id' element={<DealForm />} />
         </Routes>
     </div>
   );
