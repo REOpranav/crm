@@ -105,6 +105,7 @@ return (
              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Contact View</Text>
           </Space>
           <Space>
+              <Button type='default' >Edit Deal</Button>  
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
           </Space>
         </Row>

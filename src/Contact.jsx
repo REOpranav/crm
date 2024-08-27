@@ -20,7 +20,7 @@ const Contact = () => {
   
   const filter = contactData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction  = {  // this object for finiding the === object
-      'equal to' : (a,b) => a == b,
+      'equal to' : (a,b) => a === b,
       'greater than' : (a,b) => a > b,
       'greater than equal to' : (a,b) => a >= b,
       'lesser then equal to' : (a,b) => a <= b,
@@ -28,8 +28,8 @@ const Contact = () => {
       'not equal to' : (a,b) => a !== b,  
     }
 
-    const comparisonFn = comparisonFunction[calculateSymbol];    
-    const finalValues = comparisonFn(value[selectedOption.toLowerCase()],searching.toString())
+    const comparisonFn = comparisonFunction[calculateSymbol]
+    const finalValues = comparisonFn(value[selectedOption].toLowerCase(),searching.toString().toLowerCase())
     return finalValues
    })
 

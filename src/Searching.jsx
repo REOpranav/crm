@@ -17,7 +17,7 @@ const Searching = ({ searchQuery, setSearchQuery,listOfData,setSelectedOption,se
     let listOfDataInArray = []
     for (const a in listOfData[0]) {
       listOfDataInArray.push(a)
-    }
+    }    
 
     const symbols = ['equal to','not equal to','greater than','greater than equal to','lesser than','lesser then equal to'] 
   

@@ -32,7 +32,7 @@ const DetailEditForm = () => {
     const navigation = useNavigate() //this is for navigation   
     const urlParams = window.location.pathname //this code for getting url params          
     const [leadDatas,setLeadDatas] = useState([])//this will fetch the full data from query param
-    const [lead,setLead] = useState([]) // this data is filter data from leaddatas
+    const [lead,setLead] = useState([]) // this data is filter data from lead datas
     const [errors,setError] = useState('')
 
     const [formData,setFormData] = useState({ // this for changing the data
@@ -263,8 +263,8 @@ const DetailEditForm = () => {
                 <input type="number" name="pincode" id="pincode" placeholder={`${lead.pincode} - Pincode`} value={formData.pincode} onChange={handleChange}/>
             </p>
             <p>
-                <label for="state">Pincode : </label>
-                <input type="text" name="state" id="state" placeholder={`${lead.pincode} - Pincode`} value={formData.state} onChange={handleChange}/>
+                <label for="state">state : </label>
+                <input type="text" name="state" id="state" placeholder={`${lead.state} - Pincode`} value={formData.state} onChange={handleChange}/>
             </p>
             <p>
                 <label for="country">Country : </label>

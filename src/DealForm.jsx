@@ -23,7 +23,7 @@ const DealForm = () => {
     const URL = window.location.pathname
     const moduleName = URL.split('/').filter(e => e).shift()
     const id = URL.split('/').pop()
-    
+
     const [dealdata,setDealData] = useState({
         key : JSON.stringify(key),
         id : id,

@@ -17,25 +17,25 @@ const LeadBoard = () => {
     const [searchBy,setSearchBy] = useState('')
     const [selectedOption, setSelectedOption] = useState('firstname'); // this id for set selection
     const [searching,setSearching] = useState('') // this searching for lead
-    const [calculateSymbol,setCalculateSymbol] = useState('===')
+    const [calculateSymbol,setCalculateSymbol] = useState('equal to')
     const [selectedRowKeys,setselectedRowKeys] = useState([])
     
     const filter = leadData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
-    const comparisonFunction  = {  // this object for finiding the === object
-      '===' : (a,b) => a === b,
-      '==' : (a,b) => a == b,
-      '>' : (a,b) => a > b,
-      '>=' : (a,b) => a >= b,
-      '<=' : (a,b) => a <= b,
-      '<' : (a,b) => a < b,
-      '!==' : (a,b) => a !== b,  
-    }
-
-    const comparisonFn = comparisonFunction[calculateSymbol];    
-    const finalValues = comparisonFn(value[selectedOption.toLowerCase()],searching.toLowerCase())
-    return finalValues
-   })
-
+      const comparisonFunction  = {  // this object for finiding the === object
+        'equal to' : (a,b) => a == b,
+        'greater than' : (a,b) => a > b,
+        'greater than equal to' : (a,b) => a >= b,
+        'lesser then equal to' : (a,b) => a <= b,
+        'lesser than' : (a,b) => a < b,
+        'not equal to' : (a,b) => a !== b,  
+      }
+  
+      const comparisonFn = comparisonFunction[calculateSymbol];    
+      console.log(value[selectedOption]);
+      
+      const finalValues = comparisonFn(value[selectedOption].toLowerCase(),searching.toString().toLowerCase())
+      return finalValues
+     })
     // code for navigatingin (react router dom)
     const navigate = useNavigate();
     const formNavigate = ()=>{

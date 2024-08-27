@@ -11,11 +11,10 @@ const Deal = () => {
 
   const [dealData,setDealData] = useState([])
   const [searchBy,setSearchBy] = useState('')
-  const [selectedOption, setSelectedOption] = useState('mobile'); // this id for set selection
+  const [selectedOption, setSelectedOption] = useState('dealName'); // this id for set selection
   const [searching,setSearching] = useState('') // this searching for lead
-  const [calculateSymbol,setCalculateSymbol] = useState('equal to')
+  const [calculateSymbol,setCalculateSymbol] = useState("equal to")
   const [selectedRowKeys,setselectedRowKeys] = useState([])
-  const [dealFromInformation,setDealFromInformation] = useState([]) // this is deal information  
  
   // this code for initial load and when lead added
   const fetching = async()=>{
@@ -122,13 +121,14 @@ const Deal = () => {
         'greater than equal to' : (a,b) => a >= b,
         'lesser then equal to' : (a,b) => a <= b,
         'lesser than' : (a,b) => a < b,
-        'not equal to' : (a,b) => a !== b,  
+        'not equal to' : (a,b) => a !== b,
       }
   
-      const comparisonFn = comparisonFunction[calculateSymbol];    
-      const finalValues = comparisonFn(value[selectedOption.toLowerCase()],searching.toString())
+      const comparisonFn = comparisonFunction[calculateSymbol]      
+      const finalValues = comparisonFn(value[selectedOption].toLowerCase(),searching.toString().toLowerCase())
       return finalValues
      })
+  
      
     let data = [] // this is for handing table (antd) (my method)
     for (const datas of filter.length !== 0 ? filter : dealData) {

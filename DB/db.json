@@ -41,44 +41,6 @@
   ],
   "contact": [
     {
-      "id": "234567890",
-      "leadowner": "sarahconnor",
-      "firstname": "Sarah",
-      "lastname": "Connor",
-      "email": "sarah.connor@example.com",
-      "mobile": "6543210987",
-      "date": "2024-05-30",
-      "companyName": "AI Dynamics",
-      "annualrevenue": "950000",
-      "gender": "Female",
-      "area": "Downtown",
-      "state": "Florida",
-      "country": "USA",
-      "pincode": "33101",
-      "expectedAmount": "200000",
-      "website": "https://aidynamics.com",
-      "description": "Exploring AI-driven business solutions."
-    },
-    {
-      "id": "345678901",
-      "leadowner": "alexjohnson",
-      "firstname": "Alex",
-      "lastname": "Johnson",
-      "email": "alex.johnson@example.com",
-      "mobile": "5432109876",
-      "date": "2024-04-18",
-      "companyName": "Green Energy Co.",
-      "annualrevenue": "800000",
-      "gender": "Male",
-      "area": "Riverside",
-      "state": "Colorado",
-      "country": "USA",
-      "pincode": "80201",
-      "expectedAmount": "175000",
-      "website": "https://greenenergy.com",
-      "description": "Looking for renewable energy partnerships."
-    },
-    {
       "id": "456789012",
       "leadowner": "emilywilliams",
       "firstname": "Emily",
@@ -649,6 +611,10 @@
     {
       "id": "900842875",
       "date": "August 23rd 2024, 12:43:09 pm"
+    },
+    {
+      "id": "234567890",
+      "date": "August 27th 2024, 10:33:13 am"
     }
   ],
   "emailLogs": [
@@ -735,6 +701,10 @@
     {
       "id": "900842875",
       "date": "August 23rd 2024, 12:42:57 pm"
+    },
+    {
+      "id": "234567890",
+      "date": "August 27th 2024, 10:33:07 am"
     }
   ]
 }

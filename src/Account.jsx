@@ -29,7 +29,7 @@ const Account = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol];    
-    const finalValues = comparisonFn(value[selectedOption].toLocaleLowerCase(),searching.toLocaleLowerCase())
+    const finalValues = comparisonFn(value[selectedOption].toLowerCase(),searching.toString().toLowerCase())
     return finalValues
    })
 
