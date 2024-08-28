@@ -8,13 +8,17 @@ import axios from 'axios'
 
  // this is message ele from antd
  function messageSuccess(){
-    message.success('Sucessfully created a Lead')
+    message.success('Sucessfully created a Layout')
   }
-
 
 const FormLayout = () => {
     const {Text} = Typography
+    const [layoutName,setlayoutName] = useState("")
     const [formData,setFormData] = useState([])
+    const [finalFormData,setFinalFormData] = useState({
+        id : layoutName,
+        inputs : []
+    })
 
     useEffect(()=>{
         const formID = document.getElementById('pasteForm') 
@@ -29,7 +33,7 @@ const FormLayout = () => {
                 })   
             })
             formID.addEventListener('dragover',(e)=>{
-                e.preventDefault() 
+                e.preventDefault()
             })  
 
             formID.addEventListener('drop',(e)=>{
@@ -47,12 +51,18 @@ const FormLayout = () => {
                 form.appendChild(targetValue)
             })
     },[undefined])
-    
+        
+ useEffect(()=>{
+    let totalInputs = []
+        for (const a of formData) {
+            totalInputs.push(a.outerHTML)
+        }
+        setFinalFormData({id : layoutName , inputs : totalInputs})
+ },undefined)
     
     const onFinish = (e)=>{ 
-        e.preventDefault()  
-    console.log(formData);
-            axios.post('http://localhost:3000/formLayout',formData)
+        e.preventDefault()
+        axios.post('http://localhost:3000/formLayout',finalFormData)
               .then(res => {
                 if (res.status == 201) {
                   messageSuccess();
@@ -72,7 +82,7 @@ const FormLayout = () => {
     <div > 
        <Dashboard />
        <Row justify={'space-between'} style={{padding:'10px'}}>
-            <input type="text" placeholder='Layout Name' style={{backgroundColor:'transparent',border:'none',outline:'none',fontSize:'16px',width:'20%',color:'grey'}} />
+            <input type="text" placeholder='Layout Name' style={{backgroundColor:'transparent',border:'none',outline:'none',fontSize:'16px',width:'20%',color:'grey'}} value={layoutName} onChange={(e) => setlayoutName(e.target.value)}/>
             <Flex gap={'small'}>
                 <Link to={'/formpage'}><Button type='default'>Back one step</Button></Link>
                 <Button type='primary' onClick={onFinish}>Save Page Layout</Button>

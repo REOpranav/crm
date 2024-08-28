@@ -18,25 +18,6 @@
       "expectedAmount": "150000",
       "website": "https://biotechsolutions.in",
       "description": "Innovative solutions in biotechnology."
-    },
-    {
-      "id": "100020",
-      "leadowner": "pranavavadivel",
-      "firstname": "Sunil",
-      "lastname": "Nair",
-      "email": "sunil.nair@example.com",
-      "mobile": "9845671289",
-      "date": "2024-10-10",
-      "companyName": "CleanTech Ventures",
-      "annualrevenue": "820000",
-      "gender": "Male",
-      "area": "Fort Kochi",
-      "state": "Kerala",
-      "country": "India",
-      "pincode": "682001",
-      "expectedAmount": "160000",
-      "website": "https://cleantechventures.in",
-      "description": "Driving clean technology solutions."
     }
   ],
   "contacts": [
@@ -153,6 +134,25 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "100020",
+      "leadowner": "pranavavadivel",
+      "firstname": "Sunil",
+      "lastname": "Nair",
+      "email": "sunil.nair@example.com",
+      "mobile": "9845671289",
+      "date": "2024-10-10",
+      "companyName": "CleanTech Ventures",
+      "annualrevenue": "820000",
+      "gender": "Male",
+      "area": "Fort Kochi",
+      "state": "Kerala",
+      "country": "India",
+      "pincode": "682001",
+      "expectedAmount": "160000",
+      "website": "https://cleantechventures.in",
+      "description": "Driving clean technology solutions."
     }
   ],
   "accounts": [
@@ -426,6 +426,33 @@
     {
       "id": "72351313",
       "date": "August 28th 2024, 12:19:37 pm"
+    }
+  ],
+  
+  "formLayout": [
+    {
+      "id": "sundhar",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
+        "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>"
+      ]
+    },
+    {
+      "id": "vadivel",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
+        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>"
+      ]
+    },
+    {
+      "id": "sakthivel",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>",
+        "<p draggable=\"true\"><label for=\"country\">Country : </label><input type=\"text\" name=\"country\" id=\"country\" placeholder=\"Country\"></p>"
+      ]
     }
   ]
 }

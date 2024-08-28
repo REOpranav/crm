@@ -103,14 +103,6 @@ const Detail = () => {
           key: '1',
           label: (<Link onClick={converToContact}> Convert to Contact </Link> ),
         },
-        {
-            key: '2',
-            label: (<Link onClick={convertToAccount}> Convert to Account </Link> ),
-        },
-        {
-            key: '3',
-            label: ( <Link to={'/deals'}> Convert to Deal </Link>),
-        }
     ]
 
     // this is for store the call log
