@@ -2,9 +2,9 @@
   "leads": [
     {
       "id": "100019",
-      "leadowner": "Padma",
+      "leadowner": "ramas",
       "firstname": "Ritu",
-      "lastname": "Singh",
+      "lastname": "rocks",
       "email": "ritu.singh@example.com",
       "mobile": "9821678934",
       "date": "2024-09-19",
@@ -39,14 +39,14 @@
       "description": "Driving clean technology solutions."
     }
   ],
-  "contact": [
+  "contacts": [
     {
       "id": "567890123",
       "leadowner": "chrislee",
-      "firstname": "Chris",
-      "lastname": "Lee",
-      "email": "chris.lee@example.com",
-      "mobile": "3210987654",
+      "firstname": "prananavavadivel",
+      "lastname": "sundaravadviel",
+      "email": "pranavavadivel01@gmail.com",
+      "mobile": "9887845678",
       "date": "2024-02-10",
       "companyName": "SmartHomes Inc.",
       "annualrevenue": "720000",
@@ -77,25 +77,6 @@
       "expectedAmount": "110000",
       "website": "https://edutech.com",
       "description": "Interested in advancing educational technology."
-    },
-    {
-      "id": "957590936",
-      "leadowner": "pranavavadivek",
-      "firstname": "water",
-      "lastname": "bottle",
-      "email": "bottle@gmail.com",
-      "mobile": "9872389097",
-      "date": "2024-08-20",
-      "companyName": "Zappyworks",
-      "annualrevenue": "",
-      "gender": "male",
-      "area": "chennai",
-      "state": "Tamil Nadu",
-      "country": "india",
-      "pincode": "987603",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
     },
     {
       "id": "100012",
@@ -136,37 +117,35 @@
       "description": "Revolutionizing healthcare technology."
     },
     {
-      "id": "100014",
-      "leadowner": "pranavavadivel",
-      "firstname": "Amit",
-      "lastname": "Chatterjee",
-      "email": "amit.chatterjee@example.com",
-      "mobile": "9834567890",
-      "date": "2024-04-18",
-      "companyName": "AgroTech Solutions",
-      "annualrevenue": "690000",
-      "gender": "Male",
-      "area": "Park Street",
-      "state": "West Bengal",
-      "country": "India",
-      "pincode": "700016",
-      "expectedAmount": "140000",
-      "website": "https://agrotechsolutions.in",
-      "description": "Innovative agricultural technology."
-    }
-  ],
-  "account": [
-    {
-      "id": "331735154",
-      "leadowner": "some",
-      "firstname": "some ",
-      "lastname": "some",
-      "email": "some@gmail.com",
-      "mobile": "8765456789",
-      "date": "2024-08-29",
-      "companyName": "mouse & co",
-      "annualrevenue": "1000000",
+      "id": "10334060",
+      "leadowner": "iangaravadivel",
+      "firstname": "iangar",
+      "lastname": "vadviel",
+      "email": "vadivel@gmail.com",
+      "mobile": "9876548876",
+      "date": "2024-08-30",
+      "companyName": "infi info",
+      "annualrevenue": "30000",
       "gender": "male",
+      "area": "salem",
+      "state": "tamil nadu",
+      "country": "india",
+      "pincode": "7676768",
+      "expectedAmount": "992999",
+      "website": "https://mockcrm.vercel.app/",
+      "description": "wskdncj sdicjsd cijdsc ijsdcosdoj oijw weij"
+    },
+    {
+      "id": "72351313",
+      "leadowner": "simple",
+      "firstname": "simple ",
+      "lastname": "simple ",
+      "email": "waster@gmail.com",
+      "mobile": "9887659658",
+      "date": "2024-08-30",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
       "area": "",
       "state": "",
       "country": "",
@@ -174,68 +153,65 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
-    },
-    {
-      "id": "456789012",
-      "leadowner": "emilywilliams",
-      "firstname": "Emily",
-      "lastname": "Williams",
-      "email": "emily.williams@example.com",
-      "mobile": "4321098765",
-      "date": "2024-03-25",
-      "companyName": "Health Innovators",
-      "annualrevenue": "670000",
-      "gender": "Female",
-      "area": "Midtown",
-      "state": "Illinois",
-      "country": "USA",
-      "pincode": "60601",
-      "expectedAmount": "140000",
-      "website": "https://healthinnovators.com",
-      "description": "Interested in improving healthcare technologies."
-    },
-    {
-      "id": "789012345",
-      "leadowner": "davidmartinez",
-      "firstname": "ram",
-      "lastname": "Martinez",
-      "email": "david.martinez@example.com",
-      "mobile": "1098765432",
-      "date": "2023-12-15",
-      "companyName": "Logistics Corp.",
-      "annualrevenue": "860000",
-      "gender": "Male",
-      "area": "Warehouse District",
-      "state": "Georgia",
-      "country": "USA",
-      "pincode": "30301",
-      "expectedAmount": "190000",
-      "website": "https://logisticscorp.com",
-      "description": "Exploring solutions for supply chain optimization."
     }
   ],
-  "deal": [
+  "accounts": [
     {
-      "id": "456789012",
-      "key": "662155545",
-      "dealowner": "pranavavadivel",
-      "dealName": "vadivel deal",
-      "contactName": "pranaavx",
-      "amount": "10000",
-      "Pipeline": "standard",
-      "closingDate": "2024-08-29",
+      "id": "776839841",
+      "accountOwner": "pranaav",
+      "industry": "simple",
+      "employeesCount": "10000",
+      "annualrevenue": "29999",
+      "mobile": "0933838938",
+      "email": "some@gmail.com",
+      "date": "",
       "companyName": "",
-      "email": "",
       "gender": "",
       "area": "",
       "state": "",
       "country": "",
       "pincode": "",
-      "expectedAmount": "20",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "331083644",
+      "accountOwner": "velu loganathan",
+      "industry": "revenueFlow",
+      "employeesCount": "30000",
+      "annualrevenue": "2000",
+      "mobile": "",
+      "email": "velu@gmail.com",
+      "date": "",
+      "companyName": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "236192080",
+      "accountOwner": "Thirumalairaj",
+      "industry": "Arima.in",
+      "employeesCount": "3000",
+      "annualrevenue": "20000000",
+      "mobile": "9876545876",
+      "email": "arima.in@gmail.com",
+      "date": "2024-08-30",
+      "companyName": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
       "website": "",
       "description": ""
     }
   ],
+  "deals": [],
   "callLogs": [
     {
       "id": "789012335",
@@ -312,6 +288,14 @@
     {
       "id": "215464554",
       "date": "August 27th 2024, 5:10:45 pm"
+    },
+    {
+      "id": "770824574",
+      "date": "August 27th 2024, 10:31:45 pm"
+    },
+    {
+      "id": "72351313",
+      "date": "August 28th 2024, 12:19:33 pm"
     }
   ],
   "emailLogs": [
@@ -414,6 +398,34 @@
     {
       "id": "100012",
       "date": "August 27th 2024, 5:26:17 pm"
+    },
+    {
+      "id": "770824574",
+      "date": "August 27th 2024, 10:31:50 pm"
+    },
+    {
+      "id": "10334060",
+      "date": "August 28th 2024, 11:30:17 am"
+    },
+    {
+      "id": "10334060",
+      "date": "August 28th 2024, 11:30:23 am"
+    },
+    {
+      "id": "10334060",
+      "date": "August 28th 2024, 11:30:24 am"
+    },
+    {
+      "id": "567890123",
+      "date": "August 28th 2024, 11:30:29 am"
+    },
+    {
+      "id": "100012",
+      "date": "August 28th 2024, 11:30:42 am"
+    },
+    {
+      "id": "72351313",
+      "date": "August 28th 2024, 12:19:37 pm"
     }
   ]
 }

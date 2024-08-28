@@ -14,6 +14,8 @@ import AccountDetail from './AccountDetail';
 import InnerDeal from './InnerDeal';
 import DealForm from './DealForm';
 import DealDetail from './DealDetail';
+import AccountFormPage from './AccountFormPage';
+import AccountEditForm from './AccountEditForm';
 
 function App() {
   
@@ -22,26 +24,26 @@ function App() {
         <Routes>
           <Route path='/' element={<Dashboard />} />
           <Route path='/leads' element={<LeadBoard />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/account' element={<Account />} />
-          <Route path='/deal' element={<Deal />} />
+          <Route path='/contacts' element={<Contact />} />
+          <Route path='/accounts' element={<Account />} />
+          <Route path='/deals' element={<Deal />} />
           <Route path='/leads/formpage' element={<FormPage />} />
-          <Route path='/contact/formpage' element={<FormPage />} />
-          <Route path='/account/formpage' element={<FormPage />} />
+          <Route path='/contacts/formpage' element={<FormPage />} />
+          <Route path='/accounts/formpage' element={<AccountFormPage />} />
           <Route path='/leads/detail/:id' element={<Detail/>} />
           <Route path='/contactDetail/detail/:id' element={<ContactDetail/>} />
           <Route path='/leads/detail/leadeditform/:id' element={<DetailEditForm />} />
-          <Route path='/contact/contactDetail/contactEditForm/:id' element={<DetailEditForm />} />
+          <Route path='/contacts/contactDetail/contactEditForm/:id' element={<DetailEditForm />} />
           <Route path='/formpage/formlayout' element={<FormLayout/>} />
           <Route path='/accountdetail/detail/:id' element={<AccountDetail />} />
-          <Route path='/account/accountDetail/accountEditForm/:id' element={<DetailEditForm />} />
-          <Route path='/contact/dealForm/:id' element={<DealForm />} />
-          <Route path='/account/dealForm/:id' element={<DealForm />} />
-          <Route path='/contact/innerdeal/:id' element={<InnerDeal />} />
-          <Route path='/account/innerdeal/:id' element={<InnerDeal />} />
-          <Route path='/deal/detail/:id' element={<DealDetail />} />
-          <Route path='/deal/individualForm/:id' element={<DealForm />} />
-          <Route path='/deal/organizationForm/:id' element={<DealForm />} />
+          <Route path='/accounts/accountDetail/accountEditForm/:id' element={<AccountEditForm />} />
+          <Route path='/contacts/dealForm/:id' element={<DealForm />} />
+          <Route path='/accounts/dealForm/:id' element={<DealForm />} />
+          <Route path='/contacts/innerdeal/:id' element={<InnerDeal />} />
+          <Route path='/accounts/innerdeal/:id' element={<InnerDeal />} />
+          <Route path='/deals/detail/:id' element={<DealDetail />} />
+          <Route path='/contacts/individualForm/:id' element={<DealForm />} />
+          <Route path='/contacts/organizationForm/:id' element={<DealForm />} />
         </Routes>
     </div>
   );

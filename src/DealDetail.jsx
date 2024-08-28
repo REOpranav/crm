@@ -51,19 +51,19 @@ const DealDetail = () => {
     // this code for initial load and when lead added
     const fetching = async()=>{
         try {
-            const responce = await axios.get(`http://localhost:3000/deal/${endpoint}`)
+            const responce = await axios.get(`http://localhost:3000/deals/${endpoint}`)
             if (responce.status === 200) {
                 setDealDetail(await responce.data)
             } 
                 try {
-                    const contactResponse = await axios.get(`http://localhost:3000/contact/${endpoint}`)
+                    const contactResponse = await axios.get(`http://localhost:3000/contacts/${endpoint}`)
                     if (contactResponse.status === 200) {
                         setDealInformationFromContact(contactResponse.data)
                     }
                 } catch (error) {
                     if (error.response && error.response.status === 404) {
                         try {
-                            const accountResponse = await axios.get(`http://localhost:3000/account/${endpoint}`)
+                            const accountResponse = await axios.get(`http://localhost:3000/accounts/${endpoint}`)
                             if (accountResponse.status === 200) {
                                 setDealInformationFromAccount(accountResponse.data);
                             }

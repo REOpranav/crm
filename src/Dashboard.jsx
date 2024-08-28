@@ -28,15 +28,15 @@ return (
             </Menu.Item>
           
             <Menu.Item key="Contact">
-              <Link to={'/contact'}  className='PoppinsFont'> Contact</Link>
+              <Link to={'/contacts'}  className='PoppinsFont'> Contact</Link>
             </Menu.Item>
           
             <Menu.Item key="Acount">
-              <Link to={'/account'}  className='PoppinsFont'>Account</Link>       
+              <Link to={'/accounts'}  className='PoppinsFont'>Account</Link>       
             </Menu.Item>
          
             <Menu.Item key="deal">
-              <Link to={'/deal'}  className='PoppinsFont'>Deal </Link>
+              <Link to={'/deals'}  className='PoppinsFont'>Deal </Link>
           </Menu.Item>
         </Menu>
 

@@ -49,7 +49,7 @@ const Detail = () => {
       
       const converToContact = async()=>{ 
             let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
-            await axios.post('http://localhost:3000/contact',dataFromLead.data) // secound post that contact form
+            await axios.post('http://localhost:3000/contacts',dataFromLead.data) // secound post that contact form
               .then(res => {
                 if (res.status === 201) {
                   messageSuccess();
@@ -74,7 +74,7 @@ const Detail = () => {
       // this code for convert lead to contact
       const convertToAccount = async()=>{ 
         let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
-        await axios.post('http://localhost:3000/account',dataFromLead.data) // secound post that contact form
+        await axios.post('http://localhost:3000/accounts',dataFromLead.data) // secound post that contact form
           .then(res => {
             if (res.status === 201) {
               messageSuccess();
@@ -89,7 +89,7 @@ const Detail = () => {
             if (err.response) {
               message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
             } else if (err.request) {
-              message.error('Error: No response   from server.');
+              message.error('Error: No response from server.');
             } else {
               message.error('Error: ' + err.message);
             }
@@ -109,7 +109,7 @@ const Detail = () => {
         },
         {
             key: '3',
-            label: ( <Link to={'/deal'}> Convert to Deal </Link>),
+            label: ( <Link to={'/deals'}> Convert to Deal </Link>),
         }
     ]
 
@@ -187,11 +187,11 @@ const Detail = () => {
       
     // this for navigation
     function navigate() {
-        navigation('/contact')
+        navigation('/contacts')
     }
 
     function navigateToAccount() {
-      navigation('/account')
+      navigation('/accounts')
     }
 
 

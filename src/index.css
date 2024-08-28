@@ -15,10 +15,6 @@ body {
 .ant-btn.ant-btn-default{
   border-color: #5a3bb6;
   color: #5a3bb6;
-  &:hover {
-    border-color: rgb(148, 44, 238) !important;
-    color: rgb(148, 44, 238) !important;
-  }
 }
 
 .ant-btn.ant-btn-dashed{

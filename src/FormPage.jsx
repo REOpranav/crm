@@ -12,10 +12,9 @@ import './Dashboard.css'
     message.success('Sucessfully created')
   }
 
-
 const FormPage = () => {
   const {Text} = Typography
-  const navigation = useNavigate() //this is for navigation   
+  const navigation = useNavigate() //this is for navigation
   const [errors,setError] = useState('')
   const [id,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
   
@@ -81,12 +80,11 @@ const FormPage = () => {
   
   // This for cancelling form
     function cancelForm() {
-      navigate(`/${moduleName}`)
+      navigate()
     }
 
   // validation Form
   function validation(leadFormValues) {
-    console.log();
     
     let errorvalues = {}
     if (!leadFormValues.leadowner.trim()) {
@@ -143,10 +141,13 @@ const FormPage = () => {
         <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
      </Flex>
       <Flex gap="small">
-        <Button type='primary' danger ghost onClick={cancelForm} >Cancel</Button>
-        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
-          <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
-        </Popconfirm>
+      <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>
+        <Button type='default' danger> Cancel </Button>
+      </Popconfirm>
+
+      <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
+        <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
+      </Popconfirm>
       </Flex>
     </Row>
 

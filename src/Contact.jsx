@@ -36,7 +36,7 @@ const Contact = () => {
   // this functionf fetch the datas from URL/contact 
   const fetching = async()=>{
     try {
-        const responce = await axios.get('http://localhost:3000/contact')
+        const responce = await axios.get('http://localhost:3000/contacts')
           if (responce.status === 200) {
             setContactData(await responce.data);
             setsearchBy(await responce.data)
@@ -173,7 +173,7 @@ const Contact = () => {
 
   const deleteThedata = async()=>{
     try {
-      const URL = `http://localhost:3000/contact`
+      const URL = `http://localhost:3000/contacts`
       let deleting ; 
       for (const deleteValue of selectedRowKeys) {
          deleting =  await axios.delete(`${URL}/${deleteValue}`)        

@@ -16,12 +16,12 @@ const AccountDetail = () => {
     const [deleteInnerDealRow,setDeleteInnerDealRow] = useState(false)
 
     const URL = window.location.href
-    const id = URL.split('/').pop()    
+    const id = URL.split('/').pop()  
 
     // this code for initial load and when lead added
         const fetching = async()=>{
             try {
-                const responce = await axios.get(`http://localhost:3000/account/${id}`)         
+                const responce = await axios.get(`http://localhost:3000/accounts/${id}`)         
                   if (responce.status === 200) {
                     setAccountData(await responce.data)
                   }
@@ -37,21 +37,17 @@ const AccountDetail = () => {
         }
     
         useEffect(()=>{
-            fetching()
+          fetching()
         },[undefined])
 
         const items = [
             {
                 key: '1',
-                label: (<Link to={''}>Convert to Account</Link> ),
-            },
-            {
-                key: '2',
-                label: ( <Link to={'/deal'}>Convert to Deal</Link>),
+                label: ( <Link to={`/accounts/dealForm/${id}`}>Convert to Deal</Link>),
             }
         ]
 
-         // this is for store the call log
+    // this is for store the call log
     const makeCall = (number) => {
         const data = {
             id : id,
@@ -77,7 +73,7 @@ const AccountDetail = () => {
                   if (err.response) {
                     message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
                   } else if (err.request) {
-                    message.error('Error: No response   from server.');
+                    message.error('Error: No response from server.');
                   } else {
                     message.error('Error: ' + err.message);
                   }
@@ -113,7 +109,7 @@ const AccountDetail = () => {
                 if (err.response) {
                   message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
                 } else if (err.request) {
-                  message.error('Error: No response   from server.');
+                  message.error('Error: No response from server.');
                 } else {
                   message.error('Error: ' + err.message);
                 }
@@ -126,7 +122,7 @@ const AccountDetail = () => {
   // this is for deleting the leads
    const dealDelete = async()=>{
     try {
-      const URL = `http://localhost:3000/deal`
+      const URL = `http://localhost:3000/deals`
       let deleting ;
         for (const deleteValue of selectRowKey) {
           deleting = await axios.delete(`${URL}/${deleteValue}`)        
@@ -151,7 +147,7 @@ const AccountDetail = () => {
         <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}> 
                 <Flex gap={'small'}>
-                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'red',fontWeight:'lighter'}} >{accountData.firstname ? accountData.firstname : 'Profile Name'} - Account</Text>
+                    <Text style={{fontSize:'20px',textTransform:'capitalize',color:'red',fontWeight:'lighter'}} >{accountData.accountOwner ? accountData.accountOwner : 'Profile Name'} - Account</Text>
                 </Flex>
 
                 <Flex gap={'small'}>
@@ -162,21 +158,20 @@ const AccountDetail = () => {
                     </Button>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
-                        <Button type='primary' id='themeColor'>Convert</Button>
+                        <Button type='primary' id='themeColor'>Create Deal</Button>
                     </Dropdown>
            
                     <Button type='default'>
-                        <Link to={`/account/accountDetail/accountEditForm/${id}`} >Edit Account</Link> 
+                        <Link to={`/accounts/accountDetail/accountEditForm/${id}`} >Edit Account</Link> 
                     </Button>
                     
                     <Button type='default'>
-                        <Link to={'/contact'}>Back to Contact Board</Link> 
+                        <Link to={'/contacts'}>Back to Account Board</Link> 
                     </Button>
                 </Flex>
         </Row>
         <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
           <Col span={3} style={{backgroundColor: 'white',borderRadius:'10px',minHeight:'100vh',maxHeight:'100vh',overflow:'auto'}}>
-            <Link to={`/account/dealForm/${id}`}><Button type='default'> create Deal </Button></Link>          
           </Col>
           
           <Col span={20} offset={1} style={{overflow:'auto'}}>

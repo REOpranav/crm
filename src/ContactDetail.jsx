@@ -31,7 +31,7 @@ const ContactDetail = () => {
     // this code for initial load and when lead added
     const fetching = async()=>{
         try {
-            const responce = await axios.get(`http://localhost:3000/contact/${id}`)         
+            const responce = await axios.get(`http://localhost:3000/contacts/${id}`)         
                 if (responce.status === 200) {
                   setContactData(await responce.data)
                 }
@@ -51,47 +51,8 @@ const ContactDetail = () => {
         },[undefined,selectRowKey,setSelectedRowKey])
 
         function navigateToAccount() {
-          navigation('/account')
+          navigation('/accounts')
         }
-
-      // this code for convert lead to contact
-      const convertToAccount = async()=>{ 
-        let dataFromLead = await axios.get(`http://localhost:3000/contact/${id}`) // first getting the particular id
-        await axios.post('http://localhost:3000/account',dataFromLead.data) // secound post that contact form
-          .then(res => {
-            if (res.status === 201) {
-              messageSuccess();
-            }
-            axios.delete(`http://localhost:3000/contact/${id}`) // third code for deleting data in lead
-
-            setTimeout(()=>{
-                navigateToAccount()
-            },1 * 100) 
-
-          }).catch(err => {
-            if (err.response) {
-              message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
-            } else if (err.request) {
-              message.error('Error: No response   from server.');
-            } else {
-              message.error('Error: ' + err.message);
-            }
-      }) 
-     }
-  
-     // this is for drop down (ANTd)
-      const items = [
-            {
-              key: '1',
-              label: (<Link onClick={convertToAccount}>Convert to Accounts</Link> ),
-            },
-            {
-              key: '2',
-              label: ( <Link to={'/deal'}>Convert to Deal</Link>),
-            },
-        ]
-
-        const items3 = ["individual","organization"]
 
     // this is for store the call log
     const makeCall = (number) => {
@@ -168,7 +129,7 @@ const ContactDetail = () => {
    // this is for deleting the leads
    const dealDelete = async()=>{
     try {
-      const URL = `http://localhost:3000/deal`
+      const URL = `http://localhost:3000/deals`
       let deleting ; 
         for (const deleteValue of selectRowKey) {
           deleting =  await axios.delete(`${URL}/${deleteValue}`)        
@@ -188,13 +149,17 @@ const ContactDetail = () => {
       }    
   }
 
-  const individualFormPage = ()=>{
-    navigate(`/deal/individualForm/${id}`)
-  }
-
-  const organizationFormPage = ()=>{
-    navigate(`/deal/organizationForm/${id}`)
-  }
+  // this is for drop down (ANTd)
+   const items = [
+    {
+      key: '1',
+      label: (<Link to={`/contacts/individualForm/${id}`}>For Individual</Link> ),
+    },
+    {
+      key: '2',
+      label: ( <Link to={`/contacts/organizationForm/${id}`}>For organization</Link>),
+    },
+]
 
 
   return (
@@ -207,27 +172,23 @@ const ContactDetail = () => {
 
                 <Flex gap={'small'}>
                    {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
+
+                   <Button type='primary'>
+                        <Link to={'/contacts'}>Back to Contact</Link> 
+                    </Button>
+                    
+                    <Dropdown menu={{items}} placement='bottomCenter'>
+                        <Button type='default'>Create Deal</Button>  
+                    </Dropdown>
+
                     <Button type='default' >
                         <a href={`mailto:${contactData.email}`} onClick={()=>makeMail(contactData.email)}>Send Email</a>
                     </Button>
 
-                    <Dropdown menu={{items}} placement='bottomCenter'>
-                        <Button type='default'>Convert</Button>  
-                    </Dropdown>
-
-                    <select id="myDropdown">
-                      <option value="default"> <Button> Create Deal </Button> </option>
-                      <option value="Individual" onClick={individualFormPage}><Button> Individual </Button></option>
-                      <option value="organization" onClick={organizationFormPage}><Button> organization </Button></option>
-                    </select> 
-
                     <Button type='default'>
-                        <Link to={`/contact/contactDetail/contactEditForm/${id}`}>Edit contact</Link> 
+                        <Link to={`/contacts/contactDetail/contactEditForm/${id}`}>Edit contact</Link> 
                     </Button>
-                    
-                    <Button type='primary'>
-                        <Link to={'/contact'}>Back to Contact Board</Link> 
-                    </Button>
+                
                 </Flex>
         </Row>
         <Row style={{minHeight:"80vh",maxHeight:'80vh',overflow:'auto'}} justify={'space-around'}>
@@ -248,6 +209,7 @@ const ContactDetail = () => {
               <Col span={24}>
                 <Calllogs callLogs={callLogs} emailLog={mailLog}/>
               </Col>
+              
               <Col span={24}> 
                 <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey}/>
               </Col>

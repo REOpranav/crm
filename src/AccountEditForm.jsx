@@ -1,47 +1,29 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Row ,Flex ,message, Typography,Popconfirm } from 'antd'
-import React, { useState } from 'react'
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Col, Flex, message, Popconfirm, Row, Typography } from 'antd'
 import axios from 'axios'
-import { Col } from 'antd';
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './LeadEditForm.css'
 import Dashboard from './Dashboard'
-
- /* Flow of This Components
-      1. get the URL/endpoint for searching particular lead data 
-         1.get the last endpoint (line - 65)
-      2. make a fetch request to MOCK JSON-SERVER
-      3. after fetch the data ,set that data in setLeadDatas
-      4. using that setleadData variable ,first extract the leadID and compare which id is match in endpoint (line - 65)
-      5. if any id are availabe set the particular lead data in setLead varible (line - 70) 
-      6. after getting lead , apply this lead data as a value of editable form
-      7. make a the form editable
-      8. make put request 
-      9. changes happend
- */ 
 
  // this is message ele from antd
  function messageSuccess(value){  
     message.success(`Sucessfully Update the ${value.firstname} Lead Datas`)
  }
 
-const DetailEditForm = () => {
+ const AccountEditForm = () => {
     const {Text} = Typography
     const navigation = useNavigate() //this is for navigation   
     const urlParams = window.location.pathname //this code for getting url params          
-    const [leadDatas,setLeadDatas] = useState([])//this will fetch the full data from query param
-    const [lead,setLead] = useState([]) // this data is filter data from lead datas
+    const [fectedaccountDatas,setFetchedAccountData] = useState([])//this will fetch the full data from query param
+    const [actualActualData,setActualActualData] = useState([]) // this data is filter data from lead datas
     const [errors,setError] = useState('')
     const [formData,setFormData] = useState({})
 
-    const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()    
+    const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
     const fetching = async()=>{
       try {
       const responce = await axios.get(`http://localhost:3000/${moduleName}`)
         if (responce.status === 200) {
-            setLeadDatas(await responce.data);            
+            setFetchedAccountData(await responce.data);            
         }
       } catch (err) {
           if (err.response) {
@@ -62,37 +44,38 @@ const DetailEditForm = () => {
     // make filteration after fetching function complete
     useEffect(()=>{
       let idNUmber = urlParams.split('/').pop() // get the endpoint for filter the partucaular person array       
-        leadDatas.map((e) => {
+       fectedaccountDatas.map((e) => {
           if (e.id === idNUmber) {
-            setLead(e)
+            setActualActualData(e)
           }
        })
     },[fetching])
 
     // set the lead data in secoundary form
     useEffect(() => {
-      if (lead) {
+      if (actualActualData) {
+        
         setFormData({
-          id :lead.id,
-          leadowner:lead.leadowner,
-          firstname: lead.firstname || '',
-          lastname: lead.lastname || '',
-          email: lead.email || '',
-          mobile: lead.mobile || '',
-          date:lead.date || '',
-          companyName: lead.companyName || '',
-          annualrevenue: lead.annualrevenue || '',
-          gender:lead.gender || '',
-          area:lead.area || '',
-          state:lead.state ||  '',
-          country: lead.country || '',
-          pincode:lead.pincode || '',
-          expectedAmount:lead.expectedAmount || '',
-          website:lead.website || '',
-          description:lead.description || ''
+          id :actualActualData.id,
+          accountOwner:actualActualData.accountOwner,
+          industry: actualActualData.industry || '',
+          employeesCount: actualActualData.employeesCount || '',
+          email: actualActualData.email || '',
+          mobile: actualActualData.mobile || '',
+          date:actualActualData.date || '',
+          companyName: actualActualData.companyName || '',
+          annualrevenue: actualActualData.annualrevenue || '',
+          gender:actualActualData.gender || '',
+          area:actualActualData.area || '',
+          state:actualActualData.state ||  '',
+          country: actualActualData.country || '',
+          pincode:actualActualData.pincode || '',
+          expectedAmount:actualActualData.expectedAmount || '',
+          website:actualActualData.website || '',
+          description:actualActualData.description || ''
         });
       }      
-    }, [lead]);
+    }, [actualActualData]);
 
   // this is handle chanhge function
     const handleChange = (e)=>{
@@ -106,33 +89,23 @@ const DetailEditForm = () => {
   // validation Form
   function validation(leadFormValues) {
     let errorvalues = {}
-    if (!leadFormValues.firstname.trim()) {
-        errorvalues.firstname = 'First Name is Required'
+    if (!leadFormValues.accountOwner.trim()) {
+        errorvalues.accountOwner = 'Account Name is Required'
     }
-    if (!leadFormValues.leadowner.trim()) {
-      errorvalues.firstname = 'owner is Required'
-   }
 
-    if (!leadFormValues.lastname.trim()) {
-        errorvalues.lastname = 'Last Name is Required'
-    }
-    
-    if (!leadFormValues.email.trim()) {
-        errorvalues.email = 'Email Id is Required'
-    }
-    
     if (!leadFormValues.mobile.trim()) {
         errorvalues.mobile = 'Mobile Number is Required'
     }
     return errorvalues
   }
+
   //checking tthe form fileds are filled or not
   function checkForSubmitting(e) {
     let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0 // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
        onFinish(e)
      }else{            
-       setError(validation(formData))       
+       setError(validation(formData))
        message.error('Fill the Manditory Form Fields')
      }
   }
@@ -174,15 +147,15 @@ const DetailEditForm = () => {
     function getInputClass(value){            
       return errors[value] ? 'inputError' : ''
     }
-    
-  return (
+ 
+    return (
     <div>
-      <Dashboard />
+  <Dashboard />
         <Row justify={'space-between'} >
           <Col>
            <Flex style={{padding:'10px',display:'flex',alignItems:'center'}} gap={'small'}>
               <Text style={{fontSize:'20px',fontWeight:'lighter',color:'grey',textTransform:'capitalize'}}>Edit {`${moduleName}`}</Text>
-              <Text style={{fontSize:'15px',color:'red'}}>{`(${lead.firstname})`}</Text>
+              <Text style={{fontSize:'15px',color:'red'}}>{`(${actualActualData.accountOwner})`}</Text>
            </Flex>
           </Col>
           <Col>
@@ -204,74 +177,69 @@ const DetailEditForm = () => {
         <Row justify={'center'}>
           <form onSubmit={checkForSubmitting}>
           <p>
-                <label for="leadowner">Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Owner *`} value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
+                <label for="accountOwner">Owner : </label>
+                <input type="text" name="accountOwner" id="accountOwner" placeholder={`${actualActualData.accountOwner} - Owner *`} value={formData.accountOwner} onChange={handleChange} className={getInputClass('accountOwner')}/> 
             </p>
             <p>
-                <label for="firstname">First Name : </label>
-                <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/>
+                <label for="industry">Industry : </label>
+                <input type="text" name="industry" id="industry" placeholder={`${actualActualData.industry}* - industry`} value={formData.industry} onChange={handleChange} className={getInputClass('industry')}/>
             </p>
 
             <p>
-                <label for="lastname">Last Name : </label>
-                <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange} className={getInputClass('lastname')}/>
+                <label for="employeesCount">Employees Count : </label>
+                <input type="text" name="employeesCount" id="employeesCount" placeholder={`${actualActualData.employeesCount} * - Employees Count`} value={formData.employeesCount} onChange={handleChange} className={getInputClass('employeesCount')}/>
             </p>
 
             <p>
                 <label for="email">Email : </label>
-                <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')}/>
+                <input type="email" name="email" id="email" placeholder={`${actualActualData.email} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')}/>
             </p>
 
             <p>
                 <label for="mobile">Mobile : </label>
-                <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
-            </p>
-            
-            <p>
-                <label for="date">closing Date : </label>
-                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange}/>
+                <input type="tel" name="mobile" id="mobile" placeholder={`${actualActualData.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
             </p>
 
             <p>
                 <label for="companyName">Company Name : </label>
-                <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange} />
+                <input type="text" name="companyName" id="companyName" placeholder={`${actualActualData.companyName} - Company Name`} value={formData.companyName} onChange={handleChange} />
             </p>
 
             <p>
                 <label for="annualrevenue">Annual Revenue : </label>
-                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
+                <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${actualActualData.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
             </p>
             <p>
                 <label for="gender">Gender : </label>
-                <input type="text" name="gender" id="gender" placeholder={`${lead.gender} - Gender`} value={formData.gender} onChange={handleChange}/>
+                <input type="text" name="gender" id="gender" placeholder={`${actualActualData.gender} - Gender`} value={formData.gender} onChange={handleChange}/>
             </p>
             <p>
                 <label for="area">Area : </label>
-                <input type="text" name="area" id="area" placeholder={`${lead.area} - Area`} value={formData.area} onChange={handleChange}/>
+                <input type="text" name="area" id="area" placeholder={`${actualActualData.area} - Area`} value={formData.area} onChange={handleChange}/>
             </p>
             <p>
                 <label for="pincode">Pincode : </label>
-                <input type="number" name="pincode" id="pincode" placeholder={`${lead.pincode} - Pincode`} value={formData.pincode} onChange={handleChange}/>
+                <input type="number" name="pincode" id="pincode" placeholder={`${actualActualData.pincode} - Pincode`} value={formData.pincode} onChange={handleChange}/>
             </p>
             <p>
                 <label for="state">state : </label>
-                <input type="text" name="state" id="state" placeholder={`${lead.state} - Pincode`} value={formData.state} onChange={handleChange}/>
+                <input type="text" name="state" id="state" placeholder={`${actualActualData.state} - Pincode`} value={formData.state} onChange={handleChange}/>
             </p>
             <p>
                 <label for="country">Country : </label>
-                <input type="text" name="country" id="country" placeholder={`${lead.country} - Country`}value={formData.country} onChange={handleChange}/>
+                <input type="text" name="country" id="country" placeholder={`${actualActualData.country} - Country`}value={formData.country} onChange={handleChange}/>
             </p>  
             <p>
                 <label for="expectedAmount">Expected Amount : </label>
-                <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${lead.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange}/>
+                <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${actualActualData.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange}/>
             </p>
             <p>
                 <label for="website">Websites : </label>
-                <input type="url" name="website" id="website" placeholder={`${lead.website} - Websites`} value={formData.website} onChange={handleChange}/>
+                <input type="url" name="website" id="website" placeholder={`${actualActualData.website} - Websites`} value={formData.website} onChange={handleChange}/>
             </p>
             <p>
                 <label for="description">Description : </label>
-                <textarea name="description" id="description" placeholder={`${lead.description}- Description`} value={formData.description}  onChange={handleChange}/>
+                <textarea name="description" id="description" placeholder={`${actualActualData.description}- Description`} value={formData.description}  onChange={handleChange}/>
             </p> 
          </form>
         </Row>
@@ -279,4 +247,4 @@ const DetailEditForm = () => {
   )
 }
 
-export default DetailEditForm
+export default AccountEditForm

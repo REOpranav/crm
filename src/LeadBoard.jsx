@@ -171,7 +171,7 @@ const LeadBoard = () => {
                 if (err.response) {
                   message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
                 } else if (err.request) {
-                  message.error('Error: No response   from server.');
+                  message.error('Error: No response from server.');
                 } else {
                   message.error('Error: ' + err.message);
                 }

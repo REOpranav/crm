@@ -10,7 +10,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
   
   const fetching = async()=>{
     try {
-        const responce = await axios.get(`http://localhost:3000/deal`)                         
+        const responce = await axios.get(`http://localhost:3000/deals`)                         
             if (responce.status === 200) {
               setDealData(await responce.data)
             }
@@ -39,7 +39,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
         title: 'Deal Name',
         dataIndex: 'dealName',
         key: 'dealName',
-        render : (value,records) => <Link to={`/deal/detail/${records.id}`}> {value} </Link>
+        render : (value,records) => <Link to={`/deals/detail/${records.id}`}> {records.dealName} </Link>
       },
       {
         title: 'Deal Owner',
@@ -83,6 +83,8 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
 
     const filterParticularDeal = dealData.filter((values)=>{
       if (values.id === id) {
+        console.log(values);
+        
         return values
       }
     })

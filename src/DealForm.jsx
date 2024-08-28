@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Row ,message ,Button , Flex, Popconfirm,Typography} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
@@ -18,23 +18,23 @@ const DealForm = () => {
     const navigation = useNavigate() //this is for navigation   
     const [errors,setError] = useState('')
     const [key,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
+    const [accountData,setAccountData] = useState([])
+    const [selectedValue,setSelectedValue] = useState('')
 
-      // this is for finding the name fron pathname to send  post request in that URL
-    const URL = window.location.pathname    
+  // this is for finding the name fron pathname to send  post request in that URL
+    const URL = window.location.pathname
     const splittingURL = URL.split('/')
     const moduleName = splittingURL.filter(e => e).shift()
     const id = URL.split('/').pop()
-
-    console.log(splittingURL[2]);
-    
-
+    const typeOfDealForm = splittingURL[2]
+   
     const [dealdata,setDealData] = useState({
         key : JSON.stringify(key),
-        id : id,
+        id : '',
         dealowner:'',
         dealName : '',
-        accountName:'',
-        amount: '',
+        accountName:  '' ,
+        amount: '', 
         Pipeline:'',
         closingDate:'',
         companyName:'',
@@ -48,7 +48,14 @@ const DealForm = () => {
         website:'',
         description: ''
     })
-  
+
+    useEffect(() => {
+      setDealData(prevDealData => ({
+        ...prevDealData,
+        id: selectedValue ? selectedValue : id 
+      }));
+    }, [selectedValue])
+
     // this is handle chanhge function
     const handleChange = (e)=>{
          const {name,value} = e.target
@@ -61,7 +68,7 @@ const DealForm = () => {
     //this function for get data from form and make post request
     const onFinish = (e)=>{ 
       e.preventDefault()
-          axios.post(`http://localhost:3000/deal`,dealdata)
+          axios.post(`http://localhost:3000/deals`,dealdata)
             .then(res => {
               if (res.status === 201) {
                 messageSuccess();
@@ -82,10 +89,10 @@ const DealForm = () => {
   
     // this for navigation
       function navigate() {
-        if (moduleName == 'account') {
+        if (moduleName == 'accounts') {
           navigation(`/accountdetail/detail/${id}`)
-        }else if (moduleName == "deal") {
-          navigation(`/deal/detail/${id}`)
+        }else if (moduleName == "deals") {
+          navigation(`/deals/detail/${id}`)
         }else{
           navigation(`/contactDetail/detail/${id}`)
         }
@@ -93,40 +100,41 @@ const DealForm = () => {
     
     // This for cancelling form
       function cancelForm() {
-        navigate(`/${moduleName}`)
+        navigation(`/${moduleName}`)
       }
   
     // validation Form
     function validation(leadFormValues) {      
       let errorvalues = {}
       if (!leadFormValues.dealowner.trim()) {
-        errorvalues.dealowner = `${moduleName} Owner is Required`
+         errorvalues.dealowner = `${moduleName} Owner is Required`
       }
   
       if (!leadFormValues.dealName.trim()) {
           errorvalues.dealName = 'Deal Name is Required'
       }
   
-      if (!leadFormValues.contactName.trim()) {
-          errorvalues.accountName = 'Contact Name is Required'
-      }
+    //   if (!leadFormValues.contactName.trim()) {
+    //       errorvalues.accountName = 'Contact Name is Required'
+    //   }
       
-      if (!leadFormValues.closingDate.trim()) {
-          errorvalues.closingDate = 'closing Date is is Required'
-      }
+    //   if (!leadFormValues.closingDate.trim()) {
+    //       errorvalues.closingDate = 'closing Date is is Required'
+    //   }
       
-      if (!leadFormValues.amount.trim()) {
-        errorvalues.amount = 'Amount is Required'
-    }
+    //   if (!leadFormValues.amount.trim()) {
+    //     errorvalues.amount = 'Amount is Required'
+    // }
       
-      if (!leadFormValues.Pipeline.trim()) {
-          errorvalues.Pipeline = 'pipline is Required'
-      }
+    //   if (!leadFormValues.Pipeline.trim()) {
+    //       errorvalues.Pipeline = 'pipline is Required'
+    //   }
       return errorvalues
     }
   
     //checking tthe form fileds are filled or not
     function checkForSubmitting(event) {
+      
       let checkHavingErrorInInputField = Object.keys(validation(dealdata)).length === 0  // if it was greater than 0 that mean not fill the manditory field
       if (checkHavingErrorInInputField) {
          onFinish(event)
@@ -140,6 +148,36 @@ const DealForm = () => {
     function getInputClass(value){
       return errors[value] ? 'inputError' : ''
     }
+
+    // fething account data for look ups
+    const fetching = async()=>{
+      try {
+      const responce = await axios.get(`http://localhost:3000/accounts`)
+        if (responce.status === 200) {
+          setAccountData(await responce.data);            
+        }
+      } catch (err) {
+          if (err.response) {
+              message.error('Error: ' + err.response.status +' - '+ (err.response.data.message || 'Server Error'));
+          } else if (err.request) {
+              message.error('Error: No response from server.');
+          } else {
+              message.error('Error: ' + err.message);
+          }
+      }
+    }
+    
+    // initial fetch function occurs
+    useEffect(()=>{
+      fetching()      
+    },[undefined])    
+    
+    // this navigation for new Account form page 
+    function navigateToAccountForm() {
+        navigation('/accounts/formpage')
+    }
+
+    
   return (
   <div>  
     <Dashboard />
@@ -157,8 +195,11 @@ const DealForm = () => {
         <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
      </Flex>
       <Flex gap="small">
-        <Button type='primary' danger ghost onClick={cancelForm}> Cancel </Button>
-        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
+        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>
+          <Button type='default' danger ghost > Cancel </Button>
+        </Popconfirm>
+
+        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('cancel save')}>
           <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
         </Popconfirm>
       </Flex>
@@ -176,10 +217,16 @@ const DealForm = () => {
                 <input type="text" name="dealName" id="dealName" placeholder="Deal Owner *" value={dealdata.dealName} onChange={handleChange} className={getInputClass('dealName')}/> 
             </p>
 
-            <p>
+            {typeOfDealForm == "organizationForm" && <p>
                 <label for="contactName">Account Name : </label>
-                <input type="text" name="contactName" id="contactName" placeholder="contact Name *" value={dealdata.contactName} onChange={handleChange}  className={getInputClass('contactName')}/> 
-            </p>
+                <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
+                    <option value="" hidden >select Account</option>
+                    {accountData.map((e)=>{
+                      return <option value={e.id} style={{color:'red'}}>{e.accountOwner}</option>
+                    })}
+                    <option value="new Account" onClick={navigateToAccountForm} style={{color:'blue'  }}>Create New Account</option>
+                </select>
+            </p>}
 
             <p>
                 <label for="closingDate">Closing Date : </label>
@@ -201,7 +248,7 @@ const DealForm = () => {
                 <input type="text" name="Pipeline" id="Pipeline" placeholder="Pipeline *" value={dealdata.Pipeline} onChange={handleChange}  className={getInputClass('Pipeline')}/> 
             </p>
 
-            <p> Stage </p>
+            {/* <p> Stage </p>
                 <input type="radio" id="stage1" name="pipeline" value="stage_1" />
                 <label for="stage1">stage 1</label> 
                 
@@ -209,7 +256,7 @@ const DealForm = () => {
                 <label for="stage2">stage 2</label> 
                 
                 <input type="radio" id="stage3" name="pipeline" value="stage_3" />
-                <label for="stage3">stage 3</label>
+                <label for="stage3">stage 3</label> */}
 
             <p>
                 <label for="companyName">company Name : </label>

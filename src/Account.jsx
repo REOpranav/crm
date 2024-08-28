@@ -14,7 +14,7 @@ const Account = () => {
   const [accountData,setAccountData] = useState([]) // store the contact data come from URL 
   const [searching,setSearching] = useState('') // searching input field value
   const [searchBy,setsearchBy] = useState('') // total contact data list
-  const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
+  const [selectedOption,setSelectedOption] = useState('accountOwner') // option fireld
   const [calculateSymbol,setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   
@@ -36,7 +36,7 @@ const Account = () => {
   // this function fetch the datas from URL/contact 
     const fetching = async()=>{  
       try {
-          const responce = await axios.get('http://localhost:3000/account')
+          const responce = await axios.get('http://localhost:3000/accounts')
             if (responce.status === 200) {
               setAccountData(await responce.data);
               setsearchBy(await responce.data)
@@ -58,11 +58,10 @@ const Account = () => {
         let changeTOObject = {
             key : datas.id,
             id:datas.id,
-            firstName : datas.firstname,
-            secondName : datas.lastname,
+            accountOwner : datas.accountOwner,
+            industry	 : datas.industry	,
             emailID : datas.email,
             mobileNumber  : datas.mobile,
-            companyName:datas.companyName,
             annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0,
             gender:datas.gender
         }
@@ -71,7 +70,7 @@ const Account = () => {
 
     const deleteThedata = async()=>{
       try {
-        const URL = `http://localhost:3000/account`
+        const URL = `http://localhost:3000/accounts`
         let deleting ;
         for (const deleteValue of selectedRowKeys) { // this for loop for multi-delete
            deleting =  await axios.delete(`${URL}/${deleteValue}`)        
@@ -99,15 +98,15 @@ const Account = () => {
   // this is column for tabel (antd)
   const column = [
     {
-      title: 'First Name',
-      dataIndex: 'firstName',
-      key: 'firstName',
+      title: 'Account Owner',
+      dataIndex: 'accountOwner',
+      key: 'accountOwner',
       render : (value,record) => <Link to={`/accountdetail/detail/${record.id}`}> {value} </Link>
     },
     {
-      title: 'Second Name',
-      dataIndex: 'secondName',
-      key: 'secondName',
+      title: 'Industry',
+      dataIndex: 'industry',
+      key: 'industry',
     },
     {
       title:'Email Id',
@@ -122,15 +121,10 @@ const Account = () => {
       render : (text,record) => <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'}  onConfirm={() => makeCall(text,record.id)} onCancel={()=>message.error('Canceled call')}> <a> {text} </a> </Popconfirm>  
     },
     {
-      title:'Company Name',
-      dataIndex: 'companyName',
-      key: 'companyName',
-    },    
-    {
       title: 'Annual Revenue',
       dataIndex: 'annualRevenue',
       key: 'annualRevenue',
-    },
+    },  
   ]
 
      // this function is totally for store call log

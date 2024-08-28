@@ -11,7 +11,7 @@ const Deal = () => {
 
   const [dealData,setDealData] = useState([])
   const [searchBy,setSearchBy] = useState('')
-  const [selectedOption, setSelectedOption] = useState('dealName'); // this id for set selection
+  const [selectedOption, setSelectedOption] = useState('dealowner'); // this id for set selection
   const [searching,setSearching] = useState('') // this searching for lead
   const [calculateSymbol,setCalculateSymbol] = useState("equal to")
   const [selectedRowKeys,setselectedRowKeys] = useState([])
@@ -19,7 +19,7 @@ const Deal = () => {
   // this code for initial load and when lead added
   const fetching = async()=>{
       try {
-          const responce = await axios.get('http://localhost:3000/deal')
+          const responce = await axios.get('http://localhost:3000/deals')
 
             if (responce.status === 200) {
                 setDealData(await responce.data);
@@ -43,7 +43,7 @@ const Deal = () => {
     // this is for deleting the leads
     const deleteThedata = async()=>{
       try {
-        const URL = `http://localhost:3000/deal`
+        const URL = `http://localhost:3000/deals`
         let deleting ;
         for (const deleteValue of selectedRowKeys) {
           deleting = await axios.delete(`${URL}/${deleteValue}`)        
@@ -76,8 +76,8 @@ const Deal = () => {
       {
         title: 'Deal Name',
         dataIndex: 'dealName',
-        key: 'dealName',
-        render : (value,records) => <Link to={`./detail/${records.id}`}> {value} </Link>
+        key: 'dealName',        
+        render : (value,records) => <Link to={`./detail/${records.id}`}> {records.dealName} </Link>
       },
       {
         title:'Amount',
@@ -123,8 +123,8 @@ const Deal = () => {
         'lesser than' : (a,b) => a < b,
         'not equal to' : (a,b) => a !== b,
       }
-  
-      const comparisonFn = comparisonFunction[calculateSymbol]      
+      
+      const comparisonFn = comparisonFunction[calculateSymbol]
       const finalValues = comparisonFn(value[selectedOption].toLowerCase(),searching.toString().toLowerCase())
       return finalValues
      })
