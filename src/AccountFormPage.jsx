@@ -134,7 +134,7 @@ const AccountFormPage = () => {
                 </select>
             </Text>
             
-            <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
+            <Link to={'/accounts/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
         </Flex>
         <Flex gap="small">
            <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>  

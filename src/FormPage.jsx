@@ -1,5 +1,5 @@
 import {Row ,message ,Button , Flex, Popconfirm,Typography} from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './Formpage.css'
@@ -17,7 +17,10 @@ const FormPage = () => {
   const navigation = useNavigate() //this is for navigation
   const [errors,setError] = useState('')
   const [id,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
-  
+  const [layoutData,setLayoutData] = useState([]) // this get the layout data
+  const [formLayoutName,setFormLayoutName] = useState([]) // this is layout selected value
+  const layoutField = document.getElementById('customForm') || []
+
   const [formData,setFormData] = useState({
       id : JSON.stringify(id),
       leadowner:'',
@@ -111,8 +114,8 @@ const FormPage = () => {
 
   //checking tthe form fileds are filled or not
   function checkForSubmitting(event) {
-    let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0  // if it was greater than 0 that mean not fill the manditory field
-    if (checkHavingErrorInInputField) {
+    // let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0  // if it was greater than 0 that mean not fill the manditory field
+    if (true) {
        onFinish(event)
      }else{
        setError(validation(formData))
@@ -124,21 +127,50 @@ const FormPage = () => {
     return errors[value] ? 'inputError' : ''
   }
 
-  return (
-  <div>  
+  // this functionf fetch the datas from URL/contact 
+  const fetching = async()=>{
+    try {
+        const responce = await axios.get('http://localhost:3000/formLayout')
+          if (responce.status === 200) {
+            setLayoutData(await responce.data);            
+          }
+       } catch (err) {
+          if (err.response) {
+              message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+          } else if (err.request) {
+              message.error('Error: No response from server.');
+          } else {
+              message.error('Error: ' + err.message);
+          }
+      }
+  }
+
+  useEffect(()=>{
+    fetching()
+  },[undefined]) 
+
+   const filtering = layoutData.filter((e)=>{
+      if (e.id == formLayoutName) {
+          return e
+      }
+    })
+
+ return (
+  
+  <div>
     <Dashboard />
     <Row justify={'space-between'} style={{padding:'10px'}}>
       <Flex gap={"small"} align='center'> 
         <Text style={{fontSize:'16px',color:'grey'}}>
-            <select name="layout" className='PoppinsFont'>
-                <option value="Vadivel">{'vadivel'}</option>
-                <option value="sakthi">{'sakthi'}</option>  
-                <option value="Deepa">{'Deepa'}</option>  
-                <option value="bharath">{'bharath'}</option>  
+            <select name="layout" className='PoppinsFont' value={formLayoutName} onChange={(e) => setFormLayoutName(e.target.value)}>
+                <option value="" selected hidden>select Layout</option>
+                {layoutData.map((e)=>{
+                 return <option value={e.id} >{e.id}</option>
+                })}
             </select>
         </Text>
         
-        <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
+        <Link to={`/${moduleName}/formpage/formlayout`} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
      </Flex>
       <Flex gap="small">
       <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>
@@ -152,6 +184,7 @@ const FormPage = () => {
     </Row>
 
     <Row>
+        {formLayoutName.length === 0 && 
          <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
                 <label for="leadowner"> Owner : </label>
@@ -226,9 +259,24 @@ const FormPage = () => {
             <p>
                 <label for="description">Description : </label>
                 <textarea name="description" id="description" placeholder='Description' value={formData.description}  onChange={handleChange}/>
-            </p>
+            </p> 
 
          </form>
+         } 
+
+         {formLayoutName.length > 0 &&
+          <form onSubmit={checkForSubmitting} className='PoppinsFont' id='customForm'>
+             {filtering.map((e) => {
+                const inputs = e.inputs
+                    layoutField.innerHTML = ''
+                      inputs.forEach((a) => {
+                        layoutField.innerHTML += a;
+                        // set the attribute to store the data 
+                  })
+                })
+              }
+          </form>
+         }
     </Row>
     </div>
   )

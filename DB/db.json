@@ -18,6 +18,25 @@
       "expectedAmount": "150000",
       "website": "https://biotechsolutions.in",
       "description": "Innovative solutions in biotechnology."
+    },
+    {
+      "id": "237157838",
+      "leadowner": "pranavaavddek ",
+      "firstname": "sin",
+      "lastname": "kdc",
+      "email": "kcdk",
+      "mobile": "9876678987",
+      "date": "2024-08-29",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "contacts": [
@@ -428,7 +447,6 @@
       "date": "August 28th 2024, 12:19:37 pm"
     }
   ],
-  
   "formLayout": [
     {
       "id": "sundhar",
@@ -449,9 +467,22 @@
     {
       "id": "sakthivel",
       "inputs": [
-        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>"
+      ]
+    },
+    {
+      "id": "kumar",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>",
+        "<p draggable=\"true\"><label for=\"area\">Area : </label><input type=\"text\" name=\"area\" id=\"area\" placeholder=\"Area\"></p>"
+      ]
+    },
+    {
+      "id": "pranav",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"state\">State : </label><input type=\"text\" name=\"state\" id=\"state\" placeholder=\"State\"></p>",
         "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>",
-        "<p draggable=\"true\"><label for=\"country\">Country : </label><input type=\"text\" name=\"country\" id=\"country\" placeholder=\"Country\"></p>"
+        "<p draggable=\"true\"><label for=\"expectedAmount\">Expected Amount : </label><input type=\"text\" name=\"expectedAmount\" id=\"expectedAmount\" placeholder=\"Expected Amount\"></p>"
       ]
     }
   ]

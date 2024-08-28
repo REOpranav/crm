@@ -34,7 +34,9 @@ function App() {
           <Route path='/contactDetail/detail/:id' element={<ContactDetail/>} />
           <Route path='/leads/detail/leadeditform/:id' element={<DetailEditForm />} />
           <Route path='/contacts/contactDetail/contactEditForm/:id' element={<DetailEditForm />} />
-          <Route path='/formpage/formlayout' element={<FormLayout/>} />
+          <Route path='/leads/formpage/formlayout' element={<FormLayout/>} />
+          <Route path='/contacts/formpage/formlayout' element={<FormLayout/>} />
+          <Route path='/accounts/formpage/formlayout' element={<FormLayout/>} />
           <Route path='/accountdetail/detail/:id' element={<AccountDetail />} />
           <Route path='/accounts/accountDetail/accountEditForm/:id' element={<AccountEditForm />} />
           <Route path='/contacts/dealForm/:id' element={<DealForm />} />

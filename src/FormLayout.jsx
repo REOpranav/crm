@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { json, Link } from 'react-router-dom'
+import { json, Link, useNavigate } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import { Row ,Button,Typography,Col,Flex,message} from 'antd'
 import { useState } from 'react'
@@ -12,6 +12,7 @@ import axios from 'axios'
   }
 
 const FormLayout = () => {
+    const navigation = useNavigate() //this is for navigation   
     const {Text} = Typography
     const [layoutName,setlayoutName] = useState("")
     const [formData,setFormData] = useState([])
@@ -20,6 +21,12 @@ const FormLayout = () => {
         inputs : []
     })
 
+    const URL = window.location.pathname
+    const splittingURL = URL.split('/')
+    const moduleName = splittingURL.filter(e => e).shift()
+
+
+    // this is drag and drop codes
     useEffect(()=>{
         const formID = document.getElementById('pasteForm') 
         const form = document.getElementById('form')
@@ -52,13 +59,13 @@ const FormLayout = () => {
             })
     },[undefined])
         
- useEffect(()=>{
-    let totalInputs = []
-        for (const a of formData) {
-            totalInputs.push(a.outerHTML)
-        }
-        setFinalFormData({id : layoutName , inputs : totalInputs})
- },undefined)
+    useEffect(()=>{
+        let totalInputs = []
+            for (const a of formData) {
+                totalInputs.push(a.outerHTML)
+            }
+            setFinalFormData({id : layoutName , inputs : totalInputs})
+    },undefined)
     
     const onFinish = (e)=>{ 
         e.preventDefault()
@@ -67,6 +74,7 @@ const FormLayout = () => {
                 if (res.status == 201) {
                   messageSuccess();
                 }
+            
             }).catch(err => {
               if (err.response) {
                 message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
@@ -76,6 +84,18 @@ const FormLayout = () => {
                 message.error('Error: ' + err.message);
               }
           })
+          setTimeout(()=>{
+            navigate()
+        },1 * 100) 
+      }
+
+    // this for navigation
+      function navigate() {
+        if (moduleName == 'leads') {
+          navigation(`/leads/formpage`)
+        }else if (moduleName == "deals") {
+          navigation(`/deals/detail/`)
+        }
       }
 
   return (
