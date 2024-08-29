@@ -20,6 +20,7 @@ const FormPage = () => {
   const [layoutData,setLayoutData] = useState([]) // this get the layout data
   const [formLayoutName,setFormLayoutName] = useState([]) // this is layout selected value
   const layoutField = document.getElementById('customForm') || []
+  const [filtering,setFilteing] = useState([])
 
   const [formData,setFormData] = useState({
       id : JSON.stringify(id),
@@ -57,6 +58,12 @@ const FormPage = () => {
   //this function for get data from form and make post request
   const onFinish = (e)=>{ 
     e.preventDefault()
+    console.log(formData);
+    setTimeout(()=>{
+      navigate()
+  },1 * 100) 
+    return 
+    
         axios.post(`http://localhost:3000/${moduleName}`,formData)
           .then(res => {
             if (res.status === 201) {
@@ -149,11 +156,13 @@ const FormPage = () => {
     fetching()
   },[undefined]) 
 
-   const filtering = layoutData.filter((e)=>{
+  useEffect(()=>{
+      layoutData.filter((e)=>{
       if (e.id == formLayoutName) {
-          return e
+        setFilteing([e]) // sending the object like a array
       }
     })
+  },[formLayoutName,undefined])
 
  return (
   
@@ -269,12 +278,14 @@ const FormPage = () => {
              {filtering.map((e) => {
                 const inputs = e.inputs
                     layoutField.innerHTML = ''
-                      inputs.forEach((a) => {
-                        layoutField.innerHTML += a;
-                        // set the attribute to store the data 
+                        inputs.forEach((a) => {                                                
+                        layoutField.innerHTML += a
+                        const key = layoutField.firstChild.lastChild.name
+                        layoutField.setAttribute('value',`${formData[key]}`)                           
+                        layoutField.onchange = handleChange                        
                   })
                 })
-              }
+            }
           </form>
          }
     </Row>
