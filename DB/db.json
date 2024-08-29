@@ -445,6 +445,14 @@
     {
       "id": "72351313",
       "date": "August 28th 2024, 12:19:37 pm"
+    },
+    {
+      "id": "100020",
+      "date": "August 29th 2024, 10:17:55 am"
+    },
+    {
+      "id": "100020",
+      "date": "August 29th 2024, 10:17:57 am"
     }
   ],
   "formLayout": [
@@ -483,6 +491,13 @@
         "<p draggable=\"true\"><label for=\"state\">State : </label><input type=\"text\" name=\"state\" id=\"state\" placeholder=\"State\"></p>",
         "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>",
         "<p draggable=\"true\"><label for=\"expectedAmount\">Expected Amount : </label><input type=\"text\" name=\"expectedAmount\" id=\"expectedAmount\" placeholder=\"Expected Amount\"></p>"
+      ]
+    },
+    {
+      "id": "chair",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"expectedAmount\">Expected Amount : </label><input type=\"text\" name=\"expectedAmount\" id=\"expectedAmount\" placeholder=\"Expected Amount\"></p>",
+        "<p draggable=\"true\"><label for=\"pincode\">Pincode : </label><input type=\"number\" name=\"pincode\" id=\"pincode\" placeholder=\"Pincode\"></p>"
       ]
     }
   ]

@@ -5,6 +5,7 @@ import { Row ,Button,Typography,Col,Flex,message} from 'antd'
 import { useState } from 'react'
 import './FormLayout.css';
 import axios from 'axios'
+import './LeadEditForm.css'
 
  // this is message ele from antd
  function messageSuccess(){
@@ -66,11 +67,32 @@ const FormLayout = () => {
             }
             setFinalFormData({id : layoutName , inputs : totalInputs})
     },undefined)
-    
+
     const onFinish = (e)=>{ 
         e.preventDefault()
+        formHandle() // this is form handling and posting the data
+      }
+
+    const formHandle = ()=>{
+        const layoutLable = document.querySelector('#layoutName')
+        if (layoutLable.value == '') {
+            setError(layoutLable)
+        }else{
+            setSuccess(layoutLable)
+        }
+    }
+
+    function setError(element) {
+        let parentAccess = element.parentElement
+            parentAccess.firstElementChild.className = 'inputError'
+    }
+
+    function setSuccess(element) {
+        let parentAccess = element.parentElement
+            parentAccess.firstElementChild.className = ''
+
         axios.post('http://localhost:3000/formLayout',finalFormData)
-              .then(res => {
+             .then(res => {
                 if (res.status == 201) {
                   messageSuccess();
                 }
@@ -84,17 +106,18 @@ const FormLayout = () => {
                 message.error('Error: ' + err.message);
               }
           })
+          
           setTimeout(()=>{
             navigate()
-        },1 * 100) 
-      }
+          },1 * 100)
+    }
 
     // this for navigation
       function navigate() {
         if (moduleName == 'leads') {
           navigation(`/leads/formpage`)
-        }else if (moduleName == "deals") {
-          navigation(`/deals/detail/`)
+        }else if (moduleName == "contacts") {
+          navigation(`/contacts/formpage`)
         }
       }
 
@@ -102,10 +125,13 @@ const FormLayout = () => {
     <div > 
        <Dashboard />
        <Row justify={'space-between'} style={{padding:'10px'}}>
-            <input type="text" placeholder='Layout Name' style={{backgroundColor:'transparent',border:'none',outline:'none',fontSize:'16px',width:'20%',color:'grey'}} value={layoutName} onChange={(e) => setlayoutName(e.target.value)}/>
+                <div id='layoutNameSubmit'>
+                    <input type="text" id='layoutName' placeholder='Layout Name' value={layoutName} onChange={(e) => setlayoutName(e.target.value)} /> <br />
+                    <span></span>
+                </div>
             <Flex gap={'small'}>
-                <Link to={'/formpage'}><Button type='default'>Back one step</Button></Link>
-                <Button type='primary' onClick={onFinish}>Save Page Layout</Button>
+                <Link to={`/${moduleName}/formpage`}><Button type='default'>Back one step</Button></Link>
+                <Button type='primary' onClick={onFinish}>Save My Form</Button>
             </Flex>
         </Row>
 

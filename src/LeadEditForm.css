@@ -38,9 +38,16 @@ form {
     border-color: #007bff;
     outline: none;
   }
-    
-  .error {
-    color: #ff0000;
-    font-size: 14px;
+  
+  #layoutName{
+    background-color: transparent;
+    border:'none';
+    outline:'none';
+    font-size:'16px';
+    color:'grey'
   }
   
+  .error {
+    color: #ff0000;
+    font-size: 12px;
+  }

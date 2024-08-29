@@ -1,57 +1,8 @@
-/* form {
-    min-width:80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-   
-p{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-  
-  label {
-    display: block;
-    font-weight: bold;
-    display: flex;
+  #layoutName{
+     border-bottom: 1px solid red;
   }
 
-  input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  input[type="date"] {
-    width: 80%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  p:hover>input{
-      background-color: aliceblue;
-  }
-
-  input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-    
   .error {
-    color: #ff0000;
-    font-size: 14px;
+    color: red;
+    font-size:small;
   }
-  
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  ::-webkit-scrollbar-button{
-    color: #ff0000;
-  } */
