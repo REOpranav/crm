@@ -29,11 +29,7 @@
       box-sizing: border-box;
     } 
 
-    p span{
-      border: 1px solid black;
-    }
-
-    input[type="date"] {
+    input[type="date"],input[type="time"]{
       width: 80%;
       padding: 8px;
       border: 1px solid #ddd;

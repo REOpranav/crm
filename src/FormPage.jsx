@@ -58,12 +58,6 @@ const FormPage = () => {
   //this function for get data from form and make post request
   const onFinish = (e)=>{ 
     e.preventDefault()
-    console.log(formData);
-    setTimeout(()=>{
-      navigate()
-  },1 * 100) 
-    return 
-    
         axios.post(`http://localhost:3000/${moduleName}`,formData)
           .then(res => {
             if (res.status === 201) {

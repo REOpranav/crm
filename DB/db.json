@@ -176,24 +176,6 @@
   ],
   "accounts": [
     {
-      "id": "776839841",
-      "accountOwner": "pranaav",
-      "industry": "simple",
-      "employeesCount": "10000",
-      "annualrevenue": "29999",
-      "mobile": "0933838938",
-      "email": "some@gmail.com",
-      "date": "",
-      "companyName": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "website": "",
-      "description": ""
-    },
-    {
       "id": "331083644",
       "accountOwner": "velu loganathan",
       "industry": "revenueFlow",
@@ -230,7 +212,28 @@
       "description": ""
     }
   ],
-  "deals": [],
+  "deals": [
+    {
+      "id": "100012",
+      "key": "910256350",
+      "dealowner": "pranavavadivel",
+      "dealName": "vadivel sales process",
+      "accountName": "",
+      "amount": "100000",
+      "Pipeline": "standard",
+      "closingDate": "2024-09-03",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "20000",
+      "website": "",
+      "description": ""
+    }
+  ],
   "callLogs": [
     {
       "id": "789012335",
@@ -315,6 +318,10 @@
     {
       "id": "72351313",
       "date": "August 28th 2024, 12:19:33 pm"
+    },
+    {
+      "id": "100019",
+      "date": "August 31st 2024, 5:12:01 pm"
     }
   ],
   "emailLogs": [
@@ -453,6 +460,14 @@
     {
       "id": "100020",
       "date": "August 29th 2024, 10:17:57 am"
+    },
+    {
+      "id": "100019",
+      "date": "August 31st 2024, 5:12:08 pm"
+    },
+    {
+      "id": "776839841",
+      "date": "August 31st 2024, 5:18:18 pm"
     }
   ],
   "formLayout": [
@@ -498,6 +513,15 @@
       "inputs": [
         "<p draggable=\"true\"><label for=\"expectedAmount\">Expected Amount : </label><input type=\"text\" name=\"expectedAmount\" id=\"expectedAmount\" placeholder=\"Expected Amount\"></p>",
         "<p draggable=\"true\"><label for=\"pincode\">Pincode : </label><input type=\"number\" name=\"pincode\" id=\"pincode\" placeholder=\"Pincode\"></p>"
+      ]
+    },
+    {
+      "id": "sri venkata reddy",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"pincode\">Pincode : </label><input type=\"number\" name=\"pincode\" id=\"pincode\" placeholder=\"Pincode\"></p>",
+        "<p draggable=\"true\"><label for=\"website\">Website : </label><input type=\"url\" name=\"website\" id=\"website\" placeholder=\"Website\"></p>",
+        "<p draggable=\"true\"><label for=\"description\">Description : </label><textarea name=\"description\" id=\"description\" placeholder=\"Description\"></textarea></p>"
       ]
     }
   ]

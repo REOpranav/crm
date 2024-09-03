@@ -173,10 +173,8 @@ const ContactDetail = () => {
                 <Flex gap={'small'}>
                    {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
 
-                   <Button type='primary'>
-                        <Link to={'/contacts'}>Back to Contact</Link> 
-                    </Button>
-                    
+                    <Link to={'./ScheduleMeeting'}><Button type='primary'>Schedule Meeting</Button></Link>  
+
                     <Dropdown menu={{items}} placement='bottomCenter'>
                         <Button type='default'>Create Deal</Button>  
                     </Dropdown>
@@ -187,6 +185,10 @@ const ContactDetail = () => {
 
                     <Button type='default'>
                         <Link to={`/contacts/contactDetail/contactEditForm/${id}`}>Edit contact</Link> 
+                    </Button>
+
+                    <Button type='primary'>
+                        <Link to={'/contacts'}>Back to Contact</Link> 
                     </Button>
                 
                 </Flex>
