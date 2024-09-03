@@ -56,7 +56,7 @@ const FormPage = () => {
   const moduleName = URL.split('/').filter(e => e).shift()
 
   //this function for get data from form and make post request
-  const onFinish = (e)=>{ 
+  const onFinish = (e)=>{
     e.preventDefault()
         axios.post(`http://localhost:3000/${moduleName}`,formData)
           .then(res => {
@@ -115,8 +115,8 @@ const FormPage = () => {
 
   //checking tthe form fileds are filled or not
   function checkForSubmitting(event) {
-    // let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0  // if it was greater than 0 that mean not fill the manditory field
-    if (true) {
+    let checkHavingErrorInInputField = Object.keys(validation(formData)).length === 0  // if it was greater than 0 that mean not fill the manditory field
+    if (checkHavingErrorInInputField) {
        onFinish(event)
      }else{
        setError(validation(formData))
@@ -125,7 +125,7 @@ const FormPage = () => {
   }
 
   function getInputClass(value){
-    return errors[value] ? 'inputError' : ''
+    return errors[value] ? 'inputError' : 'errorClear'
   }
 
   // this functionf fetch the datas from URL/contact 

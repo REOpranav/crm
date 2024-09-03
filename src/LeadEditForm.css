@@ -26,10 +26,10 @@ form {
   input[type="number"] {
     width: 80%;
     padding: 8px;
-    border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
   }
+
   
   input[type="text"]:focus,
   input[type="email"]:focus,
@@ -50,4 +50,22 @@ form {
   .error {
     color: #ff0000;
     font-size: 12px;
+  }
+
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+    
+  .inputError::placeholder {
+    color: #ff0000;
+    font-size: 14px;
+  }
+
+  .inputError {
+    border: 1px solid red;
+  }
+
+  .errorClear,input,textarea{
+    border: 1px solid #ddd;
   }

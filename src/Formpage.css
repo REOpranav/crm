@@ -22,17 +22,21 @@
     }
 
     input {
-      /* width: 100%; */
       padding: 8px;
-      border: 1px solid #ddd;
       border-radius: 4px;
       box-sizing: border-box;
     } 
 
-    input[type="date"],input[type="time"]{
+    input[type="time"]{
       width: 80%;
       padding: 8px;
-      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="date"]{
+      width: 80%;
+      padding: 8px;
       border-radius: 4px;
       box-sizing: border-box;
     }
@@ -49,4 +53,12 @@
     .inputError::placeholder {
       color: #ff0000;
       font-size: 14px;
+    }
+
+    .inputError {
+      border: 1px solid red;
+    }
+
+    .errorClear{
+      border: 1px solid #ddd;
     }

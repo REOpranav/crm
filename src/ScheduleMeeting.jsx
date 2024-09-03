@@ -11,8 +11,14 @@ import Dashboard from './Dashboard'
 
 const ScheduleMeeting = () => {
     const {Text,Title} = Typography
-    const [meetingData,setMeetingData] = useState({})
     const [error,setError] = useState({})
+    const [meetingData,setMeetingData] = useState({
+        title : '',
+        meetingType : '',
+        date : '',
+        time : '',
+        host : ''
+    })
   
     // this is handle chanhge function
     const handleChange = (e)=>{
@@ -24,15 +30,20 @@ const ScheduleMeeting = () => {
     }
   
     // validation Form
-    function validation(leadFormValues) {
+    function validation(meetingData) {
       let errorvalues = {}
-      if (!leadFormValues.accountOwner.trim()) {
-          errorvalues.accountOwner = 'Account Name is Required'
+      if (!meetingData.title.trim()) {
+          errorvalues.title = 'Account Name is Required'
       }
   
-      if (!leadFormValues.mobile.trim()) {
-          errorvalues.mobile = 'Mobile Number is Required'
+      if (!meetingData.meetingType.trim()) {
+          errorvalues.meetingType = 'Meeting Type is Required'
       }
+
+      if (!meetingData.date.trim()) {
+        errorvalues.date = 'Date is Required'
+      }
+
       return errorvalues
     }
   
@@ -40,10 +51,10 @@ const ScheduleMeeting = () => {
     function checkForSubmitting(e) {
         let checkHavingErrorInInputField = Object.keys(validation(meetingData)).length === 0 // if it was greater than 0 that mean not fill the manditory field
         if (checkHavingErrorInInputField) {
-        onFinish(e)
+            onFinish(e)
         }else{            
-        setError(validation(meetingData))
-        message.error('Fill the Manditory Form Fields')
+            setError(validation(meetingData))
+            message.error('Fill the Manditory Form Fields')
         }
     }
 
@@ -51,10 +62,11 @@ const ScheduleMeeting = () => {
   // this code for patch work (onlu this problem)
   const onFinish = (e) => {
     e.preventDefault();
+
   };
 
   function getInputClass(value){            
-    return error[value] ? 'inputError' : ''
+    return error[value] ? 'inputError' : 'errorClear'
   }
 
   return (
@@ -67,12 +79,12 @@ const ScheduleMeeting = () => {
           <form onSubmit={checkForSubmitting}>
             <p>
                 <label for="title">Title : </label>
-                <input type="text" name="" id="title" placeholder={`TItle *`} value={meetingData.title} onChange={handleChange} className={getInputClass('accountOwner')}/> 
+                <input type="text" name="title" id="title" placeholder={`TItle *`} value={meetingData.title} onChange={handleChange} className={getInputClass('title')}/> 
             </p>
             
             <p>
                 <label for="meetingType">Meeting Type : </label>
-                <input type="text" name="industry" id="industry" placeholder={`Meeting Type *`} value={meetingData.meetingType} onChange={handleChange} className={getInputClass('industry')}/>
+                <input type="text" name="meetingType" id="meetingType" placeholder={`Meeting Type *`} value={meetingData.meetingType} onChange={handleChange} className={getInputClass('meetingType')}/>
             </p>
 
             <p>
@@ -94,6 +106,8 @@ const ScheduleMeeting = () => {
                 <label for="description">Agenda:</label>
                 <textarea name="description" id="description" placeholder='Agenda' onChange={handleChange}/> 
             </p>
+
+            <Button type='primary' onClick={checkForSubmitting}>Submit</Button>
         </form>
       </Row>
     </div>
