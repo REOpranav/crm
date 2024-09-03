@@ -173,7 +173,7 @@ const ContactDetail = () => {
                 <Flex gap={'small'}>
                    {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
 
-                    <Link to={'./ScheduleMeeting'}><Button type='primary'>Schedule Meeting</Button></Link>  
+                    <Button type='primary'>Schedule Meeting </Button>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
                         <Button type='default'>Create Deal</Button>  

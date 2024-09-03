@@ -2,9 +2,12 @@ import React, { useState, useEffect, useDebugValue } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
 import {message,Row,Table, Space,Typography, Popconfirm, Button, Col} from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useAsyncError, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
 import moment from 'moment'
+
+const urlSearch = new URLSearchParams(window.location.search)
+const Authcode = urlSearch.get('code')
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -17,6 +20,7 @@ const Contact = () => {
   const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
   const [calculateSymbol,setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [meetingAccessToken,setMeetingAccessToken] = useState([])
   
   const filter = contactData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction  = {  // this object for finiding the === object
@@ -213,6 +217,50 @@ const Contact = () => {
     navigate('./formpage')
   }
 
+  // this useeffect for load thr access token function when code is available in url 
+  useEffect(()=>{    
+    if (Authcode !== null) {
+      accessToken()   
+    }
+  },[]) 
+
+  // this function is getting the access token
+  const accessToken = async()=>{    
+    let accessTokenParams = {
+      code : Authcode,
+      client_id :process.env.REACT_APP_CLIENT_ID,
+      client_secret :process.env.REACT_APP_SECRET_ID,
+      redirect_uri :process.env.REACT_APP_REDIRECT_URI,
+      grant_type : 'authorization_code'
+    }
+    
+    try {
+       const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`,accessTokenParams) // this line send the request to node (server.js)
+  
+       if (accessTokenResponce.request.response === '{"error":"invalid_code"}') {
+          message.info('Authorization Code is Expired')
+       }
+       setMeetingAccessToken(accessTokenResponce.data)
+
+       if (meetingAccessToken) {        
+          message.success('Access token getted')
+       }
+
+       setTimeout(() => {
+         navigate('/contacts') // this is for getting out of that section
+       }, 100);
+
+    } catch (err) {
+      if (err.response) {
+            message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+            message.error('Error: No response   from server.');
+      } else {
+            message.error('Error: ' + err.message);
+      }
+    }
+  }
+  
   return (
     <div>
         <Dashboard />
@@ -224,6 +272,7 @@ const Contact = () => {
               {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
               <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol}/>
+              <Link to={`./ScheduleMeeting`}> <Button type='primary'>Make Zoho Meeting</Button> </Link>  
               <Button type='primary' id='themeColor' onClick={formNavigate}>Create Contact</Button>
           </Space>
         </Row>

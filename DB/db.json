@@ -523,6 +523,14 @@
         "<p draggable=\"true\"><label for=\"website\">Website : </label><input type=\"url\" name=\"website\" id=\"website\" placeholder=\"Website\"></p>",
         "<p draggable=\"true\"><label for=\"description\">Description : </label><textarea name=\"description\" id=\"description\" placeholder=\"Description\"></textarea></p>"
       ]
+    },
+    {
+      "id": "water snandy",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>",
+        "<p draggable=\"true\"><label for=\"area\">Area : </label><input type=\"text\" name=\"area\" id=\"area\" placeholder=\"Area\"></p>"
+      ]
     }
   ]
 }

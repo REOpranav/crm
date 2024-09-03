@@ -18,8 +18,7 @@ import AccountFormPage from './AccountFormPage';
 import AccountEditForm from './AccountEditForm';
 import ScheduleMeeting from './ScheduleMeeting';
 
-function App() {
-  
+function App() {  
   return (
     <div className="App">
         <Routes>
@@ -47,7 +46,7 @@ function App() {
           <Route path='/deals/detail/:id' element={<DealDetail />} />
           <Route path='/contacts/individualForm/:id' element={<DealForm />} />
           <Route path='/contacts/organizationForm/:id' element={<DealForm />} />
-          <Route path='/contactDetail/detail/:id/ScheduleMeeting' element={<ScheduleMeeting/>} />
+          <Route path='/contacts/ScheduleMeeting/' element={<ScheduleMeeting />} />
 
         </Routes>
     </div>

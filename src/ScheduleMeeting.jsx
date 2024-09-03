@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import {message,Typography,Row,Col,Flex,Button,Dropdown,Popconfirm} from 'antd'
+import {message,Typography,Row,Col,Flex,Button,Dropdown,Popconfirm, Space} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
 
 // this is message ele from antd
  function messageSuccess(value){  
-    message.success(`Sucessfully Update the ${value.firstname} Lead Datas`)
+    message.success(`Meeting was Scheduled`)
  }
 
+// this is for get the current id
+  const URL = window.location.href
+  const id = URL.split('/').pop()
+ 
 const ScheduleMeeting = () => {
     const {Text,Title} = Typography
     const [error,setError] = useState({})
@@ -52,22 +56,45 @@ const ScheduleMeeting = () => {
         let checkHavingErrorInInputField = Object.keys(validation(meetingData)).length === 0 // if it was greater than 0 that mean not fill the manditory field
         if (checkHavingErrorInInputField) {
             onFinish(e)
-        }else{            
+        }else{
             setError(validation(meetingData))
             message.error('Fill the Manditory Form Fields')
         }
     }
 
-    
-  // this code for patch work (onlu this problem)
-  const onFinish = (e) => {
-    e.preventDefault();
+    // this is reset button function
+    function resetClicked(){
+      setMeetingData({
+        title : '',
+        meetingType : '',
+        date : '',
+        time : '',
+        host : ''
+      })
+    }
 
-  };
+    // this code for patch work (onlu this problem)
+    const onFinish = (e) => {
+      e.preventDefault();
+      AuthorizationGrantCode()
+      messageSuccess()
+    };
 
-  function getInputClass(value){            
-    return error[value] ? 'inputError' : 'errorClear'
-  }
+    function getInputClass(value){
+      return error[value] 
+    }
+
+
+    const AuthorizationGrantCode = async()=>{
+      const paramsData = {
+        scope :'ZohoMeeting.meeting.READ',
+        client_id :process.env.REACT_APP_CLIENT_ID,
+        response_type:'code',
+        redirect_uri :process.env.REACT_APP_REDIRECT_URI,
+        access_type : 'offline'
+      }
+        window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
+    }
 
   return (
     <div>
@@ -79,27 +106,27 @@ const ScheduleMeeting = () => {
           <form onSubmit={checkForSubmitting}>
             <p>
                 <label for="title">Title : </label>
-                <input type="text" name="title" id="title" placeholder={`TItle *`} value={meetingData.title} onChange={handleChange} className={getInputClass('title')}/> 
+                <input type="text" name="title" id="title" placeholder={`TItle *`} value={meetingData.title} onChange={handleChange} className={getInputClass('title') ? "inputError" : 'errorClear'}/> 
             </p>
             
             <p>
                 <label for="meetingType">Meeting Type : </label>
-                <input type="text" name="meetingType" id="meetingType" placeholder={`Meeting Type *`} value={meetingData.meetingType} onChange={handleChange} className={getInputClass('meetingType')}/>
+                <input type="text" name="meetingType" id="meetingType" placeholder={`Meeting Type *`} value={meetingData.meetingType} onChange={handleChange} className={getInputClass('meetingType') ? "inputError" : 'errorClear'}/>
             </p>
 
             <p>
                 <label for="Date">Date : </label>
-                <input type="date" name="date" id="date" placeholder={`Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('date')}/>
+                <input type="date" name="date" id="date" placeholder={`Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('date') ? "inputError" : 'errorClear'}/>
             </p>
 
             <p>
                 <label for="time">Time : </label>
-                <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time')}/>
+                <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}/>
             </p>
 
             <p>
                 <label for="host">Host :</label>
-                <input type="text" name="host" id="host" placeholder={`Host`} value={meetingData.host} onChange={handleChange} className={getInputClass('host')} />
+                <input type="text" name="host" id="host" placeholder={`Host`} value={meetingData.host} onChange={handleChange} className={getInputClass('host') ? "inputError" : 'errorClear'} />
             </p>
             
             <p>
@@ -107,7 +134,10 @@ const ScheduleMeeting = () => {
                 <textarea name="description" id="description" placeholder='Agenda' onChange={handleChange}/> 
             </p>
 
+          <Space>
+              <Button type='default' danger  onClick={resetClicked}>Reset</Button>
             <Button type='primary' onClick={checkForSubmitting}>Submit</Button>
+          </Space>
         </form>
       </Row>
     </div>
