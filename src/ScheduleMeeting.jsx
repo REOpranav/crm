@@ -4,11 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
 
-// this is message ele from antd
- function messageSuccess(value){  
-    message.success(`Meeting was Scheduled`)
- }
-
 // this is for get the current id
   const URL = window.location.href
   const id = URL.split('/').pop()
@@ -75,33 +70,22 @@ const ScheduleMeeting = () => {
 
     // this code for patch work (onlu this problem)
     const onFinish = (e) => {
-      e.preventDefault();
-      AuthorizationGrantCode()
-      messageSuccess()
-    };
+      e.preventDefault()
+    }
 
     function getInputClass(value){
       return error[value] 
     }
 
-
-    const AuthorizationGrantCode = async()=>{
-      const paramsData = {
-        scope :'ZohoMeeting.meeting.READ',
-        client_id :process.env.REACT_APP_CLIENT_ID,
-        response_type:'code',
-        redirect_uri :process.env.REACT_APP_REDIRECT_URI,
-        access_type : 'offline'
-      }
-        window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
-    }
-
+   
   return (
     <div>
       <Dashboard />
       <Row justify={'center'}>
-          <Title level={3}>Schedule a Meeting</Title>
       </Row>
+
+    
+      <Title level={3}> Schedule a Meeting </Title> 
       <Row>
           <form onSubmit={checkForSubmitting}>
             <p>

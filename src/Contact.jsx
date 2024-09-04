@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useDebugValue } from 'react'
+import React, { useState, useEffect } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
 import {message,Row,Table, Space,Typography, Popconfirm, Button, Col} from 'antd'
@@ -20,8 +20,7 @@ const Contact = () => {
   const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
   const [calculateSymbol,setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  let meetingAccessToken = {}
-  
+    
   const filter = contactData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction  = {  // this object for finiding the === object
       'equal to' : (a,b) => a === b,
@@ -78,7 +77,7 @@ const Contact = () => {
                 if (err.response) {
                   message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
                 } else if (err.request) {
-                  message.error('Error: No response   from server.');
+                  message.error('Error: No response from server.');
                 } else {
                   message.error('Error: ' + err.message);
                 }
@@ -217,15 +216,27 @@ const Contact = () => {
     navigate('./formpage')
   }
 
-  // this useeffect for load thr access token function when code is available in url 
+  // this useeffect for load the access token function when code is available in url 
   useEffect(()=>{    
     if (Authcode !== null) {
-      accessToken()   
+      accessToken()
+      userdefine()
     }
-  },[]) 
+    },[Authcode])
+
+  // this is zoho meeting intergaration functions to store the user detail data
+    const userDeatailAuth = (token)=>{
+      message.success('User Token Retrieved')
+      return sessionStorage.setItem('userdatail',JSON.stringify(token))
+    }
+      
+    const accessTokenData = (token)=>{
+      message.success('Access Token Retrieved')
+      return sessionStorage.setItem('accessToken',JSON.stringify(token))
+    }
 
   // this function is getting the access token
-  const accessToken = async()=>{    
+  const accessToken = async()=>{
     let accessTokenParams = {
       code : Authcode,
       client_id :process.env.REACT_APP_CLIENT_ID,
@@ -235,29 +246,54 @@ const Contact = () => {
     }
     
     try {
-       const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`,accessTokenParams) // this line send the request to node (server.js)
-  
-       if (accessTokenResponce.request.response === '{"error":"invalid_code"}') {
-          message.info('Authorization Code is Expired')
+       const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`,accessTokenParams) // this line send the request to node (server.js)      
+       if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.CREATE') {
+        accessTokenData(accessTokenResponce.data)    
        }
-       meetingAccessToken = accessTokenResponce.data
-       console.log(meetingAccessToken)
 
        setTimeout(() => {
          navigate('/contacts') // this is for getting out of that section
-       }, 400);
+       }, 100);
 
     } catch (err) {
       if (err.response) {
             message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
       } else if (err.request) {
-            message.error('Error: No response   from server.');
+            message.error('Error: No response from server.');
       } else {
             message.error('Error: ' + err.message);
       }
     }
   }
+
+    // this function is getting the user define in zoho meeting
+    const userdefine = async()=>{
+      let accessTokenParams = {
+        code : Authcode,
+        client_id :process.env.REACT_APP_CLIENT_ID,
+        client_secret :process.env.REACT_APP_SECRET_ID,
+        redirect_uri :process.env.REACT_APP_REDIRECT_URI,
+        grant_type : 'authorization_code'
+      }
+
+      try {
+         const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`,accessTokenParams) // this line send the request to node (server.js)      
+         userDeatailAuth(accessTokenResponce.data)
+
+         setTimeout(() => {
+           navigate('/contacts') // this is for getting out of that section
+         }, 100);
+      } catch (err) {
+        console.log(err.message) 
+      }
+    }
   
+  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken'))
+  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail'))
+
+  console.log(meetingUserDetail)
+  console.log(meetingAccessTokenData)
+
   return (
     <div>
         <Dashboard />
@@ -269,7 +305,7 @@ const Contact = () => {
               {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
               <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol}/>
-              <Link to={`./ScheduleMeeting`}> <Button type='primary'>Make Zoho Meeting</Button> </Link>  
+              <Link to={`./meetingStep`}> <Button type='primary'>Make Zoho Meeting</Button> </Link>  
               <Button type='primary' id='themeColor' onClick={formNavigate}>Create Contact</Button>
           </Space>
         </Row>

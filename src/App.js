@@ -17,6 +17,7 @@ import DealDetail from './DealDetail';
 import AccountFormPage from './AccountFormPage';
 import AccountEditForm from './AccountEditForm';
 import ScheduleMeeting from './ScheduleMeeting';
+import MeetingStep from './MeetingStep';
 
 function App() {  
   return (
@@ -46,7 +47,8 @@ function App() {
           <Route path='/deals/detail/:id' element={<DealDetail />} />
           <Route path='/contacts/individualForm/:id' element={<DealForm />} />
           <Route path='/contacts/organizationForm/:id' element={<DealForm />} />
-          <Route path='/contacts/ScheduleMeeting/' element={<ScheduleMeeting />} />
+          <Route path='/contacts/meetingStep/' element={<MeetingStep />} />
+          <Route path='/contacts/meetingStep/ScheduleMeeting/' element={<ScheduleMeeting />} />
 
         </Routes>
     </div>
