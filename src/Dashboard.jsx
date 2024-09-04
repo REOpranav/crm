@@ -8,6 +8,7 @@ const {Text ,Title} = Typography
 const backGroundColor = '#422A8D'
 const iconColor = "#fff"
 
+
 return (
     <div> 
       <Row justify={'space-between'} style={{backgroundColor:backGroundColor}}>

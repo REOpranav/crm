@@ -20,7 +20,7 @@ const Contact = () => {
   const [selectedOption,setSelectedOption] = useState('firstname') // option fireld
   const [calculateSymbol,setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [meetingAccessToken,setMeetingAccessToken] = useState([])
+  let meetingAccessToken = {}
   
   const filter = contactData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction  = {  // this object for finiding the === object
@@ -240,15 +240,12 @@ const Contact = () => {
        if (accessTokenResponce.request.response === '{"error":"invalid_code"}') {
           message.info('Authorization Code is Expired')
        }
-       setMeetingAccessToken(accessTokenResponce.data)
-
-       if (meetingAccessToken) {        
-          message.success('Access token getted')
-       }
+       meetingAccessToken = accessTokenResponce.data
+       console.log(meetingAccessToken)
 
        setTimeout(() => {
          navigate('/contacts') // this is for getting out of that section
-       }, 100);
+       }, 400);
 
     } catch (err) {
       if (err.response) {
