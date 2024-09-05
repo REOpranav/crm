@@ -15,6 +15,7 @@ const AccountDetail = () => {
     const [selectRowKey,setSelectedRowKey] = useState('')
     const [deleteInnerDealRow,setDeleteInnerDealRow] = useState(false)
 
+    // this is get the id from URL
     const URL = window.location.href
     const id = URL.split('/').pop()  
 
@@ -35,17 +36,7 @@ const AccountDetail = () => {
                   }
                 }
         }
-    
-        useEffect(()=>{
-          fetching()
-        },[undefined])
-
-        const items = [
-            {
-                key: '1',
-                label: ( <Link to={`/accounts/dealForm/${id}`}>Convert to Deal</Link>),
-            }
-        ]
+  
 
     // this is for store the call log
     const makeCall = (number) => {
@@ -141,6 +132,19 @@ const AccountDetail = () => {
         }
       }    
   }
+ 
+  // intial fetch
+  useEffect(()=>{
+    fetching()
+  },[undefined])
+
+  // this is for drop down (antd frameworks)
+    const items = [
+        {
+            key: '1',
+            label: ( <Link to={`/accounts/dealForm/${id}`}>Convert to Deal</Link>),
+        }
+    ]
 
   return (
     <div>
