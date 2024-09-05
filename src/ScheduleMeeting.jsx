@@ -12,7 +12,6 @@ const ScheduleMeeting = () => {
     const navigate = useNavigate();
     const {Title} = Typography
     const [error,setError] = useState({})
-    const [createdMeetingData,setCreatedMeetingData] = useState([])
     const [meetingData,setMeetingData] = useState({ //storing the form data in this state
         topic : '',
         agenda : '',
@@ -123,10 +122,34 @@ const ScheduleMeeting = () => {
       }  
       
     // zoho meeting intergaration function to store the responce data
-    const createMeeting = (data)=>{
+    const createMeeting = async (data)=>{
       message.success('Meeting Created Successfully')
-      console.log(data)
-      setCreatedMeetingData(data)
+
+    // this object and below function are storing the meeting seesion data (only successfully created meeting data)
+      const sessionData = {
+        id : id, // giving the same contact person id for showing in his/her deatil module
+        session : data.session
+      }
+
+      const logMeetignSession = async()=>{
+        try {
+              const URL = `http://localhost:3000/meetingSession` // stoting in this URL
+              const posting = await axios.post(URL,sessionData) 
+              if (posting.status === 201) {
+                message.success('Session are stored in log')
+              }
+            } catch (err) {
+              if (err.response) {
+                message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+              } else if (err.request) {
+                message.error('Error: No response from server.');
+              } else {
+                message.error('Error: '+ err.message);
+              }
+            }
+          }
+        
+        logMeetignSession()
     }
    
   return (

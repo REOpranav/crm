@@ -208,6 +208,10 @@ const ContactDetail = () => {
               <Col span={24}> 
                 <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey}/>
               </Col>
+
+              <Col span={24}>
+                  
+              </Col>
           </Row>
         </Col>
       </Row>
