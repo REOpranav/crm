@@ -104,31 +104,28 @@ const DealForm = () => {
       }
   
     // validation Form
-    function validation(leadFormValues) {      
+    function validation(dealFormData) {      
       let errorvalues = {}
-      if (!leadFormValues.dealowner.trim()) {
+      if (!dealFormData.dealowner.trim()) {
          errorvalues.dealowner = `${moduleName} Owner is Required`
       }
   
-      if (!leadFormValues.dealName.trim()) {
+      if (!dealFormData.dealName.trim()) {
           errorvalues.dealName = 'Deal Name is Required'
       }
   
-    //   if (!leadFormValues.contactName.trim()) {
-    //       errorvalues.accountName = 'Contact Name is Required'
-    //   }
+      if (!dealFormData.closingDate.trim()) {
+          errorvalues.closingDate = 'Closing Date is Required'
+      }
       
-    //   if (!leadFormValues.closingDate.trim()) {
-    //       errorvalues.closingDate = 'closing Date is is Required'
-    //   }
-      
-    //   if (!leadFormValues.amount.trim()) {
-    //     errorvalues.amount = 'Amount is Required'
-    // }
-      
-    //   if (!leadFormValues.Pipeline.trim()) {
-    //       errorvalues.Pipeline = 'pipline is Required'
-    //   }
+      if (!dealFormData.amount.trim()) {
+          errorvalues.amount = 'closing Date is is Required'
+      }
+
+      if (!dealFormData.accountName.trim()) {
+        errorvalues.accountName = 'Account Name is Required'
+      }
+
       return errorvalues
     }
   
@@ -218,11 +215,11 @@ const DealForm = () => {
             </p>
 
             {typeOfDealForm == "organizationForm" && <p>
-                <label for="contactName">Account Name : </label>
-                <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
+                <label for="accountName" className={getInputClass('accountName') ? 'error' : ''}>Account Name : </label>
+                <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)} className={getInputClass('accountName')}>
                     <option value="" hidden >select Account</option>
                     {accountData.map((e)=>{
-                      return <option value={e.id} style={{color:'red'}}>{e.accountOwner}</option>
+                      return <option value={e.id} style={{color:'red'}} >{e.accountOwner}</option>
                     })}
                     <option value="new Account" onClick={navigateToAccountForm} style={{color:'blue'  }}>Create New Account</option>
                 </select>
@@ -230,7 +227,7 @@ const DealForm = () => {
 
             <p>
                 <label for="closingDate">Closing Date : </label>
-                <input type="date" name="closingDate" id="date" placeholder="closing Date *" value={dealdata.date} onChange={handleChange} /> 
+                <input type="date" name="closingDate" id="closingDate" placeholder="closing Date *" value={dealdata.date} onChange={handleChange} className={getInputClass('closingDate')}/> 
             </p>
 
             <p>
@@ -247,16 +244,6 @@ const DealForm = () => {
                 <label for="Pipeline">Pipeline : </label>
                 <input type="text" name="Pipeline" id="Pipeline" placeholder="Pipeline *" value={dealdata.Pipeline} onChange={handleChange}  className={getInputClass('Pipeline')}/> 
             </p>
-
-            {/* <p> Stage </p>
-                <input type="radio" id="stage1" name="pipeline" value="stage_1" />
-                <label for="stage1">stage 1</label> 
-                
-                <input type="radio" id="stage2" name="pipeline" value="stage_2" />
-                <label for="stage2">stage 2</label> 
-                
-                <input type="radio" id="stage3" name="pipeline" value="stage_3" />
-                <label for="stage3">stage 3</label> */}
 
             <p>
                 <label for="companyName">company Name : </label>

@@ -48,7 +48,7 @@ const DealDetail = () => {
     const URL = window.location.pathname    
     const endpoint = URL.split('/').pop()
     
-    // this code for initial load and when lead added
+    // this code for showing the fetching
     const fetching = async()=>{
         try {
             const responce = await axios.get(`http://localhost:3000/deals/${endpoint}`)
@@ -94,6 +94,7 @@ const DealDetail = () => {
         navigate('/')
     }
      
+    // this is date
     const currentDate = new Date();
     const parsedDate = new Date(dealDeatail.closingDate)
 

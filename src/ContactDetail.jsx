@@ -17,13 +17,10 @@ const ContactDetail = () => {
 
     const navigate = useNavigate();
     const [contactData,setContactData] = useState([])
-    const {Title,Text} = Typography // antd
+    const {Text} = Typography // antd
     const [mailLog,setMailLogs] = useState('')
-    const navigation = useNavigate() //this is for navigation
     const [callLogs,setCallLogs] = useState('')
     const [selectRowKey,setSelectedRowKey] = useState('')
-    const [isOpen, setIsOpen] = useState(false);
-    const [dealType,setDealType]  = useState("")
 
     // this is for get the current id
     const URL = window.location.href

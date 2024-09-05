@@ -8,6 +8,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
   const [dealData,setDealData] = useState([])
   const {Text} = Typography
   
+  // this is for fetching the data from deal mock data
   const fetching = async()=>{
     try {
         const responce = await axios.get(`http://localhost:3000/deals`)                         
@@ -73,7 +74,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
         title:'Company Name',
         dataIndex: 'companyName',
         key: 'companyName',
-      },    
+      },
       {
         title: 'Annual Revenue',
         dataIndex: 'annualRevenue',
@@ -81,15 +82,14 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
       },      
     ]
 
+    // THIS IS FOR FILTERING
     const filterParticularDeal = dealData.filter((values)=>{
-      if (values.id === id) {
-        console.log(values);
-        
+      if (values.id === id) {        
         return values
       }
     })
   
-    let data = []
+    let data = [] // this array is showing the data in table (antd frameworks)
     for (const datas of filterParticularDeal) {
         let changeTOObject = {
            key :datas.id,

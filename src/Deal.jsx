@@ -16,11 +16,10 @@ const Deal = () => {
   const [calculateSymbol,setCalculateSymbol] = useState("equal to")
   const [selectedRowKeys,setselectedRowKeys] = useState([])
  
-  // this code for initial load and when lead added
+  // this code for getting data from deal 
   const fetching = async()=>{
       try {
           const responce = await axios.get('http://localhost:3000/deals')
-
             if (responce.status === 200) {
                 setDealData(await responce.data);
                 setSearchBy(await responce.data);
@@ -36,11 +35,7 @@ const Deal = () => {
         }
     }
 
-    useEffect(()=>{
-      fetching()
-    },[undefined,selectedRowKeys])
-    
-    // this is for deleting the leads
+    // this is for deleting the deal in deal module
     const deleteThedata = async()=>{
       try {
         const URL = `http://localhost:3000/deals`
@@ -63,7 +58,7 @@ const Deal = () => {
       }    
     }
     
-    // this is for selecting the row key 
+    // this is for selecting the row key for deletion
     const rowSelection = {
       type: 'checkbox',
       onChange: (key) => {
@@ -129,7 +124,7 @@ const Deal = () => {
       return finalValues
      })
   
-     
+    
     let data = [] // this is for handing table (antd) (my method)
     for (const datas of filter.length !== 0 ? filter : dealData) {
         let changeTOObject = {
@@ -143,10 +138,15 @@ const Deal = () => {
         }
         data.push(changeTOObject)
     }
-      
+     
+    // this is for navigation
     const homeNavigation = ()=>{
       navigate('/')
     }
+
+    useEffect(()=>{
+      fetching()
+    },[undefined,selectedRowKeys])
   
   return (
     <div>

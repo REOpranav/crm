@@ -12,16 +12,18 @@ import Dashboard from './Dashboard'
  const AccountEditForm = () => {
     const {Text} = Typography
     const navigation = useNavigate() //this is for navigation   
-    const urlParams = window.location.pathname //this code for getting url params          
+    const urlParams = window.location.pathname //this code for getting url params
+
     const [fectedaccountDatas,setFetchedAccountData] = useState([])//this will fetch the full data from query param
     const [actualActualData,setActualActualData] = useState([]) // this data is filter data from lead datas
     const [errors,setError] = useState('')
     const [formData,setFormData] = useState({})
 
-    const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
+    const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase() // this is for getting the module name
+
     const fetching = async()=>{
       try {
-      const responce = await axios.get(`http://localhost:3000/${moduleName}`)
+      const responce = await axios.get(`http://localhost:3000/${moduleName}`) // fethch the data using the module name 
         if (responce.status === 200) {
             setFetchedAccountData(await responce.data);            
         }
