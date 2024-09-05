@@ -1,12 +1,10 @@
 import { Button, message, Row, Space, Steps } from 'antd'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // this is message ele from antd
 function messageLoading(){  
-  message.loading(`We are arranging your meeting`)
+  message.loading(`Processing`)
 }
 
 const MeetingStep = () => {
@@ -32,7 +30,7 @@ const MeetingStep = () => {
     messageLoading()
     setTimeout(()=>{
       AuthorizationGrantCode()
-    },[2 * 1000])
+    },[1 * 1000])
   }
 
   const AuthorizationGrantCode = async()=>{
@@ -77,7 +75,6 @@ const MeetingStep = () => {
             <Space>
               <Button onClick={userDetail}>GET ZOHO USER TOKEN</Button>
               <Button onClick={getAuthToken} type='primary'>GET ZOHO MEETING TOKEN</Button>
-              {/* <Link to={`./ScheduleMeeting`}> <Button type='primary'>SCHEDULE MEETING</Button> </Link>   */}
             </Space>       
           </Row>
 

@@ -8,12 +8,13 @@ import moment from 'moment'
 import Calllogs from './Calllogs'
 import './Dashboard.css'
 
-const ContactDetail = () => {
-    
   // this is message ele from antd
-    function messageSuccess(){
-      message.success('Sucessfully created a Lead')
-    }
+  function messageSuccess(){
+    message.success('Sucessfully created a Lead')
+  }
+
+const ContactDetail = () => {
+
     const navigate = useNavigate();
     const [contactData,setContactData] = useState([])
     const {Title,Text} = Typography // antd
@@ -47,12 +48,8 @@ const ContactDetail = () => {
           }
 
         useEffect(()=>{
-            fetching()
+          fetching()
         },[undefined,selectRowKey,setSelectedRowKey])
-
-        function navigateToAccount() {
-          navigation('/accounts')
-        }
 
     // this is for store the call log
     const makeCall = (number) => {
@@ -161,7 +158,6 @@ const ContactDetail = () => {
     },
 ]
 
-
   return (
     <div>
         <Dashboard />
@@ -173,7 +169,7 @@ const ContactDetail = () => {
                 <Flex gap={'small'}>
                    {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
 
-                    <Button type='primary'>Schedule Meeting </Button>
+                    <Link to={`./ScheduleMeeting/${id}`}> <Button type='primary'>Schedule Meeting</Button> </Link>
 
                     <Dropdown menu={{items}} placement='bottomCenter'>
                         <Button type='default'>Create Deal</Button>  

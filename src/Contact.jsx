@@ -6,6 +6,7 @@ import { Link, useAsyncError, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
 import moment from 'moment'
 
+// this is for getting the code (query param) from URL
 const urlSearch = new URLSearchParams(window.location.search)
 const Authcode = urlSearch.get('code')
 
@@ -14,6 +15,7 @@ const Contact = () => {
   const {Text} = Typography
   const styles = { fontWeight:'lighter'}
   const [contactData,setContactData] = useState([]) // store the contact data come from URL 
+ 
   // this are for searching components
   const [searching,setSearching] = useState([]) // searching input field value
   const [searchBy,setsearchBy] = useState([]) // total contact data list
@@ -119,7 +121,6 @@ const Contact = () => {
       }
     };
 
-
   // this is column for tabel (antd)
   const column = [
     {
@@ -174,12 +175,21 @@ const Contact = () => {
       data.push(changeTOObject)
   }
 
+  // this code is selecting the row for deleting
+  const rowSelection = {
+      type: 'checkbox',
+      onChange: (newSelectedRowKeys) => {
+        setSelectedRowKeys(newSelectedRowKeys);
+      },
+    };
+
+  // this is for delete the selected data
   const deleteThedata = async()=>{
     try {
       const URL = `http://localhost:3000/contacts`
       let deleting ; 
       for (const deleteValue of selectedRowKeys) {
-         deleting =  await axios.delete(`${URL}/${deleteValue}`)        
+         deleting = await axios.delete(`${URL}/${deleteValue}`)        
       }
       if (deleting.status == 200) {
         message.success("sucessfully Deleted the data") 
@@ -193,47 +203,8 @@ const Contact = () => {
       } else {
             message.error('Error: ' + err.message);
       }
-    }
-  }
-
-  useEffect(()=>{
-    fetching()
-  },[undefined,selectedRowKeys])
-
-  // navigating function (react router dom)
-  const homeNavigation = ()=>{
-    navigate('/')
-  }
-
-  const rowSelection = {
-    type: 'checkbox',
-    onChange: (newSelectedRowKeys) => {
-      setSelectedRowKeys(newSelectedRowKeys);
-    },
-  };
-
-  const formNavigate = ()=>{
-    navigate('./formpage')
-  }
-
-  // this useeffect for load the access token function when code is available in url 
-  useEffect(()=>{    
-    if (Authcode !== null) {
-      accessToken()
-      userdefine()
-    }
-    },[Authcode])
-
-  // this is zoho meeting intergaration functions to store the user detail data
-    const userDeatailAuth = (token)=>{
-      message.success('User Token Retrieved')
-      return sessionStorage.setItem('userdatail',JSON.stringify(token))
-    }
-      
-    const accessTokenData = (token)=>{
-      message.success('Access Token Retrieved')
-      return sessionStorage.setItem('accessToken',JSON.stringify(token))
-    }
+     }
+   }
 
   // this function is getting the access token
   const accessToken = async()=>{
@@ -287,12 +258,41 @@ const Contact = () => {
         console.log(err.message) 
       }
     }
-  
-  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken'))
-  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail'))
 
-  console.log(meetingUserDetail)
-  console.log(meetingAccessTokenData)
+  // if user user datail are getted ,stored in session storage
+    const userDeatailAuth = (token)=>{
+      message.success('User Token Retrieved')
+      return sessionStorage.setItem('userdatail',JSON.stringify(token))
+    }
+      
+  // if accesstoken are getted ,stored in session storage
+    const accessTokenData = (token)=>{
+      message.success('Access Token Retrieved')
+      return sessionStorage.setItem('accessToken',JSON.stringify(token))
+    }
+  
+  // navigating function (react router dom)
+    const homeNavigation = ()=>{
+      navigate('/')
+    }
+
+  // this is for navigation
+    const formNavigate = ()=>{
+      navigate('./formpage')
+    }
+
+  // this is initial fetch the data
+    useEffect(()=>{
+      fetching()
+    },[undefined,selectedRowKeys])
+
+  // this useeffect for load the access token function when code is available in url 
+    useEffect(()=>{    
+      if (Authcode !== null) {
+        accessToken()
+        userdefine()
+      }
+      },[Authcode])
 
   return (
     <div>

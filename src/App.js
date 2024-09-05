@@ -48,8 +48,7 @@ function App() {
           <Route path='/contacts/individualForm/:id' element={<DealForm />} />
           <Route path='/contacts/organizationForm/:id' element={<DealForm />} />
           <Route path='/contacts/meetingStep/' element={<MeetingStep />} />
-          <Route path='/contacts/meetingStep/ScheduleMeeting/' element={<ScheduleMeeting />} />
-
+          <Route path='contactDetail/detail/:id/ScheduleMeeting/:id' element={<ScheduleMeeting />} />
         </Routes>
     </div>
   );
