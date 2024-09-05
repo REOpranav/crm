@@ -124,7 +124,8 @@ const ScheduleMeeting = () => {
       
     // zoho meeting intergaration function to store the responce data
     const createMeeting = (data)=>{
-      message.success('Meeting Created')
+      message.success('Meeting Created Successfully')
+      console.log(data)
       setCreatedMeetingData(data)
     }
    

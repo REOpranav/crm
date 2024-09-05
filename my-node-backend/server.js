@@ -96,6 +96,7 @@ app.post('/api/create', async(req, res) => {
 
         const data = await response.json();
         res.json(data)
+
         } catch (error) {
                 res.status(500).json({ message: "Failed to create meeting", error: error.message });
         }

@@ -121,11 +121,6 @@ const DealForm = () => {
       if (!dealFormData.amount.trim()) {
           errorvalues.amount = 'closing Date is is Required'
       }
-
-      if (!dealFormData.accountName.trim()) {
-        errorvalues.accountName = 'Account Name is Required'
-      }
-
       return errorvalues
     }
   
@@ -215,13 +210,13 @@ const DealForm = () => {
             </p>
 
             {typeOfDealForm == "organizationForm" && <p>
-                <label for="accountName" className={getInputClass('accountName') ? 'error' : ''}>Account Name : </label>
-                <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)} className={getInputClass('accountName')}>
-                    <option value="" hidden >select Account</option>
+                <label for="accountName" >Account Name : </label>
+                <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
+                    <option value="" hidden>select Account</option>
                     {accountData.map((e)=>{
                       return <option value={e.id} style={{color:'red'}} >{e.accountOwner}</option>
                     })}
-                    <option value="new Account" onClick={navigateToAccountForm} style={{color:'blue'  }}>Create New Account</option>
+                    <option value="new Account" onClick={navigateToAccountForm} style={{color:'blue'}}>Create New Account</option>
                 </select>
             </p>}
 

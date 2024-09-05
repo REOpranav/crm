@@ -232,6 +232,46 @@
       "expectedAmount": "20000",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "236192080",
+      "key": "361105593",
+      "dealowner": "vadivel",
+      "dealName": "vadivel water deal",
+      "accountName": "",
+      "amount": "10000",
+      "Pipeline": "",
+      "closingDate": "2024-09-06",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "30000",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "678901234",
+      "key": "543951484",
+      "dealowner": "one",
+      "dealName": "onr deal",
+      "accountName": "",
+      "amount": "200000",
+      "Pipeline": "",
+      "closingDate": "2024-09-06",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "callLogs": [
@@ -322,6 +362,10 @@
     {
       "id": "100019",
       "date": "August 31st 2024, 5:12:01 pm"
+    },
+    {
+      "id": "678901234",
+      "date": "September 5th 2024, 4:26:43 pm"
     }
   ],
   "emailLogs": [
@@ -468,6 +512,10 @@
     {
       "id": "776839841",
       "date": "August 31st 2024, 5:18:18 pm"
+    },
+    {
+      "id": "678901234",
+      "date": "September 5th 2024, 4:26:38 pm"
     }
   ],
   "formLayout": [
