@@ -7,6 +7,7 @@ import InnerDeal from './InnerDeal'
 import moment from 'moment'
 import Calllogs from './Calllogs'
 import './Dashboard.css'
+import Meetinglog from './Meetinglog'
 
   // this is message ele from antd
   function messageSuccess(){
@@ -29,7 +30,7 @@ const ContactDetail = () => {
     // this code for initial load and when lead added
     const fetching = async()=>{
         try {
-            const responce = await axios.get(`http://localhost:3000/contacts/${id}`)         
+            const responce = await axios.get(`http://localhost:3000/contacts/${id}`)
                 if (responce.status === 200) {
                   setContactData(await responce.data)
                 }
@@ -136,7 +137,7 @@ const ContactDetail = () => {
         if (err.response) {
               message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
         } else if (err.request) {
-              message.error('Error: No response   from server.');
+              message.error('Error: No response from server.');
         } else {
               message.error('Error: ' + err.message);
         }
@@ -151,7 +152,7 @@ const ContactDetail = () => {
     },
     {
       key: '2',
-      label: ( <Link to={`/contacts/organizationForm/${id}`}>For organization</Link>),
+      label: (<Link to={`/contacts/organizationForm/${id}`}>For organization</Link>),
     },
 ]
 
@@ -210,7 +211,7 @@ const ContactDetail = () => {
               </Col>
 
               <Col span={24}>
-                  
+                <Meetinglog id={id} />
               </Col>
           </Row>
         </Col>

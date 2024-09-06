@@ -7,6 +7,17 @@ import Dashboard from './Dashboard'
 // this is for get the current id
   const URL = window.location.href
   const id = URL.split('/').pop()
+
+  const messageDrop = (type,content)=>{
+    message.open({
+      type : type,
+      style : {
+        padding : '20px', 
+      },
+      content : content
+     })
+
+  }
  
 const ScheduleMeeting = () => {
     const navigate = useNavigate();
@@ -113,34 +124,38 @@ const ScheduleMeeting = () => {
       try {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras) // this line send the request to node (server.js)      
           createMeeting(accessTokenResponce.data)
-          setTimeout(() => {
-            navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
-          }, 100);
         } catch (err) {
+           if (err.message == "Request failed with status code 500") {
+             messageDrop('warning','key Expired. Re-Generate the keys')
+           }
           console.log(err.message)
         }
       }  
-      
+
     // zoho meeting intergaration function to store the responce data
     const createMeeting = async (data)=>{
-      message.success('Meeting Created Successfully')
+      messageDrop('success','Meeting Created Successfully')
 
     // this object and below function are storing the meeting seesion data (only successfully created meeting data)
       const sessionData = {
         id : id, // giving the same contact person id for showing in his/her deatil module
+        key : Math.floor(Math.random() * 1000000000),
         session : data.session
-      }
+      }      
 
       const logMeetignSession = async()=>{
         try {
               const URL = `http://localhost:3000/meetingSession` // stoting in this URL
               const posting = await axios.post(URL,sessionData) 
               if (posting.status === 201) {
-                message.success('Session are stored in log')
+                messageDrop('success','Session are stored in meeting log')
               }
+              setTimeout(() => {
+                navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
+              }, 200);
             } catch (err) {
               if (err.response) {
-                message.error('Error: ' + err.response.status+' - '+ ( err.response.data.message || 'Server Error'));
+                message.error('Error');
               } else if (err.request) {
                 message.error('Error: No response from server.');
               } else {
@@ -148,14 +163,17 @@ const ScheduleMeeting = () => {
               }
             }
           }
-        
         logMeetignSession()
     }
    
   return (
     <div>
       <Dashboard />
-      <Row justify={'center'}>
+      <Row justify={'end'} style={{paddingTop:'10px',paddingRight:'10px'}}>
+        <Space>
+          <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>          
+          <Link to={`/contactDetail/detail/${id}`}><Button type='primary'>Back one Step</Button></Link>
+        </Space>
       </Row>
     
       <Title level={3}> Schedule a Meeting </Title> 
