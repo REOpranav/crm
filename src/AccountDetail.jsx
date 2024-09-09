@@ -14,6 +14,7 @@ const AccountDetail = () => {
     const [callLogs,setCallLogs] = useState('')
     const [selectRowKey,setSelectedRowKey] = useState('')
     const [deleteInnerDealRow,setDeleteInnerDealRow] = useState(false)
+    const [loadTime,setLoadTime] = useState(false)
 
     // this is get the id from URL
     const URL = window.location.href
@@ -36,7 +37,6 @@ const AccountDetail = () => {
                   }
                 }
         }
-  
 
     // this is for store the call log
     const makeCall = (number) => {
@@ -112,6 +112,7 @@ const AccountDetail = () => {
 
   // this is for deleting the leads
    const dealDelete = async()=>{
+    setLoadTime(true)
     try {
       const URL = `http://localhost:3000/deals`
       let deleting ;
@@ -130,7 +131,8 @@ const AccountDetail = () => {
         } else {
               message.error('Error: ' + err.message);
         }
-      }    
+      }
+      setLoadTime(false)
   }
  
   // intial fetch
@@ -193,7 +195,7 @@ const AccountDetail = () => {
                 <Calllogs callLogs={callLogs} emailLog={mailLog}/>
               </Col>
               <Col span={24}> 
-                <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey} deleteInnerDealRow={deleteInnerDealRow} setDeleteInnerDealRow={setDeleteInnerDealRow}/>
+                <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey} deleteInnerDealRow={deleteInnerDealRow} setDeleteInnerDealRow={setDeleteInnerDealRow} loadTime={loadTime}/>
               </Col>
           </Row>
         </Col>

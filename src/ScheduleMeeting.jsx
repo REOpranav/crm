@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {message,Typography,Row,Col,Flex,Button,Dropdown,Popconfirm, Space} from 'antd'
+import React, { useState } from 'react'
+import {message,Typography,Row,Button,Space} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
@@ -97,7 +97,7 @@ const ScheduleMeeting = () => {
   // accessing rhe access tokena and user detail from session storage
     const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken'))
     const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail'))
-  
+    
   // this function is cerate meeting credencial
     const createMeetingCredencial = async()=>{
       const data = {
@@ -178,42 +178,44 @@ const ScheduleMeeting = () => {
         </Space>
       </Row>
     
-      <Title level={3}> Schedule a Meeting </Title> 
-      <Row>
-          <form onSubmit={checkForSubmitting}>
-            <p>
-                <label for="topic">Topic : </label>
-                <input type="text" name="topic" id="topic" placeholder={`topic *`} value={meetingData.title} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
-            </p>
-            
-            <p>
-                <label for="agenda">Agenda:</label>
-                <textarea name="agenda" id="agenda" placeholder='Agenda' value={meetingData.agenda} onChange={handleChange} className={getInputClass('agenda') ? "inputError" : 'errorClear'}/>
-            </p>
+    {((meetingAccessTokenData !== null) && (meetingUserDetail !== null)) || (meetingAccessTokenData !== null)  ? <> 
+          <Title level={3}> Schedule a Meeting </Title> 
+          <Row>
+              <form onSubmit={checkForSubmitting}>
+                <p>
+                    <label for="topic">Topic : </label>
+                    <input type="text" name="topic" id="topic" placeholder={`topic *`} value={meetingData.title} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
+                </p>
+                
+                <p>
+                    <label for="agenda">Agenda:</label>
+                    <textarea name="agenda" id="agenda" placeholder='Agenda' value={meetingData.agenda} onChange={handleChange} className={getInputClass('agenda') ? "inputError" : 'errorClear'}/>
+                </p>
 
-            <p>
-                <label for="startTime">Date : </label>
-                <input type="date" name="startTime" id="startTime" placeholder={`startTime *`} value={meetingData.date} onChange={handleChange} className={getInputClass('startTime') ? "inputError" : 'errorClear'}/>
-            </p>
+                <p>
+                    <label for="startTime">Date : </label>
+                    <input type="date" name="startTime" id="startTime" placeholder={`startTime *`} value={meetingData.date} onChange={handleChange} className={getInputClass('startTime') ? "inputError" : 'errorClear'}/>
+                </p>
 
-            <p>
-                <label for="time">Time : </label>
-                <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}/>
-            </p>
+                <p>
+                    <label for="time">Time : </label>
+                    <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}/>
+                </p>
 
-            <p>
-                <label for="participantsMail">Host :</label>
-                <input type="email" name="participantsMail" id="participantsMail" placeholder={`participantsMail *`} value={meetingData.host} onChange={handleChange} className={getInputClass('participantsMail') ? "inputError" : 'errorClear'} />
-            </p>
+                <p>
+                    <label for="participantsMail">Host :</label>
+                    <input type="email" name="participantsMail" id="participantsMail" placeholder={`participantsMail *`} value={meetingData.host} onChange={handleChange} className={getInputClass('participantsMail') ? "inputError" : 'errorClear'} />
+                </p>
 
-          <Space>
-              <Button type='default' danger  onClick={resetClicked}>Reset</Button>
-            <Button type='primary' onClick={checkForSubmitting}>Submit</Button>
-          </Space>
-        </form>
-      </Row>
+              <Space>
+                  <Button type='default' danger  onClick={resetClicked}>Reset</Button>
+                <Button type='primary' onClick={checkForSubmitting}>Submit</Button>
+              </Space>
+            </form> 
+          </Row>
+       </> :  <Row justify={'center'} align={'middle'} style={{minHeight:'70vh'}}> <Title level={3} style={{opacity:'0.5',}}>Token is expires or not yet created. Re-Generate the Tokens please </Title> </Row>
+      }
     </div>
   )
 }
-
 export default ScheduleMeeting

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {message,Row,Table,Typography} from 'antd'
 import { Link } from 'react-router-dom'
 
-const InnerDeal = ({id,setSelectedRowKey}) => {
+const InnerDeal = ({id,setSelectedRowKey,loadTime}) => {
   
   const [dealData,setDealData] = useState([])
   const {Text} = Typography
@@ -51,7 +51,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
         title:'Amount',
         dataIndex: 'amount',
         key: 'amount',
-      },        
+      },
       {
         title:'closing Date',
         dataIndex: 'closingDate',
@@ -84,7 +84,7 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
 
     // THIS IS FOR FILTERING
     const filterParticularDeal = dealData.filter((values)=>{
-      if (values.id === id) {        
+      if (values.id === id) {
         return values
       }
     })
@@ -104,7 +104,13 @@ const InnerDeal = ({id,setSelectedRowKey}) => {
 
   useEffect(()=>{
     fetching()
-  },[undefined,setDealData])
+  },[undefined])
+
+  useEffect(()=>{
+    if (loadTime) {
+      fetching()
+    }
+  })
 
   return (
     <div>

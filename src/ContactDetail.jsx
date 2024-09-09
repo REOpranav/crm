@@ -22,6 +22,7 @@ const ContactDetail = () => {
     const [mailLog,setMailLogs] = useState('')
     const [callLogs,setCallLogs] = useState('')
     const [selectRowKey,setSelectedRowKey] = useState('')
+    const [loadTime,setLoadTime] = useState(false)
 
     // this is for get the current id
     const URL = window.location.href
@@ -123,6 +124,7 @@ const ContactDetail = () => {
 
    // this is for deleting the leads
    const dealDelete = async()=>{
+    setLoadTime(true)
     try {
       const URL = `http://localhost:3000/deals`
       let deleting ; 
@@ -142,6 +144,7 @@ const ContactDetail = () => {
               message.error('Error: ' + err.message);
         }
       }    
+      setLoadTime(false)
   }
 
   // this is for drop down (ANTd)
@@ -207,7 +210,7 @@ const ContactDetail = () => {
               </Col>
               
               <Col span={24}> 
-                <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey}/>
+                <InnerDeal id={id} setSelectedRowKey={setSelectedRowKey} loadTime={loadTime}/>
               </Col>
 
               <Col span={24}>

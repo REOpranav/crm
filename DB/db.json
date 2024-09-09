@@ -214,26 +214,6 @@
   ],
   "deals": [
     {
-      "id": "100012",
-      "key": "910256350",
-      "dealowner": "pranavavadivel",
-      "dealName": "vadivel sales process",
-      "accountName": "",
-      "amount": "100000",
-      "Pipeline": "standard",
-      "closingDate": "2024-09-03",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "20000",
-      "website": "",
-      "description": ""
-    },
-    {
       "id": "236192080",
       "key": "361105593",
       "dealowner": "vadivel",

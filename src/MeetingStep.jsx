@@ -13,7 +13,7 @@ const stylesForPadding = {
 }
 
 const MeetingStep = () => {
- const navigate = useNavigate();
+ const navigate = useNavigate()
  const [current,setCurrent] = useState(1)
  const onChange = (value) => {
     console.log('onChange:', value)
@@ -55,7 +55,7 @@ const MeetingStep = () => {
           <Row justify={'end'} style={{padding:'20px'}}>
             <Space>
               <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
-              <Link to={``}><Button type='primary'>Back one Step</Button></Link>
+              <Link onClick={ () => window.history.back(-1)}><Button type='primary'>Back one Step</Button></Link>
             </Space>
           </Row>
           
