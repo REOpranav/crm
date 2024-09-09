@@ -77,7 +77,7 @@ app.post('/api/userdetail', async (req, res) => {
 app.post('/api/create', async(req, res) => {
     const session = req.body // this is session credencial
     const {extras} = req.query  // this is for get the extra information like zsoid and access token
-        try {
+    try {
             const response = await fetch(
                 `https://meeting.zoho.in/api/v2/${extras.zsoid}/sessions.json`,
                 {

@@ -1,8 +1,8 @@
-import { message, Row,Table,Typography,Popconfirm } from 'antd'
+import { message, Row,Table,Typography,Popconfirm,Dropdown, Button } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineEllipsis } from "react-icons/ai";
 import './Meetinglog.css'
 
 // this is message setup (ant design)
@@ -63,6 +63,7 @@ const Meetinglog = ({id}) => {
       }        
     }
 
+    // This code is for deleting the meeting
     const deletingMeetingDataInDb = async(values)=>{
       setLoadTime(true)
       try {
@@ -105,33 +106,31 @@ const Meetinglog = ({id}) => {
           title:'Meeting End',
           dataIndex: 'endTime',
           key: 'endTime',
-        },      
-
-        // {
-        //   title:'closing Date',
-        //   dataIndex: 'closingDate',
-        //   key: 'closingDate',
-        //   render: (text) => {
-        //     const currentDate = new Date();
-        //     const parsedDate = new Date(text);
-        //     return (
-        //       <Text
-        //         style={{
-        //           backgroundColor: parsedDate < currentDate ? 'red' : 'lightGreen',
-        //         }}
-        //       >
-        //         {text}
-        //       </Text>
-        //     );
-        //   }
-        // },
-                  
+        },
+        {
+          title:'closing Date',
+          dataIndex: 'closingDate',
+          key: 'closingDate',
+          render: (text) => {
+            const currentDate = new Date();
+            const parsedDate = new Date(text);
+            return (
+              <Text
+                style={{
+                  backgroundColor: parsedDate < currentDate ? 'red' : 'lightGreen',
+                }}
+              >
+                {text}
+              </Text>
+            );
+          }
+        },        
         {
           title:'departmentName',
           dataIndex: 'departmentName',
           key: 'departmentName',
-          render : (value,records) => <Row justify={'space-between'}> {value} <Text className='deleteIcon'> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete'} cancelText={'No'}  onConfirm={()=>meetingDeletetion(records)} onCancel={()=>messageDrop('info','Deletion canceled. Everything stays as is!')}> <AiOutlineDelete  /> </Popconfirm> </Text> </Row>
-        }, 
+          render : (value,records) => <Row justify={'space-between'}> {value} <Text className='deleteIcon'> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete'} cancelText={'No'}  onConfirm={()=>meetingDeletetion(records)} onCancel={()=>messageDrop('info','Deletion canceled. Everything stays as is!')}> <AiOutlineEllipsis /> </Popconfirm> </Text> </Row>
+        },
      ]
 
     // this is for filteration

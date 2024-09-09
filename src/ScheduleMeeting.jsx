@@ -3,6 +3,7 @@ import {message,Typography,Row,Button,Space} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
+import moment from 'moment';
 
 // this is for get the current id
   const URL = window.location.href
@@ -26,17 +27,18 @@ const ScheduleMeeting = () => {
     const [meetingData,setMeetingData] = useState({ //storing the form data in this state
         topic : '',
         agenda : '',
-        startTime : '',
+        statrDate : '',
         time : '',
-        participantsMail : ''
-    })
+        meridiem : '',
+        participantsMail : '',
+    })        
 
     // this is reset button function
     function resetClicked(){
       setMeetingData({
         topic : '',
         meetingType : '',
-        startTime : '',
+        statrDate : '',
         time : '',
         participantsMail : ''
       })
@@ -73,8 +75,16 @@ const ScheduleMeeting = () => {
           errorvalues.agenda = 'Agenda is Required'
       }
 
-      if (!meetingData.startTime.trim()) {
-        errorvalues.startTime = 'Date is Required'
+      if (!meetingData.statrDate.trim()) {
+        errorvalues.statrDate = 'Date is Required'
+      }
+
+      if (!meetingData.time.trim()) {
+        errorvalues.time = 'Time is Required'
+      }
+
+      if (!meetingData.meridiem.trim()) {
+        errorvalues.meridiem = 'Meridiem is Required'
       }
 
       if (!meetingData.participantsMail.trim()) {
@@ -99,16 +109,16 @@ const ScheduleMeeting = () => {
     const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail'))
     
   // this function is cerate meeting credencial
-    const createMeetingCredencial = async()=>{
+    const createMeetingCredencial = async()=>{   
       const data = {
         "session": {
           "topic": `${meetingData.topic}`,
           "agenda": `${meetingData.agenda}`,
           "presenter":  meetingUserDetail.userDetails.zuid,
-          "startTime": "Jun 19, 2025 07:00 PM",
+          "startTime": `${moment(meetingData.statrDate).format('ll')} ${meetingData.time} ${meetingData.meridiem}`,
           "duration": 3600000,
           "timezone": "Asia/Calcutta",
-      }  
+      }
     }
 
     // this is params,sending to backend for important extra information like zoho org ID and Access Token
@@ -120,15 +130,15 @@ const ScheduleMeeting = () => {
            }
          }
       }
-  
+        
       try {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
             if (accessTokenResponce.status == 200) {
               createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server              
             }          
-        } catch (err) {
+          } catch (err) {
            if (err.message == "Request failed with status code 500") {
-            messageDrop('warning','Token Expired. Re-Generate the Tokens')
+              messageDrop('warning','Token Expired. Re-Generate the Tokens')
            }
           console.log(err.message)
         }
@@ -178,7 +188,7 @@ const ScheduleMeeting = () => {
         </Space>
       </Row>
     
-    {((meetingAccessTokenData !== null) && (meetingUserDetail !== null)) || (meetingAccessTokenData !== null)  ? <> 
+    {((meetingAccessTokenData !== null) && (meetingUserDetail !== null)) || (meetingAccessTokenData !== null) || (meetingUserDetail !== null)  ? <> 
           <Title level={3}> Schedule a Meeting </Title> 
           <Row>
               <form onSubmit={checkForSubmitting}>
@@ -193,13 +203,21 @@ const ScheduleMeeting = () => {
                 </p>
 
                 <p>
-                    <label for="startTime">Date : </label>
-                    <input type="date" name="startTime" id="startTime" placeholder={`startTime *`} value={meetingData.date} onChange={handleChange} className={getInputClass('startTime') ? "inputError" : 'errorClear'}/>
+                    <label for="statrDate">Date : </label>
+                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('startTime') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
                     <label for="time">Time : </label>
                     <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}/>
+                </p>
+
+                <p>
+                    <label for="meridiem">AM / PM : </label>
+                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange}>
+                       <option value="AM" defaultChecked selected>AM</option>
+                       <option value="PM">PM</option>
+                    </select>
                 </p>
 
                 <p>
