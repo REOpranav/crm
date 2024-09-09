@@ -1,18 +1,23 @@
 import { Button, message, Row, Space, Steps } from 'antd'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Dashboard from './Dashboard'
 
 // this is message ele from antd
 function messageLoading(){  
   message.loading(`Processing`)
 }
 
+const stylesForPadding = {
+  "padding" : '25px'
+}
+
 const MeetingStep = () => {
  const navigate = useNavigate();
  const [current,setCurrent] = useState(1)
  const onChange = (value) => {
-    console.log('onChange:', value);
-    setCurrent(value);
+    console.log('onChange:', value)
+    setCurrent(value)
   };
 
   const userDetail = async()=>{
@@ -35,7 +40,7 @@ const MeetingStep = () => {
 
   const AuthorizationGrantCode = async()=>{
     const paramsData = {
-      scope :'ZohoMeeting.meeting.CREATE',
+      scope :'ZohoMeeting.meeting.ALL',
       client_id :process.env.REACT_APP_CLIENT_ID,
       response_type:'code',
       redirect_uri :process.env.REACT_APP_REDIRECT_URI,
@@ -44,10 +49,17 @@ const MeetingStep = () => {
       window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
   }
 
-
   return (
     <div>
-          <Row style={{padding:'5px'}} justify={'center'}>  
+          <Dashboard />
+          <Row justify={'end'} style={{padding:'20px'}}>
+            <Space>
+              <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
+              <Link to={``}><Button type='primary'>Back one Step</Button></Link>
+            </Space>
+          </Row>
+          
+          <Row style={{padding:'20px'}} justify={'center'}>  
             <Steps
               style={{width:'80%'}}
               size='default'
@@ -71,10 +83,10 @@ const MeetingStep = () => {
             /> 
           </Row>
 
-          <Row justify={'center'}>
+          <Row justify={'center'} style={{padding : '30px'}}>
             <Space>
-              <Button onClick={userDetail}>GET ZOHO USER TOKEN</Button>
-              <Button onClick={getAuthToken} type='primary'>GET ZOHO MEETING TOKEN</Button>
+              <Button onClick={userDetail} style={stylesForPadding}>GET ZOHO USER TOKEN</Button>
+              <Button onClick={getAuthToken} style={stylesForPadding} type='primary'>GET ZOHO MEETING TOKEN</Button>
             </Space>       
           </Row>
 

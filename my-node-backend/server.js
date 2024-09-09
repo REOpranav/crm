@@ -103,6 +103,30 @@ app.post('/api/create', async(req, res) => {
     }
 )
 
+// this is for deleting the meeting
+app.post('/api/meeting/delete',async(req,res)=>{
+    const {session} = await req.body
+    try {
+        let URL =`https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions/${await session.meetingKey}.json`
+
+        const deleteMeeting = await fetch(
+            URL,
+            {
+                method : 'DELETE',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${session.accessToken}`,
+                    'Content-Type': 'application/json;charset=UTF-8',
+                },
+                body: JSON.stringify(session),
+            }
+        )
+        const data = await deleteMeeting.json();
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to create meeting", error: error.message });
+    }
+})
+
 const PORT = 3002
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`)

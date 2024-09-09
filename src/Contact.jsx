@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Dashboard from './Dashboard'
 import axios from 'axios'
 import {message,Row,Table, Space,Typography, Popconfirm, Button, Col} from 'antd'
-import { Link, useAsyncError, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Searching from './Searching'
 import moment from 'moment'
 
@@ -218,7 +218,7 @@ const Contact = () => {
     
     try {
        const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`,accessTokenParams) // this line send the request to node (server.js)      
-       if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.CREATE') {
+       if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.ALL') {
         accessTokenData(accessTokenResponce.data)    
        }
 
@@ -290,9 +290,14 @@ const Contact = () => {
     useEffect(()=>{    
       if (Authcode !== null) {
         accessToken()
-        userdefine()
       }
-      },[Authcode])
+    },[undefined])
+
+    useEffect(()=>{
+      if (Authcode !== null) {
+        userdefine()        
+      }
+    },[undefined])
 
   return (
     <div>

@@ -8,6 +8,7 @@ import Dashboard from './Dashboard'
   const URL = window.location.href
   const id = URL.split('/').pop()
 
+// this is message setup (ant design)
   const messageDrop = (type,content)=>{
     message.open({
       type : type,
@@ -16,7 +17,6 @@ import Dashboard from './Dashboard'
       },
       content : content
      })
-
   }
  
 const ScheduleMeeting = () => {
@@ -111,7 +111,7 @@ const ScheduleMeeting = () => {
       }  
     }
 
-    // this is params,sending to backend for important  extra information like zoho org ID and Access Token
+    // this is params,sending to backend for important extra information like zoho org ID and Access Token
       const extras = {
         "params" : {
           "extras" : {
@@ -122,18 +122,20 @@ const ScheduleMeeting = () => {
       }
   
       try {
-          const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras) // this line send the request to node (server.js)      
-          createMeeting(accessTokenResponce.data)
+          const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
+            if (accessTokenResponce.status == 200) {
+              createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server              
+            }          
         } catch (err) {
            if (err.message == "Request failed with status code 500") {
-             messageDrop('warning','key Expired. Re-Generate the keys')
+            messageDrop('warning','Token Expired. Re-Generate the Tokens')
            }
           console.log(err.message)
         }
       }  
 
     // zoho meeting intergaration function to store the responce data
-    const createMeeting = async (data)=>{
+    const createMeeting = async(data)=>{
       messageDrop('success','Meeting Created Successfully')
 
     // this object and below function are storing the meeting seesion data (only successfully created meeting data)
@@ -141,7 +143,7 @@ const ScheduleMeeting = () => {
         id : id, // giving the same contact person id for showing in his/her deatil module
         key : Math.floor(Math.random() * 1000000000),
         session : data.session
-      }      
+      }
 
       const logMeetignSession = async()=>{
         try {
@@ -149,10 +151,10 @@ const ScheduleMeeting = () => {
               const posting = await axios.post(URL,sessionData) 
               if (posting.status === 201) {
                 messageDrop('success','Session are stored in meeting log')
+                  setTimeout(() => {
+                    navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
+                  }, 8 * 100)
               }
-              setTimeout(() => {
-                navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
-              }, 200);
             } catch (err) {
               if (err.response) {
                 message.error('Error');
