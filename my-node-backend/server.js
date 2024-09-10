@@ -15,8 +15,7 @@ app.post('/api/token', async(req, res) => { // tbhis line get the data from corr
         client_secret: req.body.client_secret,
         redirect_uri: req.body.redirect_uri,
         grant_type: req.body.grant_type
-    }
-
+    }    
     try {
         const response = await axios.post('https://accounts.zoho.in/oauth/v2/token',
             // zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
@@ -26,7 +25,7 @@ app.post('/api/token', async(req, res) => { // tbhis line get the data from corr
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }
-            )
+            )            
             res.json(response.data)
         } catch (error) {
             res.status(error.response ? error.response.status : 500).json({
@@ -123,10 +122,33 @@ app.post('/api/meeting/delete',async(req,res)=>{
         const data = await deleteMeeting.json();
         res.json(data)
     } catch (error) {
-        res.status(500).json({ message: "Failed to create meeting", error: error.message });
+        res.status(500).json({ message: "Failed to delete meeting", error: error.message });
     }
 })
 
+// this is for listing the meeting
+app.post('/api/list',async(req,res)=>{
+    const {session} = await req.body
+    try {
+        let URL = `https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions.json`
+        const listMeeting = await fetch(
+            URL,
+            {
+                method : 'GET',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${session.access_token}`,
+                    'Content-Type': 'application/json;charset=UTF-8',
+                },
+            }
+        )
+        const data = await listMeeting.json();
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to list meeting", error: error.message });
+    }
+})
+
+// running the node in 3002 port
 const PORT = 3002
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`)
