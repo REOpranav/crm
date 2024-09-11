@@ -135,7 +135,7 @@ const ScheduleMeeting = () => {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
             if (accessTokenResponce.status == 200) {
               createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server              
-            }          
+            }
           } catch (err) {
            if (err.message == "Request failed with status code 500") {
               messageDrop('warning','Token Expired. Re-Generate the Tokens')
@@ -146,7 +146,12 @@ const ScheduleMeeting = () => {
 
     // zoho meeting intergaration function to store the responce data
     const createMeeting = async(data)=>{
-      messageDrop('success','Meeting Created Successfully')
+      messageDrop('success','Meeting Created Successfully') // this is showing the message (ANTD)
+    
+    // this is for changing the actual contact detail module
+      setTimeout(() => {
+        navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
+      }, 1 * 100)      
 
     // this object and below function are storing the meeting seesion data (only successfully created meeting data)
       const sessionData = {
@@ -161,9 +166,6 @@ const ScheduleMeeting = () => {
               const posting = await axios.post(URL,sessionData) 
               if (posting.status === 201) {
                 messageDrop('success','Session are stored in meeting log')
-                  setTimeout(() => {
-                    navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
-                  }, 8 * 100)
               }
             } catch (err) {
               if (err.response) {

@@ -12,7 +12,7 @@ const iconColor = "#fff"
 return (
     <div> 
       <Row justify={'space-between'} style={{backgroundColor:backGroundColor}}>
-        <Menu mode="horizontal" style={{backgroundColor:backGroundColor }} theme='dark'>
+        <Menu mode="horizontal" style={{backgroundColor:backGroundColor,width:'70%'}} theme='dark'>
             <Menu.Item>
               <Link to={'/'}>
                 <Image 
@@ -38,7 +38,11 @@ return (
          
             <Menu.Item key="deal">
               <Link to={'/deals'}  className='PoppinsFont'>Deal </Link>
-          </Menu.Item>
+            </Menu.Item>
+
+            <Menu.Item key="meetingDetail">
+              <Link to={'/meetingDetail'}  className='PoppinsFont'>Meeting </Link>
+            </Menu.Item>
         </Menu>
 
         <Space size={'large'}>

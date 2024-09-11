@@ -95,7 +95,7 @@ const Meetinglog = ({id}) => {
           title: 'Topic',
           dataIndex: 'topic',
           key: 'topic',
-          render : (value,records) => <Link to={`/deals/detail/${records.id}`}> {records.topic} </Link>
+          render : (value,records) => <Link to={`/meetingDetail/${records.id}`}> {records.topic} </Link>
         },
         {
           title: 'Meeting start',
