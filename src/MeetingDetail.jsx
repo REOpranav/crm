@@ -5,7 +5,6 @@ import './MeetingDetail.css'
 import axios from 'axios'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import { AiOutlineEllipsis } from 'react-icons/ai'
 
 // this is for finding the name fron pathname to send  post request in that URL
 const URL = window.location.pathname    
@@ -49,6 +48,7 @@ const MeetingDetail = () => {
     const [upcoming,setUpcoming] = useState(true)
     const [past,setPast] = useState(false)
     const [meetingList,setMeetingList] = useState([])
+    const [isload,setISLoad]  = useState(false)
 
     // this both array is storing the data which is seperted by date  
     const upcomingData = []
@@ -70,22 +70,19 @@ const MeetingDetail = () => {
     }
 
     // this function is create meeting listing credencial
-      const createMeetingCredencial = async()=>{
-        const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
-          "session" : {
-              "zsoid": meetingUserDetail.userDetails.zsoid,
-              "access_token": `${meetingAccessTokenData.access_token}`,
+    const createMeetingCredencial = async()=>{
+      const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
+        "session" : {
+            "zsoid": meetingUserDetail.userDetails.zsoid,
+            "access_token": `${meetingAccessTokenData.access_token}`,
           }
         }
-
         try {
           const meetingListResponce = await axios.post(`http://localhost:3002/api/list`,extras)// this line send the request to node (server.js)      
             if (meetingListResponce.status == 200) {
               setMeetingList(meetingListResponce.data)
             }
           } catch (err) {
-            console.log(err);
-
           if (err.message == "Request failed with status code 500") {
               messageDrop('warning','Token Expired. Re-Generate the Tokens')
           }
@@ -97,6 +94,12 @@ const MeetingDetail = () => {
     useEffect(()=>{
       createMeetingCredencial()
     },[undefined])
+    
+    useEffect(()=>{      
+      if (isload) {
+        createMeetingCredencial()
+      }
+    })
 
     if ( meetingList) {
       const listData = meetingList.session || []
@@ -106,12 +109,11 @@ const MeetingDetail = () => {
         }else{
           pastData.push(data)
         }
-      })        
+      })  
     }
   
     // this is for deleting the meeting in database and meeting application
       const meetingDeletetion = async(details)=>{
-        
         try {
           const data = {
             "session": {
@@ -120,10 +122,12 @@ const MeetingDetail = () => {
               "accessToken":await meetingAccessTokenData.access_token
           }
         }
-        
+        setISLoad(true)
             const accessTokenResponce = await axios.post(`http://localhost:3002/api/meeting/delete`,data)
+        setISLoad(false)
         } catch (err) {        
           console.log(err.message);
+          setISLoad(false)
         }        
       }
 
