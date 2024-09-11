@@ -148,10 +148,7 @@ const ScheduleMeeting = () => {
     const createMeeting = async(data)=>{
       messageDrop('success','Meeting Created Successfully') // this is showing the message (ANTD)
     
-    // this is for changing the actual contact detail module
-      setTimeout(() => {
-        navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
-      }, 1 * 100)      
+     // this is for changing the actual contact detail module
 
     // this object and below function are storing the meeting seesion data (only successfully created meeting data)
       const sessionData = {
@@ -178,6 +175,7 @@ const ScheduleMeeting = () => {
             }
           }
         logMeetignSession()
+       navigate(`/contactDetail/detail/${id}`) // this is for getting out of that section
     }
    
   return (

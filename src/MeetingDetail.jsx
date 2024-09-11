@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import {Button, Col, message, Popconfirm, Row, Space ,Typography} from 'antd'
+import {Button, Col, Image, message, Popconfirm, Row, Space ,Typography} from 'antd'
 import './MeetingDetail.css'
 import axios from 'axios'
 import moment from 'moment'
@@ -147,7 +147,7 @@ const MeetingDetail = () => {
           return 'https://static.zohocdn.com/meeting/images/new-night.97fae2422b330bca087a14708233bf1b.svg';
         }
       }
-      
+    
   
   return (
     <div>
@@ -165,6 +165,14 @@ const MeetingDetail = () => {
         <Row style={{minHeight:"70vh",maxHeight:'70vh',overflow:'auto',marginTop:'20px'}} justify={'center'}>
           {upcoming && 
             <Col span={23}>
+            {upcomingData.length <= 0 && <Row justify={'center'} style={{height:'100%',display:'flex',alignItems:'center'}}>
+                  <Col>
+                     <Row justify={'center'}> <Image src='https://static.zohocdn.com/meeting/images/no-upcoming-meeting.08995d6de11131e73a5d7d0738f7ae39.svg' height={'150px'} preview={false} /> </Row>
+                     <Row justify={'center'}> <Col> <Row justify={'center'} className='headstyle'> No Upcoming Meetings.</Row> <Row justify={'center'} className='headstyle'> You can either start an instant meeting or schedule a meeting </Row></Col> </Row>
+
+                  </Col>
+                </Row>}
+
               {upcomingData && upcomingData.map((data)=>{
                 return <Row style={listStyle} className='listStyle'>
                     <Col span={4} style={listDataStyle} className='listDataStyle'> 
@@ -202,6 +210,13 @@ const MeetingDetail = () => {
           }
            {past &&  
             <Col span={23}>
+                {pastData.length <= 0 && <Row justify={'center'} style={{height:'100%',display:'flex',alignItems:'center'}}>
+                  <Col >
+                     <Row justify={'center'}> <Image src='https://static.zohocdn.com/meeting/images/no-upcoming-meeting.08995d6de11131e73a5d7d0738f7ae39.svg' height={'150px'} preview={false} /> </Row>
+                     <Row justify={'center'}> <Col > <Row justify={'center'} className='headstyle'> No Past Meetings.</Row> <Row justify={'center'} className='headstyle'>You can either start an instant meeting or schedule a meeting </Row></Col> </Row>
+
+                  </Col>
+                </Row>}
               {pastData && pastData.map((data)=>{
                 return <Row style={listStyle} className='listStyle' >
                     <Col span={5} style={listDataStyle} className='listDataStyle'> 
