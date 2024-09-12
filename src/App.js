@@ -19,6 +19,7 @@ import AccountEditForm from './AccountEditForm';
 import ScheduleMeeting from './ScheduleMeeting';
 import MeetingStep from './MeetingStep';
 import MeetingDetail from './MeetingDetail';
+import MeetingInsights from './MeetingInsights';
 
 function App() {  
   return (
@@ -50,7 +51,9 @@ function App() {
           <Route path='/contacts/organizationForm/:id' element={<DealForm />} />
           <Route path='/contacts/meetingStep/' element={<MeetingStep />} />
           <Route path='/contactDetail/detail/:id/ScheduleMeeting/:id' element={<ScheduleMeeting />} />
+          <Route path='/editing/ScheduleMeeting' element={<ScheduleMeeting />} />
           <Route path='/meetingDetail' element={<MeetingDetail />} />
+          <Route path='/meetingDetail/:id' element={<MeetingInsights />} />
         </Routes>
     </div>
   );

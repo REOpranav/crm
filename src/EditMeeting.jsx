@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-import {message,Typography,Row,Button,Space} from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import { Button, message, Row, Space, Typography } from 'antd'
 import axios from 'axios'
-import Dashboard from './Dashboard'
-import moment from 'moment';
-import EditMeeting from './EditMeeting'
+import moment from 'moment'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // this is for get the current id
-  const URL = window.location.href
-  const id = URL.split('/').pop()
+const URL = window.location.href
+const id = URL.split('/').pop()
 
 // this is message setup (ant design)
   const messageDrop = (type,content)=>{
@@ -20,9 +18,11 @@ import EditMeeting from './EditMeeting'
       content : content
      })
   }
- 
-const ScheduleMeeting = () => {
+
+const EditMeeting = () => {
+
     const navigate = useNavigate();
+    
     // accessing rhe access tokena and user detail from session storage
     const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken'))
     const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail'))
@@ -178,21 +178,10 @@ const ScheduleMeeting = () => {
      // this is for changing the page actual contact detail module
        navigate(`/contactDetail/detail/${id}`)
     }
-
+    
   return (
     <div>
-      <Dashboard />
-      <Row justify={'end'} style={{paddingTop:'10px',paddingRight:'10px'}}>
-        <Space>
-          <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>          
-          <Link to={`/contactDetail/detail/${id}`}><Button type='primary'>Back one Step</Button></Link>
-        </Space>
-      </Row>
-
-    {((meetingAccessTokenData !== null) && (meetingUserDetail !== null)) || (meetingAccessTokenData !== null) || (meetingUserDetail !== null)  ? <> 
-          <Title level={3}> Schedule a Meeting </Title>
-          {window.location.pathname == `/editing/ScheduleMeeting` ? <EditMeeting /> : <> 
-          <Row>
+         <Row>
               <form onSubmit={checkForSubmitting}>
                 <p>
                     <label for="topic">Topic : </label>
@@ -228,15 +217,13 @@ const ScheduleMeeting = () => {
                 </p>
 
               <Space>
-                  <Button type='default' danger  onClick={resetClicked}>Reset</Button>
+                <Button type='default' danger onClick={resetClicked}>Reset</Button>
                 <Button type='primary' onClick={checkForSubmitting}>Submit</Button>
               </Space>
             </form> 
           </Row>
-          </>}
-       </> :  <Row justify={'center'} align={'middle'} style={{minHeight:'70vh'}}> <Title level={3} style={{opacity:'0.5',}}>Token is expires or not yet created. Re-Generate the Tokens please </Title> </Row>
-      }
+
     </div>
   )
 }
-export default ScheduleMeeting
+export default EditMeeting

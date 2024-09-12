@@ -129,7 +129,7 @@ const Meetinglog = ({id}) => {
           title:'departmentName',
           dataIndex: 'departmentName',
           key: 'departmentName',
-          render : (value,records) => <Row justify={'space-between'}> {value} <Text className='deleteIcon'> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete'} cancelText={'No'}  onConfirm={()=>meetingDeletetion(records)} onCancel={()=>messageDrop('info','Deletion canceled. Everything stays as is!')}> <AiOutlineEllipsis /> </Popconfirm> </Text> </Row>
+          render : (value,records) => <Row justify={'space-between'}> {value} <Text className='deleteIcon' style={{color:'red'}}> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete'} cancelText={'No'}  onConfirm={()=>meetingDeletetion(records)} onCancel={()=>messageDrop('info','Deletion canceled. Everything stays as is!')}> cancel </Popconfirm> </Text> </Row>
         },
      ]
 
