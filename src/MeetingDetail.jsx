@@ -296,6 +296,8 @@ const MeetingDetail = () => {
                   <span>
                      <Row justify={'center'}> <Image src='https://support.entase.com/wp-content/uploads/2022/10/Frame.svg' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
                      <Row> <Title level={4}> Token <span style={{backgroundColor:'orange'}}> expired</span> or not Generate . <span style={{backgroundColor:'greenyellow'}}> Generate</span> by click that <span style={{color:'#5a3bb6'}}> Re-Generate the Tokens </span>Button </Title></Row>
+                     {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
+                     {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}
                   </span>
                 </Col>
               </>}
