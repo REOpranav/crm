@@ -95,6 +95,25 @@
       "pincode": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "671456011",
+      "accountOwner": "Deepa rajendiren",
+      "industry": "IT",
+      "employeesCount": "30000000",
+      "email": "deepa@gmail.com",
+      "mobile": "978727293",
+      "date": "",
+      "companyName": "Zappyworks",
+      "annualrevenue": "2000000",
+      "gender": "male",
+      "area": "Kangipuram",
+      "state": "",
+      "country": "",
+      "pincode": "99993",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "deals": [
@@ -135,6 +154,46 @@
       "country": "",
       "pincode": "",
       "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "671456011",
+      "key": "653091509",
+      "dealowner": "deepa deal",
+      "dealName": "deepa",
+      "accountName": "",
+      "amount": "33333",
+      "Pipeline": "",
+      "closingDate": "2024-09-13",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "1000",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "237157838",
+      "key": "753960554",
+      "dealowner": "sin deal",
+      "dealName": "sin",
+      "accountName": "",
+      "amount": "20000",
+      "Pipeline": "standard",
+      "closingDate": "2024-09-13",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "100",
       "website": "",
       "description": ""
     }
@@ -488,7 +547,7 @@
   "meetingSession": [
     {
       "id": "567890123",
-      "key": 93965994,
+      "key": 88466387,
       "session": {
         "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
         "timezone": "Asia/Calcutta",
@@ -497,13 +556,13 @@
         "webServer": "meeting.zoho.in",
         "creatorZuid": "60024262219",
         "source": "Meeting Create page",
-        "endTimeMillisec": 1727081100000,
-        "encryptPwd": "9279db8d0dbe87d29d6099d3fd4466cc5985563767d7515cdda2cbf4aba961b9",
+        "endTimeMillisec": 1726252320000,
+        "encryptPwd": "fa94f6aa6958ab0c8d92d7d784a0bad3ec2626cd2276e3b43bc3e7e6a80145b5",
         "duration": 3600000,
-        "sys_id": "527192000000154084",
-        "accessCode": "13392 00370 #",
+        "sys_id": "527192000000154103",
+        "accessCode": "13592 95467 #",
         "sessionType": "meeting",
-        "startTime": "Sep 23, 2024 01:15 PM IST",
+        "startTime": "Sep 13, 2024 11:02 PM IST",
         "meeting": {
           "zsoid": "60017874042"
         },
@@ -513,17 +572,17 @@
         "presenter": 60024262219,
         "offset": "19800000",
         "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/gjV76xW0Cg",
-        "agenda": "this is two",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1339200370&x-meeting-org=60017874042",
+        "joinLink": "https://meet.zoho.in/LVpUIZHBuO",
+        "agenda": "this meeting for vadivel meeting`",
+        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1359295467&x-meeting-org=60017874042",
         "UID": 527192000000154100,
-        "startTimeMillisec": 1727077500000,
-        "topic": "two ",
-        "endTime": "Sep 23, 2024 02:15 PM IST",
-        "pwd": "cBqmgR",
-        "meetingKey": "1339200370",
+        "startTimeMillisec": 1726248720000,
+        "topic": "vadivel meeting ",
+        "endTime": "Sep 14, 2024 12:02 AM IST",
+        "pwd": "OYKCL2",
+        "meetingKey": "1359295467",
         "removedParticipants": "[]",
-        "startDate": "Sep 23, 2024 01:15 PM"
+        "startDate": "Sep 13, 2024 11:02 PM"
       }
     }
   ]

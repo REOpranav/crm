@@ -42,7 +42,7 @@ const AccountFormPage = () => {
     function validation(leadFormValues) {   
         let errorvalues = {}
         if (!leadFormValues.accountOwner.trim()) {
-        errorvalues.leadowner = `${moduleName} Account owner is Required`
+          errorvalues.leadowner = `${moduleName} Account owner is Required`
         }
 
     // if (!leadFormValues.industry.trim()) {
