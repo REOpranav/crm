@@ -81,7 +81,7 @@ const MeetingDetail = () => {
       }
     },[undefined])
 
-    // this function is create meeting listing credencial
+    // this function is get the meeting listing 
     const checkMeetinguserDetailAndAccessTokenAreAvailable = ()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
         const MeetingCredencial = async()=>{
@@ -100,26 +100,27 @@ const MeetingDetail = () => {
               if (err.message == "Request failed with status code 500") {
                   messageDrop('warning','Token Expired. Re-Generate the Tokens')
               }
-              console.log(err.code)
             }
         } 
           MeetingCredencial()
       }
     }
 
+    // this is calling function
     useEffect(()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
         checkMeetinguserDetailAndAccessTokenAreAvailable()
       }
     },[undefined])
     
-    
+    // this call the checkMeetinguserDetailAndAccessTokenAreAvailable function when isLoad is true   
     useEffect(()=>{      
       if (isload) {
         checkMeetinguserDetailAndAccessTokenAreAvailable()
       }
     })
 
+    // this is seperation code (past and upcoming meeting)  
     if (meetingList) {
       const listData = meetingList.session || []
       listData.map((data)=>{                      
@@ -131,7 +132,7 @@ const MeetingDetail = () => {
       })  
     }
   
-    // this is for deleting the meeting in database and meeting application
+    // this is for deleting the meeting in database
       const meetingDeletetion = async(details)=>{
         try {
           const data = {
@@ -145,7 +146,6 @@ const MeetingDetail = () => {
               const accessTokenResponce = await axios.post(`http://localhost:3002/api/meeting/delete`,data)
           setISLoad(false)
         } catch (err) {        
-          console.log(err.message);
           setISLoad(false)
         }        
       }
@@ -244,7 +244,7 @@ const MeetingDetail = () => {
                 <Col style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <span>
                      <Row justify={'center'}> <Image src='https://support.entase.com/wp-content/uploads/2022/10/Frame.svg' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
-                     <Row> <Title level={4}> Token <span style={{backgroundColor:'orange'}}> expired</span> or not Generate . <span style={{backgroundColor:'greenyellow'}}> Generate</span> by click that <span style={{color:'#5a3bb6'}}> Re-Generate the Tokens </span>Button </Title></Row>
+                     <Row> <Title level={4}> Token <span style={{backgroundColor:'orange'}}> expired</span> or not Generate . <span> Generate</span> by click the  <span style={{color:'#5a3bb6'}}> Re-Generate the Tokens </span>Button </Title></Row>
                      {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
                      {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}
                   </span>
@@ -254,7 +254,7 @@ const MeetingDetail = () => {
           }
            {past &&  
             <Col span={23}>
-            {!Array.isArray(meetingUserDetail) || !Array.isArray(meetingAccessTokenData) ? <> 
+            {!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData) ? <> 
                 {pastData.length <= 0 && <Row justify={'center'} style={{height:'100%',display:'flex',alignItems:'center'}}>
                   <Col >
                      <Row justify={'center'}> <Image src='https://static.zohocdn.com/meeting/images/no-upcoming-meeting.08995d6de11131e73a5d7d0738f7ae39.svg' height={'150px'} preview={false} /> </Row>

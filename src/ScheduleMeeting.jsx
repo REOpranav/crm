@@ -141,7 +141,6 @@ const ScheduleMeeting = () => {
            if (err.message == "Request failed with status code 500") {
               messageDrop('warning','Token Expired. Re-Generate the Tokens')
            }
-          console.log(err.message)
         }
       }  
 
@@ -175,7 +174,7 @@ const ScheduleMeeting = () => {
           }
         logMeetignSession()
 
-     // this is for changing the page actual contact detail module
+    //  // this is for changing the page actual contact detail module
        navigate(`/contactDetail/detail/${id}`)
     }
 

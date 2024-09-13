@@ -16,7 +16,6 @@ const MeetingStep = () => {
  const navigate = useNavigate()
  const [current,setCurrent] = useState(1)
  const onChange = (value) => {
-    console.log('onChange:', value)
     setCurrent(value)
   };
 
@@ -52,10 +51,9 @@ const MeetingStep = () => {
   return (
     <div>
           <Dashboard />
-          <Row justify={'end'} style={{padding:'20px'}}>
+          <Row justify={'start'} style={{padding:'20px'}}>
             <Space>
-              <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
-              <Link onClick={ () => window.history.back(-1)}><Button type='primary'>Back one Step</Button></Link>
+              <Link onClick={ () => window.history.back(-1)}><Button type='default'>Back one Step</Button></Link>
             </Space>
           </Row>
           

@@ -52,7 +52,6 @@ const Meetinglog = ({id}) => {
         }
       }
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/meeting/delete`,data)
-          console.log(accessTokenResponce.status);
           if (accessTokenResponce.status == 200) {
             deletingMeetingDataInDb(details)
           }
@@ -68,12 +67,7 @@ const Meetinglog = ({id}) => {
       setLoadTime(true)
       try {
         const URL = 'http://localhost:3000/meetingSession';
-        // console.log(`${URL}?key=${values.key}`);
-        
-        // const deleting = await axios.delete(`${URL}?key=${values.key}`)
         const deleting = await axios.delete(`${URL}/${values.id}`)
-        console.log(deleting.data);
-        
         if (deleting.status === 200) {
           message.success("Successfully deleted the data");
         }
