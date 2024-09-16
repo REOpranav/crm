@@ -183,7 +183,7 @@ const ScheduleMeeting = () => {
           }
         logMeetignSession()
 
-    // this is for changing the page actual contact detail module
+    // this is for changing the page to actual contact detail module
       setTimeout(() => {
         if (window.location.pathname == "/ScheduleMeeting") {
           navigate("/meetingDetail")
