@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {message,Typography,Row,Button,Space} from 'antd'
+import {message,Typography,Row,Button,Space, Image, Col} from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
@@ -24,8 +24,8 @@ import EditMeeting from './EditMeeting'
 const ScheduleMeeting = () => {
     const navigate = useNavigate();
     // accessing rhe access tokena and user detail from session storage
-    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken'))
-    const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail'))
+    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) || []
+    const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) || []
 
     const {Title} = Typography
     const [error,setError] = useState({})
@@ -196,6 +196,8 @@ const ScheduleMeeting = () => {
     const backFunction = ()=>{
       if (window.location.pathname == `/editing/ScheduleMeeting`) {
         navigate(window.history.back(-1))
+      }else if (window.location.pathname == "/ScheduleMeeting") {
+        navigate(window.history.back(-1))
       }else{
         navigate(`/contactDetail/detail/${id}`)
       }
@@ -211,7 +213,7 @@ const ScheduleMeeting = () => {
         </Space>
       </Row>
 
-    {((meetingAccessTokenData !== null) && (meetingUserDetail !== null)) || (meetingAccessTokenData !== null) || (meetingUserDetail !== null)  ? <> 
+    {(!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData))  ?  <> 
           <Title level={3}> Schedule a Meeting </Title>
           {window.location.pathname == `/editing/ScheduleMeeting` ? <EditMeeting /> : <> 
           <Row>
@@ -256,7 +258,15 @@ const ScheduleMeeting = () => {
             </form> 
           </Row>
           </>}
-       </> :  <Row justify={'center'} align={'middle'} style={{minHeight:'70vh'}}> <Title level={3} style={{opacity:'0.5',}}>Token is expires or not yet created. Re-Generate the Tokens please </Title> </Row>
+       </> :  <Col style={{height:'90vh',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <span>
+                     <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/one/india/h-creative.webp' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
+                     <Row justify={'center'}> <Title level={5}>  We want <span style={{color:'#5a3bb6',textTransform:'capitalize'}}> tokens </span> to schedule zoho meetings </Title></Row>
+                     <Row justify={'center'}> <Title level={4}>  Click the <span style={{color:'#5a3bb6'}}> Re-Generate Tokens </span> button to generate new tokens.</Title> </Row>
+                     {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
+                     {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}
+                  </span>
+                </Col>
       }
     </div>
   )

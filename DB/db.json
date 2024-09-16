@@ -584,46 +584,5 @@
       ]
     }
   ],
-  "meetingSession": [
-    {
-      "id": "ScheduleMeeting",
-      "key": 895846282,
-      "session": {
-        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
-        "timezone": "Asia/Calcutta",
-        "departmentId": "527192000000008011",
-        "addedParticipants": "[]",
-        "webServer": "meeting.zoho.in",
-        "creatorZuid": "60024262219",
-        "source": "Meeting Create page",
-        "endTimeMillisec": 1726601340000,
-        "encryptPwd": "c1f4c753594b985b0058b9f9881f2da0e3dc6ccbf4333874167ce5516149e0e9",
-        "duration": 3600000,
-        "sys_id": "527192000000177022",
-        "accessCode": "13962 92692 #",
-        "sessionType": "meeting",
-        "startTime": "Sep 17, 2024 11:59 PM IST",
-        "meeting": {
-          "zsoid": "60017874042"
-        },
-        "participants": [],
-        "departmentName": "My Department",
-        "creator": "60024262219",
-        "presenter": 60024262219,
-        "offset": "19800000",
-        "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/UooZM0Nmk4",
-        "agenda": "dsmc",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1396292692&x-meeting-org=60017874042",
-        "UID": 527192000000177000,
-        "startTimeMillisec": 1726597740000,
-        "topic": "sim",
-        "endTime": "Sep 18, 2024 12:59 AM IST",
-        "pwd": "IrIhuD",
-        "meetingKey": "1396292692",
-        "removedParticipants": "[]",
-        "startDate": "Sep 17, 2024 11:59 PM"
-      }
-    }
-  ]
+  "meetingSession": []
 }

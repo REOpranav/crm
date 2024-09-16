@@ -77,12 +77,12 @@ const MeetingDetail = () => {
 
     useEffect(()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
-        checkMeetinguserDetailAndAccessTokenAreAvailable()
+        checkMeetingTokensAvailable()
       }
     },[undefined])
 
-    // this function is get the meeting listing 
-    const checkMeetinguserDetailAndAccessTokenAreAvailable = ()=>{
+    // this function is get the meeting listing
+    const checkMeetingTokensAvailable = ()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
         const MeetingCredencial = async()=>{
           const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
@@ -109,14 +109,14 @@ const MeetingDetail = () => {
     // this is calling function
     useEffect(()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
-        checkMeetinguserDetailAndAccessTokenAreAvailable()
+        checkMeetingTokensAvailable()
       }
     },[undefined])
     
-    // this call the checkMeetinguserDetailAndAccessTokenAreAvailable function when isLoad is true   
+    // this call the checkMeetingTokensAvailable function when isLoad is true   
     useEffect(()=>{      
       if (isload) {
-        checkMeetinguserDetailAndAccessTokenAreAvailable()
+        checkMeetingTokensAvailable()
       }
     })
 
@@ -147,7 +147,7 @@ const MeetingDetail = () => {
           setISLoad(false)
         } catch (err) {        
           setISLoad(false)
-        }        
+        }
       }
 
     // this is for showing the images for correct time
@@ -184,7 +184,7 @@ const MeetingDetail = () => {
           </Space>
      
         </Row>
-        <Row justify={'space-between'} style={{backgroundColor:'transparent',boxShadow:'0px 0.3px 1px grey',outline:'none',border:'none'}}>
+        <Row justify={'space-between'} style={{backgroundColor:'transparent',outline:'none',border:'none'}}>
             <Col>
               <Row>
                 <Col style={headingStyle} className='headstyle' onClick={upcomingOnclick}> <span style={{borderBottom:upcoming ? '3px solid Blue': 'transparent',color:upcoming ? 'blue' : 'black',padding:'5px',}}>Upcoming</span> </Col>
@@ -246,7 +246,7 @@ const MeetingDetail = () => {
               </> : <>
                 <Col style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <span>
-                     <Row justify={'center'}> <Image src='https://support.entase.com/wp-content/uploads/2022/10/Frame.svg' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
+                     <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/it-management/home/it-management-cloud2x.png' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
                      <Row> <Title level={4}> Token <span style={{color:'orange'}}> expired </span>. Click the <span style={{color:'#5a3bb6'}}>Re-Generate Tokens </span> button to generate new tokens.</Title></Row>
                      {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
                      {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}
@@ -297,7 +297,7 @@ const MeetingDetail = () => {
                 </> : <>
                 <Col style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <span>
-                     <Row justify={'center'}> <Image src='https://support.entase.com/wp-content/uploads/2022/10/Frame.svg' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
+                     <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/it-management/home/it-management-cloud2x.png' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
                      <Row> <Title level={4}> Token <span style={{color:'orange'}}> expired </span>. Click the <span style={{color:'#5a3bb6'}}>Re-Generate Tokens </span> button to generate new tokens.</Title></Row>
                      {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
                      {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}
