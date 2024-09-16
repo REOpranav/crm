@@ -40,12 +40,12 @@ form {
     outline: none;
   }
 
+  /* this is select option input field */
   #meridiem{
     width: 80%;
     padding: 8px;
     border-radius: 4px;
     box-sizing: border-box;
-    border: 1px solid #ddd;
     background-color: white;
   }
 

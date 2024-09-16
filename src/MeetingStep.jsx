@@ -51,7 +51,7 @@ const MeetingStep = () => {
   return (
     <div>
           <Dashboard />
-          <Row justify={'start'} style={{padding:'20px'}}>
+          <Row justify={'end'} style={{padding:'20px'}}>
             <Space>
               <Link onClick={ () => window.history.back(-1)}><Button type='default'>Back one Step</Button></Link>
             </Space>

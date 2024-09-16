@@ -36,7 +36,7 @@ const ScheduleMeeting = () => {
         time : '',
         meridiem : '',
         participantsMail : '',
-    })        
+    })    
 
     // this is reset button function
     function resetClicked(){
@@ -45,6 +45,7 @@ const ScheduleMeeting = () => {
         meetingType : '',
         statrDate : '',
         time : '',
+        meridiem : '',
         participantsMail : ''
       })
     }
@@ -100,7 +101,7 @@ const ScheduleMeeting = () => {
   
    // this function for "to see if the input value is in error or not , if it in error ,it will change the class name into inputerror"
     function getInputClass(value){
-     return error[value] 
+        return error[value]
     }
 
   // this code for patch work (onlu this problem)
@@ -230,7 +231,7 @@ const ScheduleMeeting = () => {
 
                 <p>
                     <label for="statrDate">Date : </label>
-                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('startTime') ? "inputError" : 'errorClear'}/>
+                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('statrDate') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
@@ -240,8 +241,9 @@ const ScheduleMeeting = () => {
 
                 <p>
                     <label for="meridiem">AM / PM : </label>
-                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange}>
-                       <option value="AM" defaultChecked selected>AM</option>
+                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange} className={getInputClass('meridiem') ? "inputError" : 'errorClear'}>
+                       <option value="" style={{color:'red'}}>Select Meridiem</option>
+                       <option value="AM">AM</option>
                        <option value="PM">PM</option>
                     </select>
                 </p>
