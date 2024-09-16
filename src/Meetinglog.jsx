@@ -1,8 +1,7 @@
-import { message, Row,Table,Typography,Popconfirm,Dropdown, Button } from 'antd'
+import { message, Row,Table,Typography,Popconfirm} from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AiOutlineEllipsis } from "react-icons/ai";
 import './Meetinglog.css'
 
 // this is message setup (ant design)
@@ -157,7 +156,7 @@ const Meetinglog = ({id}) => {
        fetching()  
       }
      })
-     
+
   return (
     <div>
      <Row style={{padding:'10px',marginTop:'10px'}} justify={'start'}> 

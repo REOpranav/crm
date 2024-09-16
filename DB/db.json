@@ -196,6 +196,46 @@
       "expectedAmount": "100",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "331083644",
+      "key": "760536689",
+      "dealowner": "vadivel ",
+      "dealName": "vadivel deal",
+      "accountName": "",
+      "amount": "20000",
+      "Pipeline": "pranav",
+      "closingDate": "2024-09-14",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "300",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "10334060",
+      "key": "8153168",
+      "dealowner": "nprmal ",
+      "dealName": "normal deal ",
+      "accountName": "",
+      "amount": "10000",
+      "Pipeline": "standard",
+      "closingDate": "2024-09-14",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "300",
+      "website": "",
+      "description": ""
     }
   ],
   "callLogs": [
@@ -546,8 +586,8 @@
   ],
   "meetingSession": [
     {
-      "id": "contacts?code=1000.8682b379bc2230d66a1d97884daa8ffc.ae00b8d4ef8eb6718ee45210a5eff0ae&location=in&accounts-server=https%3A%2F%2Faccounts.zoho.in",
-      "key": 876627398,
+      "id": "ScheduleMeeting",
+      "key": 895846282,
       "session": {
         "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
         "timezone": "Asia/Calcutta",
@@ -556,13 +596,13 @@
         "webServer": "meeting.zoho.in",
         "creatorZuid": "60024262219",
         "source": "Meeting Create page",
-        "endTimeMillisec": 1726302180000,
-        "encryptPwd": "d46039ebdca73cf0dcbd4e16f6e59e42b6971fc17b73bfdcf3175b11418059d3",
+        "endTimeMillisec": 1726601340000,
+        "encryptPwd": "c1f4c753594b985b0058b9f9881f2da0e3dc6ccbf4333874167ce5516149e0e9",
         "duration": 3600000,
-        "sys_id": "527192000000158266",
-        "accessCode": "13196 93250 #",
+        "sys_id": "527192000000177022",
+        "accessCode": "13962 92692 #",
         "sessionType": "meeting",
-        "startTime": "Sep 14, 2024 12:53 PM IST",
+        "startTime": "Sep 17, 2024 11:59 PM IST",
         "meeting": {
           "zsoid": "60017874042"
         },
@@ -572,17 +612,17 @@
         "presenter": 60024262219,
         "offset": "19800000",
         "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/yOMByG9GN5",
-        "agenda": "simple meeting with prasnavavadivel",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1319693250&x-meeting-org=60017874042",
-        "UID": 527192000000158300,
-        "startTimeMillisec": 1726298580000,
-        "topic": "pranavavadivel",
-        "endTime": "Sep 14, 2024 01:53 PM IST",
-        "pwd": "kEr15x",
-        "meetingKey": "1319693250",
+        "joinLink": "https://meet.zoho.in/UooZM0Nmk4",
+        "agenda": "dsmc",
+        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1396292692&x-meeting-org=60017874042",
+        "UID": 527192000000177000,
+        "startTimeMillisec": 1726597740000,
+        "topic": "sim",
+        "endTime": "Sep 18, 2024 12:59 AM IST",
+        "pwd": "IrIhuD",
+        "meetingKey": "1396292692",
         "removedParticipants": "[]",
-        "startDate": "Sep 14, 2024 12:53 PM"
+        "startDate": "Sep 17, 2024 11:59 PM"
       }
     }
   ]

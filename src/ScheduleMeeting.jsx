@@ -7,7 +7,7 @@ import moment from 'moment';
 import EditMeeting from './EditMeeting'
 
 // this is for get the current id
-  const URL = window.location.href
+  const URL = window.location.pathname
   const id = URL.split('/').pop()
 
 // this is message setup (ant design)
@@ -135,7 +135,16 @@ const ScheduleMeeting = () => {
       try {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
             if (accessTokenResponce.status == 200) {
-              createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server              
+              if (window.location.pathname !== '/ScheduleMeeting') {
+                createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server                
+              }
+
+              if (window.location.pathname == '/ScheduleMeeting') {
+                setTimeout(() => {
+                  navigate("/meetingDetail")
+                }, 1 * 600) 
+              }
+            
             }
           } catch (err) {
            if (err.message == "Request failed with status code 500") {
@@ -174,8 +183,22 @@ const ScheduleMeeting = () => {
           }
         logMeetignSession()
 
-    //  // this is for changing the page actual contact detail module
-       navigate(`/contactDetail/detail/${id}`)
+    // this is for changing the page actual contact detail module
+      setTimeout(() => {
+        if (window.location.pathname == "/ScheduleMeeting") {
+          navigate("/meetingDetail")
+        }else{
+          navigate(`/contactDetail/detail/${id}`)
+        }
+        }, 1 * 600);
+    }    
+    
+    const backFunction = ()=>{
+      if (window.location.pathname == `/editing/ScheduleMeeting`) {
+        navigate(window.history.back(-1))
+      }else{
+        navigate(`/contactDetail/detail/${id}`)
+      }
     }
 
   return (
@@ -184,7 +207,7 @@ const ScheduleMeeting = () => {
       <Row justify={'end'} style={{paddingTop:'10px',paddingRight:'10px'}}>
         <Space>
           <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>          
-          <Link to={`/contactDetail/detail/${id}`}><Button type='primary'>Back one Step</Button></Link>
+           <Button type='primary' onClick={backFunction}> Back one Step </Button>
         </Space>
       </Row>
 

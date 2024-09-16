@@ -2,12 +2,13 @@ import { Menu, Row ,Typography, Image ,Space, Flex} from 'antd';
 import { Link } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
 import './Dashboard.css'
+import { useState } from 'react';
 
-const Dashboard = () => {
+const Dashboard = ({count}) => {
 const {Text ,Title} = Typography
 const backGroundColor = '#422A8D'
 const iconColor = "#fff"
-
+const [counter,setCounter] = useState(0)
 
 return (
     <div> 
@@ -40,13 +41,14 @@ return (
               <Link to={'/deals'}  className='PoppinsFont'>Deal </Link>
             </Menu.Item>
 
-            <Menu.Item key="meetingDetail">
-              <Link to={'/meetingDetail'}  className='PoppinsFont'>Meeting </Link>
+            <Menu.Item key="meetingDetail"> 
+              <Link to={'/meetingDetail'} className='PoppinsFont'>Meeting </Link>
             </Menu.Item>
         </Menu>
 
         <Space size={'large'}>
-            <AiFillSetting color={iconColor}  className='PoppinsFont'/>
+        <span style={{position:'absolute'}}> <span style={{display:'flex',marginTop:'-10px',color:'white'}}> {counter} </span></span>
+            <AiFillSetting color={iconColor}  className='PoppinsFont'/> 
             <Link to={'/'}>
               <Flex gap={'small'} align='center' style={{marginRight:'10px'}}>
               <Image  
