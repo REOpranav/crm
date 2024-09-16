@@ -57,6 +57,25 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "17886781",
+      "leadowner": "vadivel",
+      "firstname": "shanmuga priya ",
+      "lastname": "sundharavadivel",
+      "email": "some@gmail.com",
+      "mobile": "9812989212",
+      "date": "2024-09-16",
+      "companyName": "Zappyworks",
+      "annualrevenue": "02999",
+      "gender": "male",
+      "area": "chennai",
+      "state": "tamil nadu ",
+      "country": "india",
+      "pincode": "892993",
+      "expectedAmount": "100000000",
+      "website": "https://meeting.zoho.in/meeting",
+      "description": "zoho meeting intergration"
     }
   ],
   "accounts": [
@@ -83,16 +102,17 @@
       "accountOwner": "Thirumalairaj",
       "industry": "Arima.in",
       "employeesCount": "3000",
-      "annualrevenue": "20000000",
-      "mobile": "9876545876",
       "email": "arima.in@gmail.com",
+      "mobile": "9876545876",
       "date": "2024-08-30",
-      "companyName": "",
+      "companyName": "Arima.one",
+      "annualrevenue": "20000000",
       "gender": "",
       "area": "",
       "state": "",
       "country": "",
       "pincode": "",
+      "expectedAmount": "",
       "website": "",
       "description": ""
     },
@@ -116,128 +136,7 @@
       "description": ""
     }
   ],
-  "deals": [
-    {
-      "id": "236192080",
-      "key": "361105593",
-      "dealowner": "vadivel",
-      "dealName": "vadivel water deal",
-      "accountName": "",
-      "amount": "10000",
-      "Pipeline": "",
-      "closingDate": "2024-09-06",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "30000",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "678901234",
-      "key": "543951484",
-      "dealowner": "one",
-      "dealName": "onr deal",
-      "accountName": "",
-      "amount": "200000",
-      "Pipeline": "",
-      "closingDate": "2024-09-06",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "671456011",
-      "key": "653091509",
-      "dealowner": "deepa deal",
-      "dealName": "deepa",
-      "accountName": "",
-      "amount": "33333",
-      "Pipeline": "",
-      "closingDate": "2024-09-13",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "1000",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "237157838",
-      "key": "753960554",
-      "dealowner": "sin deal",
-      "dealName": "sin",
-      "accountName": "",
-      "amount": "20000",
-      "Pipeline": "standard",
-      "closingDate": "2024-09-13",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "100",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "331083644",
-      "key": "760536689",
-      "dealowner": "vadivel ",
-      "dealName": "vadivel deal",
-      "accountName": "",
-      "amount": "20000",
-      "Pipeline": "pranav",
-      "closingDate": "2024-09-14",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "300",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "10334060",
-      "key": "8153168",
-      "dealowner": "nprmal ",
-      "dealName": "normal deal ",
-      "accountName": "",
-      "amount": "10000",
-      "Pipeline": "standard",
-      "closingDate": "2024-09-14",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "300",
-      "website": "",
-      "description": ""
-    }
-  ],
+  "deals": [],
   "callLogs": [
     {
       "id": "789012335",
@@ -516,71 +415,9 @@
   ],
   "formLayout": [
     {
-      "id": "sundhar",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
-        "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
-        "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>"
-      ]
-    },
-    {
-      "id": "vadivel",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
-        "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
-        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>"
-      ]
-    },
-    {
-      "id": "sakthivel",
+      "id": "vadiv",
       "inputs": [
         "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>"
-      ]
-    },
-    {
-      "id": "kumar",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>",
-        "<p draggable=\"true\"><label for=\"area\">Area : </label><input type=\"text\" name=\"area\" id=\"area\" placeholder=\"Area\"></p>"
-      ]
-    },
-    {
-      "id": "pranav",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"state\">State : </label><input type=\"text\" name=\"state\" id=\"state\" placeholder=\"State\"></p>",
-        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>",
-        "<p draggable=\"true\"><label for=\"expectedAmount\">Expected Amount : </label><input type=\"text\" name=\"expectedAmount\" id=\"expectedAmount\" placeholder=\"Expected Amount\"></p>"
-      ]
-    },
-    {
-      "id": "chair",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"expectedAmount\">Expected Amount : </label><input type=\"text\" name=\"expectedAmount\" id=\"expectedAmount\" placeholder=\"Expected Amount\"></p>",
-        "<p draggable=\"true\"><label for=\"pincode\">Pincode : </label><input type=\"number\" name=\"pincode\" id=\"pincode\" placeholder=\"Pincode\"></p>"
-      ]
-    },
-    {
-      "id": "sri venkata reddy",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
-        "<p draggable=\"true\"><label for=\"pincode\">Pincode : </label><input type=\"number\" name=\"pincode\" id=\"pincode\" placeholder=\"Pincode\"></p>",
-        "<p draggable=\"true\"><label for=\"website\">Website : </label><input type=\"url\" name=\"website\" id=\"website\" placeholder=\"Website\"></p>",
-        "<p draggable=\"true\"><label for=\"description\">Description : </label><textarea name=\"description\" id=\"description\" placeholder=\"Description\"></textarea></p>"
-      ]
-    },
-    {
-      "id": "water snandy",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
-        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>",
-        "<p draggable=\"true\"><label for=\"area\">Area : </label><input type=\"text\" name=\"area\" id=\"area\" placeholder=\"Area\"></p>"
-      ]
-    },
-    {
-      "id": "aswq",
-      "inputs": [
-        "<p draggable=\"true\"><label for=\"firstname\">First Name : </label><input type=\"text\" name=\"firstname\" id=\"firstname\" placeholder=\"First Name *\"></p>",
-        "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>"
       ]
     }
   ],

@@ -13,6 +13,10 @@ const moduleName = URL.split('/').filter(e => e).shift()
     message.success('Sucessfully created')
  }
 
+  const required = {
+    color : 'red'
+  }
+
 const AccountFormPage = () => {
    const {Text} = Typography
    const navigation = useNavigate() //this is for navigation  
@@ -45,21 +49,13 @@ const AccountFormPage = () => {
           errorvalues.leadowner = `${moduleName} Account owner is Required`
         }
 
-    // if (!leadFormValues.industry.trim()) {
-    //     errorvalues.firstname = 'Industry Name is Required'
-    // }
+    if (!leadFormValues.industry.trim()) {
+        errorvalues.industry = 'Industry Name is Required'
+    }
 
-    // if (!leadFormValues.employeesCount.trim()) {
-    //     errorvalues.lastname = 'Employes Count is Required'
-    // }
-    
-    // if (!leadFormValues.email.trim()) {
-    //     errorvalues.email = 'Email Id is Required'
-    // }
-    
-    // if (!leadFormValues.mobile.trim()) {
-    //     errorvalues.mobile = 'Mobile Number is Required'
-    // }
+    if (!leadFormValues.employeesCount.trim()) {
+        errorvalues.employeesCount = 'Employes Count is Required'
+    }
     return errorvalues
   }
 
@@ -150,22 +146,22 @@ const AccountFormPage = () => {
     <Row>
          <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
-                <label for="accountOwner"> Account Owner : </label>
-                <input type="text" name="accountOwner" id="accountOwner" placeholder="Account Owner *" value={accountData.accountOwner} onChange={handleChange} className={getInputClass('leadowner')}/> 
+                <label for="accountOwner"> <span style={required}>* &nbsp;</span> Account Owner : </label>
+                <input type="text" name="accountOwner" id="accountOwner" placeholder="Account Owner " value={accountData.accountOwner} onChange={handleChange} className={getInputClass('leadowner')}/> 
             </p>
             
             <p>
-                <label for="industry">Industry : </label>
-                <input type="text" name="industry" id="industry" placeholder="Industry *" value={accountData.industry} onChange={handleChange} className={getInputClass('firstname')}/> 
+                <label for="industry"> <span style={required}>* &nbsp;</span> Industry : </label>
+                <input type="text" name="industry" id="industry" placeholder="Industry " value={accountData.industry} onChange={handleChange} className={getInputClass('industry')}/> 
             </p>
 
             <p>
-                <label for="employeesCount">Employees Count : </label>
-                <input type="number" name="employeesCount" id="employeesCount" placeholder="Employees Count *" value={accountData.employeesCount} onChange={handleChange}  className={getInputClass('lastname')}/> 
+                <label for="employeesCount"> <span style={required}>* &nbsp;</span> Employees Count : </label>
+                <input type="number" name="employeesCount" id="employeesCount" placeholder="Employees Count " value={accountData.employeesCount} onChange={handleChange}  className={getInputClass('employeesCount')}/> 
             </p>
 
             <p>
-                <label for="annualrevenue">Annual Revenue : </label>
+                <label for="annualrevenue"> Annual Revenue : </label>
                 <input type="number" name="annualrevenue" id="annualrevenue" placeholder="Annual Revenue" value={accountData.annualrevenue} onChange={handleChange}/> 
             </p>
             

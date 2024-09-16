@@ -21,6 +21,10 @@ import EditMeeting from './EditMeeting'
      })
   }
  
+  const required = {
+    color : 'red'
+  }
+
 const ScheduleMeeting = () => {
     const navigate = useNavigate();
     // accessing rhe access tokena and user detail from session storage
@@ -39,14 +43,14 @@ const ScheduleMeeting = () => {
     })    
 
     // this is reset button function
-    function resetClicked(){
+    const resetClicked = ()=>{
       setMeetingData({
         topic : '',
-        meetingType : '',
+        agenda : '',
         statrDate : '',
         time : '',
         meridiem : '',
-        participantsMail : ''
+        participantsMail : '',
       })
     }
 
@@ -60,7 +64,7 @@ const ScheduleMeeting = () => {
     }
 
   //checking tthe form fileds are filled or not
-  function checkForSubmitting(e) {
+  function checkForSubmitting(e) {    
     let checkHavingErrorInInputField = Object.keys(validation(meetingData)).length === 0 // if it was greater than 0 that mean not fill the manditory field
     if (checkHavingErrorInInputField) {
         onFinish(e)
@@ -185,7 +189,7 @@ const ScheduleMeeting = () => {
         logMeetignSession()
 
     // this is for changing the page to actual contact detail module
-      setTimeout(() => {
+      setTimeout(() => {        
         if (window.location.pathname == "/ScheduleMeeting") {
           navigate("/meetingDetail")
         }else{
@@ -194,11 +198,11 @@ const ScheduleMeeting = () => {
         }, 1 * 600);
     }    
     
-    const backFunction = ()=>{
-      if (window.location.pathname == `/editing/ScheduleMeeting`) {
-        navigate(window.history.back(-1))
+    const backFunction = ()=>{      
+      if (window.location.pathname == "/editing/ScheduleMeeting") {        
+        return  window.history.back(-1)
       }else if (window.location.pathname == "/ScheduleMeeting") {
-        navigate(window.history.back(-1))
+        return  window.history.back(-1)
       }else{
         navigate(`/contactDetail/detail/${id}`)
       }
@@ -210,7 +214,7 @@ const ScheduleMeeting = () => {
       <Row justify={'end'} style={{paddingTop:'10px',paddingRight:'10px'}}>
         <Space>
           <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>          
-           <Button type='primary' onClick={backFunction}> Back one Step </Button>
+          <Button type='primary' onClick={backFunction}> Back one Step </Button>
         </Space>
       </Row>
 
@@ -220,28 +224,28 @@ const ScheduleMeeting = () => {
           <Row>
               <form onSubmit={checkForSubmitting}>
                 <p>
-                    <label for="topic">Topic : </label>
-                    <input type="text" name="topic" id="topic" placeholder={`topic *`} value={meetingData.title} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
+                    <label for="topic"><span style={required}>* &nbsp;</span>Topic : </label>
+                    <input type="text" name="topic" id="topic" placeholder={`topic`} value={meetingData.topic} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
                 </p>
                 
                 <p>
-                    <label for="agenda">Agenda:</label>
+                    <label for="agenda"> <span style={required}>* &nbsp;</span>Agenda:</label>
                     <textarea name="agenda" id="agenda" placeholder='Agenda' value={meetingData.agenda} onChange={handleChange} className={getInputClass('agenda') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
-                    <label for="statrDate">Date : </label>
-                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('statrDate') ? "inputError" : 'errorClear'}/>
+                    <label for="statrDate"> <span style={required}>* &nbsp;</span>Date : </label>
+                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date `} value={meetingData.statrDate} onChange={handleChange} className={getInputClass('statrDate') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
-                    <label for="time">Time : </label>
+                    <label for="time"> <span style={required}>* &nbsp;</span>Time : </label>
                     <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
-                    <label for="meridiem">AM / PM : </label>
-                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange} className={getInputClass('meridiem') ? "inputError" : 'errorClear'}>
+                    <label for="meridiem"> <span style={required}>* &nbsp;</span>AM / PM : </label>
+                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange} className={getInputClass('meridiem') ? "inputError" : 'errorClear'} >
                        <option value="" style={{color:'red'}}>Select Meridiem</option>
                        <option value="AM">AM</option>
                        <option value="PM">PM</option>
@@ -249,8 +253,8 @@ const ScheduleMeeting = () => {
                 </p>
 
                 <p>
-                    <label for="participantsMail">Host :</label>
-                    <input type="email" name="participantsMail" id="participantsMail" placeholder={`participantsMail *`} value={meetingData.host} onChange={handleChange} className={getInputClass('participantsMail') ? "inputError" : 'errorClear'} />
+                    <label for="participantsMail"> <span style={required}>* &nbsp;</span>Host :</label>
+                    <input type="email" name="participantsMail" id="participantsMail" placeholder={`participantsMail`} value={meetingData.participantsMail} onChange={handleChange} className={getInputClass('participantsMail') ? "inputError" : 'errorClear'} />
                 </p>
 
               <Space>

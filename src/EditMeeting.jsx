@@ -1,4 +1,5 @@
 import { Button, message, Row, Space, Typography } from 'antd'
+import { Color } from 'antd/es/color-picker'
 import axios from 'axios'
 import moment from 'moment'
 import React, { useState } from 'react'
@@ -17,6 +18,10 @@ const id = URL.split('/').pop()
       },
       content : content
      })
+  }
+
+  const required = {
+    color : 'red' 
   }
 
 const EditMeeting = () => {
@@ -42,10 +47,11 @@ const EditMeeting = () => {
     function resetClicked(){
       setMeetingData({
         topic : '',
-        meetingType : '',
+        agenda : '',
         statrDate : '',
         time : '',
-        participantsMail : ''
+        meridiem : '',
+        participantsMail : '',
       })
     }
 
@@ -133,7 +139,7 @@ const EditMeeting = () => {
       }
         
       try {
-          const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
+          const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras) // this line send the request to node (server.js)      
             if (accessTokenResponce.status == 200) {
               createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server              
             }
@@ -167,7 +173,7 @@ const EditMeeting = () => {
               if (err.response) {
                 message.error('Error');
               } else if (err.request) {
-                message.error('Error: No response from server.');
+                message.error('Error: No response from server.')
               } else {
                 message.error('Error: '+ err.message);
               }
@@ -184,36 +190,36 @@ const EditMeeting = () => {
          <Row>
               <form onSubmit={checkForSubmitting}>
                 <p>
-                    <label for="topic">Topic : </label>
-                    <input type="text" name="topic" id="topic" placeholder={`topic *`} value={meetingData.title} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
+                    <label for="topic"><span style={required}>*</span> Topic : </label>
+                    <input type="text" name="topic" id="topic" placeholder={`topic`} value={meetingData.topic} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
                 </p>
                 
                 <p>
-                    <label for="agenda">Agenda:</label>
+                    <label for="agenda"> <span style={required}>*</span> Agenda:</label>
                     <textarea name="agenda" id="agenda" placeholder='Agenda' value={meetingData.agenda} onChange={handleChange} className={getInputClass('agenda') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
-                    <label for="statrDate">Date : </label>
-                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date *`} value={meetingData.date} onChange={handleChange} className={getInputClass('startTime') ? "inputError" : 'errorClear'}/>
+                    <label for="statrDate"> <span style={required}>*</span> Date : </label>
+                    <input type="date" name="statrDate" id="statrDate" placeholder={`start Date *`} value={meetingData.statrDate} onChange={handleChange} className={getInputClass('statrDate') ? "inputError" : 'errorClear'}/>
                 </p>
 
                 <p>
-                    <label for="time">Time : </label>
+                    <label for="time"> <span style={required}>*</span> Time : </label>
                     <input type="time" name="time" id="time" placeholder={`Start Time`} value={meetingData.time} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}/>
-                </p>
+                </p>  
 
                 <p>
-                    <label for="meridiem">AM / PM : </label>
-                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange}>
+                    <label for="meridiem"> <span style={required}>*</span> AM / PM : </label>
+                    <select name="meridiem" id="meridiem" value={meetingData.meridiem} onChange={handleChange} className={getInputClass('time') ? "inputError" : 'errorClear'}>
                        <option value="AM" defaultChecked selected>AM</option>
                        <option value="PM">PM</option>
                     </select>
                 </p>
 
                 <p>
-                    <label for="participantsMail">Host :</label>
-                    <input type="email" name="participantsMail" id="participantsMail" placeholder={`participantsMail *`} value={meetingData.host} onChange={handleChange} className={getInputClass('participantsMail') ? "inputError" : 'errorClear'} />
+                    <label for="participantsMail"> <span style={required}>*</span> Host :</label>
+                    <input type="email" name="participantsMail" id="participantsMail" placeholder={`participantsMail *`} value={meetingData.participantsMail} onChange={handleChange} className={getInputClass('participantsMail') ? "inputError" : 'errorClear'} />
                 </p>
 
               <Space>

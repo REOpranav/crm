@@ -11,6 +11,10 @@ import './Dashboard.css'
   function messageSuccess(){
     message.success('Sucessfully created')
   }
+  
+  const required = {
+    color : 'red'
+  }
 
 const FormPage = () => {
   const {Text} = Typography
@@ -190,33 +194,33 @@ const FormPage = () => {
         {formLayoutName.length === 0 && 
          <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
-                <label for="leadowner"> Owner : </label>
-                <input type="text" name="leadowner" id="leadowner" placeholder="Owner *" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
+                <label for="leadowner"><span style={required}>* &nbsp;</span>Owner : </label>
+                <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')}/> 
             </p>
             
             <p>
-                <label for="firstname">First Name : </label>
-                <input type="text" name="firstname" id="firstname" placeholder="First Owner *" value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/> 
+                <label for="firstname"><span style={required}>* &nbsp;</span>First Name : </label>
+                <input type="text" name="firstname" id="firstname" placeholder="First Name" value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')}/> 
             </p>
 
             <p>
-                <label for="lastname">Last Name : </label>
-                <input type="text" name="lastname" id="lastname" placeholder="Last Name *" value={formData.lastname} onChange={handleChange}  className={getInputClass('lastname')}/> 
+                <label for="lastname"><span style={required}>* &nbsp;</span>Last Name : </label>
+                <input type="text" name="lastname" id="lastname" placeholder="Last Name" value={formData.lastname} onChange={handleChange}  className={getInputClass('lastname')}/> 
             </p>
 
             <p>
-                <label for="email">Email : </label>
-                <input type="email" name="email" id="email" placeholder="Email *" value={formData.email} onChange={handleChange}  className={getInputClass('email')}/>
+                <label for="email"><span style={required}>* &nbsp;</span>Email : </label>
+                <input type="email" name="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange}  className={getInputClass('email')}/>
             </p>
 
             <p>
-                <label for="mobile">Mobile Number : </label>
-                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number *" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange}  className={getInputClass('mobile')} /> 
+                <label for="mobile"><span style={required}>* &nbsp;</span>Mobile Number : </label>
+                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange}  className={getInputClass('mobile')} /> 
             </p>
             
             <p>
                 <label for="date">closing Date : </label>
-                <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} /> 
+                <input type="date" name="date" id="date" placeholder="closing Date" value={formData.date} onChange={handleChange} /> 
             </p>
 
             <p>
