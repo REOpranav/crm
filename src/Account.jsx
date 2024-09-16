@@ -62,7 +62,7 @@ const Account = () => {
             industry	 : datas.industry	,
             emailID : datas.email,
             mobileNumber  : datas.mobile,
-            annualRevenue : datas.annualrevenue ?  datas.annualrevenue : 0,
+            annualRevenue : datas.annualrevenue ? datas.annualrevenue : 0,
             gender:datas.gender
         }
         data.push(changeTOObject)
