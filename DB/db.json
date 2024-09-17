@@ -40,25 +40,6 @@
       "description": "wskdncj sdicjsd cijdsc ijsdcosdoj oijw weij"
     },
     {
-      "id": "237157838",
-      "leadowner": "pranavaavddek ",
-      "firstname": "sin",
-      "lastname": "kdc",
-      "email": "kcdk",
-      "mobile": "9876678987",
-      "date": "2024-08-29",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
       "id": "17886781",
       "leadowner": "vadivel",
       "firstname": "shanmuga priya ",
@@ -435,6 +416,10 @@
     {
       "id": "567890123",
       "date": "September 17th 2024, 3:52:07 pm"
+    },
+    {
+      "id": "10334060",
+      "date": "September 17th 2024, 11:59:52 pm"
     }
   ],
   "formLayout": [
@@ -446,51 +431,6 @@
     }
   ],
   "meetingSession": [
-    {
-      "id": "17886781",
-      "session": {
-        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
-        "timezone": "Asia/Calcutta",
-        "creatorZuid": "60024262219",
-        "departmentId": "527192000000008011",
-        "addedParticipants": "[pranav.vs@gmail.com]",
-        "source": "new_meeting",
-        "type": "meeting",
-        "endTimeMillisec": 1729214160000,
-        "encryptPwd": "612c18bef85d30e6d1385349d15be2db2f403ac45ccc77466b40be4c439dc5d7",
-        "duration": "3600000",
-        "sys_id": 527192000000171140,
-        "accessCode": "13909 52535 #",
-        "startTime": "Oct 18, 2024 05:46 AM IST",
-        "meeting": {
-          "zsoid": "60017874042"
-        },
-        "participants": [
-          {
-            "id": "527192000000171180",
-            "email": "pranav.vs@gmail.com"
-          }
-        ],
-        "departmentName": "My Department",
-        "creator": "60024262219",
-        "presenter": 60024262219,
-        "offset": "19800000",
-        "encryptPassword": "612c18bef85d30e6d1385349d15be2db2f403ac45ccc77466b40be4c439dc5d7",
-        "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/e7ZjesIJZP",
-        "agenda": "best food meeting for ever",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1390952535&x-meeting-org=60017874042",
-        "presenterEmail": "boosingpranav@gmail.com",
-        "UID": 527192000000171140,
-        "startTimeMillisec": 1729210560000,
-        "shortenJoinUrl": "https://meet.zoho.in/e7ZjesIJZP",
-        "timeFormat": "Fri, Oct 18, 2024 05:46 AM",
-        "topic": "Best home food",
-        "endTime": "Oct 18, 2024 06:46 AM IST",
-        "meetingKey": "1390952535",
-        "removedParticipants": "[]",
-        "startDate": "Oct 18, 2024 05:46 AM"
-      }
-    }
+   
   ]
 }

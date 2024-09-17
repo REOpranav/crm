@@ -4,10 +4,6 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// this is for get the current id
-const URL = window.location.href
-const id = URL.split('/').pop()
-
 // this is message setup (ant design)
   const messageDrop = (type,content)=>{
     message.open({
@@ -24,6 +20,9 @@ const id = URL.split('/').pop()
   }
 
 const EditMeeting = () => {
+  // this is for get the current id
+    const URL = window.location.href
+    const id = URL.split('/').pop()
     const navigate = useNavigate();
     
     // accessing rhe access tokena and user detail from session storage

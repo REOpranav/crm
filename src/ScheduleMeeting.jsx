@@ -140,9 +140,7 @@ const ScheduleMeeting = () => {
       try {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
             if (accessTokenResponce.status == 200) {
-              // if (window.location.pathname !== '/ScheduleMeeting') {
                 createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server                
-              // }
 
               if (window.location.pathname == '/ScheduleMeeting') {
                 setTimeout(() => {
@@ -162,9 +160,16 @@ const ScheduleMeeting = () => {
     const createMeeting = async(data)=>{
       messageDrop('success','Meeting Created Successfully') // this is showing the message (ANTD)
     
-    // this object and below function are storing the meeting seesion data (only successfully created meeting data)
+    // this object and below function are storing the meeting seesion data (only successfully created meeting data)              
+  
+    // this is for get the current id
+      const URL = window.location.pathname  
+      const endpoint = URL.split('/').pop()
+        
+      console.log(endpoint);
+      
       const sessionData = {
-        id : window.location.pathname == "/ScheduleMeeting" ? Math.floor(Math.random() * 1000000000) : id, // giving the same contact person id for showing in his/her deatil module
+        id : window.location.pathname == "/ScheduleMeeting" ? Math.floor(Math.random() * 1000000000) : endpoint, // giving the same contact person id for showing in his/her deatil module
         key : Math.floor(Math.random() * 1000000000),
         session : data.session
       }
@@ -189,14 +194,15 @@ const ScheduleMeeting = () => {
         logMeetignSession()
 
 
+
     // this is for changing the page to actual contact detail module
-      setTimeout(() => {        
-        if (window.location.pathname == "/ScheduleMeeting") {
-          navigate("/meetingDetail")
-        }else{
-          navigate(`/contactDetail/detail/${id}`)
-        }
-        }, 1 * 600);
+      // setTimeout(() => {        
+      //   if (window.location.pathname == "/ScheduleMeeting") {
+      //     navigate("/meetingDetail")
+      //   }else{
+      //     navigate(`/contacts`)
+      //   }
+      //   }, 1 * 100);
     }    
     
     const backFunction = ()=>{      
