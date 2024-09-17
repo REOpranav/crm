@@ -166,7 +166,7 @@ const MeetingInsights = () => {
             <Col>
               <Space>
                    <Popconfirm title={'Are you sure to Start this meeting'} okText={'Start Meeting'} cancelText={'No'} onConfirm={() => startLink()} onCancel={()=>messageDrop('info','Start Canceled. Everything stays as is!')}> <Button type='primary' style={buttonStyle} target='_blank'> START MEETING </Button> </Popconfirm> 
-                   <Button style={buttonStyle}>Edit</Button>
+                   <Link to={`/editing/meetingDetail/${id}`}> <Button style={buttonStyle}>Edit</Button> </Link> 
                    <Popconfirm title={'Are you sure to Cancel this meeting'} okText={'Cancel Meeting'} cancelText={'No'} onConfirm={() => meetingDeletetion(meetingData.session.meetingKey)} onCancel={()=>messageDrop('info','Deletion Canceled. Everything stays as is!')}> <Button danger ghost style={buttonStyle}>cancel</Button> </Popconfirm> 
               </Space>
             </Col>

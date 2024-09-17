@@ -52,9 +52,11 @@ function App() {
           <Route path='/contacts/meetingStep/' element={<MeetingStep />} />
           <Route path='/contactDetail/detail/:id/ScheduleMeeting/:id' element={<ScheduleMeeting />} />
           <Route path='/editing/ScheduleMeeting' element={<ScheduleMeeting />} />
-          <Route path='/ScheduleMeeting' element={<ScheduleMeeting />} />
+          <Route path='/ScheduleMeeting' element={<ScheduleMeeting />} /> 
           <Route path='/meetingDetail' element={<MeetingDetail />} />
           <Route path='/meetingDetail/:id' element={<MeetingInsights />} />
+          <Route path='/editing/meetingDetail/:id' element={<ScheduleMeeting />} />
+
         </Routes>
     </div>
   );

@@ -149,22 +149,23 @@ app.post('/api/list',async(req,res)=>{
 })
 
 // this is for editing the meeting
-app.post('/api/edit',async(req,res)=>{
-    const {session} = await req.body
+app.post('/api/edit',async(req,res)=>{    
+    const {session} = await req.body    
+    const {extras} =  req.query
     try {
-        let URL = `https://meeting.zoho.com/api/v2/${await session.zsoid}/sessions/${await session.meetingKey}.json`
-        const listMeeting = await fetch(
+        let URL = `https://meeting.zoho.in/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`        
+        const editMeeting = await fetch(
             URL,
             {
                 method : 'PUT',
                 headers: {
-                    'Authorization': `Zoho-oauthtoken ${session.access_token}`,
-                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Zoho-oauthtoken ${await extras.access_token}`,
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(session),
+                body: JSON.stringify({session}),
             }
         )
-        const data = await listMeeting.json();
+        const data = await editMeeting.json();
         res.json(data)
     } catch (error) {
         res.status(500).json({ message: "Failed to list meeting", error: error.message });

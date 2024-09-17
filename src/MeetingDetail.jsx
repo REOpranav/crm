@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import {Button, Col, Image, message, Popconfirm, Row, Space ,Typography} from 'antd'
+import {Button, Col, Image, message, Popconfirm, Row, Space ,Tooltip,Typography} from 'antd'
 import './MeetingDetail.css'
 import axios from 'axios'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import './Dashboard.css'
+import { CiGlobe } from "react-icons/ci";
 
 // this is for finding the name fron pathname to send  post request in that URL
 const URL = window.location.pathname    
@@ -210,10 +211,10 @@ const MeetingDetail = () => {
                   </Col>
                 </Row>}
 
-              {upcomingData && upcomingData.map((data)=>{                            
+              {upcomingData && upcomingData.map((data)=>{
                 return <Row style={listStyle} className='listStyle'>
                     <Col span={4} style={listDataStyle} className='listDataStyle'> 
-                      <Row style={{display:'flex',alignItems:'center'}} justify={'space-between'}>
+                      <Row style={{display:'flex',alignItems:'center'}} justify={'space-around'}>
                         <Col span={4}>
                             <span 
                                 style={{
@@ -226,7 +227,7 @@ const MeetingDetail = () => {
                                 }}
                               ></span>
                           </Col> 
-                          <Col span={20}> {data.sDate} <span style={{backgroundColor:'GreenYellow',marginLeft:'10px',padding:'4px'}}>  {data.sTime} </span></Col>
+                          <Col span={19} offset={1}> <Row justify={'center'}> {data.sDate} </Row> <Row justify={'center'}> <Col style={{backgroundColor:'GreenYellow',padding:'4px'}}> {data.sTime} </Col> <Col style={{display:'flex',alignItems:'center',marginLeft:'5px'}}> <Tooltip placement="bottomLeft" title={`${data.timezone}`} color='#5a3bb6'> <CiGlobe/> </Tooltip> </Col> </Row></Col>
                       </Row>
                     </Col>
                     <Col span={4} style={listDataStyle} className='listDataStyle'>{data.topic}</Col>
@@ -236,7 +237,7 @@ const MeetingDetail = () => {
                     <Col span={4}>
                       <Row justify={'center'}>
                         <Space size={'large'}>
-                          <Col><Link className='listDataStyle' to={`/editing/ScheduleMeeting`}>Edit</Link></Col>
+                          <Col><Link className='listDataStyle' to={`/editing/ScheduleMeeting/`}>Edit</Link></Col>
                           <Col><Link style={{color:'red'}} className='listDataStyle'> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete Meeting'} cancelText={'No'}  onConfirm={()=>meetingDeletetion(data.meetingKey)} onCancel={()=>messageDrop('info','Deletion canceled. Everything stays as is!')}> Cancel </Popconfirm> </Link> </Col>
                         </Space>
                       </Row>
@@ -266,7 +267,7 @@ const MeetingDetail = () => {
                   </Col>
                 </Row>}
               {pastData && pastData.map((data)=>{
-                return <Row style={listStyle} className='listStyle' >
+                return <Row style={listStyle} className='listStyle'>
                     <Col span={5} style={listDataStyle} className='listDataStyle'> 
                       <Row style={{display:'flex',alignItems:'center'}} justify={'space-between'}>
                         <Col>
@@ -281,7 +282,7 @@ const MeetingDetail = () => {
                                 }}
                               ></span>
                           </Col> 
-                          <Col> {data.sDate} <span style={{backgroundColor:'orange',marginLeft:'10px',padding:'4px'}}>  {data.sTime} </span></Col>
+                          <Col span={19}> <Row justify={'space-evenly'} style={{display:'flex',alignItems:'center'}}> {data.sDate} <span style={{backgroundColor:'orange',padding:'4px'}}> {data.sTime} </span> <span> <Tooltip placement="bottomLeft" title={`${data.timezone}`} color='#5a3bb6'> <CiGlobe/> </Tooltip> </span> </Row></Col>                      
                       </Row>
                     </Col>
                     <Col span={5} style={listDataStyle} className='listDataStyle'>{data.topic}</Col>

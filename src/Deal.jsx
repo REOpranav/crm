@@ -41,7 +41,7 @@ const Deal = () => {
         const URL = `http://localhost:3000/deals`
         let deleting ;
         for (const deleteValue of selectedRowKeys) {
-          deleting = await axios.delete(`${URL}/${deleteValue}`)        
+          deleting = await axios.delete(`${URL}/${deleteValue}`)
         }
         if (deleting.status === 200) {
           message.success("sucessfully Deleted the data") 

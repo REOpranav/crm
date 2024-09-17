@@ -126,13 +126,12 @@ const Meetinglog = ({id}) => {
         },
      ]
 
-    // this is for filteration
+    // this is for filteration    
     const filterParticularSessionID = sessionData.filter((values)=>{
-        if (values.id === id) {
+        if (values.id === id) {          
           return values
         }
       })
-      
       let data = [] // This array is showing the data in table (antd frameworks)
       for (const datas of filterParticularSessionID) {
           let changeTOObject = {

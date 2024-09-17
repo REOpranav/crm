@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import {message,Typography,Row,Button,Space, Image, Col} from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useMatch, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from './Dashboard'
 import moment from 'moment';
 import EditMeeting from './EditMeeting'
 
 // this is for get the current id
-  const URL = window.location.pathname
+  const URL = window.location.pathname  
   const id = URL.split('/').pop()
 
 // this is message setup (ant design)
@@ -140,9 +140,9 @@ const ScheduleMeeting = () => {
       try {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`,data,extras)// this line send the request to node (server.js)      
             if (accessTokenResponce.status == 200) {
-              if (window.location.pathname !== '/ScheduleMeeting') {
+              // if (window.location.pathname !== '/ScheduleMeeting') {
                 createMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server                
-              }
+              // }
 
               if (window.location.pathname == '/ScheduleMeeting') {
                 setTimeout(() => {
@@ -164,7 +164,7 @@ const ScheduleMeeting = () => {
     
     // this object and below function are storing the meeting seesion data (only successfully created meeting data)
       const sessionData = {
-        id : id, // giving the same contact person id for showing in his/her deatil module
+        id : window.location.pathname == "/ScheduleMeeting" ? Math.floor(Math.random() * 1000000000) : id, // giving the same contact person id for showing in his/her deatil module
         key : Math.floor(Math.random() * 1000000000),
         session : data.session
       }
@@ -188,6 +188,7 @@ const ScheduleMeeting = () => {
           }
         logMeetignSession()
 
+
     // this is for changing the page to actual contact detail module
       setTimeout(() => {        
         if (window.location.pathname == "/ScheduleMeeting") {
@@ -208,6 +209,9 @@ const ScheduleMeeting = () => {
       }
     }
 
+  // this for find ,it is creaet meeting for edit meeting .if pathname like this .it can be change as a edit meeting
+    const matchDetail = useMatch('/editing/meetingDetail/:id')
+
   return (
     <div>
       <Dashboard />
@@ -220,12 +224,12 @@ const ScheduleMeeting = () => {
 
     {(!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData))  ?  <> 
           <Title level={3}> Schedule a Meeting </Title>
-          {window.location.pathname == `/editing/ScheduleMeeting` ? <EditMeeting /> : <> 
+          {window.location.pathname == `/editing/ScheduleMeeting` || matchDetail ? <EditMeeting /> : <>
           <Row>
               <form onSubmit={checkForSubmitting}>
                 <p>
                     <label for="topic"><span style={required}>* &nbsp;</span>Topic : </label>
-                    <input type="text" name="topic" id="topic" placeholder={`topic`} value={meetingData.topic} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
+                    <input type="text" name="topic" id="topic" placeholder={`Topic`} value={meetingData.topic} onChange={handleChange} className={getInputClass('topic') ? "inputError" : 'errorClear'}/> 
                 </p>
                 
                 <p>
