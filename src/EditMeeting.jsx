@@ -39,7 +39,7 @@ const EditMeeting = () => {
     const fetching = async()=>{
       try {
       const responce = await axios.get(`http://localhost:3000/meetingSession/${id}`) // fethch the data using the module name 
-        if (responce.status === 200) {
+      if (responce.status === 200) {
           setSavedMeetingInfo(await responce.data.session)
           setSavedMeetingId(await responce.data)        
         }
@@ -138,11 +138,11 @@ const EditMeeting = () => {
   // this code for patch work (onlu this problem)
     const onFinish = (e) => {
       e.preventDefault()
-      createMeetingCredencial()
+      MeetingCredencial()
     }    
     
   // this function is cerate meeting credencial
-    const createMeetingCredencial = async()=>{   
+    const MeetingCredencial = async()=>{   
       const data = {
         "session": {
           "topic": `${meetingData.topic}`,
@@ -172,9 +172,9 @@ const EditMeeting = () => {
         
       try {
           const accessTokenResponce = await axios.post(`http://localhost:3002/api/edit`,data,extras) // this line send the request to node (server.js)      
-            if (accessTokenResponce.status == 200) {
-              editMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server              
-            }
+          if (accessTokenResponce.status == 200) {
+            editMeeting(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the correct sesssion in mock server              
+          }
           } catch (err) {
            if (err.message == "Request failed with status code 500") {
               messageDrop('warning','Token Expired. Re-Generate the Tokens')
@@ -184,21 +184,26 @@ const EditMeeting = () => {
       }  
       
     // zoho meeting intergaration function to store the responce data IN DB.JSON
-    const editMeeting = async(data)=>{
+    const editMeeting = async(data)=>{      
+      console.log(data);
       
       const datas = {
         id : savedMeetingID.id,
         session : data.session
       }
-      
-      messageDrop('success','Meeting Rescheduled') // this is showing the message (ANTD)
+
+      const backToModule = ()=>{
+        return window.history.back(-2)
+      }
+            
       const logMeetignSession = async()=>{
         try {
               const URL = `http://localhost:3000/meetingSession/${savedMeetingID.id}` // stoting in this URL
-              const posting = await axios.put(URL,datas) 
-              if (posting.status === 201) {
-                messageDrop('success','Session Edited in meeting log')
+              const posting = await axios.put(URL,datas)             
+              if (posting.status === 200) {
+                messageDrop('success','Session Edited')
               }
+              backToModule()
             } catch (err) {
               if (err.response) {
                 message.error('Error');
@@ -209,10 +214,13 @@ const EditMeeting = () => {
               }
             }
           }
-        logMeetignSession()
+      
+        if (data.session) {
+          logMeetignSession()
+        }else{
+          messageDrop('error','Error while Reschedule the meeting')
+        }
 
-    //  this is for changing the page actual contact detail module
-       navigate(`/meetingDetail`)
     }    
   return (
     <div>

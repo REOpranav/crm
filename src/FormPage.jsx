@@ -162,6 +162,11 @@ const FormPage = () => {
     })
   },[formLayoutName,undefined])
 
+  // back function
+  const backFunction = ()=>{
+    return window.history.back(-1)
+  }
+
  return (
   
   <div>
@@ -181,12 +186,14 @@ const FormPage = () => {
      </Flex>
       <Flex gap="small">
       <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>
-        <Button type='default' danger> Cancel </Button>
+        <Button type='default' danger ghost> Cancel </Button>
       </Popconfirm>
 
       <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('Cancel Save')}>
-        <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
+        <Button type='default' className='PoppinsFont' >Submit</Button>  
       </Popconfirm>
+
+      <Button type='primary' onClick={backFunction}> Back one step </Button>
       </Flex>
     </Row>
 

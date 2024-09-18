@@ -2,61 +2,23 @@
   "leads": [],
   "contacts": [
     {
-      "id": "567890123",
-      "leadowner": "chrislee",
-      "firstname": "prananavavadivel",
-      "lastname": "sundaravadviel",
-      "email": "pranavavadivel01@gmail.com",
-      "mobile": "9887845678",
-      "date": "2024-02-10",
-      "companyName": "SmartHomes Inc.",
-      "annualrevenue": "720000",
-      "gender": "Male",
-      "area": "Greenwood",
-      "state": "Washington",
-      "country": "USA",
-      "pincode": "98001",
-      "expectedAmount": "160000",
-      "website": "https://smarthomes.com",
-      "description": "Seeking to expand smart home technology."
-    },
-    {
-      "id": "10334060",
-      "leadowner": "iangaravadivel",
-      "firstname": "iangar",
-      "lastname": "vadviel",
-      "email": "vadivel@gmail.com",
-      "mobile": "9876548876",
-      "date": "2024-08-30",
-      "companyName": "infi info",
-      "annualrevenue": "30000",
-      "gender": "male",
-      "area": "salem",
-      "state": "tamil nadu",
-      "country": "india",
-      "pincode": "7676768",
-      "expectedAmount": "992999",
-      "website": "https://mockcrm.vercel.app/",
-      "description": "wskdncj sdicjsd cijdsc ijsdcosdoj oijw weij"
-    },
-    {
-      "id": "17886781",
-      "leadowner": "vadivel",
-      "firstname": "shanmuga priya ",
-      "lastname": "sundharavadivel",
+      "id": "967342802",
+      "leadowner": "shankaravadivel",
+      "firstname": "thiru",
+      "lastname": "vadivel",
       "email": "some@gmail.com",
-      "mobile": "9812989212",
-      "date": "2024-09-16",
-      "companyName": "Zappyworks",
-      "annualrevenue": "02999",
+      "mobile": "9897827131",
+      "date": "2025-10-20",
+      "companyName": "happyWorks",
+      "annualrevenue": "",
       "gender": "male",
-      "area": "chennai",
-      "state": "tamil nadu ",
-      "country": "india",
-      "pincode": "892993",
-      "expectedAmount": "100000000",
-      "website": "https://meeting.zoho.in/meeting",
-      "description": "zoho meeting intergration"
+      "area": "Chennai",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "accounts": [
@@ -431,6 +393,51 @@
     }
   ],
   "meetingSession": [
-   
+    {
+      "id": "967342802",
+      "session": {
+        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
+        "timezone": "Asia/Calcutta",
+        "creatorZuid": "60024262219",
+        "departmentId": "527192000000008011",
+        "addedParticipants": "[]",
+        "source": "new_meeting",
+        "type": "meeting",
+        "endTimeMillisec": 1729322700000,
+        "encryptPwd": "ee0ea19f10aa4c64541e58385e38388d6b1922a9ed03142e37132ba68dc9f294",
+        "duration": "3600000",
+        "sys_id": 527192000000173060,
+        "accessCode": "13709 50211 #",
+        "startTime": "Oct 19, 2024 11:55 AM IST",
+        "meeting": {
+          "zsoid": "60017874042"
+        },
+        "participants": [
+          {
+            "id": "527192000000171234",
+            "email": "pranav.vs@zappyworks.com"
+          }
+        ],
+        "departmentName": "My Department",
+        "creator": "60024262219",
+        "presenter": 60024262219,
+        "offset": "19800000",
+        "encryptPassword": "ee0ea19f10aa4c64541e58385e38388d6b1922a9ed03142e37132ba68dc9f294",
+        "isRecurring": false,
+        "joinLink": "https://meet.zoho.in/3b2h0Ir2ao",
+        "agenda": "simple things with sanveg",
+        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1370950211&x-meeting-org=60017874042",
+        "presenterEmail": "boosingpranav@gmail.com",
+        "UID": 527192000000173060,
+        "startTimeMillisec": 1729319100000,
+        "shortenJoinUrl": "https://meet.zoho.in/3b2h0Ir2ao",
+        "timeFormat": "Sat, Oct 19, 2024 11:55 AM",
+        "topic": "veg",
+        "endTime": "Oct 19, 2024 12:55 PM IST",
+        "meetingKey": "1370950211",
+        "removedParticipants": "[]",
+        "startDate": "Oct 19, 2024 11:55 AM"
+      }
+    }
   ]
 }

@@ -41,15 +41,17 @@ form {
   }
 
   /* this is select option input field */
-  #meridiem{
+  #meridiem,#contact-module{
     width: 80%;
     padding: 8px;
     border-radius: 4px;
     box-sizing: border-box;
     background-color: white;
+    border: 1px solid #ddd;
+
   }
 
-  #meridiem:hover{
+  #meridiem:hover,#contact-module:hover{
     cursor: pointer; 
   }
   

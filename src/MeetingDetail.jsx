@@ -45,12 +45,8 @@ const listDataStyle = {
   textAlign  : 'center'
 }
 
-const stylesForPadding = {
-  "padding" : '25px'
-}
-
 const MeetingDetail = () => {
-    const {Text,Title} = Typography
+    const {Title} = Typography
     const [upcoming,setUpcoming] = useState(true)
     const [past,setPast] = useState(false)
     const [meetingList,setMeetingList] = useState([])
@@ -76,13 +72,14 @@ const MeetingDetail = () => {
       setPast(true)
     }
 
+    // checking if the userdetail and accesstoken is available or not.if available ,then only this useeffect will run
     useEffect(()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
         checkMeetingTokensAvailable()
       }
     },[undefined])
 
-    // this function is get the meeting listing
+    // this function is get the meeting list
     const checkMeetingTokensAvailable = ()=>{
       if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
         const MeetingCredencial = async()=>{
@@ -122,9 +119,9 @@ const MeetingDetail = () => {
     })
 
     // this is seperation code (past and upcoming meeting)  
-    if (meetingList) {
+    if (meetingList) {      
       const listData = meetingList.session || []
-      listData.map((data)=>{                      
+      listData.map((data)=>{
         if (moment(data.startTime,'MMM D, YYYY hh:mm A').isAfter(moment())) {
           upcomingData.push(data)
         }else{
@@ -181,7 +178,7 @@ const MeetingDetail = () => {
               <Title level={3} style={{fontFamily:'monospace',fontWeight:'lighter'}}> Meeting </Title>
           </Space>
           <Space style={{marginRight:'10px'}}>
-              <Link to={'/ScheduleMeeting'}><Button type='primary' style={{width:'300px'}}>Create Meeting</Button></Link>
+              <Link to={'/ScheduleMeeting'}><Button type='primary' style={{width:'305px'}}>Create Meeting</Button></Link>
           </Space>
      
         </Row>
