@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import {Button, Col, message,Typography, Row,Space} from 'antd'
+import {Button, Col, message,Typography, Row,Space, Tooltip} from 'antd'
 import axios from 'axios'
 import Dashboard from './Dashboard'
 import { useNavigate ,Link} from 'react-router-dom'
+import './DealDetail.css'
 
 const styles = { fontWeight:'lighter'}
 
@@ -11,10 +12,6 @@ const styles = { fontWeight:'lighter'}
     color:'grey'
  }
  
- const stagestyle = {
-    border:'1px solid black',
-    padding:'10px',
- }
 
  const dealDetailCss ={ 
     display:'flex',
@@ -44,6 +41,7 @@ const DealDetail = () => {
     const [dealDeatail,setDealDetail] = useState([])
     const [DealInformationFromContact,setDealInformationFromContact] = useState([])
     const [DealInformationFromAccount,setDealInformationFromAccount] = useState([])
+    const [stageValue,setStageValue] = useState('win')
     
     const URL = window.location.pathname    
     const endpoint = URL.split('/').pop()
@@ -97,6 +95,14 @@ const DealDetail = () => {
     // this is date
     const currentDate = new Date();
     const parsedDate = new Date(dealDeatail.closingDate)
+
+    const stage = (stage)=>{
+        setStageValue(stage)
+    }    
+
+    // finding the current stage ti set the background color
+    const CurrentStages = document.querySelectorAll('.stages')
+        
 
 return (
     <div>
@@ -175,13 +181,13 @@ return (
                         </Col>
                     </Row>
 
-                    <Row style={{width:"100%",marginTop:'10px'}}>
-                        <Col span={4} style={stagestyle}></Col>
-                        <Col span={4} style={stagestyle}></Col>
-                        <Col span={4} style={stagestyle}></Col>
-                        <Col span={4} style={stagestyle}></Col>
-                        <Col span={4} style={stagestyle}></Col>
-                        <Col span={4} style={stagestyle}></Col>
+                    <Row style={{width:"100%",marginTop:'10px'}} justify={'space-between'}>
+                        <span className='stages' onClick={() => stage('stage 1')}>stage 1</span>
+                        <span className='stages' onClick={() => stage('stage 2')}>stage 2</span>
+                        <span className='stages' onClick={() => stage('stage 3')}>stage 3</span>
+                        <span className='stages' onClick={() => stage('stage 4')}>stage 4</span>
+                        <span className='stages' onClick={() => stage('win')}>win</span>
+                        <span className='stages' onClick={() => stage('Loss')}>Loss</span>
                     </Row>
                 </Row>
 
@@ -194,12 +200,12 @@ return (
                         
                         <Row style={paddingStyle}>
                             <Col span={3} style={dealDetailCss}> <Text style={style} className='PoppinsFont'> closing Date </Text> </Col>
-                            <Col> <Text className='PoppinsFont'> : {dealDeatail.closingDate} </Text> </Col> 
+                            <Col>   <Text className='PoppinsFont'> : {dealDeatail.closingDate} </Text> </Col> 
                         </Row>
 
                         <Row style={paddingStyle}>
                             <Col span={3} style={dealDetailCss}> <Text style={style} className='PoppinsFont'> Stage </Text> </Col>
-                            <Col> <Text className='PoppinsFont'>: {dealDeatail.Stage} </Text> </Col> 
+                            <Col> <Text className='PoppinsFont'>: {stageValue} </Text> </Col> 
                         </Row>
                         
                         <Row style={paddingStyle}>
@@ -228,7 +234,7 @@ return (
                             
                             <Row style={paddingStyle}>
                                 <Col span={6} style={dealDetailCss}> <Text style={style} className='PoppinsFont'>Contact Name </Text> </Col>
-                                <Col> <Text className='PoppinsFont'> : {DealInformationFromContact.firstname  ? DealInformationFromContact.firstname : '-' } </Text> </Col>
+                                <Col> <Tooltip title="click to view this origin" color='green' placement='right'><Text className='PoppinsFont'><Link to={`/contactDetail/detail/${DealInformationFromContact.id}`}> : {DealInformationFromContact.firstname  ? DealInformationFromContact.firstname : '-' } </Link> </Text> </Tooltip> </Col>
                             </Row>
                             
                             <Row style={paddingStyle}>

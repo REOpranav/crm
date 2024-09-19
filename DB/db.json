@@ -2,23 +2,23 @@
   "leads": [],
   "contacts": [
     {
-      "id": "967342802",
-      "leadowner": "shankaravadivel",
-      "firstname": "thiru",
-      "lastname": "vadivel",
+      "id": "794498118",
+      "leadowner": "vadivel",
+      "firstname": "pranavavadivel",
+      "lastname": "some",
       "email": "some@gmail.com",
-      "mobile": "9897827131",
-      "date": "2025-10-20",
-      "companyName": "happyWorks",
-      "annualrevenue": "",
+      "mobile": "9988888888",
+      "date": "2024-10-19",
+      "companyName": "SUN LED LETTERS",
+      "annualrevenue": "30000",
       "gender": "male",
-      "area": "Chennai",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
+      "area": "salem",
+      "state": "tamil nadu",
+      "country": "india",
+      "pincode": "98899",
+      "expectedAmount": "30000",
+      "website": "zoho.com",
+      "description": "simple deal with dun led letters"
     }
   ],
   "accounts": [
@@ -79,7 +79,48 @@
       "description": ""
     }
   ],
-  "deals": [],
+  "deals": [
+    {
+      "id": "331083644",
+      "key": "957550476",
+      "dealowner": "pranav",
+      "dealName": "vadivel deal",
+      "accountName": "",
+      "amount": "2",
+      "Pipeline": "standard",
+      "closingDate": "2025-11-19",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "0",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "794498118",
+      "key": "130477230",
+      "dealowner": "vadivel",
+      "dealName": "pranavvaduvek",
+      "accountName": "",
+      "amount": "1",
+      "Pipeline": "",
+      "closingDate": "2025-10-19",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    }
+  ],
   "callLogs": [
     {
       "id": "789012335",
@@ -392,52 +433,5 @@
       ]
     }
   ],
-  "meetingSession": [
-    {
-      "id": "967342802",
-      "session": {
-        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
-        "timezone": "Asia/Calcutta",
-        "creatorZuid": "60024262219",
-        "departmentId": "527192000000008011",
-        "addedParticipants": "[]",
-        "source": "new_meeting",
-        "type": "meeting",
-        "endTimeMillisec": 1729322700000,
-        "encryptPwd": "ee0ea19f10aa4c64541e58385e38388d6b1922a9ed03142e37132ba68dc9f294",
-        "duration": "3600000",
-        "sys_id": 527192000000173060,
-        "accessCode": "13709 50211 #",
-        "startTime": "Oct 19, 2024 11:55 AM IST",
-        "meeting": {
-          "zsoid": "60017874042"
-        },
-        "participants": [
-          {
-            "id": "527192000000171234",
-            "email": "pranav.vs@zappyworks.com"
-          }
-        ],
-        "departmentName": "My Department",
-        "creator": "60024262219",
-        "presenter": 60024262219,
-        "offset": "19800000",
-        "encryptPassword": "ee0ea19f10aa4c64541e58385e38388d6b1922a9ed03142e37132ba68dc9f294",
-        "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/3b2h0Ir2ao",
-        "agenda": "simple things with sanveg",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1370950211&x-meeting-org=60017874042",
-        "presenterEmail": "boosingpranav@gmail.com",
-        "UID": 527192000000173060,
-        "startTimeMillisec": 1729319100000,
-        "shortenJoinUrl": "https://meet.zoho.in/3b2h0Ir2ao",
-        "timeFormat": "Sat, Oct 19, 2024 11:55 AM",
-        "topic": "veg",
-        "endTime": "Oct 19, 2024 12:55 PM IST",
-        "meetingKey": "1370950211",
-        "removedParticipants": "[]",
-        "startDate": "Oct 19, 2024 11:55 AM"
-      }
-    }
-  ]
+  "meetingSession": []
 }
