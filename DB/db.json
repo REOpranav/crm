@@ -100,44 +100,26 @@
   ],
   "deals": [
     {
-      "id": "331083644",
-      "key": "957550476",
-      "dealowner": "pranav",
-      "dealName": "vadivel deal",
-      "accountName": "",
-      "amount": "2",
-      "Pipeline": "standard",
-      "closingDate": "2025-11-19",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "0",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "794498118",
-      "key": "130477230",
+      "id": "236192080",
+      "key": "512073380",
       "dealowner": "vadivel",
-      "dealName": "pranavvaduvek",
+      "dealName": "mouse deal",
       "accountName": "",
-      "amount": "1",
-      "Pipeline": "",
-      "closingDate": "2025-10-19",
-      "companyName": "",
+      "amount": "10000",
+      "Pipeline": "standard",
+      "stage": "stage 1",
+      "closingDate": "2025-09-20",
+      "companyName": "SUN LED LETTERS",
       "email": "",
       "gender": "",
       "area": "",
       "state": "",
       "country": "",
       "pincode": "",
-      "expectedAmount": "",
+      "expectedAmount": "2",
       "website": "",
-      "description": ""
+      "description": "",
+      "stages": "win"
     }
   ],
   "callLogs": [
@@ -452,52 +434,5 @@
       ]
     }
   ],
-  "meetingSession": [
-    {
-      "id": "53325032",
-      "session": {
-        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
-        "timezone": "Asia/Calcutta",
-        "creatorZuid": "60024262219",
-        "departmentId": "527192000000008011",
-        "addedParticipants": "[pranav.vs@zappyworks.com]",
-        "source": "new_meeting",
-        "type": "meeting",
-        "endTimeMillisec": 1729370340000,
-        "encryptPwd": "23509d36779b21bfb6134bc7a764f3f00016b2f12b611b472fea1ee8ffb7ed1e",
-        "duration": "3600000",
-        "sys_id": 527192000000177150,
-        "accessCode": "13996 25732 #",
-        "startTime": "Oct 20, 2024 01:09 AM IST",
-        "meeting": {
-          "zsoid": "60017874042"
-        },
-        "participants": [
-          {
-            "id": "527192000000172174",
-            "email": "pranav.vs@zappyworks.com"
-          }
-        ],
-        "departmentName": "My Department",
-        "creator": "60024262219",
-        "presenter": 60024262219,
-        "offset": "19800000",
-        "encryptPassword": "23509d36779b21bfb6134bc7a764f3f00016b2f12b611b472fea1ee8ffb7ed1e",
-        "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/ACKmQUFxgv",
-        "agenda": "travelling in vandhe bharath",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1399625732&x-meeting-org=60017874042",
-        "presenterEmail": "boosingpranav@gmail.com",
-        "UID": 527192000000177150,
-        "startTimeMillisec": 1729366740000,
-        "shortenJoinUrl": "https://meet.zoho.in/ACKmQUFxgv",
-        "timeFormat": "Sun, Oct 20, 2024 01:09 AM",
-        "topic": "yercad express",
-        "endTime": "Oct 20, 2024 02:09 AM IST",
-        "meetingKey": "1399625732",
-        "removedParticipants": "[]",
-        "startDate": "Oct 20, 2024 01:09 AM"
-      }
-    }
-  ]
+  "meetingSession": []
 }

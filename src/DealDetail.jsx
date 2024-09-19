@@ -41,7 +41,7 @@ const DealDetail = () => {
     const [dealDeatail,setDealDetail] = useState([])
     const [DealInformationFromContact,setDealInformationFromContact] = useState([])
     const [DealInformationFromAccount,setDealInformationFromAccount] = useState([])
-    const [stageValue,setStageValue] = useState('win')
+    const [stageValue,setStageValue] = useState('')
     
     const URL = window.location.pathname    
     const endpoint = URL.split('/').pop()
@@ -102,7 +102,6 @@ const DealDetail = () => {
 
     // finding the current stage ti set the background color
     const CurrentStages = document.querySelectorAll('.stages')
-        
 
 return (
     <div>
@@ -182,12 +181,12 @@ return (
                     </Row>
 
                     <Row style={{width:"100%",marginTop:'10px'}} justify={'space-between'}>
-                        <span className='stages' onClick={() => stage('stage 1')}>stage 1</span>
-                        <span className='stages' onClick={() => stage('stage 2')}>stage 2</span>
-                        <span className='stages' onClick={() => stage('stage 3')}>stage 3</span>
-                        <span className='stages' onClick={() => stage('stage 4')}>stage 4</span>
-                        <span className='stages' onClick={() => stage('win')}>win</span>
-                        <span className='stages' onClick={() => stage('Loss')}>Loss</span>
+                        <span className='stages' onClick={() => stage('stage 1')} style={stageValue === 'stage 1' ? {backgroundColor:'blue'}  : {backgroundColor:'transparent'}}>stage 1</span>
+                        <span className='stages' onClick={() => stage('stage 2')} style={stageValue === 'stage 2' ? {backgroundColor:'violet'}  : {backgroundColor:'transparent'}}>stage 2</span>
+                        <span className='stages' onClick={() => stage('stage 3')} style={stageValue === 'stage 3' ? {backgroundColor:'gold'}  : {backgroundColor:'transparent'}}>stage 3</span>
+                        <span className='stages' onClick={() => stage('stage 4')} style={stageValue === 'stage 4' ? {backgroundColor:'pink'}  : {backgroundColor:'transparent'}}>stage 4</span>
+                        <span className='stages' onClick={() => stage('win')} style={stageValue === 'win' ? {backgroundColor:'greenyellow'}  : {backgroundColor:'transparent'}}>win</span>
+                        <span className='stages' onClick={() => stage('Closed')} style={stageValue === 'Closed' ? {backgroundColor:'orangered'}  : {backgroundColor:'transparent'}}>Closed</span>
                     </Row>
                 </Row>
 
@@ -205,7 +204,7 @@ return (
 
                         <Row style={paddingStyle}>
                             <Col span={3} style={dealDetailCss}> <Text style={style} className='PoppinsFont'> Stage </Text> </Col>
-                            <Col> <Text className='PoppinsFont'>: {stageValue} </Text> </Col> 
+                            <Col> <Text className='PoppinsFont'>: {stageValue ? stageValue : dealDeatail.stage } </Text> </Col> 
                         </Row>
                         
                         <Row style={paddingStyle}>

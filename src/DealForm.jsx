@@ -23,7 +23,7 @@ const DealForm = () => {
     const [errors,setError] = useState('')
     const [key,setID] = useState(()=> Math.floor(Math.random() * 1000000000))
     const [accountData,setAccountData] = useState([])
-    const [selectedValue,setSelectedValue] = useState('')
+    const [selectedAccount,setSelectedAccount] = useState('')
 
   // this is for finding the name fron pathname to send  post request in that URL
     const URL = window.location.pathname
@@ -31,6 +31,7 @@ const DealForm = () => {
     const moduleName = splittingURL.filter(e => e).shift()
     const id = URL.split('/').pop()
     const typeOfDealForm = splittingURL[2]
+    const [stage,setStage] = useState('stage 1')
    
     const [dealdata,setDealData] = useState({
         key : JSON.stringify(key),
@@ -40,6 +41,7 @@ const DealForm = () => {
         accountName:  '' ,
         amount: '', 
         Pipeline:'',
+        stage:stage,
         closingDate:'',
         companyName:'',
         email:'',
@@ -52,13 +54,15 @@ const DealForm = () => {
         website:'',
         description: ''
     })
+    console.log(dealdata);
+    
 
     useEffect(() => {
       setDealData(prevDealData => ({
         ...prevDealData,
-        id: selectedValue ? selectedValue : id 
+        id: selectedAccount ? selectedAccount : id 
       }));
-    }, [selectedValue])
+    }, [undefined,selectedAccount])
 
     // this is handle chanhge function
     const handleChange = (e)=>{
@@ -173,6 +177,7 @@ const DealForm = () => {
         navigation('/accounts/formpage')
     }
 
+    const stages = ['stage 1' , 'stage 2' , 'stage 3' , 'stage 4','win','loss']
     
   return (
   <div>  
@@ -208,7 +213,7 @@ const DealForm = () => {
 
             {typeOfDealForm == "organizationForm" && <p>
                 <label for="accountName" ><span style={required}>* &nbsp;</span>Account Name : </label>
-                <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
+                <select id="account" value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
                     <option value="" hidden>select Account</option>
                     {accountData.map((e)=>{
                       return <option value={e.id} style={{color:'red'}} >{e.accountOwner}</option>
@@ -235,6 +240,16 @@ const DealForm = () => {
             <p>
                 <label for="Pipeline">Pipeline : </label>
                 <input type="text" name="Pipeline" id="Pipeline" placeholder="Pipeline" value={dealdata.Pipeline} onChange={handleChange}  className={getInputClass('Pipeline')}/> 
+            </p>
+           
+            <p>
+                <label for="stages">stages : </label>
+                <select name="stages" id="stages" value={stage} onChange={handleChange}>
+                  {stages.map((e)=>{
+                    <option value="" hidden>Select Stage</option>
+                    return <option value={e}>{e}</option>
+                  })}
+                </select>
             </p>
 
             <p>
