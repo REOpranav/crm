@@ -14,7 +14,7 @@ const stylesForPadding = {
 
 const MeetingStep = () => {
  const navigate = useNavigate()
- const [current,setCurrent] = useState(1)
+ const [current,setCurrent] = useState(0)
  const onChange = (value) => {
     setCurrent(value)
   };

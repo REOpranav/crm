@@ -244,7 +244,7 @@ const MeetingDetail = () => {
               </> : <>
                 <Col style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <span>
-                     <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/it-management/home/it-management-cloud2x.png' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
+                     <Row justify={'center'}> <Image src='//www.zohowebstatic.com/sites/zweb/images/thrive/home/acquire.png' height={'200px'} preview={false} style={{opacity:'0.1'}} /> </Row>
                      <Row> <Title level={4}> Token <span style={{color:'orange'}}> expired </span>. Click the <span style={{color:'#5a3bb6'}}>Re-Generate Tokens </span> button to generate new tokens.</Title></Row>
                      {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
                      {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}
@@ -295,7 +295,7 @@ const MeetingDetail = () => {
                 </> : <>
                 <Col style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <span>
-                     <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/it-management/home/it-management-cloud2x.png' height={'200px'} preview={false} style={{opacity:'0.7'}} /> </Row>
+                     <Row justify={'center'}> <Image src='//www.zohowebstatic.com/sites/zweb/images/thrive/home/acquire.png' height={'200px'} preview={false} style={{opacity:'0.1'}} /> </Row>
                      <Row> <Title level={4}> Token <span style={{color:'orange'}}> expired </span>. Click the <span style={{color:'#5a3bb6'}}>Re-Generate Tokens </span> button to generate new tokens.</Title></Row>
                      {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho User </span> Token </Row>}
                      {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{color:'red',marginLeft:'5px',marginRight:'5px'}}>Zoho Meeting Access </span> Token </Row>}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Row ,message ,Button , Flex, Popconfirm,Typography} from 'antd'
+import {Row ,message ,Button , Flex, Popconfirm,Typography, Tooltip} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,10 @@ import './Dashboard.css'
  // this is message ele from antd
  function messageSuccess(){
     message.success('Sucessfully created')
+ }
+
+ const required = {
+   color : 'red'
  }
 
 const DealForm = () => {
@@ -173,44 +177,37 @@ const DealForm = () => {
   return (
   <div>  
     <Dashboard />
-    <Row justify={'space-between'} style={{padding:'10px'}}>
+    <Row justify={'end'} style={{padding:'10px'}}>
       <Flex gap={"small"} align='center'> 
-        <Text style={{fontSize:'16px',color:'grey'}}>
-            <select name="layout" className='PoppinsFont'>
-                <option value="Vadivel">{'vadivel'}</option>
-                <option value="sakthi">{'sakthi'}</option>  
-                <option value="Deepa">{'Deepa'}</option>  
-                <option value="bharath">{'bharath'}</option>  
-            </select>
-        </Text>
-
-        <Link to={'/formpage/formlayout'} > <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
+        {/* <Link to={'/formpage/formlayout'} > <Button type='default' className='PoppinsFont'>Create layout</Button> </Link>      */}
      </Flex>
       <Flex gap="small">
-        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>
-          <Button type='default' danger ghost > Cancel </Button>
+        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Discard changes')}>
+          <Tooltip placement='left' title="Discard changes" color='red'> <Button type='default' danger ghost > Cancel </Button> </Tooltip>
+        </Popconfirm>
+        
+        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('cancel save')}>
+          <Button type='default' className='PoppinsFont'>Submit</Button>  
         </Popconfirm>
 
-        <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={checkForSubmitting} onCancel={()=>message.error('cancel save')}>
-          <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
-        </Popconfirm>
+        <Button type='primary' className='PoppinsFont'>Back one step</Button>
       </Flex>
     </Row>
 
     <Row>
          <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
-                <label for="dealOwner">Deal Owner : </label>
-                <input type="text" name="dealowner" id="DealOwner" placeholder="Deal Owner *" value={dealdata.dealowner} onChange={handleChange} className={getInputClass('dealowner')}/> 
+                <label for="dealOwner"><span style={required}>* &nbsp;</span>Deal Owner : </label>
+                <input type="text" name="dealowner" id="DealOwner" placeholder="Deal Owner" value={dealdata.dealowner} onChange={handleChange} className={getInputClass('dealowner')}/> 
             </p>
             
             <p>
-                <label for="dealName">Deal Name : </label>
-                <input type="text" name="dealName" id="dealName" placeholder="Deal Owner *" value={dealdata.dealName} onChange={handleChange} className={getInputClass('dealName')}/> 
+                <label for="dealName"><span style={required}>* &nbsp;</span>Deal Name : </label>
+                <input type="text" name="dealName" id="dealName" placeholder="Deal Name" value={dealdata.dealName} onChange={handleChange} className={getInputClass('dealName')}/> 
             </p>
 
             {typeOfDealForm == "organizationForm" && <p>
-                <label for="accountName" >Account Name : </label>
+                <label for="accountName" ><span style={required}>* &nbsp;</span>Account Name : </label>
                 <select id="account" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
                     <option value="" hidden>select Account</option>
                     {accountData.map((e)=>{
@@ -221,13 +218,13 @@ const DealForm = () => {
             </p>}
 
             <p>
-                <label for="closingDate">Closing Date : </label>
-                <input type="date" name="closingDate" id="closingDate" placeholder="closing Date *" value={dealdata.date} onChange={handleChange} className={getInputClass('closingDate')}/> 
+                <label for="closingDate"><span style={required}>* &nbsp;</span>Closing Date : </label>
+                <input type="date" name="closingDate" id="closingDate" placeholder="closing Date" value={dealdata.date} onChange={handleChange} className={getInputClass('closingDate')}/> 
             </p>
 
             <p>
-                <label for="amount">Amount : </label>
-                <input type="number" name="amount" id="amount" placeholder="Amount *" value={dealdata.amount} onChange={handleChange} className={getInputClass('amount')}/> 
+                <label for="amount"><span style={required}>* &nbsp;</span>Amount : </label>
+                <input type="number" name="amount" id="amount" placeholder="Amount" value={dealdata.amount} onChange={handleChange} className={getInputClass('amount')}/> 
             </p>
             
             <p>
@@ -237,7 +234,7 @@ const DealForm = () => {
 
             <p>
                 <label for="Pipeline">Pipeline : </label>
-                <input type="text" name="Pipeline" id="Pipeline" placeholder="Pipeline *" value={dealdata.Pipeline} onChange={handleChange}  className={getInputClass('Pipeline')}/> 
+                <input type="text" name="Pipeline" id="Pipeline" placeholder="Pipeline" value={dealdata.Pipeline} onChange={handleChange}  className={getInputClass('Pipeline')}/> 
             </p>
 
             <p>
@@ -247,7 +244,7 @@ const DealForm = () => {
 
             <p>
                 <label for="mobile">Mobile Number : </label>
-                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number *" minLength={10} maxLength={10} value={dealdata.mobile} onChange={handleChange}  className={getInputClass('mobile')} /> 
+                <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" minLength={10} maxLength={10} value={dealdata.mobile} onChange={handleChange}  className={getInputClass('mobile')} /> 
             </p>            
                    
             <p>

@@ -218,6 +218,8 @@ const Contact = () => {
     
     try {
        const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`,accessTokenParams) // this line send the request to node (server.js)      
+      console.log(accessTokenResponce);
+      
        if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.ALL') {
         accessTokenData(accessTokenResponce.data)    
        }
@@ -262,13 +264,19 @@ const Contact = () => {
   // if user user datail are getted ,stored in session storage
     const userDeatailAuth = (token)=>{
       message.success('User Token Retrieved')
-      return sessionStorage.setItem('userdatail',JSON.stringify(token))
+      sessionStorage.setItem('userdatail',JSON.stringify(token))
+      setTimeout(() => {
+        sessionStorage.removeItem('userdatail')   
+      }, 3000 * 1000);
     }
       
   // if accesstoken are getted ,stored in session storage
     const accessTokenData = (token)=>{
       message.success('Access Token Retrieved')
-      return sessionStorage.setItem('accessToken',JSON.stringify(token))
+      sessionStorage.setItem('accessToken',JSON.stringify(token))
+      setTimeout(() => {
+        sessionStorage.removeItem('accessToken')   
+      }, 3000 * 1000);
     }
   
   // navigating function (react router dom)
