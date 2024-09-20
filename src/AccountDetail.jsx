@@ -140,13 +140,13 @@ const AccountDetail = () => {
     fetching()
   },[undefined])
 
-  // this is for drop down (antd frameworks)
-    const items = [
-        {
-            key: '1',
-            label: ( <Link to={`/accounts/dealForm/${id}`}>Convert to Deal</Link>),
-        }
-    ]
+  // // this is for drop down (antd frameworks)
+  //   const items = [
+  //       {
+  //           key: '1',
+  //           label: (<Link to={`/accounts/dealForm/${id}`}>Convert to Deal</Link>),
+  //       }
+  //   ]
 
   return (
     <div>
@@ -163,9 +163,9 @@ const AccountDetail = () => {
                         <a href={`mailto:${accountData.email}`} onClick={()=>makeMail(accountData.email)}>Send Email</a>
                     </Button>
 
-                    <Dropdown menu={{items}} placement='bottomCenter'>
-                        <Button type='primary' id='themeColor'>Create Deal</Button>
-                    </Dropdown>
+                    {/* <Dropdown menu={{items}} placement='bottomCenter'> */}
+                    <Link to={`/accounts/dealForm/${id}`}> <Button type='primary' id='themeColor'>Create Deal</Button> </Link>
+                    {/* </Dropdown> */}
            
                     <Button type='default'>
                         <Link to={`/accounts/accountDetail/accountEditForm/${id}`} >Edit Account</Link> 

@@ -20,6 +20,7 @@ import ScheduleMeeting from './ScheduleMeeting';
 import MeetingStep from './MeetingStep';
 import MeetingDetail from './MeetingDetail';
 import MeetingInsights from './MeetingInsights';
+import DealEditForm from './DealEditForm';
 
 function App() {  
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path='/accounts/accountDetail/accountEditForm/:id' element={<AccountEditForm />} />
           <Route path='/contacts/dealForm/:id' element={<DealForm />} />
           <Route path='/accounts/dealForm/:id' element={<DealForm />} />
+          <Route path='/deal/editDeal/:id' element={<DealEditForm />} />
           <Route path='/contacts/innerdeal/:id' element={<InnerDeal />} />
           <Route path='/accounts/innerdeal/:id' element={<InnerDeal />} />
           <Route path='/deals/detail/:id' element={<DealDetail />} />
@@ -56,7 +58,6 @@ function App() {
           <Route path='/meetingDetail' element={<MeetingDetail />} />
           <Route path='/meetingDetail/:id' element={<MeetingInsights />} />
           <Route path='/editing/meetingDetail/:id' element={<ScheduleMeeting />} />
-
         </Routes>
     </div>
   );

@@ -18,7 +18,7 @@ const moduleName = URL.split('/').filter(e => e).shift()
   }
 
 const AccountFormPage = () => {
-   const {Text} = Typography
+   const {Text,Title} = Typography
    const navigation = useNavigate() //this is for navigation  
   
     const [id,setID] = useState(()=> Math.floor(Math.random() * 1000000000)) // this is for creating the ID
@@ -121,7 +121,7 @@ const AccountFormPage = () => {
         <Dashboard />
         <Row justify={'space-between'} style={{padding:'10px'}}>
         <Flex gap={"small"} align='center'> 
-            <Text style={{fontSize:'16px',color:'grey'}}>
+            {/* <Text style={{fontSize:'16px',color:'grey'}}>
                 <select name="layout" className='PoppinsFont'>
                     <option value="Vadivel">{'vadivel'}</option>
                     <option value="sakthi">{'sakthi'}</option>  
@@ -129,9 +129,12 @@ const AccountFormPage = () => {
                     <option value="bharath">{'bharath'}</option>  
                 </select>
             </Text>
-            
-            <Link to={'/accounts/formpage/formlayout'}> <Button type='link' className='PoppinsFont'>Create layout</Button> </Link>     
+             */}
+            <Link to={'/accounts/formpage/formlayout'}> <Button type='default' className='PoppinsFont'>Create layout</Button> </Link> 
+            <Text style={{fontSize:'25px',fontWeight:'lighter'}} className='PoppinsFont'>- Account Form</Text>
+
         </Flex>
+
         <Flex gap="small">
            <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Cancelled')}>  
             <Button type='default' danger >Cancel</Button>
@@ -141,9 +144,11 @@ const AccountFormPage = () => {
             <Button type='primary' className='PoppinsFont' id='themeColor'>Submit</Button>  
            </Popconfirm>
         </Flex>
+
+       
         </Row>
 
-    <Row>
+    <Row> 
          <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
                 <label for="accountOwner"> <span style={required}>* &nbsp;</span> Account Owner : </label>

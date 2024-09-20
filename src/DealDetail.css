@@ -22,3 +22,28 @@
     cursor: pointer;
     background-color:greenyellow;
 }
+
+.yes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dealEditForm{
+    border: 1px solid #ddd;
+    width: 20%;
+    vertical-align: middle;
+    height: 300px;
+    margin-top: 10%;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px grey;
+}
+
+.dealEditForm:hover{
+    cursor: pointer;
+    box-shadow:0 3px 18px grey;
+    transition: box-shadow 0.2s ease-in;
+    transform: translateY(-1px);
+
+}

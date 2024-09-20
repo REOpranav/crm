@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import {Row ,message ,Button , Flex, Popconfirm,Typography, Tooltip} from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Formpage.css'
+import './LeadEditForm.css'
 import Dashboard from './Dashboard'
-import { Link } from 'react-router-dom'
 import './Dashboard.css'
 
  // this is message ele from antd
@@ -54,7 +54,6 @@ const DealForm = () => {
         website:'',
         description: ''
     })
-    console.log(dealdata);
     
 
     useEffect(() => {
@@ -182,11 +181,14 @@ const DealForm = () => {
   return (
   <div>  
     <Dashboard />
-    <Row justify={'end'} style={{padding:'10px'}}>
+    <Row justify={'space-between'} style={{padding:'10px'}}>
       <Flex gap={"small"} align='center'> 
-        {/* <Link to={'/formpage/formlayout'} > <Button type='default' className='PoppinsFont'>Create layout</Button> </Link>      */}
+        <Link to={'/formpage/formlayout'} > <Button type='default' >Create layout</Button> </Link>     
+        <Text style={{fontSize:'25px',fontWeight:'lighter'}} className='PoppinsFont'>- Deal Form</Text>
+
      </Flex>
       <Flex gap="small">
+
         <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={()=>message.error('Discard changes')}>
           <Tooltip placement='left' title="Discard changes" color='red'> <Button type='default' danger ghost > Cancel </Button> </Tooltip>
         </Popconfirm>
@@ -196,6 +198,7 @@ const DealForm = () => {
         </Popconfirm>
 
         <Button type='primary' className='PoppinsFont'>Back one step</Button>
+
       </Flex>
     </Row>
 

@@ -27,3 +27,89 @@
      border: 1px solid gray;
      border-radius: 3px;
 }
+
+.headRow{
+     background-color: white;
+     display: flex;
+     align-items: center;
+}
+
+.manu{
+     width: 70%;
+     display: flex;
+     align-items: center;
+     
+}
+
+ /*  this is zoho logo */
+ .topHead{
+     padding: 10px;
+     display: inline-flex;
+     overflow: hidden;
+ }
+ 
+ .logohead1,.logohead2{
+     display: inline-flex; 
+     height: fit-content;
+ }
+ 
+ .logoBox1{
+     width: 30px;
+     height: 30px;
+     border-radius: 6px;
+     position:relative;
+     animation: headBack 2.5s 1;
+     animation-fill-mode: forwards;
+     border: 2px solid red;
+     box-shadow: 1px 1px 6px red;
+     transform: rotate(-10deg);
+     z-index: 1;
+ }
+ 
+ .logoBox2{
+     width: 30px;
+     height: 30px;
+     border-radius: 6px;
+     position:relative;
+     animation: headBack 3.5s 1;
+     animation-fill-mode: forwards;
+     border: 2px solid green;
+     box-shadow: 1px 1px 6px green;
+     transform: rotate(20deg);
+     margin-left: -3px;
+     z-index: 11;
+ }
+ 
+ .logoBox3{
+     width: 30px;
+     height: 30px;
+     border-radius: 6px;
+     position:relative;
+     animation: headBack 2s 1;
+     animation-fill-mode: forwards;
+     border: 2px solid blue;
+     box-shadow: 1px 1px 6px blue;
+     transform: rotate(-10deg);
+     margin-left: -3px;
+     z-index: 1;
+ }
+ 
+ .logoBox4{
+     width: 30px;
+     height: 30px;
+     border-radius: 6px;
+     position:relative;
+     animation: headBack 3s 1;
+     animation-fill-mode: forwards;
+     border: 2px solid gold;
+     box-shadow: 1px 1px 6px red;
+     transform: rotate(0deg);
+     margin-left: -4px;
+     z-index: 1;
+ }
+ 
+ @keyframes headBack {
+     from {top: -700px;}
+     to {top: 0%;}
+ }
+ 

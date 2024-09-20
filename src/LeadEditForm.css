@@ -35,20 +35,20 @@ form {
   input[type="email"]:focus,
   input[type="tel"]:focus,
   #meridiem:focus,
+  #stages:focus,
   input[type="number"]:focus {
     border-color: #007bff;
     outline: none;
   }
 
   /* this is select option input field */
-  #meridiem,#contact-module{
+  #meridiem,#contact-module,#stages{
     width: 80%;
     padding: 8px;
     border-radius: 4px;
     box-sizing: border-box;
     background-color: white;
     border: 1px solid #ddd;
-
   }
 
   #meridiem:hover,#contact-module:hover{

@@ -8,22 +8,23 @@ const Dashboard = ({count}) => {
 const {Text ,Title} = Typography
 const backGroundColor = '#422A8D'
 const iconColor = "#fff"
-const [counter,setCounter] = useState(0)
 
 return (
     <div> 
-      <Row justify={'space-between'} style={{backgroundColor:backGroundColor}}>
-        <Menu mode="horizontal" style={{backgroundColor:backGroundColor,width:'70%'}} theme='dark'>
-            <Menu.Item>
-              <Link to={'/'}>
-                <Image 
-                    width={15}
-                    src="https://static.zohocdn.com/crm/images/crm_logo_white_c518bb417c29e9e235a64ca56ff943ec_.svg"
-                    preview={false}                
-                />
-              </Link>   
-              <Text style={{marginLeft:'10px',color:'white',fontWeight:'bold'}} className='PoppinsFont'>Zappy CRM</Text>
-            </Menu.Item>
+      <Row justify={'space-between'} className='headRow'>
+        <Menu mode="horizontal" className='manu' theme='light'>
+            {/* <Menu.Item> */}
+                <div class="topHead">
+                  <div class="logohead1">
+                      <div class="logoBox1"></div>
+                      <div class="logoBox2"></div>
+                  </div>
+                  <div class="logohead2">
+                      <div class="logoBox3"></div>
+                      <div class="logoBox4"></div>
+                  </div>
+                </div>
+            {/* </Menu.Item> */}
 
             <Menu.Item key="leadBoard">
             <Link to={'/leads'}  className='PoppinsFont'>Lead</Link>
@@ -47,7 +48,7 @@ return (
         </Menu>
 
         <Space size={'large'}>
-        <span style={{position:'absolute'}}> <span style={{display:'flex',marginTop:'-10px',color:'white'}}> {counter} </span></span>
+        {/* <span style={{position:'absolute'}}> <span style={{display:'flex',marginTop:'-10px',color:'white'}}> {counter} </span></span> */}
             <AiFillSetting color={iconColor}  className='PoppinsFont'/> 
             <Link to={'/'}>
               <Flex gap={'small'} align='center' style={{marginRight:'10px'}}>
@@ -59,7 +60,7 @@ return (
               />
               </Flex>
             </Link> 
-          </Space>
+        </Space>
     </Row>
 
 {(window.location.href === "https://mockcrm.vercel.app/" || window.location.href === 'http://localhost:3001/') &&

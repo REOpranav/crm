@@ -97,11 +97,11 @@ const Deal = () => {
           );
         }
       },          
-      {
-        title:'Contact Name',
-        dataIndex: 'contactName',
-        key: 'contactName',
-      },
+      // {
+      //   title:'Contact Name',
+      //   dataIndex: 'contactName',
+      //   key: 'contactName',
+      // },
       {
         title: 'Deal Owner',
         dataIndex: 'dealowner',

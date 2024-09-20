@@ -42,7 +42,9 @@ const DealDetail = () => {
     const [DealInformationFromContact,setDealInformationFromContact] = useState([])
     const [DealInformationFromAccount,setDealInformationFromAccount] = useState([])
     const [stageValue,setStageValue] = useState('')
+    const [notes,setNotes]= useState([])
     
+    // get the URL
     const URL = window.location.pathname    
     const endpoint = URL.split('/').pop()
     
@@ -111,7 +113,7 @@ return (
              <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}> Contact View </Text>
           </Space>
           <Space>
-              <Link to={`/deal/editDeal/${endpoint}`}> <Button type='default'> Edit Deal </Button> </Link>
+              {/* <Link to={`/deal/editDeal/${endpoint}`}> <Button type='default'> Edit Deal </Button> </Link> */}
               <Button type='default' onClick={homeNavigation}>Back to Home</Button> 
           </Space>
         </Row>
@@ -181,7 +183,7 @@ return (
                     </Row>
 
                     <Row style={{width:"100%",marginTop:'10px'}} justify={'space-between'}>
-                        <span className='stages' onClick={() => stage('stage 1')} style={stageValue === 'stage 1' ? {backgroundColor:'blue'}  : {backgroundColor:'transparent'}}>stage 1</span>
+                        <span className='stages' onClick={() => stage('stage 1')} style={stageValue === 'stage 1' ? {backgroundColor:'lightblue'}  : {backgroundColor:'transparent'}}>stage 1</span>
                         <span className='stages' onClick={() => stage('stage 2')} style={stageValue === 'stage 2' ? {backgroundColor:'violet'}  : {backgroundColor:'transparent'}}>stage 2</span>
                         <span className='stages' onClick={() => stage('stage 3')} style={stageValue === 'stage 3' ? {backgroundColor:'gold'}  : {backgroundColor:'transparent'}}>stage 3</span>
                         <span className='stages' onClick={() => stage('stage 4')} style={stageValue === 'stage 4' ? {backgroundColor:'pink'}  : {backgroundColor:'transparent'}}>stage 4</span>
@@ -285,11 +287,11 @@ return (
                     <Col span={24}>
                         <Row style={{marginBottom:'10px'}} > <Text style={overviewHeading} className='PoppinsFont'> Notes </Text> </Row>
                         <Row justify={'end'}>
-                            <Col span={24} > <textarea name="notes" id="notes" style={{width:'100%'}}></textarea> </Col>
+                            <Col span={24} > <textarea name="notes" id="notes" style={{width:'100%'}} value={notes} onChange={(e)=>setNotes(e.target.value)}></textarea> </Col>
                             <Col style={paddingStyle}>
                               <Space>
-                                <Button type='primary'>Add notes</Button>
-                                <Button type='default'>Cancel</Button>
+                                <Button type='primary' onClick={()=> message.success('Notes Added')}>Add notes</Button>
+                                <Button type='default' onClick={()=> message.error('Notes Cancelled')} >Cancel</Button>
                               </Space>
                             </Col>
                         </Row> 
