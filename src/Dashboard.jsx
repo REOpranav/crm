@@ -10,7 +10,7 @@ const navigate = useNavigate();
 const {Text ,Title} = Typography
 const backGroundColor = '#422A8D'
 const iconColor = "#fff"
-const [suitName,setSuitName] = useState("")
+const [suitName,setSuitName] = useState("Sales & Marketing")
 const [sales,setSales] = useState(true)
 const [customerService,setCustomerService] = useState(false)
 const [finance,setFinance] = useState(false)
@@ -154,16 +154,16 @@ return (
 {(window.location.href === "https://mockcrm.vercel.app/" || window.location.href === 'http://localhost:3001/') &&
      <Row>
         <Col span={24}>
-        <Row justify={'center'} className='PoppinsFont'><h3>Explore the robust array of REST APIs tailored for each Zoho product.</h3> </Row>
+        <Row justify={'space-around'} className='PoppinsFont'><h2>Explore the robust array of REST APIs tailored for each Zoho product.</h2> </Row>
             <Row className='suitOfApplicationView'>
             <aside>
-                <div><Button type='link' onClick={sales_Market} className='PoppinsFont'><h4 onClick={() => suit_Name('Sales & Marketing')}>Sales & Marketing</h4></Button></div>
-                <div><Button type='link' onClick={customer_Service} className='PoppinsFont'><h4 onClick={() => suit_Name('Customer Service')}>Customer Service</h4></Button></div>
-                <div><Button type='link' onClick={finance_suit} className='PoppinsFont'><h4 onClick={() => suit_Name('Finance')}>Finance</h4></Button></div>
-                <div><Button type='link' onClick={human_resource} className='PoppinsFont'><h4 onClick={() => suit_Name('Human Resources')}>Human Resources</h4></Button></div>
-                <div><Button type='link' onClick={EmailCollaboration} className='PoppinsFont'><h4 onClick={() => suit_Name('Email & Collaboration')}>Email & Collaboration</h4></Button></div>
-                <div><Button type='link' onClick={business_Intelligence} className='PoppinsFont'><h4 onClick={() => suit_Name('Business Intelligence')}>Business Intelligence</h4></Button></div>
-                <div><Button type='link' onClick={custom_Solutions} className='PoppinsFont'><h4 onClick={() => suit_Name('Custom Solutions')}>Custom Solutions</h4></Button></div>
+                <div><Button type={suitName == 'Sales & Marketing' ? 'text' : 'link'}  onClick={sales_Market} className='PoppinsFont'><h4 onClick={() => suit_Name('Sales & Marketing')}>Sales & Marketing</h4></Button></div>
+                <div><Button type={suitName == 'Customer Service' ? 'text' : 'link'} onClick={customer_Service} className='PoppinsFont'><h4 onClick={() => suit_Name('Customer Service')}>Customer Service</h4></Button></div>
+                <div><Button type={suitName == 'Finance' ? 'text' : 'link'} onClick={finance_suit} className='PoppinsFont'><h4 onClick={() => suit_Name('Finance')}>Finance</h4></Button></div>
+                <div><Button type={suitName == 'Human Resources' ? 'text' : 'link'} onClick={human_resource} className='PoppinsFont'><h4 onClick={() => suit_Name('Human Resources')}>Human Resources</h4></Button></div>
+                <div><Button type={suitName == 'Email & Collaboration' ? 'text' : 'link'} onClick={EmailCollaboration} className='PoppinsFont'><h4 onClick={() => suit_Name('Email & Collaboration')}>Email & Collaboration</h4></Button></div>
+                <div><Button type={suitName == 'Business Intelligence' ? 'text' : 'link'} onClick={business_Intelligence} className='PoppinsFont'><h4 onClick={() => suit_Name('Business Intelligence')}>Business Intelligence</h4></Button></div>
+                <div><Button type={suitName == 'Custom Solutions' ? 'text' : 'link'} onClick={custom_Solutions} className='PoppinsFont'><h4 onClick={() => suit_Name('Custom Solutions')}>Custom Solutions</h4></Button></div>
             </aside>
             
             <main>
