@@ -3,7 +3,8 @@
 body {
   margin: 0;
   background-color: #f3f6f4;
-   font-family: Poppins, sans-serif;
+  font-family: Poppins, sans-serif;
+  overflow: hidden;
 }
 
 .ant-btn.ant-btn-primary,

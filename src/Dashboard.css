@@ -58,10 +58,10 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 2.5s 1;
+     animation: headBack 1.5s 1;
      animation-fill-mode: forwards;
      border: 2px solid red;
-     box-shadow: 1px 1px 6px red;
+     /* box-shadow: 1px 1px 6px red; */
      transform: rotate(-10deg);
      z-index: 1;
  }
@@ -71,10 +71,9 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 3.5s 1;
+     animation: headBack 1.8s 1;
      animation-fill-mode: forwards;
      border: 2px solid green;
-     box-shadow: 1px 1px 6px green;
      transform: rotate(20deg);
      margin-left: -3px;
      z-index: 11;
@@ -88,7 +87,6 @@
      animation: headBack 2s 1;
      animation-fill-mode: forwards;
      border: 2px solid blue;
-     box-shadow: 1px 1px 6px blue;
      transform: rotate(-10deg);
      margin-left: -3px;
      z-index: 1;
@@ -99,17 +97,197 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 3s 1;
+     animation: headBack 1s 1;
      animation-fill-mode: forwards;
      border: 2px solid gold;
-     box-shadow: 1px 1px 6px red;
      transform: rotate(0deg);
      margin-left: -4px;
      z-index: 1;
  }
  
  @keyframes headBack {
-     from {top: -700px;}
+     from {top: -300px;}
      to {top: 0%;}
  }
  
+/* this code for hover effect in zoho logo */
+.logoBox1:hover{
+    cursor: pointer;
+    transform: rotate(-20deg);
+    transition: 0.2s ease-in ;
+}
+
+.logoBox2:hover{
+    cursor: pointer;
+    transform: rotate(30deg);
+    transition: 0.2s ease-in ;
+}
+
+.logoBox3:hover{
+    cursor: pointer;
+    transform: rotate(-25deg);
+    transition: 0.2s ease-in ;
+}
+
+.logoBox4:hover{
+    cursor: pointer;
+    transform: rotate(10deg);
+    transition: 0.2s ease-in ;
+}
+
+/* this is suit of application */
+
+.suitOfApplicationView{
+    display: flex;
+}
+
+.suitOfApplicationView>aside{
+    color: black;
+    background-color:white;
+    width: 19.5%;
+    min-height: 95vh;
+}
+
+.suitOfApplicationView>aside>div{
+    margin-top: 10px;
+}
+
+.suitOfApplicationView>aside>div>button ,.suitOfApplicationView>aside>div>button>h4{
+    text-align:left;
+    width: 100%;
+}
+
+.suitOfApplicationView>main{
+    width: 80%;
+}
+
+.suitOfApplicationView>main>header{
+    text-align: start;
+}
+
+.suitOfApplicationView>main>header>h3{
+    margin-left: 10px;
+    text-transform: capitalize;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.suitOfApplicationView>main>section{
+    min-height: 95vh;
+    width: 100%;
+    background-color: black;
+}
+
+img{
+    width: 70px;
+    height: 70px;
+}
+
+.imagesRow1,.imagesRow2,.imagesRow3{
+    display: flex;
+    flex-wrap: wrap;
+} 
+
+.imagesRow1>div,.imagesRow2>div,.imagesRow3>div{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagesRow1>div:hover,.imagesRow2>div:hover,.imagesRow3>div:hover{
+    cursor: pointer;
+    background-color: white;
+    transition: 0.7s ease-in-out;
+}
+
+.imagesRow1>div:hover img,.imagesRow2>div:hover img,.imagesRow3>div:hover img{
+    transform: scale(1.4);
+    transition: 0.5s ease-in-out;
+}
+
+.images1{
+    position: relative;
+    animation: SlideTop 1.5s 1;
+}
+
+.images2{
+    position: relative;
+    animation: SlideTop 1.3s 1;
+}
+    
+.images3{
+    position: relative;
+    animation: SlideTop 1.5s 1;
+}
+    
+.images4{
+    position: relative;
+    animation: SlideTop 1.8s 1;
+}
+    
+.images5{
+    position: relative;
+    animation: SlideLeftRight 2.5s 1;
+}
+    
+.images6{
+    position: relative;
+    animation: SlideLeftRight 2.7s 1;
+}
+
+.images7{
+    position: relative;
+    animation: rightSlide 1.7s 1;
+}
+    
+.images8{
+    position: relative;
+    animation: rightSlide 1.4s 1;
+}
+    
+.images9{
+    position: relative;
+    animation: slideBottomTopSlow 2.4s 1;
+}
+    
+.images10{
+    position: relative;
+    animation: slideBottomTopSlow 1.8s 1;
+}  
+    
+.images11{
+    position: relative;
+    animation: slideBottomTopSlow 1.11s 1;
+}  
+    
+.images12{
+    position: relative;
+    animation: slideBottomTopSlow 2.1s 1;
+}
+
+    @keyframes SlideTop {
+        from {top: -300%}
+        to {top : 0}
+    }
+
+    @keyframes SlideLeftRight {
+        from {left : -300%}
+        to {left : 0}
+    }
+
+    @keyframes rightSlide {
+        from {left : 200%}
+        to {left : 0}
+    }
+
+    @keyframes slideBottomTopSlow {
+        from {bottom : -200%}
+        to {bottom : 0}
+    }

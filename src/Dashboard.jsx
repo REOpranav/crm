@@ -1,29 +1,85 @@
-import { Menu, Row ,Typography, Image ,Space, Flex} from 'antd';
-import { Link } from 'react-router-dom';
+import { Menu, Row ,Typography, Image ,Space, Flex, Button} from 'antd';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
 import './Dashboard.css'
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 const Dashboard = ({count}) => {
+const navigate = useNavigate();
 const {Text ,Title} = Typography
 const backGroundColor = '#422A8D'
 const iconColor = "#fff"
+const [suitName,setSuitName] = useState("")
+const [sales,setSales] = useState(true)
+const [customerService,setCustomerService] = useState(false)
+const [finance,setFinance] = useState(false)
+const [humanResources,setHumanResources] = useState(false)
+const [email_Collaboration,setEmail_Collaboration] = useState(false)
+ 
+// this is for dynamic heading 
+const suit_Name = (name)=>{
+    setSuitName(name)
+}
 
+const sales_Market = ()=>{ 
+    setCustomerService(false)
+    setEmail_Collaboration(false)
+    setFinance(false)
+    setHumanResources(false)
+    setSales(true)
+}
+
+const customer_Service = ()=>{
+    setFinance(false)
+    setHumanResources(false)
+    setEmail_Collaboration(false)
+    setSales(false)
+    setCustomerService(true)
+}
+
+const finance_suit = ()=>{
+    setHumanResources(false)
+    setEmail_Collaboration(false)
+    setSales(false)
+    setCustomerService(false)
+    setFinance(true) 
+}
+
+const human_resource = ()=>{
+    setSales(false)
+    setEmail_Collaboration(false)
+    setCustomerService(false)
+    setFinance(false)
+    setHumanResources(true)
+}
+
+const EmailCollaboration = ()=>{
+    setSales(false)
+    setCustomerService(false)
+    setFinance(false)
+    setHumanResources(false)
+    setEmail_Collaboration(true)
+}
+
+
+const home = ()=>{
+    navigate('/')
+}
 return (
     <div> 
       <Row justify={'space-between'} className='headRow'>
         <Menu mode="horizontal" className='manu' theme='light'>
             {/* <Menu.Item> */}
-                <div class="topHead">
-                  <div class="logohead1">
-                      <div class="logoBox1"></div>
-                      <div class="logoBox2"></div>
-                  </div>
-                  <div class="logohead2">
-                      <div class="logoBox3"></div>
-                      <div class="logoBox4"></div>
-                  </div>
+            <div class="topHead" onClick={home}>
+                <div class="logohead1">
+                    <div class="logoBox1"></div>
+                    <div class="logoBox2"></div>
                 </div>
+                <div class="logohead2">
+                    <div class="logoBox3"></div>
+                    <div class="logoBox4"></div>
+                </div>
+             </div>
             {/* </Menu.Item> */}
 
             <Menu.Item key="leadBoard">
@@ -64,8 +120,117 @@ return (
     </Row>
 
 {(window.location.href === "https://mockcrm.vercel.app/" || window.location.href === 'http://localhost:3001/') &&
-    <Row style={{minHeight:'80vh'}} justify={'center'} align={'middle'} >
-        <Title level={2} style={{color:'grey',fontFamily:'fantasy',opacity:'0.4'}}> DashBoard in Progress</Title>
+    <Row className='suitOfApplicationView'>
+      <aside>
+        <div><Button type='link' onClick={sales_Market}><h4 onClick={() => suit_Name('Sales & Marketing')}>Sales & Marketing</h4></Button></div>
+        <div><Button type='link' onClick={customer_Service }><h4 onClick={() => suit_Name('Customer Service')}>Customer Service</h4></Button></div>
+        <div><Button type='link' onClick={finance_suit}><h4 onClick={() => suit_Name('Finance')}>Finance</h4></Button></div>
+        <div><Button type='link' onClick={human_resource }><h4 onClick={() => suit_Name('Human Resources')}>Human Resources</h4></Button></div>
+        <div><Button type='link' onClick={EmailCollaboration }><h4 onClick={() => suit_Name('Email & Collaboration')}>Email & Collaboration</h4></Button></div>
+      </aside>
+      
+    <main>
+       <header>
+            <h3>{suitName ? suitName : "Sales & Marketing"}</h3>
+       </header>
+       <section>
+        {sales && 
+            <div class="imagesRow1">
+                <div class="images1">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/crm.svg" />
+                </div>
+                <div class="images2">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/bookings.svg" />
+                </div>
+                
+                <div class="images3">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/commerce.svg" />
+                </div>
+                <div class="images2">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/salesiq.svg"  />
+                </div>
+                <div class="images3">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sign.svg" />
+                </div>
+                <div class="images1">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/zohobigin.svg"  />
+                </div>
+            </div>
+            }
+
+        {customerService &&
+            <div class="imagesRow2"> 
+                <div class="images8">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/assist.svg"  />
+                </div>
+                <div class="images7 ">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/desk.svg" />
+                </div>
+            </div>
+        }
+
+        {finance == true && 
+            <div class="imagesRow3">
+                <div class="images9">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/books.svg" />
+                </div>
+                <div class="images10">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/expense.svg" />
+                </div>
+                <div class="images9">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/inventory.svg"  />
+                </div>
+                <div class="images12">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/invoice.svg" />
+                </div>
+            </div>
+        }
+
+        {humanResources &&
+            <div class="imagesRow2"> 
+                <div class="images8">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/people.svg" />
+                </div>
+                <div class="images7">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/recruit.svg" />
+                </div>
+            </div>
+        }
+
+        {email_Collaboration && 
+            <div class="imagesRow1">
+                <div class="images9">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/cliq.svg" />
+                </div>
+                <div class="images10">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/bugtracker.svg" />
+                </div>
+                <div class="images12">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/connect.svg"  />
+                </div>
+                <div class="images9">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/mail.svg"  />
+                </div>
+                <div class="images12">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/meeting.svg" />
+                </div>
+                <div class="images11">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/projects.svg" />
+                </div>
+                <div class="images9">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sprints.svg" />
+                </div>    
+                <div class="images11">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/workdrive.svg"  />
+                </div>    
+                <div class="images12">
+                    <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sheet.svg" />
+                </div>    
+            </div>
+            }
+        </section>
+    </main>
+        {/* <Title level={2} style={{color:'grey',fontFamily:'fantasy',opacity:'0.4'}}> DashBoard in Progress</Title> */}
     </Row>
 }
     </div>
