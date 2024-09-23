@@ -152,9 +152,15 @@
     margin-top: 10px;
 }
 
+.suitOfApplicationView>aside>div>h3{
+    text-align: justify;
+    padding: 0 20px ;
+}
+
 .suitOfApplicationView>aside>div>button ,.suitOfApplicationView>aside>div>button>h4{
     text-align:left;
     width: 100%;
+    padding: 10px;
 }
 
 .suitOfApplicationView>main{
@@ -214,62 +220,62 @@ img{
 
 .images1{
     position: relative;
-    animation: SlideTop 1.5s 1;
+    animation: rightSlide 1s 1;
 }
 
 .images2{
     position: relative;
-    animation: SlideTop 1.3s 1;
+    animation: rightSlide 1.1s 1;
 }
     
 .images3{
     position: relative;
-    animation: SlideTop 1.5s 1;
+    animation: rightSlide 1.2s 1;
 }
     
 .images4{
     position: relative;
-    animation: SlideTop 1.8s 1;
+    animation: rightSlide 1.3s 1;
 }
     
 .images5{
     position: relative;
-    animation: SlideLeftRight 2.5s 1;
+    animation: rightSlide 1.4s 1;
 }
     
 .images6{
     position: relative;
-    animation: SlideLeftRight 2.7s 1;
+    animation: rightSlide 1.5s 1;
 }
 
 .images7{
     position: relative;
-    animation: rightSlide 1.7s 1;
+    animation: rightSlide 1.6s 1;
 }
     
 .images8{
     position: relative;
-    animation: rightSlide 1.4s 1;
+    animation: rightSlide 1.7s 1;
 }
     
 .images9{
     position: relative;
-    animation: slideBottomTopSlow 2.4s 1;
+    animation: rightSlide 1.8s 1;
 }
     
 .images10{
     position: relative;
-    animation: slideBottomTopSlow 1.8s 1;
+    animation: rightSlide 1.9s 1;
 }  
     
 .images11{
     position: relative;
-    animation: slideBottomTopSlow 1.11s 1;
+    animation: rightSlide 1.10s 1;
 }  
     
 .images12{
     position: relative;
-    animation: slideBottomTopSlow 2.1s 1;
+    animation: rightSlide 1.11s 1;
 }
 
     @keyframes SlideTop {
