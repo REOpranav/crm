@@ -58,7 +58,7 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 1.5s 1;
+     /* animation: headBack 1.5s 1; */
      animation-fill-mode: forwards;
      border: 2px solid red;
      /* box-shadow: 1px 1px 6px red; */
@@ -71,7 +71,7 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 1.8s 1;
+     /* animation: headBack 1.8s 1; */
      animation-fill-mode: forwards;
      border: 2px solid green;
      transform: rotate(20deg);
@@ -84,7 +84,7 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 2s 1;
+     /* animation: headBack 2s 1; */
      animation-fill-mode: forwards;
      border: 2px solid blue;
      transform: rotate(-10deg);
@@ -97,7 +97,7 @@
      height: 30px;
      border-radius: 6px;
      position:relative;
-     animation: headBack 1s 1;
+     /* animation: headBack 1s 1; */
      animation-fill-mode: forwards;
      border: 2px solid gold;
      transform: rotate(0deg);

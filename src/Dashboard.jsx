@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
 import './Dashboard.css'
 import { useState, useSyncExternalStore } from 'react';
+import { TARGET_CLS } from 'antd/es/_util/wave/interface';
 
 const Dashboard = ({count}) => {
 const navigate = useNavigate();
@@ -15,6 +16,8 @@ const [customerService,setCustomerService] = useState(false)
 const [finance,setFinance] = useState(false)
 const [humanResources,setHumanResources] = useState(false)
 const [email_Collaboration,setEmail_Collaboration] = useState(false)
+const [businessIntelligence,setBusinessIntelligence]= useState(false)
+const [customSolutions,setCustomSolutions] = useState(false)
  
 // this is for dynamic heading 
 const suit_Name = (name)=>{
@@ -26,6 +29,8 @@ const sales_Market = ()=>{
     setEmail_Collaboration(false)
     setFinance(false)
     setHumanResources(false)
+    setBusinessIntelligence(false)
+    setCustomSolutions(false)
     setSales(true)
 }
 
@@ -33,23 +38,29 @@ const customer_Service = ()=>{
     setFinance(false)
     setHumanResources(false)
     setEmail_Collaboration(false)
+    setBusinessIntelligence(false)
     setSales(false)
+    setCustomSolutions(false)
     setCustomerService(true)
 }
 
 const finance_suit = ()=>{
     setHumanResources(false)
+    setBusinessIntelligence(false)
     setEmail_Collaboration(false)
     setSales(false)
     setCustomerService(false)
+    setCustomSolutions(false)
     setFinance(true) 
 }
 
 const human_resource = ()=>{
     setSales(false)
+    setBusinessIntelligence(false)
     setEmail_Collaboration(false)
     setCustomerService(false)
     setFinance(false)
+    setCustomSolutions(false)
     setHumanResources(true)
 }
 
@@ -58,9 +69,30 @@ const EmailCollaboration = ()=>{
     setCustomerService(false)
     setFinance(false)
     setHumanResources(false)
+    setCustomSolutions(false)
+    setBusinessIntelligence(false)
     setEmail_Collaboration(true)
 }
 
+const business_Intelligence = ()=>{
+    setSales(false)
+    setCustomerService(false)
+    setFinance(false)
+    setHumanResources(false)
+    setEmail_Collaboration(false)
+    setCustomSolutions(false)
+    setBusinessIntelligence(true)
+}
+
+const custom_Solutions = ()=>{
+    setSales(false)
+    setCustomerService(false)
+    setFinance(false)
+    setHumanResources(false)
+    setEmail_Collaboration(false)
+    setBusinessIntelligence(false)
+    setCustomSolutions(true)    
+}
 
 const home = ()=>{
     navigate('/')
@@ -130,6 +162,8 @@ return (
                 <div><Button type='link' onClick={finance_suit} className='PoppinsFont'><h4 onClick={() => suit_Name('Finance')}>Finance</h4></Button></div>
                 <div><Button type='link' onClick={human_resource} className='PoppinsFont'><h4 onClick={() => suit_Name('Human Resources')}>Human Resources</h4></Button></div>
                 <div><Button type='link' onClick={EmailCollaboration} className='PoppinsFont'><h4 onClick={() => suit_Name('Email & Collaboration')}>Email & Collaboration</h4></Button></div>
+                <div><Button type='link' onClick={business_Intelligence} className='PoppinsFont'><h4 onClick={() => suit_Name('Business Intelligence')}>Business Intelligence</h4></Button></div>
+                <div><Button type='link' onClick={custom_Solutions} className='PoppinsFont'><h4 onClick={() => suit_Name('Custom Solutions')}>Custom Solutions</h4></Button></div>
             </aside>
             
             <main>
@@ -140,23 +174,23 @@ return (
                 {sales && 
                     <div class="imagesRow1">
                         <div class="images1">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/crm.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/crm.svg" onClick={() => window.open('https://www.zoho.com/crm/developer/docs/api/v3/','_blank')}/>
                         </div>
                         <div class="images2">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/bookings.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/bookings.svg" onClick={() => window.open('https://www.zoho.com/bookings/help/api/v1/generate-accesstoken.html','_blank')}/>
                         </div>
                         
                         <div class="images3">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/commerce.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/commerce.svg" onClick={() => window.open('https://www.zoho.com/commerce/api/introduction.html','_blank')}/>
                         </div>
                         <div class="images4">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/salesiq.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/salesiq.svg"  onClick={() => window.open('https://www.zoho.com/salesiq/help/developer-section/rest-api-portal-list.html','_blank')}/>
                         </div>
                         <div class="images5">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sign.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sign.svg" onClick={() => window.open('https://www.zoho.com/sign/api/','_blank')}/>
                         </div>
                         <div class="images6">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/zohobigin.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/zohobigin.svg" onClick={() => window.open(' https://www.bigin.com/developer/docs/apis/?source=developer','_blank')}/>
                         </div>
                     </div>
                     }
@@ -164,10 +198,10 @@ return (
                 {customerService &&
                     <div class="imagesRow2"> 
                         <div class="images7">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/assist.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/assist.svg"  onClick={() => window.open('https://www.zoho.com/assist/api/introduction.html','_blank')}/>
                         </div>
                         <div class="images8">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/desk.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/desk.svg" onClick={() => window.open('https://desk.zoho.com/DeskAPIDocument#Introduction','_blank')}/>
                         </div>
                     </div>
                 }
@@ -175,16 +209,19 @@ return (
                 {finance == true && 
                     <div class="imagesRow3">
                         <div class="images3">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/books.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/books.svg"  onClick={() => window.open('https://www.zoho.com/books/api/v3/introduction/#organization-id','_blank')}/>
                         </div>
                         <div class="images4">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/expense.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/expense.svg"  onClick={() => window.open('https://www.zoho.com/expense/api/v1/introduction/#overview','_blank')}/>
                         </div>
                         <div class="images5">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/inventory.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/inventory.svg"  onClick={() => window.open('https://www.zoho.com/inventory/api/v1/introduction/#overview','_blank')}/>
                         </div>
                         <div class="images6">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/invoice.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/invoice.svg"  onClick={() => window.open('https://www.zoho.com/invoice/api/v3/introduction/#overview','_blank')}/>
+                        </div>
+                        <div class="images7">
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/billing.svg"  onClick={() => window.open('https://www.zoho.com/billing/api/v1/introduction/#overview','_blank')}/>
                         </div>
                     </div>
                 }
@@ -192,10 +229,10 @@ return (
                 {humanResources &&
                     <div class="imagesRow2"> 
                         <div class="images7">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/people.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/people.svg" onClick={() => window.open('https://www.zoho.com/people/api/overview.html','_blank')}/>
                         </div>
                         <div class="images8">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/recruit.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/recruit.svg" onClick={() => window.open('https://help.zoho.com/portal/en/kb/recruit/developer-guide','_blank')}/>
                         </div>
                     </div>
                 }
@@ -203,34 +240,53 @@ return (
                 {email_Collaboration && 
                     <div class="imagesRow1">
                         <div class="images1">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/cliq.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/cliq.svg" onClick={() => window.open('https://www.zoho.com/cliq/help/restapi/v2/','_blank')}/>
                         </div>
                         <div class="images2">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/bugtracker.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/bugtracker.svg" onClick={() => window.open('https://www.zoho.com/projects/help/rest-api/bugtracker-portal-api.html','_blank')}/>
                         </div>
                         <div class="images3">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/connect.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/connect.svg"  onClick={() => window.open('https://www.zoho.com/connect/api/authentication.html','_blank')}/>
                         </div>
                         <div class="images4">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/mail.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/mail.svg"  onClick={() => window.open('https://www.zoho.com/mail/help/api/overview.html','_blank')}/>
                         </div>
                         <div class="images5">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/meeting.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/meeting.svg" onClick={() => window.open('https://www.zoho.com/meeting/api-integration.html','_blank')}/>
                         </div>
                         <div class="images6">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/projects.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/projects.svg" onClick={() => window.open('https://www.zoho.com/projects/help/rest-api/zohoprojectsapi.html','_blank')}/>
                         </div>
                         <div class="images7">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sprints.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sprints.svg" onClick={() => window.open('https://sprints.zoho.com/apidoc.html#Overview','_blank')}/>
                         </div>    
                         <div class="images8">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/workdrive.svg"  />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/workdrive.svg" onClick={() => window.open('https://workdrive.zoho.com/apidocs/v1/overview','_blank')}/>
                         </div>    
                         <div class="images9">
-                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sheet.svg" />
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/sheet.svg" onClick={() => window.open('https://sheet.zoho.com/help/api/v2/','_blank')}/>
                         </div>    
                     </div>
                     }
+
+            {businessIntelligence &&
+                    <div class="imagesRow2"> 
+                        <div class="images7">
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/analytics.svg" onClick={() => window.open('https://www.zoho.com/analytics/api/v2/introduction.html','_blank')}/>
+                        </div>
+                    </div>
+                }
+
+            {customSolutions &&
+                    <div class="imagesRow2"> 
+                        <div class="images7">
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/creator.svg" onClick={() => window.open('https://www.zoho.com/creator/help/api/v2/','_blank')}/>
+                        </div>
+                        <div class="images8">
+                            <img src="https://www.zohowebstatic.com/sites/zweb/images/productlogos/catalyst.svg" onClick={() => window.open('https://docs.catalyst.zoho.com/en/api/introduction/overview-and-prerequisites/#OverviewandPrerequisites','_blank')}/>
+                        </div>
+                    </div>
+                }
                 </section>
             </main>
             </Row>
