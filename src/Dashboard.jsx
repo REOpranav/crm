@@ -10,12 +10,12 @@ const navigate = useNavigate();
 const {Text ,Title} = Typography
 const backGroundColor = '#422A8D'
 const iconColor = "#fff"
-const [suitName,setSuitName] = useState("Sales & Marketing")
-const [sales,setSales] = useState(true)
+const [suitName,setSuitName] = useState("Email & Collaboration")
+const [sales,setSales] = useState(false)
 const [customerService,setCustomerService] = useState(false)
 const [finance,setFinance] = useState(false)
 const [humanResources,setHumanResources] = useState(false)
-const [email_Collaboration,setEmail_Collaboration] = useState(false)
+const [email_Collaboration,setEmail_Collaboration] = useState(true)
 const [businessIntelligence,setBusinessIntelligence]= useState(false)
 const [customSolutions,setCustomSolutions] = useState(false)
  
@@ -168,7 +168,7 @@ return (
             
             <main>
             <header>
-                <h3>{suitName ? suitName : "Sales & Marketing"}</h3>
+                <h3>{suitName ? suitName : "Email & Collaboration"}</h3>
             </header>
             <section>
                 {sales && 

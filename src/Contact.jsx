@@ -218,7 +218,6 @@ const Contact = () => {
     
     try {
        const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`,accessTokenParams) // this line send the request to node (server.js)      
-      console.log(accessTokenResponce);
       
        if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.ALL') {
         accessTokenData(accessTokenResponce.data)    

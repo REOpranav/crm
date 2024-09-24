@@ -87,6 +87,8 @@ const MeetingInsights = () => {
          
     // This function for start the meeting when click the start meeting button
     const startLink = ()=>{
+      console.log('yes');
+      
         return window.open(`${meetingData.session.startLink}`)        
     }
 
@@ -160,7 +162,7 @@ const MeetingInsights = () => {
             <Col>
                 <Row style={{display:'flex',alignItems:'center'}}>
                     <Col style={{padding:'10px'}} className='backArrow'> <IoMdArrowRoundBack size={'20px'} onClick={back}/></Col> 
-                    <Col style={{padding:'10px',fontSize:'20px',fontWeight:'lighter',color:'Grey'}} className='PoppinsFont'>Topic : <span style={{color:'red'}}> {meetingData.session.topic} </span> </Col>
+                    <Col style={{padding:'10px',fontSize:'20px',color:'Grey'}} className='PoppinsFont'>Topic : <span style={{color:'red'}}> {meetingData.session.topic} </span> </Col>
                 </Row>
             </Col>
             <Col>

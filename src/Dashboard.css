@@ -214,7 +214,7 @@ img{
 }
 
 .imagesRow1>div:hover img,.imagesRow2>div:hover img,.imagesRow3>div:hover img{
-    transform: scale(1.4);
+    transform: scale(1.3);
     transition: 0.5s ease-in-out;
 }
 

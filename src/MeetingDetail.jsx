@@ -208,7 +208,7 @@ const MeetingDetail = () => {
                   </Col>
                 </Row>}
 
-              {upcomingData && upcomingData.map((data)=>{
+              {upcomingData && upcomingData.map((data)=>{                
                 return <Row style={listStyle} className='listStyle'>
                     <Col span={4} style={listDataStyle} className='listDataStyle'> 
                       <Row style={{display:'flex',alignItems:'center'}} justify={'space-around'}>
@@ -227,14 +227,14 @@ const MeetingDetail = () => {
                           <Col span={19} offset={1}> <Row justify={'center'}> {data.sDate} </Row> <Row justify={'center'}> <Col style={{backgroundColor:'GreenYellow',padding:'4px'}}> {data.sTime} </Col> <Col style={{display:'flex',alignItems:'center',marginLeft:'5px'}}> <Tooltip placement="bottomLeft" title={`${data.timezone}`} color='#5a3bb6'> <CiGlobe/> </Tooltip> </Col> </Row></Col>
                       </Row>
                     </Col>
-                    <Col span={4} style={listDataStyle} className='listDataStyle'>{data.topic}</Col>
-                    <Col span={4} style={listDataStyle} className='listDataStyle'>{data.presenterEmail}</Col>
-                    <Col span={4} style={listDataStyle} className='listDataStyle'>{data.durationInHours}</Col>
-                    <Col span={4} style={listDataStyle} className='listDataStyle'> <Link> START MEETING </Link> </Col>
-                    <Col span={4}>
+                    <Col span={6} style={listDataStyle} className='listDataStyle'>{data.topic}</Col>
+                    <Col span={6} style={listDataStyle} className='listDataStyle'>{data.presenterEmail}</Col>
+                    <Col span={6} style={listDataStyle} className='listDataStyle'>{data.durationInHours}</Col>
+                    {/* <Col span={4} style={listDataStyle} className='listDataStyle'> <Link> START MEETING </Link> </Col> */}
+                    <Col span={1}>
                       <Row justify={'center'}>
                         <Space size={'large'}>
-                          <Col><Link className='listDataStyle' to={`/editing/ScheduleMeeting/`}>Edit</Link></Col>
+                          {/* <Col><Link className='listDataStyle' to={`/editing/ScheduleMeeting/`}>Edit</Link></Col> */}
                           <Col><Link style={{color:'red'}} className='listDataStyle'> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete Meeting'} cancelText={'No'}  onConfirm={()=>meetingDeletetion(data.meetingKey)} onCancel={()=>messageDrop('info','Deletion canceled. Everything stays as is!')}> Cancel </Popconfirm> </Link> </Col>
                         </Space>
                       </Row>
@@ -265,7 +265,7 @@ const MeetingDetail = () => {
                 </Row>}
               {pastData && pastData.map((data)=>{
                 return <Row style={listStyle} className='listStyle'>
-                    <Col span={5} style={listDataStyle} className='listDataStyle'> 
+                    <Col span={6} style={listDataStyle} className='listDataStyle'> 
                       <Row style={{display:'flex',alignItems:'center'}} justify={'space-between'}>
                         <Col>
                             <span 
@@ -282,12 +282,12 @@ const MeetingDetail = () => {
                           <Col span={19}> <Row justify={'space-evenly'} style={{display:'flex',alignItems:'center'}}> {data.sDate} <span style={{backgroundColor:'orange',padding:'4px'}}> {data.sTime} </span> <span> <Tooltip placement="bottomLeft" title={`${data.timezone}`} color='#5a3bb6'> <CiGlobe/> </Tooltip> </span> </Row></Col>                      
                       </Row>
                     </Col>
-                    <Col span={5} style={listDataStyle} className='listDataStyle'>{data.topic}</Col>
-                    <Col span={5} style={listDataStyle} className='listDataStyle'>{data.presenterEmail}</Col>
-                    <Col span={5} style={listDataStyle} className='listDataStyle'>{data.durationInHours}</Col>
-                    <Col span={4} style={listDataStyle} className='listDataStyle'>
+                    <Col span={6} style={listDataStyle} className='listDataStyle'>{data.topic}</Col>
+                    <Col span={6} style={listDataStyle} className='listDataStyle'>{data.presenterEmail}</Col>
+                    <Col span={6} style={listDataStyle} className='listDataStyle'>{data.durationInHours}</Col>
+                    <Col span={0} style={listDataStyle} className='listDataStyle'>
                       <Row justify={'space-around'}>
-                      <Col style={{color:'red'}}>View</Col>
+                      {/* <Col style={{color:'red'}}>View</Col> */}
                       </Row>
                     </Col>
                   </Row>
