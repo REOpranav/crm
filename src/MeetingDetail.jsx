@@ -290,7 +290,7 @@ const MeetingDetail = () => {
                       {/* <Col style={{color:'red'}}>View</Col> */}
                       </Row>
                     </Col>
-                  </Row>
+                  </Row> 
                 })}
                 </> : <>
                 <Col style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
