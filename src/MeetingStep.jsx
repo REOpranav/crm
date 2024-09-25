@@ -84,7 +84,7 @@ const MeetingStep = () => {
           <Row justify={'center'} style={{padding : '30px'}}>
             <Space>
               <Button onClick={userDetail} style={stylesForPadding}>GET ZOHO USER TOKEN</Button>
-              <Button onClick={getAuthToken} style={stylesForPadding} type='primary'>GET ZOHO MEETING TOKEN</Button>
+              <Button onClick={getAuthToken} style={stylesForPadding} type='primary'>GET ZOHO ACCESS TOKEN</Button>
             </Space>       
           </Row>
 

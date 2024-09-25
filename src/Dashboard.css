@@ -151,7 +151,7 @@
     border-top: 1px solid #ddd;
     background-color:white;
     width: 19.5%;
-    min-height: 95vh;
+    min-height: 70vh;
 }
 
 .suitOfApplicationView>aside>div{
@@ -186,10 +186,12 @@
 }
 
 .suitOfApplicationView>main>section{
-    min-height: 95vh;
+    min-height:100%;
     width: 100%;
     background-color: black;
     border-radius: 10px;
+    overflow: hidden;
+    min-height: 70vh;
 }
 
 img{

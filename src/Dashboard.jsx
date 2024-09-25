@@ -98,7 +98,7 @@ const home = ()=>{
     navigate('/')
 }
 return (
-    <div> 
+    <div className='DashBoardHead'> 
       <Row justify={'space-between'} className='headRow'>
         <Menu mode="horizontal" className='manu' theme='light'>
             {/* <Menu.Item> */}
