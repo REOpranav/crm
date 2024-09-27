@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import { Button, Row,Space,Typography,Popconfirm, message, Table, Col} from 'antd'
+import { Button, Row,Space,Typography,Popconfirm, message, Table, Col, Tooltip} from 'antd'
 import Searching from './Searching'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -232,8 +232,8 @@ const Deal = () => {
               </Space> 
               <Space>
                  <div style={{border:'1px solid black',borderRadius:'10px'}}>
-                    <Button onClick={makeListViewTrue} type={listView ? 'primary' : 'text'}><CiBoxList /></Button>
-                    <Button onClick={makeKambanViewTrue} type={kambanView ? 'primary' : 'text'}><BsKanban /></Button>
+                    <Tooltip title="List View"  color={listView ? '#5495ff' : '#5a3bb6'}><Button onClick={makeListViewTrue} type={listView ? 'primary' : 'text'}><CiBoxList /></Button></Tooltip>
+                    <Tooltip title="Kanban View" color={kambanView ? '#5495ff' : '#5a3bb6'}> <Button onClick={makeKambanViewTrue} type={kambanView ? 'primary' : 'text'}><BsKanban /></Button></Tooltip>
                   </div> 
                   {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
                   <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol}/>
