@@ -1,0 +1,67 @@
+.stagesColumn{
+    min-height: 100%;
+    max-height: 100%;
+    background-color: #f3f6f4;
+}
+
+.Stageheading{
+    padding: 10px;
+    color: black;
+    margin-left: 3px;
+    border-top: 2px solid #5495ff;
+    background-color: #cbe4e5; 
+    text-transform: uppercase;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.stage_content_head_row{
+    min-height: 90%;
+    max-height: 90%;
+    overflow: scroll;
+}
+
+.deal_data_head{
+    padding: 10px;
+    min-height: 100%;
+    max-height: 100%;
+}
+#deal_data{
+    padding: 10px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+#deal_data:hover {
+  cursor: all-scroll;
+  transition: 0.2s ease-in-out;
+  box-shadow: 2px 7px 10px #ddd;
+
+}
+
+#deal_data:hover .row{
+  transform: scale(1.01);   
+  transition: 0.2s ease-in-out;
+}
+
+#deal_data>.row{
+    padding: 2px;
+    text-align: left;
+    width: 100%;
+}
+
+#deal_data>.row>.rowData_key{
+    font-weight: bold;
+    color: black;
+    margin-right: 5px;
+}
+
+/* deal data colors */
+
+.successDeal{
+    color: green;
+    transition: 0.3s ease-in-out;
+}
+
+.closinDeal{
+    color: red;
+}
