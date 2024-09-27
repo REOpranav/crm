@@ -229,7 +229,7 @@ const Deal = () => {
         <Row justify={'space-between'} style={{padding:'10px'}}>
               <Space>
                 <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Deal View</Text>
-              </Space>
+              </Space> 
               <Space>
                  <div style={{border:'1px solid black',borderRadius:'10px'}}>
                     <Button onClick={makeListViewTrue} type={listView ? 'primary' : 'text'}><CiBoxList /></Button>
