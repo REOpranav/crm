@@ -39,7 +39,7 @@ const LeadBoard = () => {
     // code for navigatingin (react router dom)
     const navigate = useNavigate();
     const formNavigate = ()=>{
-        navigate('./formpage')
+      window.location.href == 'http://localhost:3001/leads' ?  navigate('./formpage') : window.open(`https://zcform.in/RflkR`,'_self')
     }
 
     const homeNavigation = ()=>{
