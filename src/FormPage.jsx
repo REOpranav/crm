@@ -93,27 +93,40 @@ const FormPage = () => {
 
   // validation Form
   function validation(leadFormValues) {
+
+    // this is for validate email
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    }
     
     let errorvalues = {}
     if (!leadFormValues.leadowner.trim()) {
       errorvalues.leadowner = `${moduleName} Owner is Required`
     }
 
-    if (!leadFormValues.firstname.trim()) {
+    if (!leadFormValues?.firstname.trim()) {
         errorvalues.firstname = 'First Name is Required'
     }
 
-    if (!leadFormValues.lastname.trim()) {
+    if (!leadFormValues?.lastname.trim()) {
         errorvalues.lastname = 'Last Name is Required'
     }
     
-    if (!leadFormValues.email.trim()) {
+    if (!leadFormValues.email.trim() || !validateEmail(leadFormValues?.email)) {
         errorvalues.email = 'Email Id is Required'
     }
     
     if (!leadFormValues.mobile.trim()) {
         errorvalues.mobile = 'Mobile Number is Required'
     }
+
+   
+    console.log(errorvalues);
+    
     return errorvalues
   }
 

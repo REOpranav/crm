@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button , Row  ,message,Table ,Space, Typography , Popconfirm, Col} from 'antd'
+import {Button , Row  ,message,Table ,Space, Typography , Popconfirm, Col, Dropdown} from 'antd'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -38,9 +38,6 @@ const LeadBoard = () => {
      })
     // code for navigatingin (react router dom)
     const navigate = useNavigate();
-    const formNavigate = ()=>{
-      window.location.href == 'http://localhost:3001/leads' ?  navigate('./formpage') : window.open(`https://zcform.in/RflkR`,'_self')
-    }
 
     const homeNavigation = ()=>{
       navigate('/')
@@ -220,6 +217,19 @@ const LeadBoard = () => {
         ]
     const styles = { fontWeight:'lighter' }
 
+     // this is for drop down (ANTd)
+   const items = [
+    {
+      key: '1',
+      label: (<Link to={`https://zcform.in/RflkR`}>For Zoho CRM</Link> ),
+    },
+    {
+      key: '2',
+      label: (<Link to={`./formpage`}>For Zappy CRM</Link>),
+    },
+  ]
+
+
   return (
     <div>    
       <Dashboard />
@@ -234,7 +244,10 @@ const LeadBoard = () => {
                       <Button type='dashed'>Save & Home</Button> 
                   </Popconfirm>
                   <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol}/>
-                  <Button type='primary' id='themeColor' onClick={formNavigate}>Create Lead</Button>
+                  <Dropdown menu={{items}} placement='bottomCenter'>
+                        <Button type='primary'>Create Lead</Button>  
+                    </Dropdown>
+                  {/* <Button type='primary'  onClick={formNavigate}></Button> */}
               </Space>
            </Row>
 
