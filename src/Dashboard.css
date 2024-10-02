@@ -53,25 +53,20 @@
  }
  
  .logoBox1{
-     width: 30px;
-     height: 30px;
-     border-radius: 6px;
-     position:relative;
-     /* animation: headBack 1.5s 1; */
-     animation-fill-mode: forwards;
-     border: 2px solid red;
-     /* box-shadow: 1px 1px 6px red; */
-     transform: rotate(-10deg);
-     z-index: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    position:relative;
+    border: 2px solid red;
+    transform: rotate(-10deg);
+    margin-left: -3px;
+    z-index: 1;
  }
  
  .logoBox2{
      width: 30px;
      height: 30px;
      border-radius: 6px;
-     position:relative;
-     /* animation: headBack 1.8s 1; */
-     animation-fill-mode: forwards;
      border: 2px solid green;
      transform: rotate(20deg);
      margin-left: -3px;
@@ -82,9 +77,6 @@
      width: 30px;
      height: 30px;
      border-radius: 6px;
-     position:relative;
-     /* animation: headBack 2s 1; */
-     animation-fill-mode: forwards;
      border: 2px solid blue;
      transform: rotate(-10deg);
      margin-left: -3px;
@@ -95,8 +87,6 @@
      width: 30px; 
      height: 30px;
      border-radius: 6px;
-     position:relative;
-     /* animation: headBack 1s 1; */
      animation-fill-mode: forwards;
      border: 2px solid gold;
      transform: rotate(0deg);
@@ -137,8 +127,17 @@
 /* this is suit of application */
 
 #APIheading{
-    background-color: white;
+    /* background: linear-gradient(93deg, #812ED8 2.25%, #208EFE 79.43%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent; */
     color: black;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 15px;
+    font-size: larger;
+    background-color: #fdf4ef;
 }
 
 .suitOfApplicationView{
@@ -146,32 +145,29 @@
 }
 
 .suitOfApplicationView>aside{
-    color: black;
-    border-top: 1px solid #ddd;
-    background-color:white;
+    border-right: 1px solid #ddd;
+    background-color:transparent;
     width: 19.5%;
-    min-height: 70vh;
+    min-height: 100vh;
 }
 
 .suitOfApplicationView>aside>div{
     margin-top: 10px;
 }
 
-.suitOfApplicationView>aside>div>h3{
-    text-align: justify;
+.suitOfApplicationView>aside>div{
+    text-align: left;
     padding: 0 20px ;
 }
 
-.suitOfApplicationView>aside>div>button ,.suitOfApplicationView>aside>div>button>h4{
+.suitOfApplicationView>aside>div>button ,.suitOfApplicationView>aside>div>button>span{
     text-align:left;
     width: 100%;
     padding: 10px;
 }
 
 .suitOfApplicationView>main{
-    width: 80%;
-    background-color: white;
-    border-top: 1px solid #ddd;
+    width: 80%    
 }
 
 .suitOfApplicationView>main>header{
@@ -179,15 +175,17 @@
 }
 
 .suitOfApplicationView>main>header>h3{
+    text-align: left;
+    padding: 10px;
     margin-left: 10px;
     text-transform: capitalize;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 
 .suitOfApplicationView>main>section{
     min-height:100%;
     width: 100%;
-    background-color: black;
+    background-color: transparent;
     border-radius: 10px;
     overflow: hidden;
     min-height: 70vh;
@@ -207,24 +205,27 @@ img{
     width: 50px;
     height: 50px;
     padding: 30px;
-    border-radius: 10px;
-    background-color: white;
     margin-top: 10px;
     margin-left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background-color: white;
+    transition: all 0.5s;
 }
 
 .imagesRow1>div:hover,.imagesRow2>div:hover,.imagesRow3>div:hover{
     cursor: pointer;
-    background-color: white;
-    transition: 0.7s ease-in-out;
+    box-shadow: 1px 1px 10px  #ddd;
+    transform: scaleY(1.1);
+
 }
 
 .imagesRow1>div:hover img,.imagesRow2>div:hover img,.imagesRow3>div:hover img{
-    transform: scale(1.3);
-    transition: 0.5s ease-in-out;
+
 }
 
 .images1{
