@@ -231,9 +231,9 @@ const Deal = () => {
                 <Text style={{fontSize:'20px',color:'red',fontWeight:'lighter'}}>Deal View</Text>
               </Space> 
               <Space>
-                 <div style={{border:'1px solid black',borderRadius:'10px'}}>
-                    <Tooltip title="List View"  color={listView ? '#5495ff' : '#5a3bb6'}><Button onClick={makeListViewTrue} type={listView ? 'primary' : 'text'}><CiBoxList /></Button></Tooltip>
-                    <Tooltip title="Kanban View" color={kambanView ? '#5495ff' : '#5a3bb6'}> <Button onClick={makeKambanViewTrue} type={kambanView ? 'primary' : 'text'}><BsKanban /></Button></Tooltip>
+                 <div style={{border:'1px solid black',borderRadius:'10px'}} id='checkBoxForView'>
+                    <Tooltip title="List View" ><Button onClick={makeListViewTrue} type={listView ? 'primary' : 'text'}><CiBoxList /></Button></Tooltip>
+                    <Tooltip title="Kanban View"> <Button onClick={makeKambanViewTrue} type={kambanView ? 'primary' : 'text'}><BsKanban /></Button></Tooltip>
                   </div> 
                   {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
                   <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol}/>

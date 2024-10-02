@@ -219,9 +219,10 @@ img{
 
 .imagesRow1>div:hover,.imagesRow2>div:hover,.imagesRow3>div:hover{
     cursor: pointer;
-    box-shadow: 1px 1px 10px  #ddd;
-    transform: scaleY(1.1);
-
+    border: 1px solid #FD9257;
+    box-shadow: 0 0 30px #8c8c8c2e;
+    transform: translateY(-5px);
+    transition: all 0.5s;
 }
 
 .imagesRow1>div:hover img,.imagesRow2>div:hover img,.imagesRow3>div:hover img{
