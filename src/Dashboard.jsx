@@ -7,16 +7,16 @@ import { TARGET_CLS } from 'antd/es/_util/wave/interface';
 
 const Dashboard = ({count}) => {
 
-// this is tawk code
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/66fd9ce837379df10df0edbf/1i97apr95';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+    // this is tawk live chat codes
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/66fe2648256fb1049b1c3e51/1i98cb32a';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
 
 const navigate = useNavigate();
 const {Text ,Title} = Typography
