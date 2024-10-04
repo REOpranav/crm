@@ -246,13 +246,13 @@ const Deal = () => {
         <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{y: 400}}/> }
        
        {kambanView &&  
-         <Row style={{height:'80vh'}}>
-            <Col span={5} className="stagesColumn">
+         <Row style={{height:'80vh'}} className='stagesRow'>
+            <Col className="stagesColumn">
               <Row className='Stageheading'><Col span={24}>Stage 1</Col></Row>
               <Row className='stage_content_head_row'>
                 <Col span={24}>
                     <div className='deal_data_head' id='deal_data_head1'>
-                     {data.map((value)=>{
+                     {data.map((value)=>{ 
                         return  <div id='deal_data' draggable key={10}>
                                   <div className='row PoppinsFont'><span className='rowData_key'>Deal Name : </span> {value.dealName}</div>
                                   <div className='row PoppinsFont'><span className='rowData_key'>Amount : </span> {value.amount}</div>
@@ -261,20 +261,20 @@ const Deal = () => {
                                 </div>
                       })}
                     </div> 
-                </Col> 
+                </Col>
               </Row>
             </Col> 
 
-            <Col span={4} className="stagesColumn">
+            <Col className="stagesColumn">
               <Row justify={'center'} className='Stageheading'>Stage 2</Row>
               <Row className='stage_content_head_row'>
                 <Col span={24}>
                   <div className='deal_data_head' id='deal_data_head2'> </div>
                 </Col>
-              </Row>
+              </Row> 
             </Col>
 
-            <Col span={5} className="stagesColumn">
+            <Col className="stagesColumn"> 
              <Row justify={'center'} className='Stageheading'>Stage 3</Row>
              <Row className='stage_content_head_row'>
                 <Col span={24}>
@@ -283,7 +283,7 @@ const Deal = () => {
              </Row>
             </Col>
 
-            <Col span={5} className="stagesColumn">
+            <Col className="stagesColumn">
               <Row justify={'center'} className='Stageheading' style={{borderTop:'3px solid green',backgroundColor:'#dff7e4'}}>closed Won</Row>
               <Row className='stage_content_head_row'>
                 <Col span={24}>
@@ -292,7 +292,7 @@ const Deal = () => {
               </Row>
             </Col> 
 
-            <Col span={5} className="stagesColumn">
+            <Col className="stagesColumn">
               <Row justify={'center'} className='Stageheading' style={{borderTop:'3px solid red',backgroundColor:'#fcdfdf'}}>closed Loss</Row>
               <Row className='stage_content_head_row'>
                 <Col span={24}>

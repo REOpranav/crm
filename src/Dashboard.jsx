@@ -2,8 +2,9 @@ import { Menu, Row ,Typography, Image ,Space, Flex, Button, Col} from 'antd';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
 import './Dashboard.css'
-import { useState, useSyncExternalStore } from 'react';
-import { TARGET_CLS } from 'antd/es/_util/wave/interface';
+import { useState } from 'react';
+import BarChart from './chart/BarChart';
+import PieChart from './chart/PieChart';
 
 const Dashboard = ({count}) => {
 
@@ -30,6 +31,7 @@ const [humanResources,setHumanResources] = useState(false)
 const [email_Collaboration,setEmail_Collaboration] = useState(true)
 const [businessIntelligence,setBusinessIntelligence]= useState(false)
 const [customSolutions,setCustomSolutions] = useState(false)
+const [dashboard,setDashboard] = useState(false)
  
 // this is for dynamic heading 
 const suit_Name = (name)=>{
@@ -110,9 +112,8 @@ const home = ()=>{
     navigate('/')
 }
 
-
 return (
-    <div className='DashBoardHead'> 
+    <div className='dashBoardHead'>
       <Row justify={'space-between'} className='headRow'>
         <Menu mode="horizontal" className='manu' theme='light'>
             {/* <Menu.Item> */}
@@ -166,6 +167,63 @@ return (
     </Row>
 
 {(window.location.href === "https://mockcrm.vercel.app/" || window.location.href === 'http://localhost:3001/') &&
+ <div className='totalDashboard'>
+   <Row>
+        <Col span={24}>
+           <Row id='welcome-row'>
+                <Col id='welcome-message'>Welcome Pranavavadivel S</Col>
+           </Row>
+           <Row>
+                <Col span={4}>
+                    <Row>
+                        <Col id='leadCount'>
+                            <Row id='countHead'>Lead list size</Row>
+                            <Row id='countNumber'>
+                                <Col span={24}>10</Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col id='contactCount'>
+                            <Row id='countHead'>Contact Count</Row>
+                            <Row id='countNumber'>
+                                <Col span={24}>10</Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col id='accountCount'>
+                            <Row id='countHead'>No of Account</Row>
+                            <Row id='countNumber'>
+                                <Col span={24}>10</Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row>    
+                        <Col id='dealCount'>
+                            <Row id='countHead'>Deal list size</Row>
+                            <Row id='countNumber'>
+                                <Col span={24}>10</Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Col> 
+                <Col span={20}>
+                <Row id='chart_head'>
+                    <Col id='pie-chart-col'><PieChart /></Col>
+                    <Col id='bar-chart-col'><BarChart /></Col>
+                </Row>
+                </Col>
+              </Row>   
+        </Col>
+    </Row>
+   
+ </div>
+}
+
+
+{/* this code is landing page
+{(window.location.href === "https://mockcrm.vercel.app/" || window.location.href == 'http://localhost:3001/') &&
      <Row>
         <Col span={24}>
         <Row justify={'space-around'} className='PoppinsFont' id='APIheading'><span>Explore the robust array of REST APIs tailored for each Zoho product.</span> </Row>
@@ -303,9 +361,9 @@ return (
             </Row>
     </Col>
 </Row>
-}
-    </div>
-  )
+} */}
+</div>
+)
 }
 
 export default Dashboard

@@ -1,35 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,500;1,500&display=swap');
-.stages,.stagesWin,.stagesLoss{
-     font-family: Poppins, sans-serif;
-     padding: 10px;
-     border: 1px solid #ddd;
-     text-transform: capitalize;
-     width: 14.5%;
+
+.stages,
+.stagesWin,
+.stagesLoss {
+    font-family: Poppins, sans-serif;
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-transform: capitalize;
+    width: 14.5%;
 }
 
-.stages:hover{
+.stages:hover {
     cursor: pointer;
     background-color: #ddd;
 }
 
-.stagesLoss:hover{
+.stagesLoss:hover {
     cursor: pointer;
     background-color: orange;
     color: white;
 }
 
-.stagesWin:hover{
+.stagesWin:hover {
     cursor: pointer;
-    background-color:greenyellow;
+    background-color: greenyellow;
 }
 
-.yes{
+.yes {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.dealEditForm{
+.dealEditForm {
     border: 1px solid #ddd;
     width: 20%;
     vertical-align: middle;
@@ -40,9 +43,9 @@
     box-shadow: 0 1px 4px grey;
 }
 
-.dealEditForm:hover{
+.dealEditForm:hover {
     cursor: pointer;
-    box-shadow:0 3px 18px grey;
+    box-shadow: 0 3px 18px grey;
     transition: box-shadow 0.2s ease-in;
     transform: translateY(-1px);
 

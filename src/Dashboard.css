@@ -1,135 +1,217 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,500;1,500&display=swap');
-.PoppinsFont{
-     font-family: Poppins, sans-serif;
+
+.PoppinsFont {
+    font-family: Poppins, sans-serif;
 }
 
-#themeColor{
-     background-color: #5a3bb6;
+.dashBoardHead {
+    overflow: hidden;
+    background: url('https://static.zohocdn.com/crm/CRMClient/images/Pattern-svg_2f7fa05089f3164079a8cd037f758513_.svg') repeat-x fixed #EDF0F4;
+}
+
+#themeColor {
+    background-color: #5a3bb6;
 }
 
 #myDropdown option[value="default"] {
-     display: none;
+    display: none;
 }
 
-#myDropdown{
-     border-radius: 5px;
-     text-align: center;
-     border: 1px solid #5a3bb6 ;
-     background-color: white;
-     color:#5a3bb6 ;
+#myDropdown {
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #5a3bb6;
+    background-color: white;
+    color: #5a3bb6;
 }
 
 #account {
-     width: 80%;
-     padding: 8px;
-     color:#5a3bb6 ;
-     background-color: white;
-     border: 1px solid gray;
-     border-radius: 3px;
+    width: 80%;
+    padding: 8px;
+    color: #5a3bb6;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 3px;
 }
 
-.headRow{
-     background-color: white;
-     display: flex;
-     align-items: center;
+.headRow {
+    background-color: white;
+    display: flex;
+    align-items: center;
 }
 
-.manu{
-     width: 70%;
-     display: flex;
-     align-items: center;
+.manu {
+    width: 70%;
+    display: flex;
+    align-items: center;
 }
 
- /*  this is zoho logo */
- .topHead{
-     padding: 10px;
-     display: inline-flex;
-     overflow: hidden;
- }
- 
- .logohead1,.logohead2{
-     display: inline-flex; 
-     height: fit-content;
- }
- 
- .logoBox1{
+/*  this is zoho logo */
+.topHead {
+    padding: 10px;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.logohead1,
+.logohead2 {
+    display: inline-flex;
+    height: fit-content;
+}
+
+.logoBox1 {
     width: 30px;
     height: 30px;
     border-radius: 6px;
-    position:relative;
+    position: relative;
     border: 2px solid red;
     transform: rotate(-10deg);
     margin-left: -3px;
     z-index: 1;
- }
- 
- .logoBox2{
-     width: 30px;
-     height: 30px;
-     border-radius: 6px;
-     border: 2px solid green;
-     transform: rotate(20deg);
-     margin-left: -3px;
-     z-index: 11;
- }
- 
- .logoBox3{
-     width: 30px;
-     height: 30px;
-     border-radius: 6px;
-     border: 2px solid blue;
-     transform: rotate(-10deg);
-     margin-left: -3px;
-     z-index: 1;
- }
- 
- .logoBox4{
-     width: 30px; 
-     height: 30px;
-     border-radius: 6px;
-     animation-fill-mode: forwards;
-     border: 2px solid gold;
-     transform: rotate(0deg);
-     margin-left: -4px;
-     z-index: 1;
- }
- 
- @keyframes headBack {
-     from {top: -300px;}
-     to {top: 0%;}
- }
- 
+}
+
+.logoBox2 {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 2px solid green;
+    transform: rotate(20deg);
+    margin-left: -3px;
+    z-index: 11;
+}
+
+.logoBox3 {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 2px solid blue;
+    transform: rotate(-10deg);
+    margin-left: -3px;
+    z-index: 1;
+}
+
+.logoBox4 {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    animation-fill-mode: forwards;
+    border: 2px solid gold;
+    transform: rotate(0deg);
+    margin-left: -4px;
+    z-index: 1;
+}
+
+@keyframes headBack {
+    from {
+        top: -300px;
+    }
+
+    to {
+        top: 0%;
+    }
+}
+
 /* this code for hover effect in zoho logo */
-.logoBox1:hover{
+.logoBox1:hover {
     cursor: pointer;
     transform: rotate(-20deg);
-    transition: 0.2s ease-in ;
+    transition: 0.2s ease-in;
 }
 
-.logoBox2:hover{
+.logoBox2:hover {
     cursor: pointer;
     transform: rotate(30deg);
-    transition: 0.2s ease-in ;
+    transition: 0.2s ease-in;
 }
 
-.logoBox3:hover{
+.logoBox3:hover {
     cursor: pointer;
     transform: rotate(-25deg);
-    transition: 0.2s ease-in ;
+    transition: 0.2s ease-in;
 }
 
-.logoBox4:hover{
+.logoBox4:hover {
     cursor: pointer;
     transform: rotate(10deg);
-    transition: 0.2s ease-in ;
+    transition: 0.2s ease-in;
+}
+
+/* dashbaord CSS code  */
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.totalDashboard {
+    overflow-y: scroll;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+/* this is welcome Row */
+#welcome-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#welcome-row>#welcome-message {
+    padding: 10px;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    font-size: larger;
+}
+
+#chart_head {
+    display: flex;
+    justify-content: space-around;
+}
+
+#bar-chart-col {
+    min-height: 300px;
+    width: 49%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#pie-chart-col {
+    width: 49%;
+    min-height: 300px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+/* total head */
+#totalCountHead {
+    margin-top: 20px;
+}
+
+/* this is lead,contact,account,deal total count  */
+#leadCount,
+#contactCount,
+#accountCount,
+#dealCount {
+    border-radius: 5px;
+    transition: 0.5s ease-in-out;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#countHead {
+    font-weight: 400;
+    padding: 7px;
+    border-bottom: 0.4px solid #ddd;
+    font-family: Poppins, sans-serif;
+}
+
+#countNumber {
+    padding: 20px;
 }
 
 /* this is suit of application */
-
-#APIheading{
-    /* background: linear-gradient(93deg, #812ED8 2.25%, #208EFE 79.43%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent; */
+#APIheading {
     color: black;
     width: 100%;
     position: sticky;
@@ -140,41 +222,42 @@
     background-color: #fdf4ef;
 }
 
-.suitOfApplicationView{
+.suitOfApplicationView {
     display: flex;
 }
 
-.suitOfApplicationView>aside{
+.suitOfApplicationView>aside {
     border-right: 1px solid #ddd;
-    background-color:transparent;
+    background-color: transparent;
     width: 19.5%;
     min-height: 70vh;
 }
 
-.suitOfApplicationView>aside>div{
+.suitOfApplicationView>aside>div {
     margin-top: 10px;
 }
 
-.suitOfApplicationView>aside>div{
+.suitOfApplicationView>aside>div {
     text-align: left;
-    padding: 0 20px ;
+    padding: 0 20px;
 }
 
-.suitOfApplicationView>aside>div>button ,.suitOfApplicationView>aside>div>button>span{
-    text-align:left;
+.suitOfApplicationView>aside>div>button,
+.suitOfApplicationView>aside>div>button>span {
+    text-align: left;
     width: 100%;
     padding: 10px;
 }
 
-.suitOfApplicationView>main{
-    width: 80%    
+.suitOfApplicationView>main {
+    width: 80%
 }
 
-.suitOfApplicationView>main>header{
+.suitOfApplicationView>main>header {
     text-align: start;
 }
 
-.suitOfApplicationView>main>header>h3{
+.suitOfApplicationView>main>header>h3 {
     text-align: left;
     padding: 10px;
     margin-left: 10px;
@@ -182,8 +265,8 @@
     font-family: Poppins, sans-serif;
 }
 
-.suitOfApplicationView>main>section{
-    min-height:100%;
+.suitOfApplicationView>main>section {
+    min-height: 100%;
     width: 100%;
     background-color: transparent;
     border-radius: 10px;
@@ -191,17 +274,21 @@
     min-height: 70vh;
 }
 
-img{
+img {
     width: 70px;
     height: 70px;
 }
 
-.imagesRow1,.imagesRow2,.imagesRow3{
+.imagesRow1,
+.imagesRow2,
+.imagesRow3 {
     display: flex;
     flex-wrap: wrap;
-} 
+}
 
-.imagesRow1>div,.imagesRow2>div,.imagesRow3>div{
+.imagesRow1>div,
+.imagesRow2>div,
+.imagesRow3>div {
     width: 50px;
     height: 50px;
     padding: 30px;
@@ -217,7 +304,9 @@ img{
     transition: all 0.5s;
 }
 
-.imagesRow1>div:hover,.imagesRow2>div:hover,.imagesRow3>div:hover{
+.imagesRow1>div:hover,
+.imagesRow2>div:hover,
+.imagesRow3>div:hover {
     cursor: pointer;
     border: 1px solid #FD9257;
     box-shadow: 0 0 30px #8c8c8c2e;
@@ -225,86 +314,116 @@ img{
     transition: all 0.5s;
 }
 
-.imagesRow1>div:hover img,.imagesRow2>div:hover img,.imagesRow3>div:hover img{
+.imagesRow1>div:hover img,
+.imagesRow2>div:hover img,
+.imagesRow3>div:hover img {}
 
-}
-
-.images1{
+.images1 {
     position: relative;
     animation: rightSlide 1s 1;
 }
 
-.images2{
+.images2 {
     position: relative;
     animation: rightSlide 1.1s 1;
 }
-    
-.images3{
+
+.images3 {
     position: relative;
     animation: rightSlide 1.2s 1;
 }
-    
-.images4{
+
+.images4 {
     position: relative;
     animation: rightSlide 1.3s 1;
 }
-    
-.images5{
+
+.images5 {
     position: relative;
     animation: rightSlide 1.4s 1;
 }
-    
-.images6{
+
+.images6 {
     position: relative;
     animation: rightSlide 1.5s 1;
 }
 
-.images7{
+.images7 {
     position: relative;
     animation: rightSlide 1.6s 1;
 }
-    
-.images8{
+
+.images8 {
     position: relative;
     animation: rightSlide 1.7s 1;
 }
-    
-.images9{
+
+.images9 {
     position: relative;
     animation: rightSlide 1.8s 1;
 }
-    
-.images10{
+
+.images10 {
     position: relative;
     animation: rightSlide 1.9s 1;
-}  
-    
-.images11{
+}
+
+.images11 {
     position: relative;
     animation: rightSlide 1.10s 1;
-}  
-    
-.images12{
+}
+
+.images12 {
     position: relative;
     animation: rightSlide 1.11s 1;
 }
 
-    @keyframes SlideTop {
-        from {top: -300%}
-        to {top : 0}
+@keyframes SlideTop {
+    from {
+        top: -300%
     }
 
-    @keyframes SlideLeftRight {
-        from {left : -300%}
-        to {left : 0}
+    to {
+        top: 0
+    }
+}
+
+@keyframes SlideLeftRight {
+    from {
+        left: -300%
     }
 
-    @keyframes rightSlide {
-        from {left : 200%}
-        to {left : 0}
+    to {
+        left: 0
+    }
+}
+
+@keyframes rightSlide {
+    from {
+        left: 200%
     }
 
-    @keyframes slideBottomTopSlow {
-        from {bottom : -200%}
-        to {bottom : 0}
+    to {
+        left: 0
     }
+}
+
+@keyframes slideBottomTopSlow {
+    from {
+        bottom: -200%
+    }
+
+    to {
+        bottom: 0
+    }
+}
+
+@keyframes rightSlidereturn {
+    from {
+        left: 0
+    }
+
+    to {
+        left: 200%
+    }
+}

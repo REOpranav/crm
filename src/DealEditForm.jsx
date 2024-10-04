@@ -2,13 +2,13 @@ import { message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const pathname = window.location.pathname 
-const endpoint  = pathname.split('/').pop()
+const pathname = window.location.pathname
+const endpoint = pathname.split('/').pop()
 
 const DealEditForm = () => {
 
-    const [dealDetail,setDealDetail] = useState([])
-    const fetching = async()=>{
+    const [dealDetail, setDealDetail] = useState([])
+    const fetching = async () => {
         try {
             const responce = await axios.get(`http://localhost:3000/deals/${endpoint}`)
             if (responce.status === 200) {
@@ -16,7 +16,7 @@ const DealEditForm = () => {
             }
         } catch (err) {
             if (err.response) {
-                message.error('Error: ' + err.response.status+' - '+(err.response.data.message || 'Server Error'));
+                message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
             } else if (err.request) {
                 message.error('Error: No response from server.')
             } else {
@@ -25,20 +25,20 @@ const DealEditForm = () => {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetching()
-    },[undefined])
+    }, [undefined])
 
     console.log(dealDetail);
 
-  return (
-    <div className='yes'>
-        <div className='dealEditForm'>
-            DealEditForm
+    return (
+        <div className='yes'>
+            <div className='dealEditForm'>
+                DealEditForm
+            </div>
         </div>
-    </div>
 
-  )
+    )
 }
 
 export default DealEditForm

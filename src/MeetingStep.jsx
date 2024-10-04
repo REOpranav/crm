@@ -4,89 +4,89 @@ import { Link, useNavigate } from 'react-router-dom'
 import Dashboard from './Dashboard'
 
 // this is message ele from antd
-function messageLoading(){  
+function messageLoading() {
   message.loading(`Processing`)
 }
 
 const stylesForPadding = {
-  "padding" : '25px'
+  "padding": '25px'
 }
 
 const MeetingStep = () => {
- const navigate = useNavigate()
- const [current,setCurrent] = useState(0)
- const onChange = (value) => {
+  const navigate = useNavigate()
+  const [current, setCurrent] = useState(0)
+  const onChange = (value) => {
     setCurrent(value)
   };
 
-  const userDetail = async()=>{
+  const userDetail = async () => {
     const paramsData = {
-      scope :'ZohoMeeting.manageOrg.READ',
-      client_id :process.env.REACT_APP_CLIENT_ID,
-      response_type:'code',
-      redirect_uri :process.env.REACT_APP_REDIRECT_URI,
-      access_type : 'offline'
+      scope: 'ZohoMeeting.manageOrg.READ',
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      response_type: 'code',
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+      access_type: 'offline'
     }
-      window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
+    window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
   }
 
-  const getAuthToken = ()=>{
+  const getAuthToken = () => {
     messageLoading()
-    setTimeout(()=>{
+    setTimeout(() => {
       AuthorizationGrantCode()
-    },[1 * 1000])
+    }, [1 * 1000])
   }
 
-  const AuthorizationGrantCode = async()=>{
+  const AuthorizationGrantCode = async () => {
     const paramsData = {
-      scope :'ZohoMeeting.meeting.ALL',
-      client_id :process.env.REACT_APP_CLIENT_ID,
-      response_type:'code',
-      redirect_uri :process.env.REACT_APP_REDIRECT_URI,
-      access_type : 'offline'
+      scope: 'ZohoMeeting.meeting.ALL',
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      response_type: 'code',
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+      access_type: 'offline'
     }
-      window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
+    window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
   }
 
   return (
     <div>
-          <Dashboard />
-          <Row justify={'end'} style={{padding:'20px'}}>
-            <Space>
-              <Link onClick={ () => window.history.back(-1)}><Button type='default'>Back one Step</Button></Link>
-            </Space>
-          </Row>
-          
-          <Row style={{padding:'20px'}} justify={'center'}>  
-            <Steps
-              style={{width:'80%'}}
-              size='default'
-              current={current}
-              onChange={onChange}
-              items={[
-                {
-                 title : 'GET USER DETAIILS',
-                 description:'In Zoho Meeting,your business is termed as an organization. A zsoid key has to be used for all other APIs.'
+      <Dashboard />
+      <Row justify={'end'} style={{ padding: '20px' }}>
+        <Space>
+          <Link onClick={() => window.history.back(-1)}><Button type='default'>Back one Step</Button></Link>
+        </Space>
+      </Row>
 
-                },
-                {
-                 title : 'GET AN ACCESS TOKEN',
-                 description:'All Zoho Meeting APIs need to be authenticated using an OAuth token.'
-                },
-                {
-                 title : 'SCHEDULE MEETINGS',
-                 description:'After getting the access token you can Schedule the meeting'
-                }
-              ]}
-            /> 
-          </Row>
+      <Row style={{ padding: '20px' }} justify={'center'}>
+        <Steps
+          style={{ width: '80%' }}
+          size='default'
+          current={current}
+          onChange={onChange}
+          items={[
+            {
+              title: 'GET USER DETAIILS',
+              description: 'In Zoho Meeting,your business is termed as an organization. A zsoid key has to be used for all other APIs.'
 
-          <Row justify={'center'} style={{padding : '30px'}}>
-            <Space>
-              <Button onClick={userDetail} style={stylesForPadding}>GET ZOHO USER TOKEN</Button>
-              <Button onClick={getAuthToken} style={stylesForPadding} type='primary'>GET ZOHO ACCESS TOKEN</Button>
-            </Space>       
-          </Row>
+            },
+            {
+              title: 'GET AN ACCESS TOKEN',
+              description: 'All Zoho Meeting APIs need to be authenticated using an OAuth token.'
+            },
+            {
+              title: 'SCHEDULE MEETINGS',
+              description: 'After getting the access token you can Schedule the meeting'
+            }
+          ]}
+        />
+      </Row>
+
+      <Row justify={'center'} style={{ padding: '30px' }}>
+        <Space>
+          <Button onClick={userDetail} style={stylesForPadding}>GET ZOHO USER TOKEN</Button>
+          <Button onClick={getAuthToken} style={stylesForPadding} type='primary'>GET ZOHO ACCESS TOKEN</Button>
+        </Space>
+      </Row>
 
     </div>
   )

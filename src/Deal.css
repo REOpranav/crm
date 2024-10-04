@@ -1,10 +1,15 @@
 #checkBoxForView{
     transition: 0.5s ease-in-out;
 }
+.stagesRow{
+    width: 100%;
+    /* overflow-x: scroll; */
+}
 
 .stagesColumn{
     min-height: 100%;
     max-height: 100%;
+    min-width: 20%;
     background-color: #f3f6f4;
 }
 
@@ -40,8 +45,7 @@
   cursor: all-scroll;
   transition: 0.2s ease-in-out;
   transform: translateY(-5px);
-  box-shadow: 2px 7px 10px #ddd;
-
+  box-shadow: 0px 0px 30px #ddd;
 }
 
 #deal_data:hover .row{

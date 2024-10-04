@@ -1,64 +1,64 @@
   form {
-      min-width:80%;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    
-    p{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    label {
-      font-weight: bold;
-      display: flex;
-      justify-content:left;
-    }
+    min-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
-    input {
-      padding: 8px;
-      border-radius: 4px;
-      box-sizing: border-box;
-    } 
+  p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    input[type="time"]{
-      width: 80%;
-      padding: 8px;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+  label {
+    font-weight: bold;
+    display: flex;
+    justify-content: left;
+  }
 
-    input[type="date"]{
-      width: 80%;
-      padding: 8px;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+  input {
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-    p:hover>input{
-        background-color: aliceblue;
-    }
+  input[type="time"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-    input:focus {
-      border-color: #007bff;
-      outline: none;
-    }
-      
-    .inputError::placeholder {
-      color: #ff0000;
-      font-size: 14px;
-    }
+  input[type="date"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-    .inputError {
-      border: 1px solid red;
-      transform: scale(1.01);
-      transition: 0.2s ease-in;
-    }
+  p:hover>input {
+    background-color: aliceblue;
+  }
 
-    .errorClear{
-      border: 1px solid #ddd;
-    }
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .inputError::placeholder {
+    color: #ff0000;
+    font-size: 14px;
+  }
+
+  .inputError {
+    border: 1px solid red;
+    transform: scale(1.01);
+    transition: 0.2s ease-in;
+  }
+
+  .errorClear {
+    border: 1px solid #ddd;
+  }

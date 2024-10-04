@@ -1,87 +1,92 @@
 form {
-    width: 80%;
-    margin: 10px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: end;
-  }
-  
-  p {
-    margin: 0 0 15px;
-  }
-  
-  label {
-    font-weight: 400;
-    color:black;
-    text-align: start;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="url"],
-  textarea,
-  input[type="number"] {
-    width: 80%;
-    padding: 8px;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+  width: 80%;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: end;
+}
 
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="tel"]:focus,
-  #meridiem:focus,
-  #stages:focus,
-  input[type="number"]:focus {
-    border-color: #007bff;
-    outline: none;
-  }
+p {
+  margin: 0 0 15px;
+}
 
-  /* this is select option input field */
-  #meridiem,#contact-module,#stages{
-    width: 80%;
-    padding: 8px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: white;
-    border: 1px solid #ddd;
-  }
+label {
+  font-weight: 400;
+  color: black;
+  text-align: start;
+}
 
-  #meridiem:hover,#contact-module:hover{
-    cursor: pointer; 
-  }
-  
-  #layoutName{
-    background-color: transparent;
-    border:'none';
-    outline:'none';
-    font-size:'16px';
-    color:'grey'
-  }
-  
-  .error {
-    color: #ff0000;
-    font-size: 12px;
-  }
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+textarea,
+input[type="number"] {
+  width: 80%;
+  padding: 8px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
-  input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-    
-  .inputError::placeholder {
-    color: #ff0000;
-    font-size: 14px;
-  }
 
-  .inputError {
-    border: 1px solid red;
-  }
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+#meridiem:focus,
+#stages:focus,
+input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
 
-  .errorClear,input,textarea{
-    border: 1px solid #ddd;
-  }
+/* this is select option input field */
+#meridiem,
+#contact-module,
+#stages {
+  width: 80%;
+  padding: 8px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+#meridiem:hover,
+#contact-module:hover {
+  cursor: pointer;
+}
+
+#layoutName {
+  background-color: transparent;
+  border: 'none';
+  outline: 'none';
+  font-size: '16px';
+  color: 'grey'
+}
+
+.error {
+  color: #ff0000;
+  font-size: 12px;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.inputError::placeholder {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+.inputError {
+  border: 1px solid red;
+}
+
+.errorClear,
+input,
+textarea {
+  border: 1px solid #ddd;
+}

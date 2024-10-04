@@ -9,25 +9,27 @@ body {
 
 .ant-btn.ant-btn-primary,
 .ant-btn-primary {
-  background-color:#5a3bb6;
+  background-color: #5a3bb6;
   border-color: #5a3bb6;
 }
-.ant-btn.ant-btn-default{
+
+.ant-btn.ant-btn-default {
   border-color: #5a3bb6;
   color: #5a3bb6;
 }
 
-.ant-btn.ant-btn-dashed{
+.ant-btn.ant-btn-dashed {
   border-color: #5a3bb6;
   color: #5a3bb6;
+
   &:hover {
-    border-color:rgb(148, 44, 238) !important;
+    border-color: rgb(148, 44, 238) !important;
     color: rgb(148, 44, 238) !important;
 
   }
 }
 
-.ant-btn-primary:hover{
+.ant-btn-primary:hover {
   background-color: #7253cf !important;
   border-color: #5a3bb6 !important;
 }

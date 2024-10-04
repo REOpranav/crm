@@ -570,6 +570,13 @@
         "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>",
         "<p draggable=\"true\"><label for=\"companyName\">company Name : </label><input type=\"text\" name=\"companyName\" id=\"companyName\" placeholder=\"company Name\"></p>"
       ]
+    },
+    {
+      "id": "prw",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"firstname\">First Name : </label><input type=\"text\" name=\"firstname\" id=\"firstname\" placeholder=\"First Name *\"></p>"
+      ]
     }
   ],
   "meetingSession": []

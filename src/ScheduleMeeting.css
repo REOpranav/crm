@@ -1,21 +1,21 @@
 .imageStyle {
-    min-width: 100%;
-    min-height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items:end;
-    /* filter: blur(7px); */
-  }
+  min-width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  /* filter: blur(7px); */
+}
 
-.imageStyle>img{
+.imageStyle>img {
   width: 15%;
   outline: none;
   z-index: -1;
   filter: blur(1px);
 }
 
-.OopsContent{
-  position:absolute;
+.OopsContent {
+  position: absolute;
   display: flex;
   align-items: center;
   height: 80%;
