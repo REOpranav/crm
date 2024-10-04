@@ -166,7 +166,7 @@ return (
         </Space>
     </Row>
 
-{(window.location.href === "https://mockcrm.vercel.app/" || window.location.href === 'http://localhost:3001/') &&
+{/* {(window.location.href === "https://mockcrm.vercel.app/" || window.location.href === 'http://localhost:3001/') &&
  <div className='totalDashboard'>
    <Row>
         <Col span={24}>
@@ -220,9 +220,9 @@ return (
    
  </div>
 }
+ */}
 
-
-{/* this code is landing page
+{/* this code is landing page */}
 {(window.location.href === "https://mockcrm.vercel.app/" || window.location.href == 'http://localhost:3001/') &&
      <Row>
         <Col span={24}>
@@ -361,7 +361,7 @@ return (
             </Row>
     </Col>
 </Row>
-} */}
+}
 </div>
 )
 }
