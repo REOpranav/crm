@@ -11,8 +11,7 @@ const PieChart = ({ lead, contact, account, deal }) => {
       existingChart.current.destroy();
     }
 
-    let datas = [lead?lead:0, contact?contact:0, account?account:0, deal?deal:0, Math.ceil(deal?deal:0 / 2)]
-
+    let datas = [lead ? lead : 0, contact ? contact : 0, account ? account : 0, deal ? deal : 0, deal ? Math.ceil(deal / 2) : 0, deal ? deal - Math.ceil(deal / 2) : 0]
     const data = {
       labels: [
         'Lead',
@@ -44,7 +43,7 @@ const PieChart = ({ lead, contact, account, deal }) => {
       options: {},
     });
 
-  }, [undefined,lead, contact, account, deal]);
+  }, [undefined, lead, contact, account, deal]);
 
   return (
     <div>
