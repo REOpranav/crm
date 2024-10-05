@@ -21,6 +21,7 @@ import MeetingStep from './MeetingStep';
 import MeetingDetail from './MeetingDetail';
 import MeetingInsights from './MeetingInsights';
 import DealEditForm from './DealEditForm';
+import APIs from './RestAPI/APIs';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path='/contacts' element={<Contact />} />
         <Route path='/accounts' element={<Account />} />
         <Route path='/deals' element={<Deal />} />
+        <Route path='/restapi' element={<APIs />} />
         <Route path='/leads/formpage' element={<FormPage />} />
         <Route path='/contacts/formpage' element={<FormPage />} />
         <Route path='/accounts/formpage' element={<AccountFormPage />} />

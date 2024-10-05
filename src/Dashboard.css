@@ -6,7 +6,7 @@
 
 .dashBoardHead {
     overflow: hidden;
-    /* background: url('https://static.zohocdn.com/crm/CRMClient/images/Pattern-svg_2f7fa05089f3164079a8cd037f758513_.svg') repeat-x fixed #EDF0F4; */
+    background: url('https://static.zohocdn.com/crm/CRMClient/images/Pattern-svg_2f7fa05089f3164079a8cd037f758513_.svg') repeat-x fixed #EDF0F4;
 }
 
 #themeColor {
@@ -137,16 +137,41 @@
 }
 
 /* dashbaord CSS code  */
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.totalDashboard {
+    padding: 20px;
+    padding-right: 0;
 }
 
-.totalDashboard {
-    overflow-y: scroll;
-    border: 1px solid black;
+/* total head */
+#totalViewOfDashboard {
+    max-height: 80vh;
+}
+
+#totalCountValues {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* this is lead,contact,account,deal total count  */
+#leadCount,
+#contactCount,
+#accountCount,
+#dealCount {
+    border-radius: 5px;
+    transition: 0.5s ease-in-out;
+    background-color: white;
+    width: 100%;
+}
+
+#countHead {
+    font-weight: 400;
+    padding: 7px;
+    border-bottom: 0.4px solid #ddd;
+    font-family: Poppins, sans-serif;
+}
+
+#countNumber {
     padding: 20px;
 }
 
@@ -163,60 +188,63 @@
     font-size: larger;
 }
 
+#welcome-row>#api-navigation-button {
+    margin-right: 23px;
+}
+
 #chart_head {
+    overflow: scroll;
+    max-height: 75vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
 }
 
-#bar-chart-col {
-    min-height: 300px;
-    width: 49%;
-    border-radius: 10px;
-    background-color: white;
-}
-
+#bar-chart-col,
 #pie-chart-col {
+    min-height: 300px;
+    width: 49%;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#line-chart-col,
+#meeting-chart-col {
+    margin-top: 10px;
+    margin-left: 10px;
     width: 49%;
     min-height: 300px;
     border-radius: 10px;
     background-color: white;
-}
-
-/* total head */
-#totalCountHead {
-    margin-top: 20px;
-}
-
-/* this is lead,contact,account,deal total count  */
-#leadCount,
-#contactCount,
-#accountCount,
-#dealCount {
-    border-radius: 5px;
-    transition: 0.5s ease-in-out;
-    background-color: white;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-#countHead {
-    font-weight: 400;
-    padding: 7px;
-    border-bottom: 0.4px solid #ddd;
-    font-family: Poppins, sans-serif;
-}
-
-#countNumber {
-    padding: 20px;
 }
 
 /* this is suit of application */
+#backAPIHeading {
+    color: black;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    padding: 19px;
+    font-size: larger;
+    transition: 0.5s all;
+    margin-left: 1%;
+}
+
+#backAPIHeading:hover {
+    cursor: pointer;
+    color: grey;
+    transform: translateX(-5px);
+}
+
 #APIheading {
     color: black;
     width: 100%;
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 0;
     padding: 15px;
     font-size: larger;
     background-color: #fdf4ef;

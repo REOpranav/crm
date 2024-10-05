@@ -37,10 +37,9 @@ const PieChart = () => {
 
     // Create a new Chart.js instance
     existingChart.current = new Chart(ctx, {
-      type: 'polarArea',
+      type: 'doughnut',
       data: data,
       options: {},
-
     });
 
   }, []);
