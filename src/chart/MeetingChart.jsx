@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import '../MeetingChart.css'
 import axios from 'axios'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdOutlineCancel } from "react-icons/md";
 
 // this is message setup (ant design)
@@ -18,6 +18,7 @@ const messageDrop = (type, content) => {
 }
 
 const MeetingChart = () => {
+  const navigate = useNavigate();
   const [meetingList, setMeetingList] = useState([])
   const [isload, setISLoad] = useState(false)
 
@@ -98,13 +99,12 @@ const MeetingChart = () => {
     })
   }
 
-  console.log(upcomingData);
 
   return (
     <div>
       <Row>
         <Col span={24} id='meeting-head'>
-          <div><p>Upcoming Meetings &nbsp; <Tooltip title="You have two meetings" placement='right' color='#5a3bb6'><span>-&nbsp;{upcomingData?.length}</span></Tooltip></p></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}><p id='meetingheading'>Upcoming Meetings &nbsp; <Tooltip title="You have two meetings" placement='right' color='#5a3bb6'><span>-&nbsp;{upcomingData?.length}</span></Tooltip></p> <p id='meetingPageLink' onClick={() => navigate('/meetingDetail')}>Meeting Page</p></div>
           <div id='meetingDeatailInDashboardHead'>
             {upcomingData?.map((e) => {
               return <Row id='meetingDetailInDashboard'>

@@ -1,7 +1,7 @@
 import { Chart } from 'chart.js';
 import React, { useEffect, useRef } from 'react'
 
-const LineChart = () => {
+const LineChart = ({ lead, contact, account, deal }) => {
 
   const canvasRef = useRef(null);
   const existingChart = useRef(null);
@@ -12,6 +12,8 @@ const LineChart = () => {
       existingChart.current.destroy();
     }
 
+    let datas = [lead ? lead : 0, contact ? contact : 0, account ? account : 0, deal ? deal : 0, Math.ceil(deal ? deal : 0 / 2)]
+
     // Create a new Chart.js instance
     existingChart.current = new Chart(ctx, {
       type: 'line',
@@ -20,7 +22,7 @@ const LineChart = () => {
         datasets: [
           {
             label: 'Last week Data',
-            data: [20, 15, 4, 8, 5],
+            data: datas,
             backgroundColor: ['rgb(98, 37, 209)',
               'rgb(75, 151, 75)',
               'rgb(255, 175, 0)',
@@ -40,7 +42,7 @@ const LineChart = () => {
         },
       },
     });
-  }, []);
+  }, [[undefined, lead, contact, account, deal]]);
   return (
     <div>
       <canvas ref={canvasRef} id="myChart"></canvas>

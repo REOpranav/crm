@@ -158,13 +158,14 @@
 #contactCount,
 #accountCount,
 #dealCount {
-    border-radius: 5px;
     transition: 0.5s ease-in-out;
     background-color: white;
     width: 100%;
 }
 
 #countHead {
+    background-color: #daf5f7;
+    border-top: 3px solid #cfe9ea;
     font-weight: 400;
     padding: 7px;
     border-bottom: 0.4px solid #ddd;
@@ -173,6 +174,27 @@
 
 #countNumber {
     padding: 20px;
+    text-align: left;
+}
+
+#countValue {
+    font-size: larger;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+}
+
+#countLogo {
+    visibility: hidden;
+    transition: ease-in 0.2s;
+}
+
+#countNumber:hover {
+    cursor: pointer;
+}
+
+#countNumber:hover #countLogo {
+    visibility: visible;
+    transform: translatex(5px);
 }
 
 /* this is welcome Row */

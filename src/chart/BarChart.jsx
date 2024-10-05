@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto';
 import '../BarChart.css'
 
-const BarChart = () => {
+const BarChart = ({ lead, contact, account, deal }) => {
 
   const canvasRef = useRef(null);
   const existingChart = useRef(null);
@@ -13,6 +13,8 @@ const BarChart = () => {
       existingChart.current.destroy();
     }
 
+    let datas = [lead ? lead : 0, contact ? contact : 0, account ? account : 0, deal ? deal : 0, Math.ceil(deal ? deal : 0 / 2)]
+
     // Create a new Chart.js instance
     existingChart.current = new Chart(ctx, {
       type: 'bar',
@@ -21,7 +23,7 @@ const BarChart = () => {
         datasets: [
           {
             label: 'Sales Funnel Overview',
-            data: [20, 15, 4, 8, 5],
+            data: datas,
             backgroundColor: 'rgb(56, 174, 230, 0.6)',
             borderWidth: 1
           },
@@ -36,7 +38,7 @@ const BarChart = () => {
         },
       },
     });
-  }, []);
+  }, [undefined, lead, contact, account, deal]);
 
   return (
     <div>

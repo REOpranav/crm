@@ -1,13 +1,21 @@
-import { Menu, Row, Typography, Image, Space, Flex, Button, Col } from 'antd';
+import { Menu, Row, Typography, Image, Space, Flex, Button, Col, message } from 'antd';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AiFillSetting } from "react-icons/ai";
+import { IoIosArrowForward } from "react-icons/io";
 import './Dashboard.css'
 import BarChart from './chart/BarChart';
 import PieChart from './chart/PieChart';
 import LineChart from './chart/LineChart';
 import MeetingChart from './chart/MeetingChart';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const Dashboard = ({ count }) => {
+
+    const [leadData, setLeadData] = useState([])
+    const [contact, setContact] = useState([])
+    const [account, setAccount] = useState([])
+    const [deal, setDeal] = useState([])
 
     // this is tawk live chat codes
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
@@ -19,6 +27,45 @@ const Dashboard = ({ count }) => {
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
     })();
+
+    // this code for initial load and when lead added
+    const fetching = async (urls) => {
+        try {
+            for (const url of urls) {
+                const responce = await axios.get(`${url}`)
+                if (responce.status === 200) {
+                    if (url.includes('/leads')) {
+                        setLeadData(await responce.data);
+                    } else if (url.includes('/contacts')) {
+                        setContact(await responce.data)
+                    } else if (url.includes('/accounts')) {
+                        setAccount(await responce.data)
+                    } else if (url.includes('/deals')) {
+                        setDeal(await responce.data)
+                    }
+                }
+            }
+        } catch (err) {
+            if (err.response) {
+                message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+            } else if (err.request) {
+                message.error('Error: No response from server.');
+            } else {
+                message.error('Error: ' + err.message);
+            }
+        }
+    }
+
+    let url = [
+        'http://localhost:3000/leads',
+        'http://localhost:3000/contacts',
+        'http://localhost:3000/accounts',
+        'http://localhost:3000/deals',
+    ]
+
+    useEffect(() => {
+        fetching(url)
+    }, [undefined])
 
     const navigate = useNavigate();
     const iconColor = "#fff"
@@ -99,42 +146,46 @@ const Dashboard = ({ count }) => {
                                     <Row>
                                         <Col id='leadCount'>
                                             <Row id='countHead'>Lead list size</Row>
-                                            <Row id='countNumber'>
-                                                <Col span={24}>10</Col>
+                                            <Row id='countNumber' onClick={() => navigate('/leads')} justify={'space-between'}>
+                                                <Col span={12} id='countValue'>{leadData?.length}</Col>
+                                                <Col id='countLogo'><IoIosArrowForward /></Col>
                                             </Row>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col id='contactCount'>
-                                            <Row id='countHead'>Contact Count</Row>
-                                            <Row id='countNumber'>
-                                                <Col span={24}>10</Col>
+                                            <Row id='countHead'>Contact list size</Row>
+                                            <Row id='countNumber' onClick={() => navigate('/contacts')} justify={'space-between'}>
+                                                <Col span={12} id='countValue'>{contact?.length}</Col>
+                                                <Col id='countLogo'><IoIosArrowForward /></Col>
                                             </Row>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col id='accountCount'>
                                             <Row id='countHead'>No of Account</Row>
-                                            <Row id='countNumber'>
-                                                <Col span={24}>10</Col>
+                                            <Row id='countNumber' onClick={() => navigate('/accounts')} justify={'space-between'}>
+                                                <Col span={12} id='countValue'>{account?.length}</Col>
+                                                <Col id='countLogo'><IoIosArrowForward /></Col>
                                             </Row>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col id='dealCount'>
-                                            <Row id='countHead'>Deal list size</Row>
-                                            <Row id='countNumber'>
-                                                <Col span={24}>10</Col>
+                                            <Row id='countHead'>No of Deal</Row>
+                                            <Row id='countNumber' onClick={() => navigate('/deals')} justify={'space-between'}>
+                                                <Col span={12} id='countValue'>{deal?.length}</Col>
+                                                <Col id='countLogo'><IoIosArrowForward /></Col>
                                             </Row>
                                         </Col>
                                     </Row>
                                 </Col>
                                 <Col span={20} offset={0.5}>
                                     <Row id='chart_head'>
-                                        <Col id='pie-chart-col'><PieChart /></Col>
-                                        <Col id='bar-chart-col'><BarChart /></Col>
-                                        <Col id='line-chart-col'><LineChart /></Col>
-                                        <Col id='meeting-chart-col'><MeetingChart /></Col>
+                                        <Col id='pie-chart-col'><PieChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
+                                        <Col id='bar-chart-col'><BarChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
+                                        <Col id='line-chart-col'><LineChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
+                                        <Col id='meeting-chart-col'><MeetingChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
                                     </Row>
                                 </Col>
                             </Row>
