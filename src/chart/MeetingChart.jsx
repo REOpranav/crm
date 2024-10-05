@@ -79,8 +79,8 @@ const MeetingChart = () => {
     }
   }, [undefined])
 
-   // this call the checkMeetingTokensAvailable function when isLoad is true   
-   useEffect(() => {
+  // this call the checkMeetingTokensAvailable function when isLoad is true   
+  useEffect(() => {
     if (isload) {
       checkMeetingTokensAvailable()
     }
@@ -115,7 +115,7 @@ const MeetingChart = () => {
                 <Col span={4}>
                   <Row justify={'space-between'}>
                     <Tooltip title="Join Meeting" color='blue'><a href={e?.joinLink} target='_blank'>Join</a></Tooltip>
-                    <Tooltip title="Cancel Meeting" color='red'><Link style={{ color: 'red' }}> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Cancel Meeting'} cancelText={'No'} onConfirm={() => meetingDeletetion(e.meetingKey)} onCancel={() => messageDrop('info', 'Deletion canceled. Everything stays as is!')}> <MdOutlineCancel color='red'/> </Popconfirm> </Link></Tooltip>
+                    <Tooltip title="Cancel Meeting" color='red'><Link style={{ color: 'red' }}> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Cancel Meeting'} cancelText={'No'} onConfirm={() => meetingDeletetion(e.meetingKey)} onCancel={() => messageDrop('info', 'Deletion canceled. Everything stays as is!')}> <MdOutlineCancel color='red' /> </Popconfirm> </Link></Tooltip>
                   </Row>
                 </Col>
               </Row>

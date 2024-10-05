@@ -1,4 +1,4 @@
-import { Button, Col, Row ,Tooltip} from 'antd'
+import { Button, Col, Row, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import Dashboard from '../Dashboard'
 import { IoIosArrowBack } from "react-icons/io";
@@ -91,7 +91,7 @@ const APIs = () => {
         setCustomSolutions(true)
     }
 
-    const home = ()=>{
+    const home = () => {
         return navigate('/')
     }
 
