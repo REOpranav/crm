@@ -26,11 +26,11 @@ const PieChart = ({ lead, contact, account, deal }) => {
         label: 'polarArea View',
         data: datas,
         backgroundColor: [
-          'rgb(98, 37, 209)',
-          'rgb(75, 151, 75)',
-          'rgb(255, 175, 0)',
-          'rgb(255, 0, 191)',
-          'rgb(0, 255, 0)',
+          'rgb(98, 37, 209,0.7)',
+          'rgb(75, 151, 75,0.7)',
+          'rgb(255, 175, 0,0.7)',
+          'rgb(255, 0, 191,0.7)',
+          'rgb(0, 255, 0,0.7)',
           'red'
         ],
       }]

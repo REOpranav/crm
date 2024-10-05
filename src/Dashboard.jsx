@@ -182,9 +182,9 @@ const Dashboard = ({ count }) => {
                                 </Col>
                                 <Col span={20} offset={0.5}>
                                     <Row id='chart_head'>
+                                        <Col id='line-chart-col'><LineChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
                                         <Col id='pie-chart-col'><PieChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
                                         <Col id='bar-chart-col'><BarChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
-                                        <Col id='line-chart-col'><LineChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
                                         <Col id='meeting-chart-col'><MeetingChart lead={leadData?.length} contact={contact?.length} account={account?.length} deal={deal?.length} /></Col>
                                     </Row>
                                 </Col>

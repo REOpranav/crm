@@ -222,7 +222,8 @@
 }
 
 #bar-chart-col,
-#pie-chart-col {
+#pie-chart-col,
+#line-chart-col{
     min-height: 300px;
     width: 49%;
     border-radius: 10px;
@@ -233,7 +234,7 @@
     align-items: center;
 }
 
-#line-chart-col,
+#bar-chart-col,
 #meeting-chart-col {
     margin-top: 10px;
     margin-left: 10px;
