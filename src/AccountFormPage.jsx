@@ -111,11 +111,6 @@ const AccountFormPage = () => {
     navigation(`/${moduleName}`)
   }
 
-  // This for cancelling form
-  function cancelForm() {
-    navigate()
-  }
-
   return (
     <div>
       <Dashboard />
@@ -136,7 +131,7 @@ const AccountFormPage = () => {
         </Flex>
 
         <Flex gap="small">
-          <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={cancelForm} onCancel={() => message.error('Cancelled')}>
+          <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={navigate} onCancel={() => message.error('Cancelled')}>
             <Button type='default' danger >Cancel</Button>
           </Popconfirm>
 

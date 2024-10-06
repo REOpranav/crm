@@ -225,7 +225,7 @@ const LeadBoard = () => {
     },
     {
       key: '2',
-      label: (<Link to={`./formpage`}>For Zappy CRM</Link>),
+      label: (<Link to={`./formpage`}>For This CRM</Link>),
     },
   ]
 
@@ -239,15 +239,12 @@ const LeadBoard = () => {
         </Space>
         <Space>
           {selectedRowKeys.length > 0 && <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm>}
-          <Button type='default' onClick={homeNavigation}>Back to Home</Button>
-          <Popconfirm title="Are you sure to save" okText="Yes" cancelText="No" onConfirm={homeNavigation} onCancel={() => message.error('Cancel Save')}>
-            <Button type='dashed'>Save & Home</Button>
-          </Popconfirm>
           <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol} />
           <Dropdown menu={{ items }} placement='bottomCenter'>
-            <Button type='primary'>Create Lead</Button>
+            <Button type='default'>Create Lead</Button>
           </Dropdown>
           {/* <Button type='primary'  onClick={formNavigate}></Button> */}
+          <Button type='primary' onClick={homeNavigation}>Back to Home</Button>
         </Space>
       </Row>
 

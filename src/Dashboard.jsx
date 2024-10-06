@@ -95,6 +95,10 @@ const Dashboard = ({ count }) => {
                     </div>
                     {/* </Menu.Item> */}
 
+                    <Menu.Item key="home">
+                        <Link to={'/'} className='PoppinsFont'>Home</Link>
+                    </Menu.Item>
+
                     <Menu.Item key="leadBoard">
                         <Link to={'/leads'} className='PoppinsFont'>Lead</Link>
                     </Menu.Item>
