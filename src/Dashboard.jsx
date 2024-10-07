@@ -9,6 +9,7 @@ import LineChart from './chart/LineChart';
 import MeetingChart from './chart/MeetingChart';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import './Dashboard.css'
 
 const Dashboard = ({ count }) => {
 

@@ -1,25 +1,6 @@
 {
   "leads": [
     {
-      "id": "347216330",
-      "leadowner": "ra,m ",
-      "firstname": "dskns",
-      "lastname": "ksckm",
-      "email": "kdsm@gmail.com",
-      "mobile": "732872372",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
       "id": "680630186",
       "leadowner": "sdlc",
       "firstname": "kmsd",
@@ -45,25 +26,6 @@
       "lastname": "ksdkn",
       "email": "cksdvc@gmail.com",
       "mobile": "9876545678",
-      "date": "",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "837333477",
-      "leadowner": "simple ",
-      "firstname": "pranav",
-      "lastname": "vanaas",
-      "email": "kdckn@gma.com",
-      "mobile": "9765678987",
       "date": "",
       "companyName": "",
       "annualrevenue": "",
@@ -619,46 +581,6 @@
   ],
   "meetingSession": [
     {
-      "id": "672324717",
-      "key": 542215712,
-      "session": {
-        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
-        "timezone": "Asia/Calcutta",
-        "departmentId": "527192000000008011",
-        "addedParticipants": "[]",
-        "webServer": "meeting.zoho.in",
-        "creatorZuid": "60024262219",
-        "source": "Meeting Create page",
-        "endTimeMillisec": 1730843160000,
-        "encryptPwd": "57df75aa29202bfebbe43d3d1b68fb470d9f6836449e3e0673723a1cf67b3e8b",
-        "duration": 3600000,
-        "sys_id": "527192000000196022",
-        "accessCode": "13273 67555 #",
-        "sessionType": "meeting",
-        "startTime": "Nov 06, 2024 02:16 AM IST",
-        "meeting": {
-          "zsoid": "60017874042"
-        },
-        "participants": [],
-        "departmentName": "My Department",
-        "creator": "60024262219",
-        "presenter": 60024262219,
-        "offset": "19800000",
-        "isRecurring": false,
-        "joinLink": "https://meet.zoho.in/hdp2md4pHb",
-        "agenda": "fun day ",
-        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1327367555&x-meeting-org=60017874042",
-        "UID": 527192000000196030,
-        "startTimeMillisec": 1730839560000,
-        "topic": "saturday ",
-        "endTime": "Nov 06, 2024 03:16 AM IST",
-        "pwd": "tZcaCP",
-        "meetingKey": "1327367555",
-        "removedParticipants": "[]",
-        "startDate": "Nov 6, 2024 02:16 AM"
-      }
-    },
-    {
       "id": "53325032",
       "key": 776918109,
       "session": {
@@ -696,6 +618,92 @@
         "meetingKey": "1314312294",
         "removedParticipants": "[]",
         "startDate": "Nov 6, 2024 03:30 AM"
+      }
+    },
+    {
+      "id": "794498118",
+      "session": {
+        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
+        "timezone": "Asia/Calcutta",
+        "creatorZuid": "60024262219",
+        "departmentId": "527192000000008011",
+        "addedParticipants": "[pranav.vs@zappyworks.com]",
+        "source": "new_meeting",
+        "type": "meeting",
+        "endTimeMillisec": 1733645640000,
+        "encryptPwd": "f8bcecbd048fb0e03c588126895edf122b2bf03487e0adcb9968094fe4aea9e7",
+        "duration": "3600000",
+        "sys_id": 527192000000191100,
+        "accessCode": "13766 55835 #",
+        "startTime": "Dec 08, 2024 12:44 PM IST",
+        "meeting": {
+          "zsoid": "60017874042"
+        },
+        "participants": [
+          {
+            "id": "527192000000191122",
+            "email": "pranav.vs@zappyworks.com"
+          }
+        ],
+        "departmentName": "My Department",
+        "creator": "60024262219",
+        "presenter": 60024262219,
+        "offset": "19800000",
+        "encryptPassword": "f8bcecbd048fb0e03c588126895edf122b2bf03487e0adcb9968094fe4aea9e7",
+        "isRecurring": false,
+        "joinLink": "https://meet.zoho.in/SPLQUtiI3b",
+        "agenda": "this meeting for rural training program",
+        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1376655835&x-meeting-org=60017874042",
+        "presenterEmail": "boosingpranav@gmail.com",
+        "UID": 527192000000191100,
+        "startTimeMillisec": 1733642040000,
+        "shortenJoinUrl": "https://meet.zoho.in/SPLQUtiI3b",
+        "timeFormat": "Sun, Dec 08, 2024 12:44 PM",
+        "topic": "Rural training program",
+        "endTime": "Dec 08, 2024 01:44 PM IST",
+        "meetingKey": "1376655835",
+        "removedParticipants": "[]",
+        "startDate": "Dec 8, 2024 12:44 PM"
+      }
+    },
+    {
+      "id": "794498118",
+      "key": 7630284,
+      "session": {
+        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
+        "timezone": "Asia/Calcutta",
+        "departmentId": "527192000000008011",
+        "addedParticipants": "[]",
+        "webServer": "meeting.zoho.in",
+        "creatorZuid": "60024262219",
+        "source": "Meeting Create page",
+        "endTimeMillisec": 1730966640000,
+        "encryptPwd": "f43c15a26424eb979e390b7845fb3c4bf087dd63c2996a11bbc9f7bb017ac5df",
+        "duration": 3600000,
+        "sys_id": "527192000000189010",
+        "accessCode": "13986 17699 #",
+        "sessionType": "meeting",
+        "startTime": "Nov 07, 2024 12:34 PM IST",
+        "meeting": {
+          "zsoid": "60017874042"
+        },
+        "participants": [],
+        "departmentName": "My Department",
+        "creator": "60024262219",
+        "presenter": 60024262219,
+        "offset": "19800000",
+        "isRecurring": false,
+        "joinLink": "https://meet.zoho.in/68fCHSzTE0",
+        "agenda": "This is secound days",
+        "startLink": "https://meeting.zoho.in/meeting/meeting-start?key=1398617699&x-meeting-org=60017874042",
+        "UID": 527192000000189000,
+        "startTimeMillisec": 1730963040000,
+        "topic": "secound Day",
+        "endTime": "Nov 07, 2024 01:34 PM IST",
+        "pwd": "o7AkV9",
+        "meetingKey": "1398617699",
+        "removedParticipants": "[]",
+        "startDate": "Nov 7, 2024 12:34 PM"
       }
     }
   ]

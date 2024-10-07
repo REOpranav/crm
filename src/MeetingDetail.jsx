@@ -197,7 +197,7 @@ const MeetingDetail = () => {
         </Col>
       </Row>
 
-      <Row style={{ minHeight: "70vh", maxHeight: '70vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
+      <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
         {upcoming &&
           <Col span={23}>
             {!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData) ? <>

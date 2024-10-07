@@ -44,6 +44,10 @@
     margin-top: 2px;
     display: flex;
     align-items: center;
-    justify-content: left;
-    text-align: left;
+    justify-content: center;
+    text-align: center;
+}
+
+.topic:hover{
+    cursor:alias;
 }
