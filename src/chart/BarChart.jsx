@@ -24,7 +24,7 @@ const BarChart = ({ lead, contact, account, deal }) => {
           {
             label: 'Sales Funnel Overview',
             data: datas,
-            backgroundColor: 'rgb(56, 174, 230, 0.6)',
+            backgroundColor: 'rgb(2,206,201)',
             borderWidth: 1
           },
         ],
