@@ -21,7 +21,7 @@ const MeetingChart = () => {
   const navigate = useNavigate();
   const [meetingList, setMeetingList] = useState([])
   const [isload, setISLoad] = useState(false)
-  const [truncate,setTruncate] = useState([]) 
+  const [truncate, setTruncate] = useState([])
 
   // this both array is storing the data which is seperted by date  
   const upcomingData = []
@@ -100,17 +100,17 @@ const MeetingChart = () => {
     })
   }
 
-  useEffect(()=>{
-  const truncateWords = document.querySelector('.topic');
+  useEffect(() => {
+    const truncateWords = document.querySelector('.topic');
     function truncateText(spanElement) {
-        const words = spanElement?.textContent?.trim().split(' ') || []
-        if (words.length > 2) {
-            spanElement.textContent = words.slice(0, 2).join(' ') + ` ...`;
-        }
+      const words = spanElement?.textContent?.trim().split(' ') || []
+      if (words.length > 2) {
+        spanElement.textContent = words.slice(0, 2).join(' ') + ` ...`;
+      }
     }
     truncateText(truncateWords)
-  },undefined)
- 
+  }, undefined)
+
   return (
     <div>
       <Row>
@@ -118,8 +118,6 @@ const MeetingChart = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}><p id='meetingheading'>Upcoming Meetings &nbsp; <Tooltip title="You have two meetings" placement='right' color='#5a3bb6'><span>-&nbsp;{upcomingData?.length}</span></Tooltip></p> <p id='meetingPageLink' onClick={() => navigate('/meetingDetail')}>Meeting Page</p></div>
           <div id='meetingDeatailInDashboardHead'>
             {upcomingData?.map((e) => {
-              console.log(e);
-              
               return <Row id='meetingDetailInDashboard'>
                 <Col span={5}>{e?.sDate}</Col>
                 <Col span={5}><span style={{ backgroundColor: '#AFE1AF' }}>{e?.sTime}</span></Col>
