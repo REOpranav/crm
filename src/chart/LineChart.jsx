@@ -12,8 +12,7 @@ const LineChart = ({ lead, contact, account, deal }) => {
       existingChart.current.destroy();
     }
 
-    let datas = [lead ? lead : 0, contact ? contact : 0, account ? account : 0, deal ? deal : 0, Math.ceil(deal ? deal : 0 / 2)]
-
+    let datas = [lead ? lead : 0, contact ? contact : 0, account ? account : 0, deal ? deal : 0, deal ? Math.ceil(deal / 2) : 0, deal ? deal - Math.ceil(deal / 2) : 0]
     // Create a new Chart.js instance
     existingChart.current = new Chart(ctx, {
       type: 'line',
@@ -33,7 +32,7 @@ const LineChart = ({ lead, contact, account, deal }) => {
           },
         ],
       },
-      options:
+      options: 
       {
         scales: {
           y: {
