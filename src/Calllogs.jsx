@@ -4,6 +4,8 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Row, Typography, Col } from 'antd'
 import './Calllog.css'
+import { FiPhoneCall } from "react-icons/fi";
+import { LuMailCheck } from "react-icons/lu";
 
 const Calllogs = ({ callLogs, emailLog }) => {
   const [logData, setLogData] = useState('')
@@ -63,8 +65,9 @@ const Calllogs = ({ callLogs, emailLog }) => {
 
       <Row>
         <Col>
-          <Row style={{ padding: '10px', backgroundColor: '#C0C0C0', borderRadius: '5px' }} justify={'start'}>
-            <Text style={{ color: 'black', fontWeight: 'lighter' }}>Call log</Text>
+          <Row style={{ padding: '10px', backgroundColor: '#efe8ff', borderRadius: '5px'}} justify={'space-between'}>
+            <Text style={{ color: 'black', fontWeight: 'lighter'}}>Call log </Text>
+            <Text><FiPhoneCall color='#8550ff'/></Text>
           </Row>
 
           <Row>
@@ -78,8 +81,9 @@ const Calllogs = ({ callLogs, emailLog }) => {
         </Col>
 
         <Col style={{ marginLeft: '2%' }}>
-          <Row style={{ padding: '10px', backgroundColor: '#C0C0C0', borderRadius: '5px' }} justify={'start'}>
+          <Row style={{ padding: '10px', backgroundColor: '#fef1e1', borderRadius: '5px' }} justify={'space-between'}>
             <Text style={{ color: 'black', fontWeight: 'lighter' }}>Email log</Text>
+            <Text><LuMailCheck color='#faab4d'/></Text>
           </Row>
 
           <Row>

@@ -111,6 +111,20 @@ const MeetingChart = () => {
     truncateText(truncateWords)
   }, undefined)
 
+  const findingEvenNumber = (indexNumber)=>{   
+    // indexNumber start with 0
+    if (indexNumber % 2 === 0) {
+        return '#daf5f7'
+      }else{
+        return 'transparent'
+      }
+  } 
+
+  useEffect(()=>{
+    findingEvenNumber()
+  },[undefined])
+  
+
   return (
     <div>
       <Row>
@@ -118,9 +132,10 @@ const MeetingChart = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}><p id='meetingheading'>Upcoming Meetings &nbsp; <Tooltip title="You have two meetings" placement='right' color='#5a3bb6'><span>-&nbsp;{upcomingData?.length}</span></Tooltip></p> <p id='meetingPageLink' onClick={() => navigate('/meetingDetail')}>Meeting Page</p></div>
           <div id='meetingDeatailInDashboardHead'>
             {upcomingData?.map((e) => {
-              return <Row id='meetingDetailInDashboard'>
+               const indexNumber = upcomingData?.indexOf(e)
+              return <Row id='meetingDetailInDashboard' style={{backgroundColor:`${findingEvenNumber(indexNumber)}`}}>
                 <Col span={5}><Row justify={'start'}>{e?.sDate}</Row></Col>
-                <Col span={5}><Row justify={'start'}><span style={{ backgroundColor: '#AFE1AF' }}>{e?.sTime}</span></Row></Col>
+                <Col span={5}><Row justify={'start'}><span style={{ backgroundColor: '#aff4be' }}>{e?.sTime}</span></Row></Col>
                 <Col span={5}><Tooltip title={e?.topic} color='grey'><Row className='topic' justify={'start'}>{e?.topic}</Row></Tooltip></Col>
                 <Col span={5}><Row justify={'start'}>{e?.durationInHours}</Row></Col>
                 <Col span={4}>
