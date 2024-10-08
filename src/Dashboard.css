@@ -232,6 +232,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 0px 3px #ddd;
 }
 
 #bar-chart-col,
