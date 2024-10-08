@@ -1,14 +1,14 @@
 {
   "leads": [
     {
-      "id": "680630186",
-      "leadowner": "sdlc",
-      "firstname": "kmsd",
-      "lastname": "sdj",
-      "email": "prana@gmail.com",
-      "mobile": "sdc",
+      "id": "38979345",
+      "leadowner": "dkn",
+      "firstname": "knsdcn",
+      "lastname": "ksdkn",
+      "email": "cksdvc@gmail.com",
+      "mobile": "9876545678",
       "date": "",
-      "companyName": "",
+      "companyName": "srv led letters",
       "annualrevenue": "",
       "gender": "",
       "area": "",
@@ -20,13 +20,13 @@
       "description": ""
     },
     {
-      "id": "38979345",
-      "leadowner": "dkn",
-      "firstname": "knsdcn",
-      "lastname": "ksdkn",
-      "email": "cksdvc@gmail.com",
-      "mobile": "9876545678",
-      "date": "",
+      "id": "533065960",
+      "leadowner": "dfkv",
+      "firstname": "kdvkn",
+      "lastname": "kndfkvn",
+      "email": "snd@gmail.com",
+      "mobile": "9865876967",
+      "date": "2025-11-08",
       "companyName": "",
       "annualrevenue": "",
       "gender": "",
@@ -348,6 +348,10 @@
     {
       "id": "794498118",
       "date": "September 19th 2024, 3:43:01 pm"
+    },
+    {
+      "id": "38979345",
+      "date": "October 7th 2024, 6:35:57 pm"
     }
   ],
   "emailLogs": [
@@ -576,6 +580,14 @@
       "inputs": [
         "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
         "<p draggable=\"true\"><label for=\"firstname\">First Name : </label><input type=\"text\" name=\"firstname\" id=\"firstname\" placeholder=\"First Name *\"></p>"
+      ]
+    },
+    {
+      "id": "sri form",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"firstname\">First Name : </label><input type=\"text\" name=\"firstname\" id=\"firstname\" placeholder=\"First Name *\"></p>",
+        "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>",
+        "<p draggable=\"true\"><label for=\"companyName\">company Name : </label><input type=\"text\" name=\"companyName\" id=\"companyName\" placeholder=\"company Name\"></p>"
       ]
     }
   ],

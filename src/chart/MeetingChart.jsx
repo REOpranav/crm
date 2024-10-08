@@ -119,10 +119,10 @@ const MeetingChart = () => {
           <div id='meetingDeatailInDashboardHead'>
             {upcomingData?.map((e) => {
               return <Row id='meetingDetailInDashboard'>
-                <Col span={5}>{e?.sDate}</Col>
-                <Col span={5}><span style={{ backgroundColor: '#AFE1AF' }}>{e?.sTime}</span></Col>
+                <Col span={5}><Row justify={'start'}>{e?.sDate}</Row></Col>
+                <Col span={5}><Row justify={'start'}><span style={{ backgroundColor: '#AFE1AF' }}>{e?.sTime}</span></Row></Col>
                 <Col span={5}><Tooltip title={e?.topic} color='grey'><Row className='topic' justify={'start'}>{e?.topic}</Row></Tooltip></Col>
-                <Col span={5}>{e?.durationInHours}</Col>
+                <Col span={5}><Row justify={'start'}>{e?.durationInHours}</Row></Col>
                 <Col span={4}>
                   <Row justify={'space-between'}>
                     <Tooltip title="Join Meeting" color='blue'><a href={e?.joinLink} target='_blank'>Join</a></Tooltip>
