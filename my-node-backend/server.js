@@ -4,39 +4,39 @@ const cors = require('cors')
 const app = express()
 const qs = require('qs')
 
-app.use(cors())
-app.use(express.json())
+app.use(cors()) // this is enable cors (bypass the cross error)
+app.use(express.json()) // Parse incoming JSON
 
 // this code for getting the access token
-app.post('/api/token', async(req, res) => { // tbhis line get the data from correct endpoint
+app.post('/api/token', async (req, res) => { // tbhis line get the data from correct endpoint
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
         client_secret: req.body.client_secret,
         redirect_uri: req.body.redirect_uri,
         grant_type: req.body.grant_type
-    }    
+    }
     try {
         const response = await axios.post('https://accounts.zoho.in/oauth/v2/token',
             // zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
-                qs.stringify(accessTokenParams),
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+            qs.stringify(accessTokenParams),
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            )            
-            res.json(response.data)
-        } catch (error) {
-            res.status(error.response ? error.response.status : 500).json({
-                message: error.message,
-                error: error.response ? error.response.data : null
+            }
+        )
+        res.json(response.data)
+    } catch (error) {
+        res.status(error.response ? error.response.status : 500).json({
+            message: error.message,
+            error: error.response ? error.response.data : null
         });
     }
 })
 
 //  this code for get the user (accounter) detail
-app.post('/api/userdetail', async (req, res) => { 
+app.post('/api/userdetail', async (req, res) => {
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
@@ -45,73 +45,73 @@ app.post('/api/userdetail', async (req, res) => {
         grant_type: req.body.grant_type
     }
 
-    try {        
+    try {
         const response = await axios.post('https://accounts.zoho.in/oauth/v2/token',
-                qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+            qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            )
+            }
+        )
 
         const getingUserDetail = await axios.get('https://meeting.zoho.in/api/v2/user.json', // extra post request for get the user account deatil
-                {
-                    headers : {
-                        'Authorization':`Zoho-oauthtoken ${await response.data.access_token}` 
-                    }
-                })
-                    res.json(getingUserDetail.data)
-                    return
-           
-        } catch (error) {
-            res.status(error.response ? error.response.status : 500).json({
-                message: error.message,
-                error: error.response ? error.response.data : null
+            {
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${await response.data.access_token}`
+                }
+            })
+        res.json(getingUserDetail.data)
+        return
+
+    } catch (error) {
+        res.status(error.response ? error.response.status : 500).json({
+            message: error.message,
+            error: error.response ? error.response.data : null
         });
     }
 })
 
 // this post for create a meeting
-app.post('/api/create', async(req, res) => {
+app.post('/api/create', async (req, res) => {
     const session = req.body // this is session credencial
-    const {extras} = req.query  // this is for get the extra information like zsoid and access token
+    const { extras } = req.query  // this is for get the extra information like zsoid and access token
     try {
-            const response = await fetch(
-                `https://meeting.zoho.in/api/v2/${extras.zsoid}/sessions.json`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Zoho-oauthtoken ${extras.access_token}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(session),
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error(`Failed to create meeting: ${response.statusText}`);
+        const response = await fetch(
+            `https://meeting.zoho.in/api/v2/${extras.zsoid}/sessions.json`,
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${extras.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(session),
             }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Failed to create meeting: ${response.statusText}`);
+        }
 
         const data = await response.json();
         res.json(data)
 
-        } catch (error) {
-                res.status(500).json({ message: "Failed to create meeting", error: error.message });
-        }
+    } catch (error) {
+        res.status(500).json({ message: "Failed to create meeting", error: error.message });
     }
+}
 )
 
 // this is for deleting the meeting
-app.post('/api/meeting/delete',async(req,res)=>{
-    const {session} = await req.body
+app.post('/api/meeting/delete', async (req, res) => {
+    const { session } = await req.body
     try {
-        let URL =`https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions/${await session.meetingKey}.json`
+        let URL = `https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions/${await session.meetingKey}.json`
 
         const deleteMeeting = await fetch(
             URL,
             {
-                method : 'DELETE',
+                method: 'DELETE',
                 headers: {
                     'Authorization': `Zoho-oauthtoken ${session.accessToken}`,
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -127,14 +127,14 @@ app.post('/api/meeting/delete',async(req,res)=>{
 })
 
 // this is for listing the meeting
-app.post('/api/list',async(req,res)=>{
-    const {session} = await req.body
+app.post('/api/list', async (req, res) => {
+    const { session } = await req.body
     try {
         let URL = `https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions.json`
         const listMeeting = await fetch(
             URL,
             {
-                method : 'GET',
+                method: 'GET',
                 headers: {
                     'Authorization': `Zoho-oauthtoken ${session.access_token}`,
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -149,20 +149,20 @@ app.post('/api/list',async(req,res)=>{
 })
 
 // this is for editing the meeting
-app.post('/api/edit',async(req,res)=>{    
-    const {session} = await req.body    
-    const {extras} =  req.query
+app.post('/api/edit', async (req, res) => {
+    const { session } = await req.body
+    const { extras } = req.query
     try {
-        let URL = `https://meeting.zoho.in/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`        
+        let URL = `https://meeting.zoho.in/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`
         const editMeeting = await fetch(
             URL,
             {
-                method : 'PUT',
+                method: 'PUT',
                 headers: {
                     'Authorization': `Zoho-oauthtoken ${await extras.access_token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({session}),
+                body: JSON.stringify({ session }),
             }
         )
         const data = await editMeeting.json();
