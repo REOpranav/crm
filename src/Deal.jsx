@@ -169,7 +169,6 @@ const Deal = () => {
       fetching()
     },[undefined,selectedRowKeys])
     
-    console.log(deal_data);
 
     let targetedValue =''
     deal_data?.forEach(e => {
@@ -179,7 +178,7 @@ const Deal = () => {
         }) 
     })
 
-
+// this is drag and drop section (kanban view)
     const addDropListeners = (head)=>{
       head?.addEventListener('dragover',(e)=>{
         e.preventDefault() 

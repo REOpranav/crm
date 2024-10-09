@@ -1,0 +1,8 @@
+.profile{
+  border: 1px solid black;
+}
+
+.name_edit,.profileName_edit,.fullName_displayName,.gender_country,.state_language,.timeZone{
+    border: 1px solid black;
+    padding: 8px;
+}

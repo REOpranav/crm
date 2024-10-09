@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,500;1,500&display=swap');
 
+:root{
+  --popinFont: Poppins, sans-serif;
+}
 .PoppinsFont {
-    font-family: Poppins, sans-serif;
+    font-family:var(--popinFont);
 }
 
 .dashBoardHead {
@@ -24,6 +27,89 @@
     background-color: white;
     color: #5a3bb6;
 }
+
+ /* Style for the sidebar (prifile)*/
+ .sideBarOpen {
+    visibility: visible;
+    width: 350px;
+    background-color:#E8EFFD;
+    color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: -5px 0px 14px rgba(49,57,73,.24);
+    overflow-x: hidden;
+    animation: profileRight 0.3s;
+}
+
+.sideBarOpen:hover{
+    cursor: pointer;
+}
+
+#closeProfileTab{
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+}
+
+@keyframes profileRight {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+
+.sideBarclose {
+    visibility: hidden;
+}
+
+.sidebarHeading{
+    background: url('https://h2js.zohocdn.com/crm/CRMClient/images/user-profile_e629744b0ae20a694a9bf5f7f352aee1_.jpg') #212b3e;
+    min-height: 50%;
+    max-height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#profileName{
+    padding: 20px;
+    font-size: large;
+    font-family:var(--popinFont);
+}
+
+#ProfileUserID_org{
+    font-size: large;
+}
+
+#profile_user_id,#profile_training{
+    padding: 5px;
+    font-family:var(--popinFont);
+}
+
+#profileAccount{
+    font-family:var(--popinFont);
+    margin-top: auto;
+}
+
+#profileMyAccount,#profilesignOut{
+    border: 1px solid rgba(221, 221, 221, 0.6);
+    border-bottom: none;
+    padding: 10px;
+    transition: 0.5s all;
+}
+
+#profileMyAccount:hover,#profilesignOut:hover{
+    position: relative;
+    background-color: #EDF0F4;
+    color: black;
+}   
 
 #account {
     width: 80%;
@@ -136,6 +222,16 @@
     transition: 0.2s ease-in;
 }
 
+/* this is for profile images */
+#profileImages{
+    transition: 0.5s all;
+    margin-right: 10px;
+}
+
+#profileImages:hover{
+    cursor: pointer;
+}
+
 /* dashbaord CSS code  */
 .totalDashboard {
     padding: 20px;
@@ -169,7 +265,7 @@
     font-weight: 400;
     padding: 7px;
     border-bottom: 0.4px solid #ddd;
-    font-family: Poppins, sans-serif;
+    font-family: var(--popinFont);
 }
 
 #countNumber {
@@ -205,7 +301,7 @@
 
 #welcome-row>#welcome-message {
     padding: 10px;
-    font-family: Poppins, sans-serif;
+    font-family: var(--popinFont);
     font-weight: 600;
     font-size: larger;
 }
@@ -314,7 +410,7 @@
     padding: 10px;
     margin-left: 10px;
     text-transform: capitalize;
-    font-family: Poppins, sans-serif;
+    font-family: var(--popinFont);
 }
 
 .suitOfApplicationView>main>section {
