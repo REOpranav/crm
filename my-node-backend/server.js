@@ -35,7 +35,7 @@ async function run() {
 }
 
 function getData(resData) {
-    app.get('/contact', async(req, res) => {
+    app.get('/contacts', async(req, res) => {
       try {
         const response = await axios.post('https://mockcrm.vercel.app/contact', resData)     
         res.json({ message: 'Contacts synced successfully!', data: response.data });   
