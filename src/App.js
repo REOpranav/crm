@@ -22,14 +22,12 @@ import MeetingDetail from './MeetingDetail';
 import MeetingInsights from './MeetingInsights';
 import DealEditForm from './DealEditForm';
 import APIs from './RestAPI/APIs';
-import ProfilePage from './ProfilePage/ProfilePage';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Dashboard />} />
-        <Route path='/ProfilePage' element={<ProfilePage />} />
         <Route path='/leads' element={<LeadBoard />} />
         <Route path='/contacts' element={<Contact />} />
         <Route path='/accounts' element={<Account />} />
