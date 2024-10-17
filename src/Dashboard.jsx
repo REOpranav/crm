@@ -90,18 +90,6 @@ const Dashboard = ({ count }) => {
         navigate('/ProfilePage' )
     }
 
-// this code for getting data from mongoDB (on -progress) 
-    const [data, setData] = useState([]);
-    useEffect(() => {
-      axios.get('http://localhost:5000/api/movies') // Update endpoint
-        .then(response => {
-          setData(response.data);
-        })
-        .catch(error => {
-          console.error(error.message);
-        });
-    }, [undefined]);
-
 
     return (
         <div className='dashBoardHead'>

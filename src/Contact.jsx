@@ -38,10 +38,29 @@ const Contact = () => {
     return finalValues
   })
 
-  // this functionf fetch the datas from URL/contact 
+  // // this functionf fetch the datas from URL/contact 
+  // const fetching = async () => {
+  //   try {
+  //     const responce = await axios.get('http://localhost:3000/contacts')
+  //     if (responce.status === 200) {
+  //       setContactData(await responce.data);
+  //       setsearchBy(await responce.data)
+  //     }
+  //   } catch (err) {
+  //     if (err.response) {
+  //       message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+  //     } else if (err.request) {
+  //       message.error('Error: No response from server.');
+  //     } else {
+  //       message.error('Error: ' + err.message);
+  //     }
+  //   }
+  // }
+
+  //  this code is fethcing from node.js (mongoDB)
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3000/contacts')
+      const responce = await axios.get('http://localhost:3001/contact')
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
