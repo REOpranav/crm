@@ -6,7 +6,7 @@ const qs = require('qs')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 app.use(express.json()) // Parse incoming JSON
-app.use(cors({ origin:'https://mockcrm.vercel.app/'}));
+app.use(cors({ origin: 'https://mockcrm.vercel.app/' }));
 
 const uri = "mongodb+srv://vadivel:infiinfo01@crmcluster1.weqo4.mongodb.net/?retryWrites=true&w=majority&appName=CRMcluster1"
 async function run() {
@@ -27,21 +27,20 @@ async function run() {
     // getting data from mongo DB
     const data =  collection.find({}).toArray()
     data.then((responceData)=>{
-      getData(responceData)
+        getData(responceData)
     })
   }catch(err){  
     console.log(err);
   }
 }
 
-function getData(responceData) {    
-    app.get('/contact', (req, res) => {
+function getData(resData) {
+    app.get('/contact', async(req, res) => {
       try {
-        res.json(responceData)
-        console.log(responceData)
+        const response = await axios.post('https://mockcrm.vercel.app/contact', resData)     
+        res.json({ message: 'Contacts synced successfully!', data: response.data });   
       } catch (error) {
-        console.error('Error sending JSON response:', error);
-        res.status(500).send('Internal Server Error');
+        console.log('Error sending JSON response:', error);
       }
     });
 }
