@@ -60,7 +60,7 @@ const Contact = () => {
   //  this code is fethcing from node.js (mongoDB)
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3001/contact')
+      const responce = await axios.get('https://mockcrm.vercel.app/contact')
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
