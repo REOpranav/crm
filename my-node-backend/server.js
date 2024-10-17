@@ -35,9 +35,10 @@ async function run() {
 }
 
 function getData(resData) {
-    app.get('/contacts', async(req, res) => {
+    app.get('/mongoDB/contact', async(req, res) => {
       try {
-        const response = await axios.post('https://mockcrm.vercel.app/contact', resData)     
+        console.log(resData)
+        const response = await axios.post('https://mockcrm.vercel.app/mongoDB/contact', resData)
         res.json({ message: 'Contacts synced successfully!', data: response.data });   
       } catch (error) {
         console.log('Error sending JSON response:', error);
