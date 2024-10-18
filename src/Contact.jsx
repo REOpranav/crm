@@ -60,7 +60,7 @@ const Contact = () => {
   //  this code is fethcing from node.js (mongoDB)
   const fetching = async () => {
     try {
-      const responce = await axios.get('https://mockcrm.vercel.app/mongoDB/contacts')
+      const responce = await axios.get('http://localhost:3002/contacts')
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
@@ -75,6 +75,8 @@ const Contact = () => {
       }
     }
   }
+  console.log(contactData);
+  
 
   // this function is totally for store call log
   const makeCall = (number, id) => {

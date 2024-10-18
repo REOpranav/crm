@@ -6,43 +6,42 @@ const qs = require('qs')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 app.use(express.json()) // Parse incoming JSON
-app.use(cors({ origin: 'https://mockcrm.vercel.app/' }));
+app.use(cors());
 
 const uri = "mongodb+srv://vadivel:infiinfo01@crmcluster1.weqo4.mongodb.net/?retryWrites=true&w=majority&appName=CRMcluster1"
 async function run() {
   try {
     // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-    const client = new MongoClient(uri, {
-        serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-        }
-    });
+        const client = new MongoClient(uri, {
+            serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+            }
+        });
 
-    await client.connect();
-    const dataBase = client.db('CRMdata')
-    const collection = dataBase.collection('contact')
+        await client.connect();
+        const dataBase = client.db('CRMdata')
+        const collection = dataBase.collection('contact')
 
-    // getting data from mongo DB
-    const data =  collection.find({}).toArray()
-    data.then((responceData)=>{
-        getData(responceData)
-    })
-  }catch(err){  
-    console.log(err);
-  }
+        // getting data from mongo DB
+        const data =  collection.find({}).toArray()
+        data.then((responceData)=>{
+        sendFetchData(responceData)
+        })
+    }catch(err){  
+        console.log(err);
+    }
 }
 
-function getData(resData) {
-    app.get('/mongoDB/contact', async(req, res) => {
-      try {
-        console.log(resData)
-        const response = await axios.post('https://mockcrm.vercel.app/mongoDB/contact', resData)
-        res.json({ message: 'Contacts synced successfully!', data: response.data });   
-      } catch (error) {
-        console.log('Error sending JSON response:', error);
-      }
+// Create an API route to serve the data
+function sendFetchData(fetchedData) {    
+    app.get('/contacts', async (req, res) => {
+        try {
+          res.json(fetchedData)
+        } catch (error) {
+          res.status(500).json({ message: 'Error fetching contacts' });
+        }
     });
 }
 

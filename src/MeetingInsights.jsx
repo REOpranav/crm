@@ -87,8 +87,6 @@ const MeetingInsights = () => {
 
   // This function for start the meeting when click the start meeting button
   const startLink = () => {
-    console.log('yes');
-
     return window.open(`${meetingData.session.startLink}`)
   }
 
