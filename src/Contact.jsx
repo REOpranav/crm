@@ -38,29 +38,10 @@ const Contact = () => {
     return finalValues
   })
 
-  // // this functionf fetch the datas from URL/contact 
-  // const fetching = async () => {
-  //   try {
-  //     const responce = await axios.get('http://localhost:3000/contacts')
-  //     if (responce.status === 200) {
-  //       setContactData(await responce.data);
-  //       setsearchBy(await responce.data)
-  //     }
-  //   } catch (err) {
-  //     if (err.response) {
-  //       message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-  //     } else if (err.request) {
-  //       message.error('Error: No response from server.');
-  //     } else {
-  //       message.error('Error: ' + err.message);
-  //     }
-  //   }
-  // }
-
-  //  this code is fethcing from node.js (mongoDB)
+  // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3002/contacts')
+      const responce = await axios.get('http://localhost:3000/contacts')
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
@@ -75,8 +56,26 @@ const Contact = () => {
       }
     }
   }
-  console.log(contactData);
-  
+
+  //  this code is fethcing from node.js (mongoDB)
+  // const fetching = async () => {
+  //   try {
+  //     const responce = await axios.get(`http://localhost:8000/api/contacts`)
+  //     if (responce.status === 200) {
+  //       setContactData(await responce.data);
+  //       setsearchBy(await responce.data)
+  //     }
+  //   } catch (err) {
+  //     if (err.response) {
+  //       message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+  //     } else if (err.request) {
+  //       message.error('Error: No response from server.');
+  //     } else {
+  //       message.error('Error: ' + err.message);
+  //     }
+  //   }
+  // }
+  // console.log(contactData);
 
   // this function is totally for store call log
   const makeCall = (number, id) => {
@@ -283,8 +282,13 @@ const Contact = () => {
 
   // if user user datail are getted ,stored in session storage
   const userDeatailAuth = (token) => {
-    message.success('User Token Retrieved')
-    sessionStorage.setItem('userdatail', JSON.stringify(token))
+    sessionStorage.setItem('userdatail', JSON.stringify(token)) // stroing thr api data in sessiong storage
+    
+  //checking if there have meetingUserDetail for showing the success message
+    const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
+    meetingUserDetail !== null && message.success('User Token Retrieved')
+
+  // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
     setTimeout(() => {
       sessionStorage.removeItem('userdatail')
     }, 3000 * 1000);
@@ -292,8 +296,13 @@ const Contact = () => {
 
   // if accesstoken are getted ,stored in session storage
   const accessTokenData = (token) => {
-    message.success('Access Token Retrieved')
-    sessionStorage.setItem('accessToken', JSON.stringify(token))
+    sessionStorage.setItem('accessToken', JSON.stringify(token)) // stroing thr api data in sessiong storage
+    
+  //checking if there have meetingAccessTokenData in session storage for showing the success message
+    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []
+    meetingAccessTokenData !== null && message.success('Access Token Retrieved')
+
+    // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
     setTimeout(() => {
       sessionStorage.removeItem('accessToken')
     }, 3000 * 1000);
@@ -338,7 +347,6 @@ const Contact = () => {
           {selectedRowKeys.length > 0 && <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm>}
           <Button type='default' onClick={homeNavigation}>Back to Home</Button>
           <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} calculateSymbol={calculateSymbol} setCalculateSymbol={setCalculateSymbol} />
-          <Link to={`./meetingStep`}> <Button type='primary'>Generate Meeting Tokens</Button> </Link>
           <Button type='primary' id='themeColor' onClick={formNavigate}>Create Contact</Button>
         </Space>
       </Row>

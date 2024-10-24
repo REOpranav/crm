@@ -21,16 +21,19 @@ const Dashboard = ({ count }) => {
     const [deal, setDeal] = useState([])
     const [profilView, setProfileView] = useState(false)
 
-    // this is tawk live chat codes
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/66fe2648256fb1049b1c3e51/1i98cb32a';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
+    // // this is tawk live chat codes
+    // const twlkCodes = ()=>{
+    //     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    //     (function(){
+    //     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    //     s1.async=true;
+    //     s1.src='https://embed.tawk.to/66fe2648256fb1049b1c3e51/1i98cb32a';
+    //     s1.charset='UTF-8';
+    //     s1.setAttribute('crossorigin','*');
+    //     s0.parentNode.insertBefore(s1,s0);
+    //     })();
+    // }
+    // twlkCodes()
 
     // this code for initial load and when lead added
     const fetching = async (urls) => {
@@ -159,6 +162,10 @@ const Dashboard = ({ count }) => {
 
                     <Menu.Item key="meetingDetail">
                         <Link to={'/meetingDetail'} className='PoppinsFont'>Meeting </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="maillog">
+                        <Link to={'/maillog'} className='PoppinsFont'>Mail Log </Link>
                     </Menu.Item>
                 </Menu>
 

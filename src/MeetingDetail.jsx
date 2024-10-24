@@ -25,15 +25,15 @@ const messageDrop = (type, content) => {
 
 // this is head style
 const headingStyle = {
-  fontSize: '20px',
   padding: '5px',
+  border:'1px solid '
 }
 
 // this is list css 
 const listStyle = {
   boxShadow: '0 1px 5px grey',
   outline: 'none',
-  padding: '20px',
+  padding: '10px',
   borderRadius: '5px',
   marginTop: '10px',
   display: 'flex',
@@ -57,9 +57,8 @@ const MeetingDetail = () => {
   const pastData = []
 
   // accessing rhe access tokena and user detail from session storage
-  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) || []
-  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) || []
-
+  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []
+  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
 
   // this is for showing upcoming and past detail
   const upcomingOnclick = () => {
@@ -175,23 +174,23 @@ const MeetingDetail = () => {
       <Dashboard />
       <Row justify={'space-between'} >
         <Space style={{ paddingLeft: '10px' }}>
-          <Title level={3} style={{ fontFamily: 'monospace', fontWeight: 'lighter' }}> Meeting </Title>
+          <Title level={3} style={{fontWeight: 'lighter',color:'red'}}> Meeting </Title>
         </Space>
         <Space style={{ marginRight: '10px' }}>
           <Link to={'/ScheduleMeeting'}><Button type='primary' style={{ width: '305px' }}>Create Meeting</Button></Link>
         </Space>
 
       </Row>
-      <Row justify={'space-between'} style={{ backgroundColor: 'transparent', outline: 'none', border: 'none' }}>
+      <Row justify={'space-between'} style={{ backgroundColor: 'transparent', outline: 'none'}}>
         <Col>
-          <Row>
-            <Col style={headingStyle} className='headstyle' onClick={upcomingOnclick}> <span style={{ borderBottom: upcoming ? '3px solid Blue' : 'transparent', color: upcoming ? 'blue' : 'black', padding: '5px', }}>Upcoming</span> </Col>
-            <Col style={headingStyle} className='headstyle' onClick={setPastOnclick}><span style={{ borderBottom: past ? '3px solid blue' : 'transparent', color: past ? 'blue' : 'black', padding: '5px' }}> Past </span> </Col>
+          <Row className='meetingState'>
+            <Col className='headstyle' onClick={upcomingOnclick} style={{ color: upcoming ? 'white' : 'black', backgroundColor: upcoming ? '#5a3bb6' : 'transparent', padding: '5px', width:'100px' }}> <span >Upcoming</span> </Col>
+            <Col className='headstyle' onClick={setPastOnclick} style={{ color: past ? 'white' : 'black', backgroundColor: past ? '#5a3bb6' : 'transparent', padding: '5px',width:'100px'}}><span > Past </span> </Col>
           </Row>
         </Col>
         <Col style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
           <Space>
-            <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
+            <Link to={`/integrationStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
             <Button type='primary' onClick={back}>Back one Step</Button>
           </Space>
         </Col>
@@ -204,7 +203,7 @@ const MeetingDetail = () => {
               {upcomingData.length <= 0 && <Row justify={'center'} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
                 <Col>
                   <Row justify={'center'}> <Image src='https://static.zohocdn.com/meeting/images/no-upcoming-meeting.08995d6de11131e73a5d7d0738f7ae39.svg' height={'150px'} preview={false} /> </Row>
-                  <Row justify={'center'}> <Col> <Row justify={'center'} className='headstyle'> No Upcoming Meetings.</Row> <Row justify={'center'} className='headstyle'> You can either start an instant meeting or schedule a meeting </Row></Col> </Row>
+                  <Row justify={'center'}> <Col> <Row justify={'center'} className='no-meeting-message-style'> No Upcoming Meetings.</Row> <Row justify={'center'} className='no-meeting-message-style'> You can either start an instant meeting or schedule a meeting </Row></Col> </Row>
                 </Col>
               </Row>}
 
@@ -259,7 +258,7 @@ const MeetingDetail = () => {
               {pastData.length <= 0 && <Row justify={'center'} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
                 <Col >
                   <Row justify={'center'}> <Image src='https://static.zohocdn.com/meeting/images/no-upcoming-meeting.08995d6de11131e73a5d7d0738f7ae39.svg' height={'150px'} preview={false} /> </Row>
-                  <Row justify={'center'}> <Col> <Row justify={'center'} className='headstyle'> No Past Meetings.</Row> <Row justify={'center'} className='headstyle'>You can either start an instant meeting or schedule a meeting </Row></Col> </Row>
+                  <Row justify={'center'}> <Col> <Row justify={'center'} className='no-meeting-message-style'> No Past Meetings.</Row> <Row justify={'center'} className='no-meeting-message-style'>You can either start an instant meeting or schedule a meeting </Row></Col> </Row>
 
                 </Col>
               </Row>}

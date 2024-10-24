@@ -22,6 +22,8 @@ import MeetingDetail from './MeetingDetail';
 import MeetingInsights from './MeetingInsights';
 import DealEditForm from './DealEditForm';
 import APIs from './RestAPI/APIs';
+import MailLog from './MailLog';
+import MailStep from './MailStep';
 
 function App() {
   return (
@@ -53,13 +55,15 @@ function App() {
         <Route path='/deals/detail/:id' element={<DealDetail />} />
         <Route path='/contacts/individualForm/:id' element={<DealForm />} />
         <Route path='/contacts/organizationForm/:id' element={<DealForm />} />
-        <Route path='/contacts/meetingStep/' element={<MeetingStep />} />
+        <Route path='/integrationStep' element={<MeetingStep />} />
         <Route path='/contactDetail/detail/:id/ScheduleMeeting/:id' element={<ScheduleMeeting />} />
         <Route path='/editing/ScheduleMeeting' element={<ScheduleMeeting />} />
         <Route path='/ScheduleMeeting' element={<ScheduleMeeting />} />
         <Route path='/meetingDetail' element={<MeetingDetail />} />
         <Route path='/meetingDetail/:id' element={<MeetingInsights />} />
         <Route path='/editing/meetingDetail/:id' element={<ScheduleMeeting />} />
+        <Route path='/maillog' element={<MailLog />} />
+        <Route path='/mailStep' element={<MailStep />}></Route>
       </Routes>
     </div>
   );

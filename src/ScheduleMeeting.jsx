@@ -34,8 +34,8 @@ const contactButton = {
 const ScheduleMeeting = () => {
   const navigate = useNavigate();
   // accessing rhe access tokena and user detail from session storage
-  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) || []
-  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) || []
+  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []
+  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
 
   const { Title } = Typography
   const [error, setError] = useState({})
@@ -170,7 +170,6 @@ const ScheduleMeeting = () => {
     // this is for get the current id
     const URL = window.location.pathname
     const endpoint = URL.split('/').pop()
-    console.log(endpoint);
 
     // this object and below function are storing the meeting seesion data (only successfully created meeting data)
     const sessionData = {
@@ -250,7 +249,7 @@ const ScheduleMeeting = () => {
       <Dashboard />
       <Row justify={'end'} style={{ paddingTop: '10px', paddingRight: '10px', }}>
         <Space>
-          <Link to={`/contacts/meetingStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
+          <Link to={`/integrationStep`}> <Button type='default'>Re-Generate the Tokens</Button> </Link>
           <Button type='primary' onClick={backFunction}> Back one Step </Button>
         </Space>
       </Row>
