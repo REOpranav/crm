@@ -67,7 +67,6 @@ const MailLog = () => {
 
 
 
-  
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccount_IDdetail = async () => {
     let accessTokenParams = {
