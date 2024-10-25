@@ -237,7 +237,7 @@ const Deal = () => {
                   {selectedRowKeys.length > 0 &&  <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm> }
                   <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol}/>
                   <Button type='default' onClick={homeNavigation}>Back to Home</Button>
-              </Space> 
+              </Space>  
         </Row>
     <Row>
       <Col span={24}>
@@ -295,7 +295,7 @@ const Deal = () => {
               <Row justify={'center'} className='Stageheading' style={{borderTop:'3px solid red',backgroundColor:'#fcdfdf'}}>closed Loss</Row>
               <Row className='stage_content_head_row'>
                 <Col span={24}>
-                  <div className='deal_data_head' id='deal_data_head5'> </div> 
+                  <div className='deal_data_head' id='deal_data_head5'> </div>
                 </Col>
               </Row>
             </Col>
