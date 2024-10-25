@@ -171,7 +171,7 @@ const ScheduleMeeting = () => {
     const URL = window.location.pathname
     const endpoint = URL.split('/').pop()
 
-    // this object and below function are storing the meeting seesion data (only successfully created meeting data)
+    // this object and below function are storing the meeting seesion data (only successfully created meeting data in ZOHO meeting)
     const sessionData = {
       id: window.location.pathname == "/ScheduleMeeting" ? selectedContact : endpoint, // giving the same contact person id for showing in his/her deatil module
       key: Math.floor(Math.random() * 1000000000),

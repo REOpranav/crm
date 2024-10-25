@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
 import { Button, Col, Image, message, Popconfirm, Row, Space, Tooltip, Typography } from 'antd'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import { LogarithmicScale } from 'chart.js'
+import { json, Link, useNavigate } from 'react-router-dom'
+import './MailLog.css'
+import { CiMail } from "react-icons/ci";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 // this is for finding the name fron pathname to send  post request in that URL
 const URL = window.location.pathname
@@ -24,65 +26,50 @@ const messageDrop = (type, content) => {
   })
 }
 
-// this is list css 
-const listStyle = {
-  boxShadow: '0 2px 2px #ddd',
-  outline: 'none',
-  padding: '10px',
-  borderRadius: '5px',
-  marginTop: '10px',
-  display: 'flex',
-}
-
 const MailLog = () => {
   const navigate = useNavigate();
   const { Title } = Typography
 
   // // accessing the zoho Mail Account detail from session storage
-  const ZOHOmailAccountdDetail = JSON.parse(sessionStorage.getItem('mailAccountdDetail')) || []
-  const ZOHOmailFolderNumber = JSON.parse(sessionStorage.getItem('mailFolderDetail')) || []
+  const ZOHOmailAccountdDetail = sessionStorage.getItem('mailAccountdDetail') || []
+  const ZOHOmailFolderNumber = sessionStorage.getItem('mailFolderDetail') || []
+  const totalMailDatas = sessionStorage.getItem('totalMailDatas') || []
+  const ZOHOmailAccountDetailResponceAccountName = sessionStorage.getItem('ZOHOmailAccountDetailResponceAccountName') || []
+  const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
+
+  // this is for parsing the all JSON data to normal data
+  const parsingFunction = (data)=>{
+    return data.length > 0 ? JSON.parse(data) : ""
+  }
 
   // this code are ZOHO MAIL intregreation codes 
-  const fetchedDataFromZOHOmailAccount_IDdetail = (token) => { // if account Token will get ,stored in session storage
-    sessionStorage.setItem('mailAccountdDetail', JSON.stringify(token)) // stroing the api data in sessiong storage
-    const checkmailAccountdDetailForDropMessage = JSON.parse(sessionStorage.getItem('mailAccountdDetail')) ?? [] //checking if there have meetingAccessTokenData in session storage for showing the success message
-    checkmailAccountdDetailForDropMessage !== null ? message.success('Mail Account Detail Retrieved') : message.warning('Failed to retrive,Pleace Retry the same process')
-
-    setTimeout(() => { // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
-      sessionStorage.removeItem('mailAccountdDetail')
-    }, 3000 * 1000);
-  }
-
   const fetchedDataFromZOHOmailFOlder = (token) => { // if account Token will get ,stored in session storage
     sessionStorage.setItem('mailFolderDetail', JSON.stringify(token)) // stroing the api data in sessiong storage
-    const checkmailAccountdDetailForDropMessage = JSON.parse(sessionStorage.getItem('mailFolderDetail')) ?? [] //checking if there have meetingAccessTokenData in session storage for showing the success message
+    const checkmailAccountdDetailForDropMessage = JSON.parse(sessionStorage.getItem('mailFolderDetail')) || [] //checking if there have meetingAccessTokenData in session storage for showing the success message
     checkmailAccountdDetailForDropMessage !== null ? message.success('Mail Folder Detail Retrieved') : message.warning('Failed to retrive,Pleace Retry the same process')
-
-    setTimeout(() => { // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
-      sessionStorage.removeItem('mailAccountdDetail')
-    }, 3000 * 1000);
   }
 
-
-
-
-
   // this function is getting the zoho mail Account detail (Account ID) 
-  const getZOHOmailAccount_IDdetail = async () => {
+  const getZOHOmailAccountIDdetail = async () => {
     let accessTokenParams = {
       code: Authcode,
       client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
       client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
       redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
       grant_type: 'authorization_code',
+      ZOHOmailAccountdNumber: ZOHOmailAccountdDetail,
+      ZOHOmailFolderNumber: ZOHOmailFolderNumber
     }
-    
+
     try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)       
-      console.log(accessTokenResponce.data);
+      const ZOHOmailAccountDetailResponce = await axios.post(`http://localhost:3002/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)
       
-      if (accessTokenResponce.data) {
-        fetchedDataFromZOHOmailAccount_IDdetail(accessTokenResponce.data.data[0].accountId)
+      // sessionStorage.setItem('totalMailDatas', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.data)) // this code is accesstoken relevent code
+
+      if (ZOHOmailAccountDetailResponce.data) {
+             sessionStorage.setItem('mailAccountdDetail', JSON.stringify(ZOHOmailAccountDetailResponce.data.data[0].accountId))
+             sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', JSON.stringify(ZOHOmailAccountDetailResponce.data.data[0].accountName))
+             sessionStorage.setItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress', JSON.stringify(ZOHOmailAccountDetailResponce.data.data[0].primaryEmailAddress))
       }
       setTimeout(() => {
         navigate('/maillog') // this is for getting out of that section
@@ -139,15 +126,9 @@ const MailLog = () => {
       ZOHOmailFolderNumber: ZOHOmailFolderNumber
     }
 
-    console.log(accessTokenParams);
-    
     try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/mailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)       
+      const accessTokenResponce = await axios.post(`http://localhost:3002/api/ZOHOmailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)       
       console.log(accessTokenResponce.data);
-      
-      if (accessTokenResponce.data) {
-        fetchedDataFromZOHOmailAccount_IDdetail(accessTokenResponce.data.data[0].accountId)
-      }
       setTimeout(() => {
         navigate('/maillog') // this is for getting out of that section
       }, 100);
@@ -162,6 +143,27 @@ const MailLog = () => {
     }
   }
 
+  // showing the date for zoho mail
+  const showingDateInZOHOmail = (millisecound) => {
+    const timestampInSeconds = millisecound / 1000;
+    const dateObject = new Date(timestampInSeconds);
+  
+    // Get the user's preferred time zone
+    const userTimeZoneOffset = dateObject.getTimezoneOffset() * 60 * 1000;
+    const timestampInUserTimeZone = millisecound - userTimeZoneOffset;
+  
+    const formattedDate = new Date(timestampInUserTimeZone).toLocaleString("en-US", {
+      year: 'numeric',  // Full year (2024)
+      month: 'short',  // Short month name (Oct)
+      day: 'numeric',  // Day of the month (23)
+      hour: 'numeric',  // Hour (11)
+      minute: '2-digit', // Padded minutes (32)
+      second: '2-digit', // Padded seconds (01)
+      hour12: true,    // Use 12-hour clock (AM/PM)
+    })
+    return formattedDate
+  }
+
   // this is for back one step
   const back = () => {
     window.history.back()
@@ -170,27 +172,28 @@ const MailLog = () => {
   // this useeffect for load the access token function when code is available in url 
   useEffect(() => {
     if (Authcode !== null) {
-      getZOHOmailAccount_IDdetail()
-    }}, [undefined])
+      getZOHOmailAccountIDdetail()
+    }
+  }, [undefined])
 
   useEffect(() => {
     if (Authcode !== null) {
       // ZOHOmailFolderDetail()
-  }},[undefined])
+    }
+  }, [undefined])
 
-  useEffect(()=>{
+  useEffect(() => {
     if (Authcode !== null) {
       // getZOHOmailMessageAccessToken()
     }
-  },[undefined])
-  
+  }, [undefined])
 
   return (
     <div>
       <Dashboard />
       <Row justify={'space-between'} >
         <Space style={{ paddingLeft: '10px' }}>
-          <Title level={3} style={{ fontWeight: 'lighter', color: 'red' }}> Mail Log </Title>
+          <Title level={3} style={{ fontWeight: 'lighter', color: 'red' }}> Mail Log <span style={{color:'gray',fontSize:'small',fontWeight:'400',fontStyle:'italic'}}>{`${parsingFunction(ZOHOmailAccountDetailResponcePrimaryEmailAddress) ?? ''}`}</span></Title>
         </Space>
         <Space style={{ marginRight: '10px' }}>
           <Link><Button type='primary' style={{ width: '305px' }}>Send mail</Button></Link>{/* we want to create a send mail code */}
@@ -206,42 +209,18 @@ const MailLog = () => {
           </Space>
         </Col>
       </Row>
-
-      {/* <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
-        {upcoming &&
-          <Col span={23}>
-            {!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData) ? <>
-              {upcomingData.length <= 0 && <Row justify={'center'} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
-                <Col>
-                  <Row justify={'center'}> <Image src='https://static.zohocdn.com/meeting/images/no-upcoming-meeting.08995d6de11131e73a5d7d0738f7ae39.svg' height={'150px'} preview={false} /> </Row>
-                  <Row justify={'center'}> <Col> <Row justify={'center'} className='no-meeting-message-style'> No mails in inbox.</Row> <Row justify={'center'} className='no-meeting-message-style'>Waiting For upcoming Mail.</Row></Col> </Row>
-                </Col>
-              </Row>}
-
-              {upcomingData && upcomingData.map((data) => {
-                return <Row style={listStyle} className='listStyle'>
-                  <Col span={1}>
-                    <Row justify={'center'}>
-                      <Space size={'large'}>
-                        <Col><Link style={{ color: 'red' }} className='listDataStyle'> <Popconfirm title={'Are you sure to delete this meeting'} okText={'Delete Meeting'} cancelText={'No'} onConfirm={() => meetingDeletetion(data.meetingKey)} onCancel={() => messageDrop('info', 'Deletion canceled. Everything stays as is!')}> Cancel </Popconfirm> </Link> </Col>
-                      </Space>
-                    </Row>
-                  </Col>
-                </Row>
-              })}
-            </> : <>
-              <Col style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span>
-                  <Row justify={'center'}> <Image src='https://oweb.zohowebstatic.com/sites/oweb/images/zakya/images/zakya-error-page-bg-2x.webp' height={'250px'} preview={false} /> </Row>
-                  <Row> <Title level={4}> Token <span style={{ color: 'orange' }}> expired </span>. Click the <span style={{ color: '#5a3bb6' }}>Re-Generate Tokens </span> button to generate new tokens.</Title></Row>
-                  {Array.isArray(meetingUserDetail) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho User </span> Token </Row>}
-                  {Array.isArray(meetingAccessTokenData) && <Row justify={'center'} className='PoppinsFont'>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Mail Access </span> Token </Row>}
-                </span>
-              </Col>
-            </>}
-          </Col>
-        }
-      </Row> */}
+      <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
+        <Col span={23}>
+          {parsingFunction(totalMailDatas) && parsingFunction(totalMailDatas).map((data) => {
+            return <Row className='mailDataStyle'>
+              <Col span={1}><CiMail className='ZOHOmailLOGO'/></Col>
+              <Col span={5} className='mailDataFromAddress'><Row style={{ maxWidth: '90%' }} className='mailDataFromAddress'>{data.fromAddress}</Row></Col>
+              <Col span={17}><Row justify={'center'}> <Col span={23} className='mailDataSummuryStyle'>{data.subject}</Col></Row></Col>
+              <Col span={1} style={{ textAlign: 'end' }}><MdOutlineDeleteOutline className='ZOHOmailDelete' /></Col>
+            </Row>
+          })}
+        </Col>
+      </Row>
     </div>
   )
 }

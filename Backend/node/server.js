@@ -206,43 +206,12 @@ app.post('/api/edit', async (req, res) => {
     }
 })
 
+
 // below code is mail intergration
-// this code for getting the access token
-app.post('/api/', async (req, res) => { // tbhis line get the data from correct endpoint
-    const accessTokenParams = {
-        code: req.body.code,
-        client_id: req.body.client_id,
-        client_secret: req.body.client_secret,
-        redirect_uri: req.body.redirect_uri,
-        grant_type: req.body.grant_type
-    }
-    try {
-        const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
-            // zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
-            qs.stringify(accessTokenParams),
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }
-        )
-        console.log(response.data);
-        res.json(response.data)
-    } catch (error) {
-        res.status(error.response ? error.response.status : 500).json({
-            message: error.message,
-            error: error.response ? error.response.data : null
-        });
-    }
-})
+app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get the user (accounter) detail
+    let ZOHOmailAccountdNumber = req.body.ZOHOmailAccountdNumber
+    let ZOHOmailFolderNumber = req.body.ZOHOmailFolderNumber
 
-
-
-
-//  this code for get the user (accounter) detail
-app.post('/api/mailAccountToken', async (req, res) => {  
-  console.log('running');
-  
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
@@ -260,7 +229,8 @@ app.post('/api/mailAccountToken', async (req, res) => {
                 }
             }
         )
-        // const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/8821592000000008002/messages/view?folderId=8821592000000008014&threadedMails=true&includeto=true&start=1&limit=100`, // extra post request for get the user account deatil
+        
+        // const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/6702630000000008001/messages/view?folderId=6702630000000008013&start=1&limit=200`, // extra post request for get the user account deatil
         //     {
         //         headers: {
         //             'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
@@ -275,8 +245,7 @@ app.post('/api/mailAccountToken', async (req, res) => {
                     'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
                 }
             })
-        console.log(getingUserDetail);
-        
+        console.log(getingUserDetail.data);
         res.json(getingUserDetail.data)
         return
     } catch (error) {
@@ -324,18 +293,17 @@ app.post('/api/mailFolder', async (req, res) => {
     }
 })
 
-//  this code for get the user (MESSAGE ACCESS ID) detail
-app.post('/api/mailMessageAccessToken', async (req, res) => {    
+//  this code for get the user (getZOHOmailMessageAccessToken) detail
+app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {  
     let ZOHOmailAccountdNumber = req.body.ZOHOmailAccountdNumber
-    let ZOHOmailFolderNumber = req.body.ZOHOmailFolderNumber
+    let ZOHOmailFolderNumber = req.body.ZOHOmailAccountdNumber
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
         client_secret: req.body.client_secret,
         redirect_uri: req.body.redirect_uri,
         grant_type: req.body.grant_type
-    }
-
+    }    
     try {
         const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
@@ -345,14 +313,15 @@ app.post('/api/mailMessageAccessToken', async (req, res) => {
                 }
             }
         )
-        const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/8821592000000008002/messages/view?folderId=mailFolderDetail:8821592000000008014&threadedMails=true&includeto=true`, // extra post request for get the user account deatil
+        
+        const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/${ZOHOmailAccountdNumber}/messages/view?folderId=${ZOHOmailFolderNumber}&threadedMails=true&includeto=true`, // extra post request for get the user account deatil
             {
                 headers: {
                     'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
                 }
             })
-       console.log(getingUserDetail.data);
-        res.json(getingUserDetail.data);
+        console.log(getingUserDetail.data);
+        // res.json(getingUserDetail.data)
         return
     } catch (error) {
         res.status(error.response ? error.response.status : 500).json({
@@ -361,7 +330,6 @@ app.post('/api/mailMessageAccessToken', async (req, res) => {
         });
     }
 })
-
 
 // running the node in 3002 port
 const PORT = 3002

@@ -61,7 +61,6 @@ const MeetingStep = () => {
     }, [1 * 1000])
   }
 
-
   const GetZOHO_MeetingAccessToken = async () => { // this code for getting access token
     const paramsData = {
       scope: 'ZohoMeeting.meeting.ALL',
@@ -86,13 +85,6 @@ const MeetingStep = () => {
     window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
  }
 
-  const fetchZOHOMailAccessToken = () => {
-    messageLoading()
-    setTimeout(() => {
-      getZOHOmailMessageAccessToken()
-    }, [1 * 1000]) 
-  }
-
    // this is ZOHO mail integration code
    const fetchZOHOMailFolders = async () => { // this is for getting mail account_id.
     const paramsData = {
@@ -105,6 +97,13 @@ const MeetingStep = () => {
     window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
  }
 
+ const fetchZOHOMailAccessToken = () => {
+  messageLoading()
+  setTimeout(() => {
+    getZOHOmailMessageAccessToken()
+  }, [1 * 1000]) 
+}
+
   // this for getting ZOHO mail access token
   const getZOHOmailMessageAccessToken = async () => { 
     const paramsData = {
@@ -114,7 +113,7 @@ const MeetingStep = () => {
       redirect_uri: process.env.REACT_APP_REDIRECT_URI,
       access_type: 'offline'
     }
-    window.location.href = `https://accounts.zoho.in/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
+    window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
   }
 
   return (
