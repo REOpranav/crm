@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
 import { Button, Col, Image, message, Row, Space, Typography } from 'antd'
 import axios from 'axios'
@@ -20,26 +20,48 @@ const required = {
   color: 'red'
 }
 
+const URL = window.location.href
+const id = URL.split('/').pop()
+
 const SendMail = () => {
   const { Text, Title } = Typography
   const navigate = useNavigate();
+  const [sendLeadMail, setSendMailSend] = useState('')
   const ZOHOmailAccountDetailResponcePrimaryEmailAddress = JSON.parse(sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress')) || []
   const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
   const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
   const [error, setError] = useState([])
   const [mailData, setMailData] = useState({ //storing the form data in this state
     fromAddress: '',
-    toAddress: '',
+    toAddress: sendLeadMail ? sendLeadMail : '',
     ccAddress: '',
     subject: '',
     content: '',
   })
 
+  const fecthingLeadDetailForMail = async () => {
+    // this code for initial load and when lead added
+    try {
+      const responce = await axios.get(`http://localhost:3000/leads/${id}`)
+      if (responce.status === 200) {
+        setSendMailSend(await responce.data.email);
+      }
+    } catch (err) {
+      if (err.response) {
+        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    }
+  }
+
   // this is reset function
   const resetClicked = () => {
     setMailData({
       fromAddress: '',
-      toAddress: '',
+      toAddress: sendLeadMail ? sendLeadMail : '',
       ccAddress: '',
       subject: '',
       content: '',
@@ -70,8 +92,10 @@ const SendMail = () => {
   function validation(mailData) {
     let errorvalues = {}
 
-    if (!mailData.toAddress.trim()) {
-      errorvalues.toAddress = 'To-Address is Required'
+    if (!sendLeadMail) {
+      if (!mailData.toAddress.trim()) {
+        errorvalues.toAddress = 'To-Address is Required'
+      }
     }
 
     if (!mailData.subject.trim()) {
@@ -101,7 +125,7 @@ const SendMail = () => {
         const data = {
           "details": {
             "fromAddress": `${ZOHOmailAccountDetailResponcePrimaryEmailAddress}`,
-            "toAddress": `${mailData.toAddress}`,
+            "toAddress": `${sendLeadMail ? sendLeadMail : mailData.toAddress}`,
             "ccAddress": `${mailData.ccAddress}`,
             "subject": `${mailData.subject}`,
             "content": `${mailData.content}`,
@@ -135,6 +159,16 @@ const SendMail = () => {
   const backFunction = () => {
     return window.history.back(-1)
   }
+
+  useEffect(() => {
+    if ((window.location.pathname).includes('lead')) {
+      fecthingLeadDetailForMail()
+    } else if ((window.location.pathname).includes('lead')) {
+      // from contact
+    }
+  }, [undefined])
+
+
   return (
     <div>
       <Dashboard />
@@ -156,7 +190,7 @@ const SendMail = () => {
 
             <p>
               <label for="toAddress"> <span style={required}>* &nbsp;</span>To-Address</label>
-              <input type='email' name="toAddress" id="toAddress" placeholder='To Address' value={mailData.toAddress} onChange={handleChange} className={getInputClass('toAddress') ? "inputError" : 'errorClear'} />
+              <input type='email' name="toAddress" id="toAddress" placeholder='To Address' value={sendLeadMail ? sendLeadMail : mailData.toAddress} onChange={handleChange} className={getInputClass('toAddress') ? "inputError" : 'errorClear'} />
             </p>
 
             <p>

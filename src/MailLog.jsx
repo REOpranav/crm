@@ -34,7 +34,6 @@ const MailLog = () => {
   const [deletingMailMessageID, setDeletingMailMessageID] = useState([])
   const [ZOHOmailFolderID, setZOHOmailFolderID] = useState([])
   const [isLoad, setISload] = useState(true)
-  const [folderID, setFolderID] = useState(0)
 
   // accessing the zoho Mail Account detail from session storage
   const ZOHOmailFoldersDetails = sessionStorage.getItem('mailFolderDetails') || []
@@ -211,15 +210,14 @@ const MailLog = () => {
   useEffect(() => { // this useeffect for load the access token function when code is available in url 
     if (Authcode !== null) {
       // getZOHOmailAccountIDdetail()
-      ZOHOmailFolderDetail()
+      // ZOHOmailFolderDetail()
       getZOHOmailMessageAccessToken()
     }
   }, [undefined])
 
   const back = () => window.history.back() // this is for back one step
   let mailFolderData = !Array.isArray(ZOHOmailFoldersDetails) ? parsingFunction(ZOHOmailFoldersDetails) : [] // this send this mail data  
-
-  console.log(folderID);
+  const [folderID, setFolderID] = useState(mailFolderData ? mailFolderData[0]?.folderId : 0)
 
   return (
     <div>

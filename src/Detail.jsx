@@ -21,6 +21,7 @@ const Detail = () => {
   const [callLogs, setCallLogs] = useState('')
   const [mailLog, setMailLogs] = useState('')
   const navigation = useNavigate() //this is for navigation
+  const [gmail,setGmail] = useState(false)
 
   const URL = window.location.href
   const id = URL.split('/').pop()
@@ -186,7 +187,6 @@ const Detail = () => {
     navigation('/accounts')
   }
 
-
   return (
     <div>
       <Dashboard />
@@ -196,9 +196,17 @@ const Detail = () => {
         </Flex>
 
         <Flex gap={'small'}>
-          <Button type='primary'>
-            <a href={`mailto:${leadData.email}`}>Send Email</a>
-          </Button>
+           <div style={{backgroundColor:'rgb(239, 232, 255)',borderRadius:'5px'}}>
+              <Button onClick={() => setGmail(true)} type={gmail ? 'default' : 'link'}>
+                <a href={`mailto:${leadData.email}`}>Send Google mail</a>
+              </Button>
+            
+              <Link to={`/mailsend/lead/${id}`}>
+                <Button onClick={() => setGmail(false)} type={gmail ? 'link':'default'}>
+                  Send Zoho mail
+                </Button>
+              </Link>
+           </div>
 
           <Dropdown menu={{ items }} placement='bottomCenter'>
             <Button type='primary'>Convert</Button>

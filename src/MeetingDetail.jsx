@@ -165,7 +165,7 @@ const MeetingDetail = () => {
       <Dashboard />
       <Row justify={'space-between'} >
         <Space style={{ paddingLeft: '10px' }}>
-          <Title level={3} style={{ fontWeight: 'lighter', color: 'red' }}> Meeting log</Title>
+          <Title level={3} style={{ fontWeight: 'lighter', color: 'red' }}> Meeting log <span style={{ color: 'gray', fontSize: 'small', fontWeight: '400', fontStyle: 'italic'}}>{ meetingUserDetail && meetingUserDetail?.userDetails?.primaryEmail}</span></Title>
         </Space>
         <Space style={{ marginRight: '10px' }}>
           <Link to={'/ScheduleMeeting'}><Button type='primary' style={{ width: '305px' }}>Create Meeting</Button></Link>
