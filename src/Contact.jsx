@@ -324,11 +324,12 @@ const Contact = () => {
   }, [undefined, selectedRowKeys])
 
   // this useeffect for load the access token function when code is available in url 
-  useEffect(() => {
+  useEffect(()=>{    
     if (Authcode !== null) {
       accessToken()
     }
-  }, [undefined])
+  },[undefined])
+
 
   useEffect(() => {
     if (Authcode !== null) {

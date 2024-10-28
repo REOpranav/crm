@@ -33,14 +33,12 @@ app.get('/api/contacts', async (req, res) => {
         data.then((responceData) => {
             res.json(responceData)
         })
-        console.log('fetchedData')
     } catch (error) {
         res.status(500).json({ message: 'Error fetching contacts' });
     }
 });
 
 // this all are meeting intergration code
-
 // this code for getting the access token
 app.post('/api/token', async (req, res) => { // tbhis line get the data from correct endpoint
     const accessTokenParams = {
@@ -88,7 +86,6 @@ app.post('/api/userdetail', async (req, res) => {
                 }
             }
         )
-
         const getingUserDetail = await axios.get('https://meeting.zoho.in/api/v2/user.json', // extra post request for get the user account deatil
             {
                 headers: {
@@ -160,7 +157,7 @@ app.post('/api/meeting/delete', async (req, res) => {
     }
 })
 
-// this is for listing the meeting
+// this is for listing the Current ZOHO meetings
 app.post('/api/list', async (req, res) => {
     const { session } = await req.body
     try {
@@ -209,9 +206,6 @@ app.post('/api/edit', async (req, res) => {
 
 // below code is mail intergration
 app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get the user (accounter) detail
-    let ZOHOmailAccountdNumber = req.body.ZOHOmailAccountdNumber
-    let ZOHOmailFolderNumber = req.body.ZOHOmailFolderNumber
-
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
@@ -219,9 +213,9 @@ app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get t
         redirect_uri: req.body.redirect_uri,
         grant_type: req.body.grant_type
     }
-    
+
     try {
-        const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
+        const getZOHOmeetingAccessToken = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
             {
                 headers: {
@@ -229,24 +223,19 @@ app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get t
                 }
             }
         )
-        
-        // const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/6702630000000008001/messages/view?folderId=6702630000000008013&start=1&limit=200`, // extra post request for get the user account deatil
-        //     {
-        //         headers: {
-        //             'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
-        //         }
-        //     })
-        // console.log(getingUserDetail.data);
-        // res.json(getingUserDetail.data)
-
-        const getingUserDetail = await axios.get('https://mail.zoho.com/api/accounts', // extra post request for get the user account deatil
+        const fecthingZOHOmeetingAccountDetails = await axios.get('https://mail.zoho.com/api/accounts', // extra post request for get the user account deatil
             {
                 headers: {
-                    'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
+                    'Authorization': `Zoho-oauthtoken ${await getZOHOmeetingAccessToken?.data?.access_token}`
                 }
             })
-        console.log(getingUserDetail.data);
-        res.json(getingUserDetail.data)
+
+        const getTokensAndFetchedAccountDetail = {
+            getZOHOmeetingAccessToken: getZOHOmeetingAccessToken?.data,
+            fecthingZOHOmeetingAccountDetails: fecthingZOHOmeetingAccountDetails?.data?.data
+        }
+
+        res.json(getTokensAndFetchedAccountDetail)
         return
     } catch (error) {
         res.status(error.response ? error.response.status : 500).json({
@@ -257,8 +246,8 @@ app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get t
 })
 
 //  this code for get the user (Folder ID) detail
-app.post('/api/mailFolder', async (req, res) => {    
-    let ZOHOmailAccountdNumber = req.body.ZOHOmailAccountdNumber
+app.post('/api/mailFolder', async (req, res) => {
+    let ZOHOmailAccountID = req.body.ZOHOmailAccountID
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
@@ -276,14 +265,18 @@ app.post('/api/mailFolder', async (req, res) => {
                 }
             }
         )
-                        
-        const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/${ZOHOmailAccountdNumber}/folders`, // extra post request for get the user account deatil
+        const getFolderDetail = await axios.get(`https://mail.zoho.com/api/accounts/${ZOHOmailAccountID}/folders`, // extra post request for get the user account deatil
             {
                 headers: {
                     'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
                 }
             })
-        res.json(getingUserDetail.data)
+        
+        const getTokensAndFolderDetail = {
+            getZOHOfolderAccessToken: response?.data,
+            getZOHOfolderDetails: getFolderDetail?.data?.data
+        }
+        res.json(getTokensAndFolderDetail)
         return
     } catch (error) {
         res.status(error.response ? error.response.status : 500).json({
@@ -294,16 +287,14 @@ app.post('/api/mailFolder', async (req, res) => {
 })
 
 //  this code for get the user (getZOHOmailMessageAccessToken) detail
-app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {  
-    let ZOHOmailAccountdNumber = req.body.ZOHOmailAccountdNumber
-    let ZOHOmailFolderNumber = req.body.ZOHOmailAccountdNumber
+app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {
     const accessTokenParams = {
         code: req.body.code,
         client_id: req.body.client_id,
         client_secret: req.body.client_secret,
         redirect_uri: req.body.redirect_uri,
         grant_type: req.body.grant_type
-    }    
+    }
     try {
         const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
@@ -313,21 +304,59 @@ app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {
                 }
             }
         )
-        
-        const getingUserDetail = await axios.get(`https://mail.zoho.com/api/accounts/${ZOHOmailAccountdNumber}/messages/view?folderId=${ZOHOmailFolderNumber}&threadedMails=true&includeto=true`, // extra post request for get the user account deatil
-            {
-                headers: {
-                    'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
-                }
-            })
-        console.log(getingUserDetail.data);
-        // res.json(getingUserDetail.data)
+        res.json(response.data)
         return
     } catch (error) {
         res.status(error.response ? error.response.status : 500).json({
             message: error.message,
             error: error.response ? error.response.data : null
-        });
+        })
+    }
+})
+
+// this is for listing the Current ZOHO meetings
+app.post('/api/mailList', async (req, res) => {
+    const { session } = await req.body
+    const mailAccessToken = session?.mailAccess_token
+    try {
+        let URI = `https://mail.zoho.com/api/accounts/${session.mailAccountID}/messages/view?folderId=${session.mailFolderID}&start=1&limit=200`
+        const listMeeting = await fetch(URI,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${JSON.parse(mailAccessToken)}`,
+                },
+            }
+        )
+        const data = await listMeeting.json()       
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to list meeting", error: error.message });
+    }
+})
+
+// this is for deleting the ZOHO 
+app.post('/api/maildelete', async (req, res) => {
+    const { session } = await req.body
+    const mailAccessToken = session?.mailAccess_token
+
+    try {
+        let URL = `https://mail.zoho.com/api/accounts/${session?.mailAccountID}/folders/${session?.mailFolderID}/messages/${session?.deletingMailFolder_ID}`
+        const deleteMail = await fetch(
+            URL,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${JSON.parse(mailAccessToken)}`,
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Accept': 'application/json'
+                },
+            }
+        )
+        const data = await deleteMail.json();
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to delete meeting", error: error.message });
     }
 })
 

@@ -24,6 +24,7 @@ import DealEditForm from './DealEditForm';
 import APIs from './RestAPI/APIs';
 import MailLog from './MailLog';
 import MailStep from './MailStep';
+import SendMail from './SendMail';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path='/editing/meetingDetail/:id' element={<ScheduleMeeting />} />
         <Route path='/maillog' element={<MailLog />} />
         <Route path='/mailStep' element={<MailStep />}></Route>
+        <Route path='/mailsend' element={<SendMail />} />
       </Routes>
     </div>
   );

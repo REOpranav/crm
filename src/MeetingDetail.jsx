@@ -26,7 +26,7 @@ const messageDrop = (type, content) => {
 // this is head style
 const headingStyle = {
   padding: '5px',
-  border:'1px solid '
+  border: '1px solid '
 }
 
 // this is list css 
@@ -71,27 +71,20 @@ const MeetingDetail = () => {
     setPast(true)
   }
 
-  // checking if the userdetail and accesstoken is available or not.if available ,then only this useeffect will run
-  useEffect(() => {
-    if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
-      checkMeetingTokensAvailable()
-    }
-  }, [undefined])
-
   // this function is get the meeting list
-  const checkMeetingTokensAvailable = () => {
+  const currentZOHOmeetingSchedule = () => {
     if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
       const MeetingCredencial = async () => {
         const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
           "session": {
-            "zsoid": meetingUserDetail ? meetingUserDetail.userDetails.zsoid : 0,
-            "access_token": `${meetingAccessTokenData.access_token}`,
+            "zsoid": meetingUserDetail ? meetingUserDetail?.userDetails?.zsoid : 0,
+            "access_token": `${meetingAccessTokenData?.access_token}`,
           }
         }
         try {
           const meetingListResponce = await axios.post(`http://localhost:3002/api/list`, extras)// this line send the request to node (server.js)      
-          if (meetingListResponce.status == 200) {
-            setMeetingList(meetingListResponce.data)
+          if (meetingListResponce?.status == 200) {
+            setMeetingList(meetingListResponce?.data)
           }
         } catch (err) {
           if (err.message == "Request failed with status code 500") {
@@ -103,17 +96,15 @@ const MeetingDetail = () => {
     }
   }
 
-  // this is calling function
+  // checking if the userdetail and accesstoken is available or not.if available ,then only this useeffect will run
   useEffect(() => {
-    if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) {
-      checkMeetingTokensAvailable()
-    }
-  }, [undefined])
+      if (!Array.isArray(meetingUserDetail) && !Array.isArray(meetingAccessTokenData)) { currentZOHOmeetingSchedule() }
+    }, [undefined])
 
-  // this call the checkMeetingTokensAvailable function when isLoad is true   
+  // this call the currentZOHOmeetingSchedule function when isLoad is true   
   useEffect(() => {
     if (isload) {
-      checkMeetingTokensAvailable()
+      currentZOHOmeetingSchedule()
     }
   })
 
@@ -121,7 +112,7 @@ const MeetingDetail = () => {
   if (meetingList) {
     const listData = meetingList.session || []
     listData.map((data) => {
-      if (moment(data.startTime, 'MMM D, YYYY hh:mm A').isAfter(moment())) {
+      if (moment(data?.startTime, 'MMM D, YYYY hh:mm A').isAfter(moment())) {
         upcomingData.push(data)
       } else {
         pastData.push(data)
@@ -174,18 +165,18 @@ const MeetingDetail = () => {
       <Dashboard />
       <Row justify={'space-between'} >
         <Space style={{ paddingLeft: '10px' }}>
-          <Title level={3} style={{fontWeight: 'lighter',color:'red'}}> Meeting log</Title>
+          <Title level={3} style={{ fontWeight: 'lighter', color: 'red' }}> Meeting log</Title>
         </Space>
         <Space style={{ marginRight: '10px' }}>
           <Link to={'/ScheduleMeeting'}><Button type='primary' style={{ width: '305px' }}>Create Meeting</Button></Link>
         </Space>
 
       </Row>
-      <Row justify={'space-between'} style={{ backgroundColor: 'transparent', outline: 'none'}}>
+      <Row justify={'space-between'} style={{ backgroundColor: 'transparent', outline: 'none' }}>
         <Col>
           <Row className='meetingState'>
-            <Col className='headstyle' onClick={upcomingOnclick} style={{ color: upcoming ? 'white' : 'black', backgroundColor: upcoming ? '#5a3bb6' : 'transparent', padding: '5px', width:'100px' }}> <span >Upcoming</span> </Col>
-            <Col className='headstyle' onClick={setPastOnclick} style={{ color: past ? 'white' : 'black', backgroundColor: past ? '#5a3bb6' : 'transparent', padding: '5px',width:'100px'}}><span > Past </span> </Col>
+            <Col className='headstyle' onClick={upcomingOnclick} style={{ color: upcoming ? 'white' : 'black', backgroundColor: upcoming ? '#5a3bb6' : 'transparent', padding: '5px', width: '100px' }}> <span >Upcoming</span> </Col>
+            <Col className='headstyle' onClick={setPastOnclick} style={{ color: past ? 'white' : 'black', backgroundColor: past ? '#5a3bb6' : 'transparent', padding: '5px', width: '100px' }}><span > Past </span> </Col>
           </Row>
         </Col>
         <Col style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>

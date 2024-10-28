@@ -108,9 +108,9 @@ const MeetingStep = () => {
   const getZOHOmailMessageAccessToken = async () => { 
     const paramsData = {
       scope: 'ZohoMail.messages.ALL',
-      client_id: process.env.REACT_APP_CLIENT_ID,
+      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
       response_type: 'code',
-      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
       access_type: 'offline'
     }
     window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
