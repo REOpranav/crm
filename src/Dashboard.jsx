@@ -21,7 +21,8 @@ const Dashboard = ({ count }) => {
     const [deal, setDeal] = useState([])
     const [profilView, setProfileView] = useState(false)
 
-    // // this is tawk live chat codes
+    useEffect(()=>{
+    // this is tawk live chat codes
     const twlkCodes = ()=>{
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
@@ -34,6 +35,8 @@ const Dashboard = ({ count }) => {
         })();
     }
     twlkCodes()
+    },[undefined]) 
+
 
     // this code for initial load and when lead added
     const fetching = async (urls) => {

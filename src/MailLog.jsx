@@ -13,7 +13,7 @@ const id = URL.split('/').pop()
 
 // this is for getting the code (query param) from URL
 const urlSearch = new URLSearchParams(window.location.search)
-const Authcode = urlSearch.get('code')
+const Authcode = urlSearch.get('code') ?? null
 
 // this is message setup (ant design)
 const messageDrop = (type, content) => {
@@ -34,6 +34,7 @@ const MailLog = () => {
   const [deletingMailMessageID, setDeletingMailMessageID] = useState([])
   const [ZOHOmailFolderID, setZOHOmailFolderID] = useState([])
   const [isLoad, setISload] = useState(true)
+  const [folderID, setFolderID] = useState(0)
 
   // accessing the zoho Mail Account detail from session storage
   const ZOHOmailFoldersDetails = sessionStorage.getItem('mailFolderDetails') || []
@@ -61,7 +62,7 @@ const MailLog = () => {
 
     try {
       const ZOHOmailAccountDetailResponce = await axios.post(`http://localhost:3002/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)   
-            ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId && messageDrop('success', 'Account Details getted')
+      ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId && messageDrop('success', 'Account Details getted')
       ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails.status === 200 && messageDrop('success', 'Account detail Got successfully')
       if (ZOHOmailAccountDetailResponce?.data?.getZOHOmeetingAccessToken?.scope == 'ZohoMail.accounts.ALL') {
         sessionStorage.setItem('ZOHOmailAccountID', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId))
@@ -181,6 +182,7 @@ const MailLog = () => {
   const sendFolderID = (folderID) => {  // Getting spacific Mail Folder ID 
     setISload(true)
     setZOHOmailFolderID(folderID)
+    setFolderID(folderID)
   }
 
   const mailMessageID = (messageID) => {
@@ -209,13 +211,15 @@ const MailLog = () => {
   useEffect(() => { // this useeffect for load the access token function when code is available in url 
     if (Authcode !== null) {
       // getZOHOmailAccountIDdetail()
-      // ZOHOmailFolderDetail()
+      ZOHOmailFolderDetail()
       getZOHOmailMessageAccessToken()
     }
   }, [undefined])
 
   const back = () => window.history.back() // this is for back one step
   let mailFolderData = !Array.isArray(ZOHOmailFoldersDetails) ? parsingFunction(ZOHOmailFoldersDetails) : [] // this send this mail data  
+
+  console.log(folderID);
 
   return (
     <div>
@@ -232,7 +236,7 @@ const MailLog = () => {
         <Col span={16}>
           <Row className='mailFolderOuterBox' justify={'space-around'}>
             {Array.isArray(mailFolderData) && mailFolderData.length > 0 && mailFolderData?.map(e =>
-              <Col className='Mailfolders'><span onClick={() => sendFolderID(e?.folderId)}> {e?.folderName} </span></Col>
+              <Col className='Mailfolders' onClick={() => sendFolderID(e?.folderId)}> <span> {e.folderId == folderID ?? 0 ? <span style={{ color: 'blueviolet', transition: 'all 0.3s ease-in-out' }}>{e?.folderName}</span> : e?.folderName} </span></Col>
             )}
           </Row>
         </Col>
@@ -243,25 +247,37 @@ const MailLog = () => {
           </Space>
         </Col>
       </Row>
-      <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
-        <Col span={23}>
-          {!Array.isArray(mailList) && (mailList?.data.length > 0) ? (mailList?.data).map((data) => {
-            return <Row className='mailDataStyle'>
-              <Col span={1}><CiMail className='ZOHOmailLOGO' /></Col>
-              <Col span={5} className='mailDataFromAddress'><Row style={{ maxWidth: '90%' }} className='mailDataFromAddress'>{data.subject}</Row></Col>
-              <Col span={17}><Row justify={'center'}> <Col span={20} className='mailDataSummuryStyle'>{data.summary}</Col> <Col span={4} className='mailDataKB'>{KBvalue(data.size)}</Col></Row></Col>
-              <Col span={1} style={{ textAlign: 'left' }}><MdOutlineDeleteOutline className='ZOHOmailDelete' onClick={() => mailMessageID(data.messageId)} /></Col>
-            </Row>
-          }) :
-            <Row justify={'center'} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
-              <Col>
-                <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/mail/custom-domain-illustration-2x.png' height={'150px'} preview={false} /></Row>
-                <Row justify={'center'}> <Col> <Row justify={'center'} className='no-meeting-message-style'>Unfortunately, no messages are currently available in this module.</Row></Col></Row>
-              </Col>
-            </Row>
-          }
-        </Col>
-      </Row>
+      {!Array.isArray(ZOHOmailAccountdID) && !Array.isArray(ZOHOmailFoldersDetails) && !Array.isArray(ZOHOmailMessageAccessToken) ?
+        <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
+          <Col span={23}>
+            {!Array.isArray(mailList) && (mailList?.data.length > 0) ? (mailList?.data).map((data) => {
+              return <Row className='mailDataStyle'>
+                <Col span={1}><CiMail className='ZOHOmailLOGO' /></Col>
+                <Col span={5} className='mailDataFromAddress'><Row style={{ maxWidth: '90%' }} className='mailDataFromAddress'>{data.subject}</Row></Col>
+                <Col span={17}><Row justify={'center'}> <Col span={20} className='mailDataSummuryStyle'>{data.summary}</Col> <Col span={4} className='mailDataKB'>{KBvalue(data.size)}</Col></Row></Col>
+                <Col span={1} style={{ textAlign: 'left' }}><MdOutlineDeleteOutline className='ZOHOmailDelete' onClick={() => mailMessageID(data.messageId)} /></Col>
+              </Row>
+            }) :
+              <Row justify={'center'} style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
+                <Col>
+                  <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/mail/custom-domain-illustration-2x.png' height={'150px'} preview={false} /></Row>
+                  <Row justify={'center'}> <Col> <Row justify={'center'} className='no-meeting-message-style'>Unfortunately, no messages are currently available in this module.</Row></Col></Row>
+                </Col>
+              </Row>
+            }
+          </Col>
+        </Row>
+        : <>
+          <Col style={{ height: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundImage: '' }}>
+            <span>
+              <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/social/real-estate/zh-real-estate.png' height={'200px'} preview={false} /></Row>
+              <Row justify={'center'}> <Title level={4}>  Click the <span style={{ color: '#5a3bb6' }}> Re-Generate Tokens </span> button to generate new tokens.</Title> </Row>
+              {Array.isArray(ZOHOmailAccountdID) && <Row className='PoppinsFont'> <Col span={7} style={{ textAlign: 'right' }}>1.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Account Access </span> Token</Col> </Row>}
+              {Array.isArray(ZOHOmailFoldersDetails) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>2.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Folder Access </span> Token</Col> </Row>}
+              {Array.isArray(ZOHOmailMessageAccessToken) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>3.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Message Access </span> Token</Col> </Row>}
+            </span>
+          </Col>
+        </>}
     </div>
   )
 }
