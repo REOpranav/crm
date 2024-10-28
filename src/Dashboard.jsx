@@ -22,18 +22,18 @@ const Dashboard = ({ count }) => {
     const [profilView, setProfileView] = useState(false)
 
     // // this is tawk live chat codes
-    // const twlkCodes = ()=>{
-    //     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    //     (function(){
-    //     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    //     s1.async=true;
-    //     s1.src='https://embed.tawk.to/66fe2648256fb1049b1c3e51/1i98cb32a';
-    //     s1.charset='UTF-8';
-    //     s1.setAttribute('crossorigin','*');
-    //     s0.parentNode.insertBefore(s1,s0);
-    //     })();
-    // }
-    // twlkCodes()
+    const twlkCodes = ()=>{
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/66fe2648256fb1049b1c3e51/1i98cb32a';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    }
+    twlkCodes()
 
     // this code for initial load and when lead added
     const fetching = async (urls) => {
