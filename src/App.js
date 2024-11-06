@@ -23,7 +23,6 @@ import MeetingInsights from './MeetingInsights';
 import DealEditForm from './DealEditForm';
 import APIs from './RestAPI/APIs';
 import MailLog from './MailLog';
-import MailStep from './MailStep';
 import SendMail from './SendMail';
 
 function App() {
@@ -64,7 +63,6 @@ function App() {
         <Route path='/meetingDetail/:id' element={<MeetingInsights />} />
         <Route path='/editing/meetingDetail/:id' element={<ScheduleMeeting />} />
         <Route path='/maillog' element={<MailLog />} />
-        <Route path='/mailStep' element={<MailStep />}></Route>
         <Route path='/mailsend' element={<SendMail />} />
         <Route path='/mailsend/lead/:id' element={<SendMail />} />
       </Routes>

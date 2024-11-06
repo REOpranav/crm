@@ -49,7 +49,7 @@ app.post('/api/token', async (req, res) => { // tbhis line get the data from cor
         grant_type: req.body.grant_type
     }
     try {
-        const response = await axios.post('https://accounts.zoho.in/oauth/v2/token',
+        const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             // zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
             qs.stringify(accessTokenParams),
             {
@@ -78,20 +78,20 @@ app.post('/api/userdetail', async (req, res) => {
     }
 
     try {
-        const response = await axios.post('https://accounts.zoho.in/oauth/v2/token',
+        const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }
-        )
-        const getingUserDetail = await axios.get('https://meeting.zoho.in/api/v2/user.json', // extra post request for get the user account deatil
+        )        
+        const getingUserDetail = await axios.get('https://meeting.zoho.com/api/v2/user.json', // extra post request for get the user account deatil
             {
                 headers: {
-                    'Authorization': `Zoho-oauthtoken ${await response.data.access_token}`
+                    'Authorization': `Zoho-oauthtoken ${response.data.access_token}`
                 }
-            })
+            })            
         res.json(getingUserDetail.data)
         return
 
@@ -109,7 +109,7 @@ app.post('/api/create', async (req, res) => {
     const { extras } = req.query  // this is for get the extra information like zsoid and access token
     try {
         const response = await fetch(
-            `https://meeting.zoho.in/api/v2/${extras.zsoid}/sessions.json`,
+            `https://meeting.zoho.com/api/v2/${extras.zsoid}/sessions.json`,
             {
                 method: 'POST',
                 headers: {
@@ -136,7 +136,7 @@ app.post('/api/create', async (req, res) => {
 app.post('/api/meeting/delete', async (req, res) => {
     const { session } = await req.body
     try {
-        let URL = `https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions/${await session.meetingKey}.json`
+        let URL = `https://meeting.zoho.com/api/v2/${await session.zsoid}/sessions/${await session.meetingKey}.json`
 
         const deleteMeeting = await fetch(
             URL,
@@ -160,7 +160,7 @@ app.post('/api/meeting/delete', async (req, res) => {
 app.post('/api/list', async (req, res) => {
     const { session } = await req.body
     try {
-        let URL = `https://meeting.zoho.in/api/v2/${await session.zsoid}/sessions.json`
+        let URL = `https://meeting.zoho.com/api/v2/${await session.zsoid}/sessions.json`
         const listMeeting = await fetch(
             URL,
             {
@@ -183,7 +183,7 @@ app.post('/api/edit', async (req, res) => {
     const { session } = await req.body
     const { extras } = req.query
     try {
-        let URL = `https://meeting.zoho.in/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`
+        let URL = `https://meeting.zoho.comz/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`
         const editMeeting = await fetch(
             URL,
             {
@@ -222,6 +222,7 @@ app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get t
                 }
             }
         )
+        
         const fecthingZOHOmeetingAccountDetails = await axios.get('https://mail.zoho.com/api/accounts', // extra post request for get the user account deatil
             {
                 headers: {
@@ -385,8 +386,33 @@ app.post('/api/sendMail', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Failed to send Mail", error: error.message });
     }
-}
-)
+})
+
+// this is for deleting the ZOHO 
+app.post('/api/mailDataIndividual', async (req, res) => {
+    const { session } = await req.body
+    console.log( session);
+    const mailAccessToken = session?.mailAccess_token
+
+    try {
+        let URL = `https://mail.zoho.com/api/accounts/${session?.mailAccountID}/folders/${session?.mailFolderID}/messages/${session?.showZOHOMailMessage}/details`
+        const listIndividual = await fetch(
+            URL,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${JSON.parse(mailAccessToken)}`,
+                    'Accept': 'application/json'
+                },
+            }
+        )
+        const data = await listIndividual.json();
+        console.log(data);
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to delete meeting", error: error.message });
+    }
+})
 
 
 // running the node in 3002 port

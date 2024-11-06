@@ -39,8 +39,7 @@ const SendMail = () => {
     content: '',
   })
 
-  const fecthingLeadDetailForMail = async () => {
-    // this code for initial load and when lead added
+ const fecthingLeadDetailForMail = async () => { // this code for initial load and when lead added
     try {
       const responce = await axios.get(`http://localhost:3000/leads/${id}`)
       if (responce.status === 200) {

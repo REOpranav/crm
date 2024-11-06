@@ -226,88 +226,6 @@ const Contact = () => {
     }
   }
 
-  // this function is getting the access token
-  const accessToken = async () => {
-    let accessTokenParams = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-      grant_type: 'authorization_code'
-    }
-
-    try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`, accessTokenParams) // this line send the request to node (server.js)      
-
-      if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.ALL') {
-        accessTokenData(accessTokenResponce.data)
-      }
-
-      setTimeout(() => {
-        navigate('/contacts') // this is for getting out of that section
-      }, 100);
-
-    } catch (err) {
-      if (err.response) {
-        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-      } else if (err.request) {
-        message.error('Error: No response from server.');
-      } else {
-        message.error('Error: ' + err.message);
-      }
-    }
-  }
-
-  // this function is getting the user define in zoho meeting
-  const userdefine = async () => {
-    let accessTokenParams = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-      grant_type: 'authorization_code'
-    }
-
-    try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)      
-      userDeatailAuth(accessTokenResponce.data)
-
-      setTimeout(() => {
-        navigate('/contacts') // this is for getting out of that section
-      }, 100);
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-
-  // if user user datail are getted ,stored in session storage
-  const userDeatailAuth = (token) => {
-    sessionStorage.setItem('userdatail', JSON.stringify(token)) // stroing thr api data in sessiong storage
-    
-  //checking if there have meetingUserDetail for showing the success message
-    const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
-    meetingUserDetail !== null && message.success('User Token Retrieved')
-
-  // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
-    setTimeout(() => {
-      sessionStorage.removeItem('userdatail')
-    }, 3000 * 1000);
-  }
-
-  // if accesstoken are getted ,stored in session storage
-  const accessTokenData = (token) => {
-    sessionStorage.setItem('accessToken', JSON.stringify(token)) // stroing thr api data in sessiong storage
-    
-  //checking if there have meetingAccessTokenData in session storage for showing the success message
-    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []
-    meetingAccessTokenData !== null && message.success('Access Token Retrieved')
-
-    // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
-    setTimeout(() => {
-      sessionStorage.removeItem('accessToken')
-    }, 3000 * 1000);
-  }
-
   // navigating function (react router dom)
   const homeNavigation = () => {
     navigate('/')
@@ -322,20 +240,6 @@ const Contact = () => {
   useEffect(() => {
     fetching()
   }, [undefined, selectedRowKeys])
-
-  // this useeffect for load the access token function when code is available in url 
-  useEffect(()=>{    
-    if (Authcode !== null) {
-      accessToken()
-    }
-  },[undefined])
-
-
-  useEffect(() => {
-    if (Authcode !== null) {
-      userdefine()
-    }
-  }, [undefined])
 
   return (
     <div>

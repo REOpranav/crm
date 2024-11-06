@@ -127,3 +127,71 @@
     background-position: 1px 0;
     opacity: .7;
 }
+
+
+/* Style for the sidebar (prifile)*/
+.sideBarOpen {
+    visibility: visible;
+    width: 600px;
+    background-color:white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1000;
+    box-shadow: -5px 0px 14px rgba(49,57,73,.24);
+    overflow-x: hidden;
+    animation: profileRight 0.6s;
+}
+
+.sideBarOpen:hover{
+  cursor: auto;
+}
+
+#closeProfileTab{
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+}
+
+@keyframes profileRight {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+.subject{
+  font-family: var(--mailFont);
+  text-shadow: 1px 1px 30px #ddd;
+}
+
+.fromAddress{
+  color: #7150d6;
+  font-style: italic;
+  padding: 10px;
+}
+
+.ccAddress{
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    color: grey;
+    font-style: italic;
+}
+
+.summaryHead{
+    font-family: var(--mailFont);
+    padding: 10px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.messagegSummery{
+  font-family: var(--mailFont);
+  color: grey;
+  text-align: left;
+  padding: 10px;
+}

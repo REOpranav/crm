@@ -197,12 +197,12 @@ const Detail = () => {
 
         <Flex gap={'small'}>
            <div style={{backgroundColor:'rgb(239, 232, 255)',borderRadius:'5px'}}>
-              <Button onClick={() => setGmail(true)} type={gmail ? 'default' : 'link'}>
+              <Button onClick={() => setGmail(true)} type={gmail ? 'default' : 'text'}>
                 <a href={`mailto:${leadData.email}`}>Send Google mail</a>
               </Button>
             
               <Link to={`/mailsend/lead/${id}`}>
-                <Button onClick={() => setGmail(false)} type={gmail ? 'link':'default'}>
+                <Button onClick={() => setGmail(false)} type={gmail ? 'text':'default'}>
                   Send Zoho mail
                 </Button>
               </Link>
