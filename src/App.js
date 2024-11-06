@@ -65,6 +65,7 @@ function App() {
         <Route path='/maillog' element={<MailLog />} />
         <Route path='/mailsend' element={<SendMail />} />
         <Route path='/mailsend/lead/:id' element={<SendMail />} />
+        <Route path='/maillog/reply/:id' element={<SendMail />} />
       </Routes>
     </div>
   );

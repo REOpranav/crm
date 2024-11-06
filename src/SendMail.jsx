@@ -162,7 +162,6 @@ const SendMail = () => {
   useEffect(() => {
     if ((window.location.pathname).includes('lead')) {
       fecthingLeadDetailForMail()
-    } else if ((window.location.pathname).includes('lead')) {
       // from contact
     }
   }, [undefined])

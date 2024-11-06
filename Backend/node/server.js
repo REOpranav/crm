@@ -360,7 +360,7 @@ app.post('/api/maildelete', async (req, res) => {
     }
 })
 
-// this post for create a meeting
+// this post for send the mail
 app.post('/api/sendMail', async (req, res) => {
     const session = req.body // this is session credencial
     const { extras } = req.query  // this is for get the extra information like zsoid and access token 
@@ -391,7 +391,6 @@ app.post('/api/sendMail', async (req, res) => {
 // this is for deleting the ZOHO 
 app.post('/api/mailDataIndividual', async (req, res) => {
     const { session } = await req.body
-    console.log( session);
     const mailAccessToken = session?.mailAccess_token
 
     try {
@@ -407,12 +406,41 @@ app.post('/api/mailDataIndividual', async (req, res) => {
             }
         )
         const data = await listIndividual.json();
-        console.log(data);
         res.json(data)
     } catch (error) {
         res.status(500).json({ message: "Failed to delete meeting", error: error.message });
     }
 })
+
+// this post for reply the mail
+app.post('/api/mailDataIndividualReply', async (req, res) => {
+    const session = req.body // this is session credencial
+    const { extras } = req.query  // this is for get the extra information like zsoid and access token 
+     
+    try {
+        const response = await fetch(
+            `https://mail.zoho.com/api/accounts/${extras?.accountId}/messages/${extras?.messageId}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Zoho-oauthtoken ${extras?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(session?.details),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Failed to create meeting: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to send Mail", error: error.message });
+    }
+})
+
 
 
 // running the node in 3002 port

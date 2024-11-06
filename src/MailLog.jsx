@@ -8,6 +8,8 @@ import { CiMail } from "react-icons/ci";
 import { MdOutlineAirlineSeatLegroomReduced, MdOutlineDeleteOutline } from "react-icons/md";
 import { AiOutlineClose } from 'react-icons/ai'
 import { RxArrowLeft } from "react-icons/rx";
+import SendMail from './SendMail'
+import ZOHOIndividualReplyMail from './ZOHOIndividualReplyMail'
 
 // this is for finding the name fron pathname to send  post request in that URL
 const URL = window.location.pathname
@@ -28,6 +30,11 @@ const messageDrop = (type, content) => {
   })
 }
 
+const replyHeading = {
+  color:'red',
+  marginTop:'10px'
+}
+
 const MailLog = () => {
   const navigate = useNavigate();
   const { Title } = Typography
@@ -38,6 +45,9 @@ const MailLog = () => {
   const [isLoad, setISload] = useState(true)
   const [profilView, setProfileView] = useState(false)
   const [individualMailMessage, setIndividualMailMessage] = useState([])
+  const [zohoIndividualReplyMail, setZohoIndividualReplyMail] = useState(false)
+  const [zohoIndividualReplyAllMail, setZohoIndividualReplyAllMail] = useState(false)
+  const [zohoIndividualForwardMail, setZohoIndividualForwardMail] = useState(false)
 
   // accessing the zoho Mail Account detail from session storage
   const ZOHOmailFoldersDetails = sessionStorage.getItem('mailFolderDetails') || []
@@ -276,7 +286,6 @@ const MailLog = () => {
         try {
           const mailIndividualResponce = await axios.post(`http://localhost:3002/api/mailDataIndividual`, extras)// this line send the request to node (server.js)
           if (mailIndividualResponce.status == 200) {
-            console.log(mailIndividualResponce.data);
             setIndividualMailMessage(mailIndividualResponce?.data?.data)
           }
         } catch (err) {
@@ -293,14 +302,31 @@ const MailLog = () => {
   }
 
   const sendFolderID = (folderID) => {  // Getting spacific Mail Folder ID 
-    console.log(folderID);
     setISload(true)
     setProfileView(false) // closong rhe preview (message showing in side)
     setZOHOmailFolderID(folderID)
     setFolderID(folderID)
   }
 
-  const mailMessageIDForDelete = (messageID) => { 
+  const ccAddressCovertToHumanReadable = (ccAddesss) => { // this is for convert cc address to normal human readable email string
+    const parser = new DOMParser();
+    const decodedString = parser.parseFromString(ccAddesss, 'text/html').body.textContent;
+
+    // Extract email address using a regular expression
+    if (decodedString == 'Not Provided') {
+      return decodedString
+    } else {
+      const email = decodedString && decodedString.match(/<(.+?)>/)[1];
+      return email
+    }
+  }
+
+  const KBvalue = (dataSize) => { // finding normal value to KB value in mail list
+    const KB = Number(dataSize) / 1024
+    return `${KB.toFixed(0)} KB`
+  }
+
+  const mailMessageIDForDelete = (messageID) => {
     setISload(true)
     ZOHOmailDelete(messageID)
   }
@@ -323,12 +349,8 @@ const MailLog = () => {
     setISload(false)
   }
 
-  const KBvalue = (dataSize) => { // finding normal valuw to KB value 
-    const KB = Number(dataSize) / 1024
-    return `${KB.toFixed(0)} KB`
-  }
 
-  useEffect(() => { // this useeffect for load the access token function when code is available in url 
+  useEffect(() => { // mail access tokens 
     if (Authcode !== null) {
       // getZOHOmailAccountIDdetail()
       ZOHOmailFolderDetail()
@@ -339,20 +361,29 @@ const MailLog = () => {
 
   useEffect(() => {
     if (Authcode !== null) {
-      userdefine()
+      userdefine() // meeting user account
+      accessToken() // meeting access token
     }
   }, [undefined])
 
-  // this useeffect for load the access token function when code is available in url 
-  useEffect(() => {
-    if (Authcode !== null) {
-      accessToken()
-    }
-  }, [undefined])
+  const profileViewTrue = () => {
+    setProfileView(true)  // set true for profile view (individual message view = true)
 
+    // making the state false for hide it 
+    setZohoIndividualReplyMail(false)
+    setZohoIndividualReplyAllMail(false)
+    setZohoIndividualForwardMail(false)
+  }
 
-  const profileViewTrue = () => { setProfileView(true) }
-  const profileView = () => { setProfileView(!profilView) }
+  const profileView = () => {
+    setProfileView(!profilView)
+
+    // making the state false for hide it
+    setZohoIndividualReplyMail(false)
+    setZohoIndividualReplyAllMail(false)
+    setZohoIndividualForwardMail(false)
+  }
+
   const back = () => window.history.back() // this is for back one step
   let mailFolderData = !Array.isArray(ZOHOmailFoldersDetails) ? parsingFunction(ZOHOmailFoldersDetails) : [] // this send this mail data  
   const [folderID, setFolderID] = useState(mailFolderData ? mailFolderData[0]?.folderId : 0)
@@ -373,7 +404,7 @@ const MailLog = () => {
           <Row className='mailFolderOuterBox' justify={'space-around'}>
             {Array.isArray(mailFolderData) && mailFolderData.length > 0 && mailFolderData?.map(e =>
               <Col className='Mailfolders' onClick={() => sendFolderID(e?.folderId)}> <span> {e.folderId == folderID ?? 0 ? <span style={{ color: 'blueviolet', transition: 'all 0.3s ease-in-out' }}>{e?.folderName}</span> : e?.folderName} </span></Col>
-            )}  
+            )}
           </Row>
         </Col>
         <Col span={6}>
@@ -383,22 +414,70 @@ const MailLog = () => {
           </Space>
         </Col>
       </Row>
+
       {!Array.isArray(ZOHOmailAccountdID) && !Array.isArray(ZOHOmailFoldersDetails) && !Array.isArray(ZOHOmailMessageAccessToken) ?
         <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
           <Col span={23}>
-            {profilView && !Array.isArray(individualMailMessage) &&
+            {profilView && !Array.isArray(individualMailMessage) && // this code for showing the individual mail message when they click the messages in mailLog
               <Row className={profilView && 'sideBarOpen'}>
                 <Col span={24} style={{ color: 'black' }}>
                   <Row id='closeProfileTab' onClick={() => profileView()}> <p> <RxArrowLeft size={20} color='grey' /></p></Row>
                   <Row justify={'center'} className='subject'><Title level={4} style={{ zIndex: 1000 }}>{individualMailMessage?.subject}</Title></Row>
                   <Row justify={'center'} className='fromAddress'>From : {individualMailMessage?.fromAddress}</Row>
-                  <Row justify={'center'} className='ccAddress'>ccAddress : {individualMailMessage?.ccAddress ? individualMailMessage?.ccAddress : '-'}</Row>
+                  <Row justify={'center'} className='ccAddress'>ccAddress : {individualMailMessage?.ccAddress ? ccAddressCovertToHumanReadable(individualMailMessage?.ccAddress) : '-'}</Row>
                   <Row justify={'start'} className='summaryHead'>Summary :</Row>
                   <Row justify={'start'} className='messagegSummery'>{individualMailMessage?.summary}</Row>
+                  <Row justify={'start'} className='ExtrasFeatures'>
+                    <Col onClick={() => { setZohoIndividualReplyAllMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyMail(true) }}> <span className='reply'>Reply</span></Col>
+                    <Col onClick={() => { setZohoIndividualReplyMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyAllMail(true) }} style={{ marginLeft: '20px' }}> <span className='replyAll'>Reply All</span></Col>
+                    <Col onClick={() => { setZohoIndividualReplyMail(false); setZohoIndividualReplyAllMail(false); setZohoIndividualForwardMail(true) }} style={{ marginLeft: '20px' }}> <span className='forward'> Forward</span></Col>
+                  </Row>
+
+                  {zohoIndividualReplyMail &&
+                    <Row>
+                      <Col span={24}>
+                        <Row justify={'center'} style={replyHeading}>REPLY</Row>
+                        <ZOHOIndividualReplyMail
+                          toAddress={individualMailMessage?.fromAddress} // while sending reply message from address change into to address
+                          messageID={individualMailMessage?.messageId}
+                          subject={individualMailMessage?.subject}
+                          setReplySendStatus={setProfileView}
+                        />
+                      </Col>
+                    </Row>
+                  }
+                  {zohoIndividualReplyAllMail &&
+                    <Row>
+                      <Col span={24}>
+                      <Row justify={'center'} style={replyHeading}>REPLY ALL</Row>
+                        <ZOHOIndividualReplyMail
+                          toAddress={individualMailMessage?.fromAddress} // while sending reply message from address change into to address
+                          messageID={individualMailMessage?.messageId}
+                          subject={individualMailMessage?.subject}
+                          ccAddress={ccAddressCovertToHumanReadable(individualMailMessage?.ccAddress) !== 'Not Provided' ? ccAddressCovertToHumanReadable(individualMailMessage?.ccAddress) : ''}
+                          setReplySendStatus={setProfileView}
+                        />
+                      </Col>
+                    </Row>
+                  }
+                  {zohoIndividualForwardMail &&
+                    <Row>
+                      <Col span={24}>
+                      <Row justify={'center'} style={replyHeading}>FORWARD</Row>
+                        <ZOHOIndividualReplyMail
+                          toAddress={individualMailMessage?.fromAddress} // while sending reply message from address change into to address
+                          messageID={individualMailMessage?.messageId}
+                          subject={individualMailMessage?.subject}
+                          content={individualMailMessage?.summary}
+                          setReplySendStatus={setProfileView}
+                        />
+                      </Col>
+                    </Row>
+                  }
                 </Col>
               </Row>
             }
-            {!Array.isArray(mailList) && (mailList?.data.length > 0) ? (mailList?.data).map((data) => {
+            {!Array.isArray(mailList) && (mailList?.data.length > 0) ? (mailList?.data).map((data) => { // this code for showing the mail message data in list  
               return <Row className='mailDataStyle' >
                 <Col span={24}>
                   <Row>
@@ -428,7 +507,7 @@ const MailLog = () => {
         : <>
           <Col style={{ height: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <span>
-              
+
               <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/social/real-estate/zh-real-estate.png' height={'200px'} preview={false} /></Row>
               <Row justify={'center'}> <Title level={4}>  Click the <span style={{ color: '#5a3bb6' }}> Re-Generate Tokens </span> button to generate new tokens.</Title> </Row>
               {Array.isArray(ZOHOmailAccountdID) && <Row className='PoppinsFont'> <Col span={7} style={{ textAlign: 'right' }}>1.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Account Access </span> Token</Col> </Row>}

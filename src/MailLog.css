@@ -133,22 +133,22 @@
 .sideBarOpen {
     visibility: visible;
     width: 600px;
-    background-color:white;
+    background-color: white;
     position: fixed;
     top: 0;
     right: 0;
     height: 100%;
     z-index: 1000;
-    box-shadow: -5px 0px 14px rgba(49,57,73,.24);
+    box-shadow: -5px 0px 14px rgba(49, 57, 73, .24);
     overflow-x: hidden;
     animation: profileRight 0.6s;
 }
 
-.sideBarOpen:hover{
-  cursor: auto;
+.sideBarOpen:hover {
+    cursor: auto;
 }
 
-#closeProfileTab{
+#closeProfileTab {
     width: 100%;
     position: absolute;
     padding: 10px;
@@ -164,34 +164,60 @@
     }
 }
 
-.subject{
-  font-family: var(--mailFont);
-  text-shadow: 1px 1px 30px #ddd;
+.subject {
+    font-family: var(--mailFont);
+    text-shadow: 1px 1px 30px #ddd;
 }
 
-.fromAddress{
-  color: #7150d6;
-  font-style: italic;
-  padding: 10px;
+.fromAddress {
+    color: #7150d6;
+    font-style: italic;
+    padding: 10px;
 }
 
-.ccAddress{
+.ccAddress {
     padding: 5px;
     border-bottom: 1px solid #ddd;
     color: grey;
     font-style: italic;
 }
 
-.summaryHead{
+.summaryHead {
     font-family: var(--mailFont);
     padding: 10px;
     font-weight: 700;
     margin-top: 10px;
 }
 
-.messagegSummery{
-  font-family: var(--mailFont);
-  color: grey;
-  text-align: left;
-  padding: 10px;
+.messagegSummery {
+    font-family: var(--mailFont);
+    color: grey;
+    text-align: left;
+    padding: 10px;
+}
+
+.ExtrasFeatures {
+    margin-top: 20px;
+    color: #7150d6;
+    font-family: var(--mailFont);
+    background-color: rgb(239, 232, 255);
+    font-weight: 500;
+    padding: 10px;
+}
+
+.ExtrasFeatures:hover {
+    cursor: pointer;
+}
+
+.reply,
+.replyAll,
+.forward {
+    padding: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.reply:hover,.replyAll:hover,.forward:hover{
+    background-color:white;
+    color:red;
+    min-height: 100%;
 }
