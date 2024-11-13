@@ -323,13 +323,13 @@ const MailLog = () => {
 
   useEffect(() => {
     if (Authcode !== null) {
-      userdefine() // meeting user account
+      // userdefine() // meeting user account
     }
   }, [undefined])
 
   useEffect(() => {
     if (Authcode !== null) {
-      ZOHO_Meeting_Access_Token() // meeting access token
+      // ZOHO_Meeting_Access_Token() // meeting access token
     }
   }, [undefined])
 
@@ -389,8 +389,13 @@ const MailLog = () => {
             {profilView && !Array.isArray(individualMailMessage_content) && // this code for showing the individual mail message when they click the messages in mailLog
               <Row className={profilView && 'sideBarOpen'}>
                 <Col span={24} style={{ color: 'black' }}>
-                  <Row id='closeProfileTab' onClick={() => profileView()}> <p> <AiOutlineClose size={20} className='closingTabArrow' /></p></Row>
-                  <Row><div id='individualMessage'></div></Row>
+                  <Row id='closeProfileTab' onClick={() => profileView()}> <p> <RxArrowLeft size={20} color='grey' className='closingTabArrow' /></p></Row>
+                  <Row justify={'center'} className='subject'><Title level={4} style={{ zIndex: 1000 }}>{individualMailMessage_details?.data?.subject}</Title></Row>
+                  <Row justify={'center'} className='fromAddress'>From : {individualMailMessage_details?.data?.fromAddress}</Row>
+                  <Row justify={'center'} className='ccAddress'>ccAddress : {individualMailMessage_details?.data?.ccAddress ? ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) : '-'}</Row>
+                  <Row justify={'start'} className='summaryHead'>Summary :</Row>
+                  <Row justify={'start'} className='messagegSummery'>{individualMailMessage_details?.data?.summary}</Row>
+                  <Row><div id='individualMessage' style={{textAlign:'justify'}}></div></Row>
                   <Row justify={'start'} className='ExtrasFeatures'>
                     <Col onClick={() => { setZohoIndividualReplyAllMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyMail(true) }}> <span className='reply'>Reply</span></Col>
                     <Col onClick={() => { setZohoIndividualReplyMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyAllMail(true) }} style={{ marginLeft: '20px' }}> <span className='replyAll'>Reply All</span></Col>
