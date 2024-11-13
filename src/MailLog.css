@@ -140,7 +140,7 @@
     height: 100%;
     z-index: 1000;
     box-shadow: -5px 0px 14px rgba(49, 57, 73, .24);
-    overflow-x: hidden;
+    overflow-x: auto;
     animation: profileRight 0.6s;
 }
 
@@ -148,10 +148,13 @@
     cursor: auto;
 }
 
-#closeProfileTab {
-    width: 100%;
-    position: absolute;
-    padding: 10px;
+.closingTabArrow{
+    transition: all 0.2s ease-in-out ;
+}
+
+.closingTabArrow:hover{
+    cursor: pointer;
+    color: blueviolet;
 }
 
 @keyframes profileRight {

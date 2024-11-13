@@ -10,6 +10,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { RxArrowLeft } from "react-icons/rx";
 import SendMail from './SendMail'
 import ZOHOIndividualReplyMail from './ZOHOIndividualReplyMail'
+import { getZohoAccessToken_Params } from 'api-auth-zoho'
 
 // this is for finding the name fron pathname to send  post request in that URL
 const URL = window.location.pathname
@@ -31,9 +32,16 @@ const messageDrop = (type, content) => {
 }
 
 const replyHeading = {
-  color:'red',
-  marginTop:'10px'
+  color: 'red',
+  marginTop: '10px'
 }
+
+let autharizationCode = Authcode
+let client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+let client_secret = process.env.REACT_APP_MAIL_SECRET_ID
+let redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
+let grant_type = 'authorization_code'
+let accessTokenParams = getZohoAccessToken_Params(autharizationCode, client_id, client_secret, redirect_uri, grant_type)
 
 const MailLog = () => {
   const navigate = useNavigate();
@@ -44,20 +52,22 @@ const MailLog = () => {
   const [ZOHOmailFolderID, setZOHOmailFolderID] = useState([])
   const [isLoad, setISload] = useState(true)
   const [profilView, setProfileView] = useState(false)
-  const [individualMailMessage, setIndividualMailMessage] = useState([])
+  const [individualMailMessage_content, setIndividualMailMessage_content] = useState([])
+  const [individualMailMessage_details, setTndividualMailMessage_details] = useState([])
   const [zohoIndividualReplyMail, setZohoIndividualReplyMail] = useState(false)
   const [zohoIndividualReplyAllMail, setZohoIndividualReplyAllMail] = useState(false)
   const [zohoIndividualForwardMail, setZohoIndividualForwardMail] = useState(false)
+  const individual = document.getElementById('individualMessage')
 
   // accessing the zoho Mail Account detail from session storage
-  const ZOHOmailFoldersDetails = sessionStorage.getItem('mailFolderDetails') || []
+  const ZOHOmailFoldersDetails = JSON.parse(sessionStorage.getItem('mailFolderDetails')) || []
   const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
   const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
   const ZOHOmailAccountDetailResponceAccountName = sessionStorage.getItem('ZOHOmailAccountDetailResponceAccountName') || []
   const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
 
   // this code are ZOHO MAIL intregreation codes 
-  const fetchedDataFromZOHOmailFOlder = async (token) => { // if account Token will get ,stored in session storage    
+  const fetchedDataFromZOHOmailFOlder = async (token) => { // if account Token will get ,stored in session storage        
     sessionStorage.setItem('mailFolderDetails', JSON.stringify(token)) // stroing the api data in sessiong storage
     const checkmailAccountdDetailForDropMessage = await JSON.parse(sessionStorage.getItem('mailFolderDetails')) || [] //checking if there have meetingAccessTokenData in session storage for showing the success message
     checkmailAccountdDetailForDropMessage !== null ? message.success('Mail Folder Detail Retrieved') : message.warning('Failed to retrive,Pleace Retry the same process')
@@ -66,62 +76,36 @@ const MailLog = () => {
   // meeting codes (get user token)
   // this function is getting the user define in zoho meeting
   const userdefine = async () => {
-    let accessTokenParams = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      grant_type: 'authorization_code'
-    }
-
     try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)      
-      userDeatailAuth(accessTokenResponce.data)
-
-      setTimeout(() => {
-        navigate('/maillog') // this is for getting out of that section
-      }, 100);
+      const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)          
+      userDeatailAuth(accessTokenResponce?.data)
     } catch (err) {
       console.log(err.message)
     }
   }
 
-  // if user user datail are getted ,stored in session storage
+  // if user datail are get ,it store in session storage
   const userDeatailAuth = (token) => {
     sessionStorage.setItem('userdatail', JSON.stringify(token)) // stroing thr api data in sessiong storage
-
-    //checking if there have meetingUserDetail for showing the success message
     const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
-    meetingUserDetail !== null && message.success('User Token Retrieved')
-
-    // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
+    meetingUserDetail !== null && message.success('User Token Retrieved') //checking if there have meetingUserDetail for showing the success message
     setTimeout(() => {
-      sessionStorage.removeItem('userdatail')
-    }, 3000 * 1000);
+      navigate('/maillog') // this is for getting out of that section
+    }, 100)
   }
 
   // meeting codes (get access token)
   // this function is getting the access token
-  const accessToken = async () => {
-    let accessTokenParams = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      grant_type: 'authorization_code'
-    }
-
+  const ZOHO_Meeting_Access_Token = async () => {
     try {
       const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`, accessTokenParams) // this line send the request to node (server.js)      
+      if (accessTokenResponce?.data?.scope == 'ZohoMeeting.meeting.ALL') {
+        accessTokenData(accessTokenResponce?.data)
 
-      if (accessTokenResponce.data.scope == 'ZohoMeeting.meeting.ALL') {
-        accessTokenData(accessTokenResponce.data)
+        setTimeout(() => {
+          navigate('/maillog') // this is for getting out of that section
+        }, 300);
       }
-
-      setTimeout(() => {
-        navigate('/maillog') // this is for getting out of that section
-      }, 100);
-
     } catch (err) {
       if (err.response) {
         message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
@@ -136,39 +120,26 @@ const MailLog = () => {
   // if accesstoken are getted ,stored in session storage
   const accessTokenData = (token) => {
     sessionStorage.setItem('accessToken', JSON.stringify(token)) // stroing thr api data in sessiong storage
-
-    //checking if there have meetingAccessTokenData in session storage for showing the success message
-    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []
+    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []  //checking if there have meetingAccessTokenData in session storage for showing the success message
     meetingAccessTokenData !== null && message.success('Access Token Retrieved')
-
-    // setting time for removing the sessionStorage data after 1 hour, because default limit time for zoho api are 1 hours
-    setTimeout(() => {
-      sessionStorage.removeItem('accessToken')
-    }, 3000 * 1000);
   }
 
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccountIDdetail = async () => {
-    let accessTokenParams = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      grant_type: 'authorization_code',
-    }
-
     try {
       const ZOHOmailAccountDetailResponce = await axios.post(`http://localhost:3002/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)   
-      ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId && messageDrop('success', 'Account Details getted')
-      ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails.status === 200 && messageDrop('success', 'Account detail Got successfully')
+
       if (ZOHOmailAccountDetailResponce?.data?.getZOHOmeetingAccessToken?.scope == 'ZohoMail.accounts.ALL') {
-        sessionStorage.setItem('ZOHOmailAccountID', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId))
-        sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountName))
-        sessionStorage.setItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress', JSON.stringify(ZOHOmailAccountDetailResponce.data?.fecthingZOHOmeetingAccountDetails[0]?.primaryEmailAddress))
+        sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId)
+        sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountName)
+        sessionStorage.setItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress', ZOHOmailAccountDetailResponce.data?.fecthingZOHOmeetingAccountDetails[0]?.primaryEmailAddress)
+
+        ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId && messageDrop('success', 'Account Details getted')
+
+        setTimeout(() => {
+          navigate('/maillog') // this is for getting out of that section
+        }, 100);
       }
-      setTimeout(() => {
-        navigate('/maillog') // this is for getting out of that section
-      }, 100);
     } catch (err) {
       console.log(err.message);
     }
@@ -176,65 +147,58 @@ const MailLog = () => {
 
   // this function is getting the zoho mail Account detail (Account ID) 
   const ZOHOmailFolderDetail = async () => {
-    let accessTokenParams = {
+    let accessTokenParameter = {
       code: Authcode,
       client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
       client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
       redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
       grant_type: 'authorization_code',
-      ZOHOmailAccountID: ZOHOmailAccountdID && JSON.parse(ZOHOmailAccountdID)
+      ZOHOmailAccountID: ZOHOmailAccountdID && ZOHOmailAccountdID
     }
 
     try {
-      const folderTokenResponce = await axios.post(`http://localhost:3002/api/mailFolder`, accessTokenParams) // this line send the request to node (server.js)
-      if (folderTokenResponce?.data?.getZOHOfolderAccessToken?.scope == "ZohoMail.folders.ALL") {
+      const folderTokenResponce = await axios.post(`http://localhost:3002/api/mailFolder`, accessTokenParameter) // this line send the request to node (server.js)
+      folderTokenResponce?.data?.getZOHOfolderAccessToken?.scope == "ZohoMail.folders.ALL" && (() => {
         fetchedDataFromZOHOmailFOlder(folderTokenResponce?.data?.getZOHOfolderDetails)
-      }
-      setTimeout(() => {
-        navigate('/maillog') // this is for getting out of that section
-      }, 100);
+        setTimeout(() => {
+          navigate('/maillog') // this is for getting out of that section
+        }, 100);
+      })()
     } catch (err) {
       console.log(err.message)
     }
   }
 
   const getZOHOmailMessageAccessToken = async () => {
-    let accessTokenParams = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      grant_type: 'authorization_code',
-    }
-
     try {
-      const ZOHOmailMessageDetailResponce = await axios.post(`http://localhost:3002/api/ZOHOmailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)
-      ZOHOmailMessageDetailResponce.data.scope === "ZohoMail.messages.ALL" && sessionStorage.setItem('ZOHOmailMessageAccessToken', JSON.stringify(ZOHOmailMessageDetailResponce?.data?.access_token)) // this code is accesstoken relevent code
-      setTimeout(() => {
-        navigate('/maillog')
-      }, 100);
+      const ZOHOmailMessageDetailResponce = await axios.post(`http://localhost:3002/api/ZOHOmailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)      
+      ZOHOmailMessageDetailResponce?.data?.scope === "ZohoMail.messages.ALL" && (() => {
+        sessionStorage.setItem('ZOHOmailMessageAccessToken', ZOHOmailMessageDetailResponce?.data?.access_token)
+        setTimeout(() => {
+          navigate('/maillog')
+        }, 100);
+      })()
     } catch (err) {
       console.log(err.message);
-
     }
   }
 
   // this function is get the current mail list
   const currentZOHOmailList = () => {
-    if (!Array.isArray(JSON.parse(ZOHOmailMessageAccessToken)) && !Array.isArray(JSON.parse(ZOHOmailAccountdID))) {
+    if (!Array.isArray(ZOHOmailMessageAccessToken) && !Array.isArray(ZOHOmailAccountdID)) {
       const mailAccessCredencial = async () => {
         const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
           "session": {
-            "mailAccountID": ZOHOmailAccountdID ? JSON.parse(ZOHOmailAccountdID) : 0,
+            "mailAccountID": ZOHOmailAccountdID ? `${ZOHOmailAccountdID}` : 0,
             "mailFolderID": ZOHOmailFolderID ? ZOHOmailFolderID : 0,
-            "mailAccess_token": `${ZOHOmailMessageAccessToken}`,
+            "mailAccess_token": ZOHOmailMessageAccessToken,
           }
         }
         try {
           const mailListResponce = await axios.post(`http://localhost:3002/api/mailList`, extras)// this line send the request to node (server.js)          
-          if (mailListResponce?.status == 200) {
+          mailListResponce?.status == 200 && (() => {
             setMailList(mailListResponce?.data)
-          }
+          })()
         } catch (err) {
           if (err.message == "Request failed with status code 500") {
             messageDrop('warning', 'Re-Generate the Tokens')
@@ -247,22 +211,22 @@ const MailLog = () => {
 
   // this function is delete the ZOHO MAIL
   const ZOHOmailDelete = (ZOHOmessageID) => {
-    if (!Array.isArray(JSON.parse(ZOHOmailMessageAccessToken)) && !Array.isArray(JSON.parse(ZOHOmailAccountdID))) {
+    if (!Array.isArray(ZOHOmailMessageAccessToken) && !Array.isArray(ZOHOmailAccountdID)) {
       const MailDeleteCredencial = async () => {
         const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
           "session": {
-            "mailAccountID": ZOHOmailAccountdID ? JSON.parse(ZOHOmailAccountdID) : 0,
+            "mailAccountID": ZOHOmailAccountdID ? ZOHOmailAccountdID : 0,
             "mailFolderID": ZOHOmailFolderID ? ZOHOmailFolderID : 0,
-            "mailAccess_token": `${ZOHOmailMessageAccessToken}`,
+            "mailAccess_token": ZOHOmailMessageAccessToken,
             "deletingMailFolder_ID": ZOHOmessageID && ZOHOmessageID
           }
         }
         try {
           const mailListResponce = await axios.post(`http://localhost:3002/api/maildelete`, extras)// this line send the request to node (server.js)
-          if (mailListResponce.status == 200) {
+          mailListResponce.status == 200 && (() => {
             messageDrop('success', 'Deleted successfully')
             currentZOHOmailList()
-          }
+          })()
         } catch (err) {
           console.log(err.message);
         }
@@ -273,20 +237,21 @@ const MailLog = () => {
 
   // this code listing the Email
   const ZOHOmailListIndividualMessage = (ZOHOmessageID) => {
-    if (!Array.isArray(JSON.parse(ZOHOmailMessageAccessToken)) && !Array.isArray(JSON.parse(ZOHOmailAccountdID))) {
+    if (!Array.isArray(ZOHOmailMessageAccessToken) && !Array.isArray(ZOHOmailAccountdID)) {
       const listMailCredencial = async () => {
         const extras = { // This is params,sending to backend for important extra information like zoho org ID and Access Token
           "session": {
-            "mailAccountID": ZOHOmailAccountdID ? JSON.parse(ZOHOmailAccountdID) : 0,
+            "mailAccountID": ZOHOmailAccountdID ? ZOHOmailAccountdID : 0,
             "mailFolderID": ZOHOmailFolderID ? ZOHOmailFolderID : 0,
-            "mailAccess_token": `${ZOHOmailMessageAccessToken}`,
+            "mailAccess_token": ZOHOmailMessageAccessToken,
             "showZOHOMailMessage": ZOHOmessageID && ZOHOmessageID
           }
         }
         try {
           const mailIndividualResponce = await axios.post(`http://localhost:3002/api/mailDataIndividual`, extras)// this line send the request to node (server.js)
           if (mailIndividualResponce.status == 200) {
-            setIndividualMailMessage(mailIndividualResponce?.data?.data)
+            setIndividualMailMessage_content(mailIndividualResponce?.data?.content)
+            setTndividualMailMessage_details(mailIndividualResponce?.data?.detail)
           }
         } catch (err) {
           console.log(err.message);
@@ -298,7 +263,7 @@ const MailLog = () => {
 
   // this is for parsing the all JSON data to normal data
   const parsingFunction = (data) => {
-    return data.length > 0 ? JSON.parse(data) : ""
+    return data.length > 0 ? data : ""
   }
 
   const sendFolderID = (folderID) => {  // Getting spacific Mail Folder ID 
@@ -308,7 +273,7 @@ const MailLog = () => {
     setFolderID(folderID)
   }
 
-  const ccAddressCovertToHumanReadable = (ccAddesss) => { // this is for convert cc address to normal human readable email string
+  const ccAddressCovertToHumanReadable = (ccAddesss) => { // this is for convert cc address to normal human readable email string    
     const parser = new DOMParser();
     const decodedString = parser.parseFromString(ccAddesss, 'text/html').body.textContent;
 
@@ -332,7 +297,6 @@ const MailLog = () => {
   }
 
   const mailMessageIDForShowParticularMail = (messageID) => {
-    setISload(true)
     ZOHOmailListIndividualMessage(messageID)
   }
 
@@ -349,20 +313,23 @@ const MailLog = () => {
     setISload(false)
   }
 
-
   useEffect(() => { // mail access tokens 
     if (Authcode !== null) {
-      // getZOHOmailAccountIDdetail()
+      getZOHOmailAccountIDdetail()
       ZOHOmailFolderDetail()
       getZOHOmailMessageAccessToken()
     }
   }, [undefined])
 
-
   useEffect(() => {
     if (Authcode !== null) {
       userdefine() // meeting user account
-      accessToken() // meeting access token
+    }
+  }, [undefined])
+
+  useEffect(() => {
+    if (Authcode !== null) {
+      ZOHO_Meeting_Access_Token() // meeting access token
     }
   }, [undefined])
 
@@ -383,10 +350,11 @@ const MailLog = () => {
     setZohoIndividualReplyAllMail(false)
     setZohoIndividualForwardMail(false)
   }
-
   const back = () => window.history.back() // this is for back one step
-  let mailFolderData = !Array.isArray(ZOHOmailFoldersDetails) ? parsingFunction(ZOHOmailFoldersDetails) : [] // this send this mail data  
+  let mailFolderData = parsingFunction(ZOHOmailFoldersDetails) // this send this mail data  
   const [folderID, setFolderID] = useState(mailFolderData ? mailFolderData[0]?.folderId : 0)
+
+  individual !== null && (individual.innerHTML = individualMailMessage_content?.data?.content)
 
   return (
     <div>
@@ -415,32 +383,29 @@ const MailLog = () => {
         </Col>
       </Row>
 
-      {!Array.isArray(ZOHOmailAccountdID) && !Array.isArray(ZOHOmailFoldersDetails) && !Array.isArray(ZOHOmailMessageAccessToken) ?
+      {!Array.isArray(ZOHOmailAccountdID) && Array.isArray(ZOHOmailFoldersDetails) && !Array.isArray(ZOHOmailMessageAccessToken) ?
         <Row style={{ minHeight: "65vh", maxHeight: '65vh', overflow: 'auto', marginTop: '20px' }} justify={'center'}>
           <Col span={23}>
-            {profilView && !Array.isArray(individualMailMessage) && // this code for showing the individual mail message when they click the messages in mailLog
+            {profilView && !Array.isArray(individualMailMessage_content) && // this code for showing the individual mail message when they click the messages in mailLog
               <Row className={profilView && 'sideBarOpen'}>
                 <Col span={24} style={{ color: 'black' }}>
-                  <Row id='closeProfileTab' onClick={() => profileView()}> <p> <RxArrowLeft size={20} color='grey' /></p></Row>
-                  <Row justify={'center'} className='subject'><Title level={4} style={{ zIndex: 1000 }}>{individualMailMessage?.subject}</Title></Row>
-                  <Row justify={'center'} className='fromAddress'>From : {individualMailMessage?.fromAddress}</Row>
-                  <Row justify={'center'} className='ccAddress'>ccAddress : {individualMailMessage?.ccAddress ? ccAddressCovertToHumanReadable(individualMailMessage?.ccAddress) : '-'}</Row>
-                  <Row justify={'start'} className='summaryHead'>Summary :</Row>
-                  <Row justify={'start'} className='messagegSummery'>{individualMailMessage?.summary}</Row>
+                  <Row id='closeProfileTab' onClick={() => profileView()}> <p> <AiOutlineClose size={20} className='closingTabArrow' /></p></Row>
+                  <Row><div id='individualMessage'></div></Row>
                   <Row justify={'start'} className='ExtrasFeatures'>
                     <Col onClick={() => { setZohoIndividualReplyAllMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyMail(true) }}> <span className='reply'>Reply</span></Col>
                     <Col onClick={() => { setZohoIndividualReplyMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyAllMail(true) }} style={{ marginLeft: '20px' }}> <span className='replyAll'>Reply All</span></Col>
                     <Col onClick={() => { setZohoIndividualReplyMail(false); setZohoIndividualReplyAllMail(false); setZohoIndividualForwardMail(true) }} style={{ marginLeft: '20px' }}> <span className='forward'> Forward</span></Col>
                   </Row>
 
+
                   {zohoIndividualReplyMail &&
                     <Row>
                       <Col span={24}>
                         <Row justify={'center'} style={replyHeading}>REPLY</Row>
                         <ZOHOIndividualReplyMail
-                          toAddress={individualMailMessage?.fromAddress} // while sending reply message from address change into to address
-                          messageID={individualMailMessage?.messageId}
-                          subject={individualMailMessage?.subject}
+                          toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
+                          messageID={individualMailMessage_details?.data?.messageId}
+                          subject={individualMailMessage_details?.data?.subject}
                           setReplySendStatus={setProfileView}
                         />
                       </Col>
@@ -449,12 +414,12 @@ const MailLog = () => {
                   {zohoIndividualReplyAllMail &&
                     <Row>
                       <Col span={24}>
-                      <Row justify={'center'} style={replyHeading}>REPLY ALL</Row>
+                        <Row justify={'center'} style={replyHeading}>REPLY ALL</Row>
                         <ZOHOIndividualReplyMail
-                          toAddress={individualMailMessage?.fromAddress} // while sending reply message from address change into to address
-                          messageID={individualMailMessage?.messageId}
-                          subject={individualMailMessage?.subject}
-                          ccAddress={ccAddressCovertToHumanReadable(individualMailMessage?.ccAddress) !== 'Not Provided' ? ccAddressCovertToHumanReadable(individualMailMessage?.ccAddress) : ''}
+                          toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
+                          messageID={individualMailMessage_details?.data?.messageId}
+                          subject={individualMailMessage_details?.data?.subject}
+                          ccAddress={ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) !== 'Not Provided' ? ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) : ''}
                           setReplySendStatus={setProfileView}
                         />
                       </Col>
@@ -463,12 +428,12 @@ const MailLog = () => {
                   {zohoIndividualForwardMail &&
                     <Row>
                       <Col span={24}>
-                      <Row justify={'center'} style={replyHeading}>FORWARD</Row>
+                        <Row justify={'center'} style={replyHeading}>FORWARD</Row>
                         <ZOHOIndividualReplyMail
-                          toAddress={individualMailMessage?.fromAddress} // while sending reply message from address change into to address
-                          messageID={individualMailMessage?.messageId}
-                          subject={individualMailMessage?.subject}
-                          content={individualMailMessage?.summary}
+                          toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
+                          messageID={individualMailMessage_details?.data?.messageId}
+                          subject={individualMailMessage_details?.data?.subject}
+                          content={individualMailMessage_details?.data?.summary}
                           setReplySendStatus={setProfileView}
                         />
                       </Col>
@@ -477,11 +442,12 @@ const MailLog = () => {
                 </Col>
               </Row>
             }
-            {!Array.isArray(mailList) && (mailList?.data.length > 0) ? (mailList?.data).map((data) => { // this code for showing the mail message data in list  
-              return <Row className='mailDataStyle' >
+
+            {!Array.isArray(mailList) && (mailList?.data?.length > 0) ? (mailList?.data).map((data) => { // this code for showing the mail message data in list             
+              return <Row className='mailDataStyle'>
                 <Col span={24}>
                   <Row>
-                    <Col span={23} onClick={() => { profileViewTrue(); mailMessageIDForShowParticularMail(data.messageId) }}>
+                    <Col span={23} onClick={() => { profileViewTrue(); mailMessageIDForShowParticularMail(data?.messageId) }}>
                       <Row>
                         <Col span={1}><CiMail className='ZOHOmailLOGO' /></Col>
                         <Col span={5} className='mailDataFromAddress'><Row style={{ maxWidth: '90%' }} className='mailDataFromAddress'>{data.subject}</Row></Col>
@@ -489,7 +455,7 @@ const MailLog = () => {
                       </Row>
                     </Col>
                     <Col span={1} style={{ textAlign: 'left' }}>
-                      <Row justify={'center'}> <MdOutlineDeleteOutline className='ZOHOmailDelete' onClick={() => mailMessageIDForDelete(data.messageId)} /> </Row>
+                      <Row justify={'center'}> <MdOutlineDeleteOutline className='ZOHOmailDelete' onClick={() => mailMessageIDForDelete(data?.messageId)} /> </Row>
                     </Col>
                   </Row>
                 </Col>
@@ -511,7 +477,7 @@ const MailLog = () => {
               <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/social/real-estate/zh-real-estate.png' height={'200px'} preview={false} /></Row>
               <Row justify={'center'}> <Title level={4}>  Click the <span style={{ color: '#5a3bb6' }}> Re-Generate Tokens </span> button to generate new tokens.</Title> </Row>
               {Array.isArray(ZOHOmailAccountdID) && <Row className='PoppinsFont'> <Col span={7} style={{ textAlign: 'right' }}>1.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Account Access </span> Token</Col> </Row>}
-              {Array.isArray(ZOHOmailFoldersDetails) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>2.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Folder Access </span> Token</Col> </Row>}
+              {ZOHOmailFoldersDetails.length <= 0 && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>2.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Folder Access </span> Token</Col> </Row>}
               {Array.isArray(ZOHOmailMessageAccessToken) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>3.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Message Access </span> Token</Col> </Row>}
             </span>
           </Col>

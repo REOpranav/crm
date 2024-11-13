@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import axios from 'axios'
 
+
 // this is message setup (ant design)
 const messageDrop = (type, content) => {
     message.open({
@@ -27,10 +28,10 @@ const greyColor = {
 const URL = window.location.href
 const id = URL.split('/').pop()
 
-const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject ,ccAddress ,setReplySendStatus, content}) => {
+const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, setReplySendStatus, content }) => {
     const { Text, Title } = Typography
     const navigate = useNavigate();
-    const ZOHOmailAccountDetailResponcePrimaryEmailAddress = JSON.parse(sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress')) || []
+    const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
     const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
     const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
     const [error, setError] = useState([])
@@ -47,7 +48,7 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject ,ccAddress ,set
         setMailData({
             fromAddress: ZOHOmailAccountDetailResponcePrimaryEmailAddress ?? '',
             toAddress: toAddress ? toAddress : '',
-            ccAddress: ccAddress ? ccAddress : '' ,
+            ccAddress: ccAddress ? ccAddress : '',
             subject: '',
             content: content ? content : '',
         })
@@ -93,7 +94,7 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject ,ccAddress ,set
         sendReplyMail()
     }
 
-    const sendReplyMail = () => {
+    const sendReplyMail = () => { // sending reply mail
         if (!Array.isArray(ZOHOmailMessageAccessToken)) {
             const mailAccessCredencial = async () => {
                 const data = {
@@ -104,7 +105,7 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject ,ccAddress ,set
                         "subject": `${mailData.subject !== '' ? (content ? `Fwd : Re: ${mailData.subject}` : `Re: ${mailData.subject}`) : (content ? `Fwd : Re: ${subject}` : `Re: ${subject}`)}`,
                         "content": `${content ? `Fwd : ${content}` : mailData.content}`,
                         "action": `reply`,
-                        "askReceipt" : `no`
+                        "askReceipt": `no`
                     }
                 }
 
@@ -136,6 +137,7 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject ,ccAddress ,set
     const backFunction = () => {
         return window.history.back(-1)
     }
+
 
     return (
         <div>

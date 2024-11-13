@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express()
 const qs = require('qs')
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const { theme } = require('antd')
 require('dotenv').config()
 
 app.use(express.json()) // Parse incoming JSON
@@ -58,6 +59,8 @@ app.post('/api/token', async (req, res) => { // tbhis line get the data from cor
                 }
             }
         )
+        console.log(response.data);
+
         res.json(response.data)
     } catch (error) {
         res.status(error.response ? error.response.status : 500).json({
@@ -85,13 +88,13 @@ app.post('/api/userdetail', async (req, res) => {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }
-        )        
+        )
         const getingUserDetail = await axios.get('https://meeting.zoho.com/api/v2/user.json', // extra post request for get the user account deatil
             {
                 headers: {
                     'Authorization': `Zoho-oauthtoken ${response.data.access_token}`
                 }
-            })            
+            })
         res.json(getingUserDetail.data)
         return
 
@@ -183,14 +186,14 @@ app.post('/api/edit', async (req, res) => {
     const { session } = await req.body
     const { extras } = req.query
     try {
-        let URL = `https://meeting.zoho.comz/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`
+        let URL = `https://meeting.zoho.com/api/v2/${await extras.zsoid}/sessions/${await extras.meetingKey}.json`
         const editMeeting = await fetch(
             URL,
             {
                 method: 'PUT',
                 headers: {
-                    'Authorization': `Zoho-oauthtoken ${await extras.access_token}`,
                     'Content-Type': 'application/json',
+                    'Authorization': `Zoho-oauthtoken ${await extras.access_token}`,
                 },
                 body: JSON.stringify({ session }),
             }
@@ -222,7 +225,7 @@ app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get t
                 }
             }
         )
-        
+
         const fecthingZOHOmeetingAccountDetails = await axios.get('https://mail.zoho.com/api/accounts', // extra post request for get the user account deatil
             {
                 headers: {
@@ -234,7 +237,6 @@ app.post('/api/mailAccountToken', async (req, res) => {  //  this code for get t
             getZOHOmeetingAccessToken: getZOHOmeetingAccessToken?.data,
             fecthingZOHOmeetingAccountDetails: fecthingZOHOmeetingAccountDetails?.data?.data
         }
-
         res.json(getTokensAndFetchedAccountDetail)
         return
     } catch (error) {
@@ -271,7 +273,7 @@ app.post('/api/mailFolder', async (req, res) => {
                     'Authorization': `Zoho-oauthtoken ${await response?.data?.access_token}`
                 }
             })
-        
+
         const getTokensAndFolderDetail = {
             getZOHOfolderAccessToken: response?.data,
             getZOHOfolderDetails: getFolderDetail?.data?.data
@@ -296,7 +298,7 @@ app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {
         grant_type: req.body.grant_type
     }
     try {
-        const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
+        const getZOHOmailMessageAccessToken = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
             {
                 headers: {
@@ -304,9 +306,9 @@ app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {
                 }
             }
         )
-        res.json(response.data)
-        return
+        res.json(getZOHOmailMessageAccessToken.data)
     } catch (error) {
+        console.log(error)
         res.status(error.response ? error.response.status : 500).json({
             message: error.message,
             error: error.response ? error.response.data : null
@@ -318,17 +320,18 @@ app.post('/api/ZOHOmailMessageAccessToken', async (req, res) => {
 app.post('/api/mailList', async (req, res) => {
     const { session } = await req.body
     const mailAccessToken = session?.mailAccess_token
+
     try {
         let URI = `https://mail.zoho.com/api/accounts/${session.mailAccountID}/messages/view?folderId=${session.mailFolderID}&start=1&limit=200`
         const listMeeting = await fetch(URI,
             {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Zoho-oauthtoken ${JSON.parse(mailAccessToken)}`,
+                    'Authorization': `Zoho-oauthtoken ${mailAccessToken}`,
                 },
             }
         )
-        const data = await listMeeting.json()       
+        const data = await listMeeting.json()
         res.json(data)
     } catch (error) {
         res.status(500).json({ message: "Failed to list meeting", error: error.message });
@@ -347,7 +350,7 @@ app.post('/api/maildelete', async (req, res) => {
             {
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Zoho-oauthtoken ${JSON.parse(mailAccessToken)}`,
+                    'Authorization': `Zoho-oauthtoken ${mailAccessToken}`,
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Accept': 'application/json'
                 },
@@ -380,7 +383,7 @@ app.post('/api/sendMail', async (req, res) => {
         if (!response.ok) {
             throw new Error(`Failed to create meeting: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
         res.json(data)
     } catch (error) {
@@ -388,27 +391,41 @@ app.post('/api/sendMail', async (req, res) => {
     }
 })
 
-// this is for deleting the ZOHO 
+// this is for showing the individual mail(ZOHO) data  
 app.post('/api/mailDataIndividual', async (req, res) => {
     const { session } = await req.body
     const mailAccessToken = session?.mailAccess_token
 
     try {
-        let URL = `https://mail.zoho.com/api/accounts/${session?.mailAccountID}/folders/${session?.mailFolderID}/messages/${session?.showZOHOMailMessage}/details`
-        const listIndividual = await fetch(
-            URL,
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Zoho-oauthtoken ${JSON.parse(mailAccessToken)}`,
-                    'Accept': 'application/json'
-                },
+        let URLs = [
+            `https://mail.zoho.com/api/accounts/${session?.mailAccountID}/folders/${session?.mailFolderID}/messages/${session?.showZOHOMailMessage}/details`,
+            `https://mail.zoho.com/api/accounts/${session?.mailAccountID}/folders/${session?.mailFolderID}/messages/${session?.showZOHOMailMessage}/content`
+        ]
+
+        const responce = await Promise.all(URLs.map(async (url) => {
+            const fetching = await fetch(
+                url,
+                {
+                    method: 'GET',
+                    headers: {
+                        "Accept": `application/json`,
+                        "Content-Type": "application/json",
+                        "Authorization": `Zoho-oauthtoken ${mailAccessToken}`
+                    }
+                }
+            )
+            if (!fetching.ok) {
+                throw new Error(`Failed to access individual mail`)
             }
-        )
-        const data = await listIndividual.json();
-        res.json(data)
+            return fetching.json();
+        }))
+
+        const [detail, content] = responce
+
+        res.json({ detail, content })
     } catch (error) {
-        res.status(500).json({ message: "Failed to delete meeting", error: error.message });
+        console.log(error);
+        // res.status(500).json({ message: "Failed to delete meeting", error: error.message });
     }
 })
 
@@ -416,7 +433,7 @@ app.post('/api/mailDataIndividual', async (req, res) => {
 app.post('/api/mailDataIndividualReply', async (req, res) => {
     const session = req.body // this is session credencial
     const { extras } = req.query  // this is for get the extra information like zsoid and access token 
-     
+
     try {
         const response = await fetch(
             `https://mail.zoho.com/api/accounts/${extras?.accountId}/messages/${extras?.messageId}`,
@@ -433,15 +450,13 @@ app.post('/api/mailDataIndividualReply', async (req, res) => {
         if (!response.ok) {
             throw new Error(`Failed to create meeting: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
         res.json(data)
     } catch (error) {
         res.status(500).json({ message: "Failed to send Mail", error: error.message });
     }
 })
-
-
 
 // running the node in 3002 port
 const PORT = 3002

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import './MeetingDetail.css'
+import { getZohoAuth_Code } from 'api-auth-zoho'
 
 // this is message ele from antd
 function messageLoading() {
@@ -43,15 +44,12 @@ const MeetingStep = () => {
   }
 
   // this is zoho meeting integration code
-  const fetchZOHOmeetingUserDetail = async () => { // this code for getting org id
-    const paramsData = {
-      scope: 'ZohoMeeting.manageOrg.READ',
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      response_type: 'code',
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      access_type: 'offline'
-    }
-    window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
+  const fetchZOHOmeetingUserDetail = () => { // this code for getting org id
+    const scope = 'ZohoMeeting.manageOrg.READ'
+    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
+
+    getZohoAuth_Code(scope, client_id, redirect_uri)
   }
 
   const fetchZOHOmeetingAccessToken = () => {
@@ -61,59 +59,47 @@ const MeetingStep = () => {
     }, [1 * 1000])
   }
 
-  const GetZOHO_MeetingAccessToken = async () => { // this code for getting access token
-    const paramsData = {
-      scope: 'ZohoMeeting.meeting.ALL',
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      response_type: 'code',
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      access_type: 'offline'
-    }
-    window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&redirect_uri=${paramsData.redirect_uri}&access_type=${paramsData.access_type}`
+  const GetZOHO_MeetingAccessToken = () => { // this code for getting access token
+    const scope = 'ZohoMeeting.meeting.ALL'
+    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
+
+    getZohoAuth_Code(scope, client_id, redirect_uri)
   }
 
 
   // ZOHO mail integration code
-  const fetchZOHOMailAccountDetail = async () => { // this is for getting mail account_id.
-    const paramsData = {
-      scope: 'ZohoMail.accounts.ALL',
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      response_type: 'code',
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      access_type: 'offline'
-    }
-    window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
- }
+  const fetchZOHOMailAccountDetail = () => { // This is for getting mail account_id.
+    const scope = 'ZohoMail.accounts.ALL'
+    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 
-   // this is ZOHO mail integration code
-   const fetchZOHOMailFolders = async () => { // this is for getting mail account_id.
-    const paramsData = {
-      scope: 'ZohoMail.folders.ALL',
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      response_type: 'code',
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      access_type: 'offline'
-    }
-    window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
- }
+    getZohoAuth_Code(scope, client_id, redirect_uri)
+  }
 
- const fetchZOHOMailAccessToken = () => {
-  messageLoading()
-  setTimeout(() => {
-    getZOHOmailMessageAccessToken()
-  }, [1 * 1000]) 
-}
+  // This is ZOHO mail integration code
+  const fetchZOHOMailFolders = () => { // This is for getting mail account_id. 
+    const scope = 'ZohoMail.folders.ALL'
+    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 
-  // this for getting ZOHO mail access token
-  const getZOHOmailMessageAccessToken = async () => { 
-    const paramsData = {
-      scope: 'ZohoMail.messages.ALL',
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      response_type: 'code',
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      access_type: 'offline'
-    }
-    window.location.href = `https://accounts.zoho.com/oauth/v2/auth?scope=${paramsData.scope}&client_id=${paramsData.client_id}&response_type=${paramsData.response_type}&access_type=offline&redirect_uri=${paramsData.redirect_uri}`
+    getZohoAuth_Code(scope, client_id, redirect_uri)
+  }
+
+  const fetchZOHOMailAccessToken = () => {
+    messageLoading()
+    setTimeout(() => {
+      getZOHOmailMessageAccessToken()
+    }, [1 * 1000])
+  }
+
+  // This for getting ZOHO mail access token
+  const getZOHOmailMessageAccessToken = () => {
+    const scope = 'ZohoMail.messages.ALL'
+    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
+
+    getZohoAuth_Code(scope, client_id, redirect_uri)
   }
 
   return (
@@ -125,8 +111,8 @@ const MeetingStep = () => {
             <Col className='headstyle' onClick={ZOHOmeetingIntegration} style={{ color: meetingInt ? 'white' : 'black', backgroundColor: meetingInt ? '#5a3bb6' : 'transparent', padding: '5px', minWidth: '200px' }}> <span>Get Meeting Tokens</span> </Col>
             <Col className='headstyle' onClick={ZOHOmailIntegration} style={{ color: mailInt ? 'white' : 'black', backgroundColor: mailInt ? '#5a3bb6' : 'transparent', padding: '5px', minWidth: '200px' }}><span>Get Mail Tokens</span> </Col>
           </Row>
-          <Row style={{paddingTop:'5px'}} justify={"start"}>
-            <span style={{color:'gray',fontStyle:'italic',marginLeft:'15px'}}>Retrieve <span style={{color:'red',textTransform:'capitalize'}}> all </span> tokens for integration</span> 
+          <Row style={{ paddingTop: '5px' }} justify={"start"}>
+            <span style={{ color: 'gray', fontStyle: 'italic', marginLeft: '15px' }}>Retrieve <span style={{ color: 'red', textTransform: 'capitalize' }}> all </span> tokens for integration</span>
           </Row>
         </Col>
 
@@ -208,10 +194,10 @@ const MeetingStep = () => {
             />
           </Row>
 
-          <Row justify={'space-evenly'} style={{ padding: '30px'}}>
-              <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>GET ZOHO <span style={{color:'red'}}> MAIL ACCOUNT ACCESS</span>TOKEN </Button>
-              <Button onClick={fetchZOHOMailFolders} style={stylesForPadding}>GET ZOHO <span style={{color:'red'}}> MAIL FOLDER ACCESS</span>TOKEN</Button>
-              <Button onClick={fetchZOHOMailAccessToken} style={stylesForPadding}>GET ZOHO <span style={{color:'red'}}>MAIL MESSAGE ACCESS </span>TOKEN</Button>
+          <Row justify={'space-evenly'} style={{ padding: '30px' }}>
+            <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}> MAIL ACCOUNT ACCESS</span>TOKEN </Button>
+            <Button onClick={fetchZOHOMailFolders} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}> MAIL FOLDER ACCESS</span>TOKEN</Button>
+            <Button onClick={fetchZOHOMailAccessToken} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}>MAIL MESSAGE ACCESS </span>TOKEN</Button>
           </Row>
         </>
       }

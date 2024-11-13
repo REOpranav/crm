@@ -27,7 +27,7 @@ const SendMail = () => {
   const { Text, Title } = Typography
   const navigate = useNavigate();
   const [sendLeadMail, setSendMailSend] = useState('')
-  const ZOHOmailAccountDetailResponcePrimaryEmailAddress = JSON.parse(sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress')) || []
+  const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
   const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
   const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
   const [error, setError] = useState([])
@@ -37,7 +37,7 @@ const SendMail = () => {
     ccAddress: '',
     subject: '',
     content: '',
-  })
+  })  
 
  const fecthingLeadDetailForMail = async () => { // this code for initial load and when lead added
     try {
@@ -118,7 +118,7 @@ const SendMail = () => {
     sendMail()
   }
 
-  const sendMail = () => {
+  const sendMail = () => {    
     if (!Array.isArray(ZOHOmailMessageAccessToken)) {
       const mailAccessCredencial = async () => {
         const data = {
@@ -135,8 +135,8 @@ const SendMail = () => {
         const extras = {
           "params": {
             "extras": {
-              "accountId": ZOHOmailAccountdID && JSON.parse(ZOHOmailAccountdID),
-              "access_token": `${JSON.parse(ZOHOmailMessageAccessToken)}`,
+              "accountId": ZOHOmailAccountdID && ZOHOmailAccountdID,
+              "access_token": ZOHOmailMessageAccessToken,
             }
           }
         }
