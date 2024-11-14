@@ -140,23 +140,25 @@
     height: 100%;
     z-index: 1000;
     box-shadow: -5px 0px 14px rgba(49, 57, 73, .24);
-    overflow-x: auto;
     animation: profileRight 0.6s;
 }
 
-#individualMessage{
-    width: 100%;
+#individualMessage {
+    text-align: justify;
+    padding: 10px;
+    min-width: 100%;
+    overflow-x: scroll;
 }
 
 .sideBarOpen:hover {
     cursor: auto;
 }
 
-.closingTabArrow{
-    transition: all 0.2s ease-in-out ;
+.closingTabArrow {
+    transition: all 0.2s ease-in-out;
 }
 
-.closingTabArrow:hover{
+.closingTabArrow:hover {
     cursor: pointer;
     color: blueviolet;
 }
@@ -176,6 +178,14 @@
     text-shadow: 1px 1px 30px #ddd;
 }
 
+.subject>span {
+    font-family: var(--mailFont);
+    font-weight: bold;
+    font-size: large;
+    z-index: 1000;
+    padding: 10px;
+}
+
 .fromAddress {
     color: #7150d6;
     font-style: italic;
@@ -187,6 +197,13 @@
     border-bottom: 1px solid #ddd;
     color: grey;
     font-style: italic;
+}
+
+.mailHeaders {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white; 
 }
 
 .summaryHead {
@@ -203,11 +220,13 @@
     padding: 10px;
 }
 
+/* this is reply replyall and forword */
 .ExtrasFeatures {
-    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #7150d6;
     font-family: var(--mailFont);
-    background-color: rgb(239, 232, 255);
     font-weight: 500;
     padding: 10px;
 }
@@ -219,12 +238,18 @@
 .reply,
 .replyAll,
 .forward {
-    padding: 4px;
+    padding: 10px;
     transition: all 0.2s ease-in-out;
 }
 
-.reply:hover,.replyAll:hover,.forward:hover{
-    background-color:white;
-    color:red;
+.reply:hover,
+.replyAll:hover,
+.forward:hover {
+    background-color: white;
+    color: red;
     min-height: 100%;
+}
+
+.zohoIndividualReplyMail {
+    transition: all 0.5s ease-in-out;
 }

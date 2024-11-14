@@ -32,8 +32,7 @@ const messageDrop = (type, content) => {
 }
 
 const replyHeading = {
-  color: 'red',
-  marginTop: '10px'
+  padding: '10px'
 }
 
 let autharizationCode = Authcode
@@ -323,13 +322,13 @@ const MailLog = () => {
 
   useEffect(() => {
     if (Authcode !== null) {
-      // userdefine() // meeting user account
+      userdefine() // meeting user account
     }
   }, [undefined])
 
   useEffect(() => {
     if (Authcode !== null) {
-      // ZOHO_Meeting_Access_Token() // meeting access token
+      ZOHO_Meeting_Access_Token() // meeting access token
     }
   }, [undefined])
 
@@ -388,14 +387,18 @@ const MailLog = () => {
           <Col span={23}>
             {profilView && !Array.isArray(individualMailMessage_content) && // this code for showing the individual mail message when they click the messages in mailLog
               <Row className={profilView && 'sideBarOpen'}>
-                <Col span={24} style={{ color: 'black' }}>
-                  <Row id='closeProfileTab' onClick={() => profileView()}> <p> <RxArrowLeft size={20} color='grey' className='closingTabArrow' /></p></Row>
-                  <Row justify={'center'} className='subject'><Title level={4} style={{ zIndex: 1000 }}>{individualMailMessage_details?.data?.subject}</Title></Row>
-                  <Row justify={'center'} className='fromAddress'>From : {individualMailMessage_details?.data?.fromAddress}</Row>
-                  <Row justify={'center'} className='ccAddress'>ccAddress : {individualMailMessage_details?.data?.ccAddress ? ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) : '-'}</Row>
+                <Col span={24} style={{ color: 'black' }} >
+                  <Row className='mailHeaders'>
+                    <Col span={24} >
+                      <Row id='closeProfileTab' onClick={() => profileView()}> <p> <RxArrowLeft size={20} color='grey' className='closingTabArrow' /></p></Row>
+                      <Row justify={'center'} className='subject'><span >{individualMailMessage_details?.data?.subject}</span></Row>
+                      <Row justify={'center'} className='fromAddress'>From : {individualMailMessage_details?.data?.fromAddress}</Row>
+                      <Row justify={'center'} className='ccAddress'>ccAddress : {individualMailMessage_details?.data?.ccAddress ? ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) : '-'}</Row>
+                    </Col>
+                  </Row>
+
                   <Row justify={'start'} className='summaryHead'>Summary :</Row>
-                  <Row justify={'start'} className='messagegSummery'>{individualMailMessage_details?.data?.summary}</Row>
-                  <Row><div id='individualMessage' style={{textAlign:'justify'}}></div></Row>
+                  <Row><div id='individualMessage'></div></Row>
                   <Row justify={'start'} className='ExtrasFeatures'>
                     <Col onClick={() => { setZohoIndividualReplyAllMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyMail(true) }}> <span className='reply'>Reply</span></Col>
                     <Col onClick={() => { setZohoIndividualReplyMail(false); setZohoIndividualForwardMail(false); setZohoIndividualReplyAllMail(true) }} style={{ marginLeft: '20px' }}> <span className='replyAll'>Reply All</span></Col>
@@ -404,9 +407,9 @@ const MailLog = () => {
 
 
                   {zohoIndividualReplyMail &&
-                    <Row>
+                    <Row className={zohoIndividualReplyMail && 'zohoIndividualReplyMail'}>
                       <Col span={24}>
-                        <Row justify={'center'} style={replyHeading}>REPLY</Row>
+                        <Row justify={'center'} style={{ textTransform: '' }}>Reply :</Row>
                         <ZOHOIndividualReplyMail
                           toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
                           messageID={individualMailMessage_details?.data?.messageId}
@@ -419,7 +422,7 @@ const MailLog = () => {
                   {zohoIndividualReplyAllMail &&
                     <Row>
                       <Col span={24}>
-                        <Row justify={'center'} style={replyHeading}>REPLY ALL</Row>
+                        <Row justify={'center'} style={replyHeading}>REPLY ALL :</Row>
                         <ZOHOIndividualReplyMail
                           toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
                           messageID={individualMailMessage_details?.data?.messageId}
@@ -433,7 +436,7 @@ const MailLog = () => {
                   {zohoIndividualForwardMail &&
                     <Row>
                       <Col span={24}>
-                        <Row justify={'center'} style={replyHeading}>FORWARD</Row>
+                        <Row justify={'center'} style={replyHeading}>FORWARD :</Row>
                         <ZOHOIndividualReplyMail
                           toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
                           messageID={individualMailMessage_details?.data?.messageId}
