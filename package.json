@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react": "^18.3.3",
     "antd": "^5.20.0",
-    "api-auth-zoho": "^1.0.13",
+    "api-auth-zoho": "^1.0.15",
     "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "configbee-openfeature-provider-web": "^0.0.0-alpha.6",

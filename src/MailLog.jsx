@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
 import { Button, Col, Image, message, Popconfirm, Row, Space, Tooltip, Typography, Spin } from 'antd'
 import axios from 'axios'
-import { json, Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './MailLog.css'
 import { CiMail } from "react-icons/ci";
 import { MdOutlineAirlineSeatLegroomReduced, MdOutlineDeleteOutline } from "react-icons/md";

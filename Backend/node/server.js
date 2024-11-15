@@ -59,8 +59,6 @@ app.post('/api/token', async (req, res) => { // tbhis line get the data from cor
                 }
             }
         )
-        console.log(response.data);
-
         res.json(response.data)
     } catch (error) {
         res.status(error.response ? error.response.status : 500).json({
@@ -79,7 +77,6 @@ app.post('/api/userdetail', async (req, res) => {
         redirect_uri: req.body.redirect_uri,
         grant_type: req.body.grant_type
     }
-
     try {
         const response = await axios.post('https://accounts.zoho.com/oauth/v2/token',
             qs.stringify(accessTokenParams),// zoho must want the params in url encoded type.so that's why we send it in qs (qs is a liabrary)
