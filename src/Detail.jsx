@@ -21,7 +21,7 @@ const Detail = () => {
   const [callLogs, setCallLogs] = useState('')
   const [mailLog, setMailLogs] = useState('')
   const navigation = useNavigate() //this is for navigation
-  const [gmail,setGmail] = useState(false)
+  const [gmail, setGmail] = useState(false)
 
   const URL = window.location.href
   const id = URL.split('/').pop()
@@ -143,13 +143,13 @@ const Detail = () => {
   };
 
   // this is for store the Mail log
-  const makeMail = (number) => {
+  const makeMail = (mailID) => {
     const data = {
       id: id,
       date: moment().format('MMMM Do YYYY, h:mm:ss a')
     }
 
-    if (number) {
+    if (mailID) {
       const logPost = async () => {
         try {
           const URL = `http://localhost:3000/emailLogs`
@@ -162,7 +162,7 @@ const Detail = () => {
             message.success('Mail are stored in Mail log')
           }
           if (posting.status === 201) {
-            window.location.href = `mailto:${number}`
+            window.location.href = `mailto:${mailID}`
           }
         } catch (err) {
           if (err.response) {
@@ -196,17 +196,21 @@ const Detail = () => {
         </Flex>
 
         <Flex gap={'small'}>
-           <div style={{backgroundColor:'rgb(239, 232, 255)',borderRadius:'5px'}}>
-              <Button onClick={() => setGmail(true)} type={gmail ? 'default' : 'text'}>
-                <a href={`mailto:${leadData.email}`}>Send Google mail</a>
+          <div style={{ backgroundColor: 'rgb(239, 232, 255)', borderRadius: '5px' }}>
+            <Button onClick={() => {
+              setGmail(true)
+              makeMail(leadData.email)
+            }
+            } type={gmail ? 'default' : 'text'}>
+              <a href={`mailto:${leadData.email}`}>Send Google mail</a>
+            </Button>
+
+            <Link to={`/ZOHOmailsend/lead/${id}`}>
+              <Button onClick={() => setGmail(false)} type={gmail ? 'text' : 'default'}>
+                Send Zoho mail
               </Button>
-            
-              <Link to={`/mailsend/lead/${id}`}>
-                <Button onClick={() => setGmail(false)} type={gmail ? 'text':'default'}>
-                  Send Zoho mail
-                </Button>
-              </Link>
-           </div>
+            </Link>
+          </div>
 
           <Dropdown menu={{ items }} placement='bottomCenter'>
             <Button type='primary'>Convert</Button>

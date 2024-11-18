@@ -20,9 +20,6 @@ const required = {
   color: 'red'
 }
 
-const URL = window.location.href
-const id = URL.split('/').pop()
-
 const SendMail = () => {
   const { Text, Title } = Typography
   const navigate = useNavigate();
@@ -41,7 +38,50 @@ const SendMail = () => {
 
  const fecthingLeadDetailForMail = async () => { // this code for initial load and when lead added
     try {
-      const responce = await axios.get(`http://localhost:3000/leads/${id}`)
+      const URL = window.location.href
+      const ids = URL.split('/').pop()
+      
+      const responce = await axios.get(`http://localhost:3000/leads/${ids}`)      
+      if (responce.status === 200) {
+        setSendMailSend(await responce.data.email);
+      }
+    } catch (err) {
+      if (err.response) {
+        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    }
+  }
+
+  const fecthingContactDetailForMail = async () => { // this code for initial load for getting the to-address from contact  
+    try {
+      const URL = window.location.href
+      const ids = URL.split('/').pop()
+      
+      const responce = await axios.get(`http://localhost:3000/contacts/${ids}`)      
+      if (responce.status === 200) {
+        setSendMailSend(await responce.data.email);
+      }
+    } catch (err) {
+      if (err.response) {
+        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    }
+  }
+
+  const fecthingAccountDetailForMail = async () => { // this code for initial load for getting the to-address from contact  
+    try {
+      const URL = window.location.href
+      const ids = URL.split('/').pop()
+      
+      const responce = await axios.get(`http://localhost:3000/accounts/${ids}`)      
       if (responce.status === 200) {
         setSendMailSend(await responce.data.email);
       }
@@ -162,7 +202,10 @@ const SendMail = () => {
   useEffect(() => {
     if ((window.location.pathname).includes('lead')) {
       fecthingLeadDetailForMail()
-      // from contact
+    }else if ((window.location.pathname).includes('contact')) {
+      fecthingContactDetailForMail()
+    }else if ((window.location.pathname).includes('account')) {
+      fecthingAccountDetailForMail()
     }
   }, [undefined])
 

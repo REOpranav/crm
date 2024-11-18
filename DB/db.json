@@ -37,6 +37,215 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "973777977",
+      "leadowner": "Sukesh Kumar",
+      "firstname": "Ben",
+      "lastname": "10",
+      "email": "ben10@gmail.com",
+      "mobile": "1289823883",
+      "date": "2023-12-16",
+      "companyName": "",
+      "annualrevenue": "2000",
+      "gender": "Mouse",
+      "area": "Chennai",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "989664781",
+      "leadowner": "Pranav",
+      "firstname": "Vinod",
+      "lastname": "Purvakam",
+      "email": "simple@gmail.com",
+      "mobile": "9812982812",
+      "date": "2024-12-17",
+      "companyName": "ZOHO",
+      "annualrevenue": "",
+      "gender": "Male",
+      "area": "chennai",
+      "state": "",
+      "country": "",
+      "pincode": "9829382",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "533065961",
+      "leadowner": "john",
+      "firstname": "John",
+      "lastname": "Doe",
+      "email": "john.doe@example.com",
+      "mobile": "9876543210",
+      "date": "2025-10-01",
+      "companyName": "TechCorp",
+      "annualrevenue": "500000",
+      "gender": "Male",
+      "area": "Downtown",
+      "state": "California",
+      "country": "USA",
+      "pincode": "90210",
+      "expectedAmount": "100000",
+      "website": "https://techcorp.com",
+      "description": "A tech-savvy individual"
+    },
+    {
+      "id": "533065962",
+      "leadowner": "jane",
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "email": "jane.smith@example.com",
+      "mobile": "9123456780",
+      "date": "2025-09-15",
+      "companyName": "HealthPlus",
+      "annualrevenue": "200000",
+      "gender": "Female",
+      "area": "Uptown",
+      "state": "Texas",
+      "country": "USA",
+      "pincode": "75001",
+      "expectedAmount": "50000",
+      "website": "https://healthplus.com",
+      "description": "Interested in health products"
+    },
+    {
+      "id": "533065963",
+      "leadowner": "raj",
+      "firstname": "Raj",
+      "lastname": "Kumar",
+      "email": "raj.kumar@example.in",
+      "mobile": "8899776655",
+      "date": "2025-08-20",
+      "companyName": "IndTech",
+      "annualrevenue": "300000",
+      "gender": "Male",
+      "area": "MG Road",
+      "state": "Karnataka",
+      "country": "India",
+      "pincode": "560001",
+      "expectedAmount": "80000",
+      "website": "https://indtech.in",
+      "description": "Seeking investment opportunities"
+    },
+    {
+      "id": "533065964",
+      "leadowner": "lisa",
+      "firstname": "Lisa",
+      "lastname": "Morris",
+      "email": "lisa.morris@example.com",
+      "mobile": "8765432109",
+      "date": "2025-07-30",
+      "companyName": "EcoGreen",
+      "annualrevenue": "150000",
+      "gender": "Female",
+      "area": "Central Park",
+      "state": "New York",
+      "country": "USA",
+      "pincode": "10001",
+      "expectedAmount": "40000",
+      "website": "https://ecogreen.com",
+      "description": "Promoting eco-friendly products"
+    },
+    {
+      "id": "533065965",
+      "leadowner": "mike",
+      "firstname": "Mike",
+      "lastname": "Johnson",
+      "email": "mike.johnson@example.com",
+      "mobile": "9988776655",
+      "date": "2025-06-25",
+      "companyName": "BuildIt",
+      "annualrevenue": "600000",
+      "gender": "Male",
+      "area": "Main Street",
+      "state": "Florida",
+      "country": "USA",
+      "pincode": "33101",
+      "expectedAmount": "120000",
+      "website": "https://buildit.com",
+      "description": "Looking for construction partnerships"
+    },
+    {
+      "id": "533065966",
+      "leadowner": "priya",
+      "firstname": "Priya",
+      "lastname": "Sharma",
+      "email": "priya.sharma@example.in",
+      "mobile": "9876532104",
+      "date": "2025-05-10",
+      "companyName": "FashionHub",
+      "annualrevenue": "400000",
+      "gender": "Female",
+      "area": "Connaught Place",
+      "state": "Delhi",
+      "country": "India",
+      "pincode": "110001",
+      "expectedAmount": "70000",
+      "website": "https://fashionhub.in",
+      "description": "Expanding fashion retail"
+    },
+    {
+      "id": "533065967",
+      "leadowner": "ali",
+      "firstname": "Ali",
+      "lastname": "Khan",
+      "email": "ali.khan@example.pk",
+      "mobile": "1234567890",
+      "date": "2025-04-20",
+      "companyName": "SmartSolutions",
+      "annualrevenue": "250000",
+      "gender": "Male",
+      "area": "Liberty Market",
+      "state": "Punjab",
+      "country": "Pakistan",
+      "pincode": "54000",
+      "expectedAmount": "60000",
+      "website": "https://smartsolutions.pk",
+      "description": "Technology-driven initiatives"
+    },
+    {
+      "id": "533065969",
+      "leadowner": "wang",
+      "firstname": "Wang",
+      "lastname": "Li",
+      "email": "wang.li@example.cn",
+      "mobile": "9087654321",
+      "date": "2025-02-10",
+      "companyName": "ChinaTrade",
+      "annualrevenue": "800000",
+      "gender": "Male",
+      "area": "Shanghai",
+      "state": "Shanghai",
+      "country": "China",
+      "pincode": "200001",
+      "expectedAmount": "200000",
+      "website": "https://chinatrade.cn",
+      "description": "Import-export specialist"
+    },
+    {
+      "id": "533065970",
+      "leadowner": "maria",
+      "firstname": "Maria",
+      "lastname": "Gonzalez",
+      "email": "maria.gonzalez@example.mx",
+      "mobile": "7788996655",
+      "date": "2025-01-05",
+      "companyName": "AgroMex",
+      "annualrevenue": "450000",
+      "gender": "Female",
+      "area": "Central Market",
+      "state": "Mexico City",
+      "country": "Mexico",
+      "pincode": "06000",
+      "expectedAmount": "70000",
+      "website": "https://agromex.mx",
+      "description": "Agriculture-focused"
     }
   ],
   "contacts": [
@@ -45,7 +254,7 @@
       "leadowner": "vadivel",
       "firstname": "pranavavadivel",
       "lastname": "some",
-      "email": "some@gmail.com",
+      "email": "boosingpranav@gmail.com",
       "mobile": "9988888888",
       "date": "2024-10-19",
       "companyName": "SUN LED LETTERS",
@@ -115,6 +324,25 @@
       "expectedAmount": "",
       "website": "",
       "description": ""
+    },
+    {
+      "id": "533065968",
+      "leadowner": "emma",
+      "firstname": "Emma",
+      "lastname": "Watson",
+      "email": "emma.watson@example.com",
+      "mobile": "8098765432",
+      "date": "2025-03-15",
+      "companyName": "EduWorld",
+      "annualrevenue": "350000",
+      "gender": "Female",
+      "area": "Baker Street",
+      "state": "London",
+      "country": "UK",
+      "pincode": "NW16XE",
+      "expectedAmount": "50000",
+      "website": "https://eduworld.uk",
+      "description": "Educational services provider"
     }
   ],
   "accounts": [
@@ -175,50 +403,7 @@
       "description": ""
     }
   ],
-  "deals": [
-    {
-      "id": "331083644",
-      "key": "233401655",
-      "dealowner": "sdkc ",
-      "dealName": "kmsdck",
-      "accountName": "",
-      "amount": "1",
-      "Pipeline": "",
-      "stage": "stage 1",
-      "closingDate": "2024-10-26",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "1",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "236192080",
-      "key": "166594073",
-      "dealowner": "reddy anna",
-      "dealName": "vadivel deal",
-      "accountName": "",
-      "amount": "1000",
-      "Pipeline": "",
-      "stage": "stage 1",
-      "closingDate": "2024-10-23",
-      "companyName": "",
-      "email": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    }
-  ],
+  "deals": [],
   "callLogs": [
     {
       "id": "789012335",
@@ -335,6 +520,18 @@
     {
       "id": "38979345",
       "date": "October 9th 2024, 12:15:40 am"
+    },
+    {
+      "id": "533065960",
+      "date": "November 18th 2024, 12:01:47 pm"
+    },
+    {
+      "id": "533065960",
+      "date": "November 18th 2024, 12:02:26 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:07:46 pm"
     }
   ],
   "emailLogs": [
@@ -589,6 +786,74 @@
     {
       "id": "533065960",
       "date": "October 28th 2024, 5:30:30 pm"
+    },
+    {
+      "id": "794498118",
+      "date": "November 18th 2024, 11:40:39 am"
+    },
+    {
+      "id": "794498118",
+      "date": "November 18th 2024, 11:41:15 am"
+    },
+    {
+      "id": "794498118",
+      "date": "November 18th 2024, 11:58:07 am"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:05:44 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:06:23 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:06:54 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:07:00 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:08:27 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:09:03 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:09:20 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 12:09:29 pm"
+    },
+    {
+      "id": "53325032",
+      "date": "November 18th 2024, 12:10:13 pm"
+    },
+    {
+      "id": "713268902",
+      "date": "November 18th 2024, 12:13:05 pm"
+    },
+    {
+      "id": "713268902",
+      "date": "November 18th 2024, 12:14:24 pm"
+    },
+    {
+      "id": "672324717",
+      "date": "November 18th 2024, 12:53:06 pm"
+    },
+    {
+      "id": "236192080",
+      "date": "November 18th 2024, 1:00:22 pm"
+    },
+    {
+      "id": "671456011",
+      "date": "November 18th 2024, 1:03:34 pm"
     }
   ],
   "formLayout": [

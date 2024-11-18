@@ -19,7 +19,7 @@ const LeadBoard = () => {
   const [searching, setSearching] = useState('') // this searching for lead
   const [calculateSymbol, setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setselectedRowKeys] = useState([])
-
+  
   const filter = leadData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction = {  // this object for finiding the === object
       'equal to': (a, b) => a == b,
@@ -31,8 +31,6 @@ const LeadBoard = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol];
-    console.log(value[selectedOption]);
-
     const finalValues = comparisonFn(value[selectedOption].toLowerCase(), searching.toString().toLowerCase())
     return finalValues
   })
@@ -98,7 +96,7 @@ const LeadBoard = () => {
     fetching()
   }, [undefined, selectedRowKeys])
 
-  // this code for appending field name into antd table
+  // this code for appending field name into antd table  
   const data = []
   for (const datas of filter.length !== 0 ? filter : leadData) { // telling if filtered data are available show that only or show all data in webpage
     let changeTOObject = {

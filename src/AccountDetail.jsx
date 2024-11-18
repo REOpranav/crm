@@ -15,6 +15,7 @@ const AccountDetail = () => {
   const [selectRowKey, setSelectedRowKey] = useState('')
   const [deleteInnerDealRow, setDeleteInnerDealRow] = useState(false)
   const [loadTime, setLoadTime] = useState(false)
+  const [gmail, setGmail] = useState(false)
 
   // this is get the id from URL
   const URL = window.location.href
@@ -75,13 +76,13 @@ const AccountDetail = () => {
   };
 
   // this is for store the Mail log
-  const makeMail = (number) => {
+  const makeMail = (mailID) => {
     const data = {
       id: id,
       date: moment().format('MMMM Do YYYY, h:mm:ss a')
     }
 
-    if (number) {
+    if (mailID) {
       const logPost = async () => {
         try {
           const URL = `http://localhost:3000/emailLogs`
@@ -94,7 +95,7 @@ const AccountDetail = () => {
             message.success('Mail are stored in Mail log')
           }
           if (posting.status === 201) {
-            window.location.href = `mailto:${number}`
+            window.location.href = `mailto:${mailID}`
           }
         } catch (err) {
           if (err.response) {
@@ -159,9 +160,22 @@ const AccountDetail = () => {
         <Flex gap={'small'}>
           {selectRowKey.length > 0 && <Button type='primary' onClick={dealDelete}>Delete</Button>}
 
-          <Button type='primary' id='themeColor'>
-            <a href={`mailto:${accountData.email}`} onClick={() => makeMail(accountData.email)}>Send Email</a>
-          </Button>
+
+          <div style={{ backgroundColor: 'rgb(239, 232, 255)', borderRadius: '5px' }}>
+            <Button onClick={() => {
+              setGmail(true)
+              makeMail(accountData.email)
+            }}
+              type={gmail ? 'default' : 'text'}>
+              <a href={`mailto:${accountData.email}`}>Send Google mail</a>
+            </Button>
+
+            <Link to={`/ZOHOmailsend/account/${id}`}>
+              <Button onClick={() => setGmail(false)} type={gmail ? 'text' : 'default'}>
+                Send Zoho mail
+              </Button>
+            </Link>
+          </div>
 
           {/* <Dropdown menu={{items}} placement='bottomCenter'> */}
           <Link to={`/accounts/dealForm/${id}`}> <Button type='primary' id='themeColor'>Create Deal</Button> </Link>

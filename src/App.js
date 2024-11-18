@@ -64,7 +64,9 @@ function App() {
         <Route path='/editing/meetingDetail/:id' element={<ScheduleMeeting />} />
         <Route path='/maillog' element={<MailLog />} />
         <Route path='/mailsend' element={<SendMail />} />
-        <Route path='/mailsend/lead/:id' element={<SendMail />} />
+        <Route path='/ZOHOmailsend/lead/:id' element={<SendMail />} />
+        <Route path='/ZOHOmailsend/contact/:id' element={<SendMail />} />
+        <Route path='/ZOHOmailsend/account/:id' element={<SendMail />} />
         <Route path='/maillog/reply/:id' element={<SendMail />} />
       </Routes>
     </div>

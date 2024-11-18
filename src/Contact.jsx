@@ -25,7 +25,7 @@ const Contact = () => {
    
   const filter = Array.isArray(contactData) && contactData?.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction = {  // this object for finiding the === object
-      'equal to': (a, b) => a === b,
+      'equal to': (a, b) => a == b,
       'greater than': (a, b) => a > b,
       'greater than equal to': (a, b) => a >= b,
       'lesser then equal to': (a, b) => a <= b,
@@ -36,7 +36,7 @@ const Contact = () => {
     const comparisonFn = comparisonFunction[calculateSymbol]
     const finalValues = comparisonFn(value[selectedOption].toLowerCase(), searching.toString().toLowerCase())
     return finalValues
-  })
+  })  
 
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
@@ -180,7 +180,7 @@ const Contact = () => {
 
   // this is for set the fethched data into data array (for showing in table)
   const data = []
-  for (const datas of filter.length !== 0 && filter == true ? filter : Array.isArray(contactData) ? contactData : [] ) { // telling if filtered data are available show that only or show all data in webpage
+  for (const datas of filter.length !== 0 ? filter : Array.isArray(contactData) ? contactData : [] ) { // telling if filtered data are available show that only or show all data in webpage
     let changeTOObject = {
       key: datas.id,
       id: datas.id,

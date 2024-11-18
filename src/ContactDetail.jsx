@@ -23,6 +23,8 @@ const ContactDetail = () => {
   const [callLogs, setCallLogs] = useState('')
   const [selectRowKey, setSelectedRowKey] = useState('')
   const [loadTime, setLoadTime] = useState(false)
+  const [gmail,setGmail] = useState(false)
+
 
   // this is for get the current id
   const URL = window.location.href
@@ -92,8 +94,6 @@ const ContactDetail = () => {
       id: id,
       date: moment().format('MMMM Do YYYY, h:mm:ss a')
     }
-    console.log(mailId);
-
 
     if (mailId) {
       const logPost = async () => {
@@ -178,9 +178,25 @@ const ContactDetail = () => {
             <Button type='default'>Create Deal</Button>
           </Dropdown>
 
-          <Button type='default' >
+          {/* <Button type='default' >
             <a href={`mailto:${contactData.email}`} onClick={() => makeMail(contactData.email)}>Send Email</a>
-          </Button>
+          </Button> */}
+
+          <div style={{backgroundColor:'rgb(239, 232, 255)',borderRadius:'5px'}}>
+              <Button onClick={() => {
+                setGmail(true)
+                makeMail(contactData.email)
+              }}
+                 type={gmail ? 'default' : 'text'}>
+                <a href={`mailto:${contactData.email}`}>Send Google mail</a>
+              </Button>
+            
+              <Link to={`/ZOHOmailsend/contact/${id}`}>
+                <Button onClick={() => setGmail(false)} type={gmail ? 'text':'default'}>
+                  Send Zoho mail
+                </Button>
+              </Link>
+           </div>
 
           <Button type='default'>
             <Link to={`/contacts/contactDetail/contactEditForm/${id}`}>Edit contact</Link>

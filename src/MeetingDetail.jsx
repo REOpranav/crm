@@ -160,7 +160,6 @@ const MeetingDetail = () => {
     window.history.back()
   }
 
-  console.log(meetingUserDetail);
   
   return (
     <div>
