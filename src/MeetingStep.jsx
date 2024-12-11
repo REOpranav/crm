@@ -44,7 +44,7 @@ const MeetingStep = () => {
   }
 
   // this is zoho meeting integration code
-  const fetchZOHOmeetingUserDetail = () => { // this code for getting org id
+  const fetchZOHOmeetingUserDetail = async () => { // this code for getting org id
     const scope = 'ZohoMeeting.manageOrg.READ'
     const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
     const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI

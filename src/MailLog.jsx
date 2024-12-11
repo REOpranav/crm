@@ -41,6 +41,8 @@ let client_secret = process.env.REACT_APP_MAIL_SECRET_ID
 let redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 let grant_type = 'authorization_code'
 let accessTokenParams = getZohoAccessToken_Params(autharizationCode, client_id, client_secret, redirect_uri, grant_type)
+console.log(accessTokenParams);
+
 
 const MailLog = () => {
   const navigate = useNavigate();
@@ -76,7 +78,9 @@ const MailLog = () => {
   // this function is getting the user define in zoho meeting
   const userdefine = async () => {
     try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)          
+      const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)                
+      console.log(accessTokenResponce?.data);
+      return 
       userDeatailAuth(accessTokenResponce?.data)
     } catch (err) {
       console.log(err.message)
@@ -96,7 +100,7 @@ const MailLog = () => {
   // meeting codes (get access token)
   // this function is getting the access token
   const ZOHO_Meeting_Access_Token = async () => {
-    try {
+    try { 
       const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`, accessTokenParams) // this line send the request to node (server.js)      
       if (accessTokenResponce?.data?.scope == 'ZohoMeeting.meeting.ALL') {
         accessTokenData(accessTokenResponce?.data)
@@ -312,23 +316,23 @@ const MailLog = () => {
     setISload(false)
   }
 
+  useEffect(() => {
+    if (Authcode !== null) {
+      // userdefine() // meeting user account
+    } 
+  }, [undefined])
+
+  useEffect(() => {
+    if (Authcode !== null) {
+      // ZOHO_Meeting_Access_Token() // meeting access token
+    }
+  }, [undefined])
+
   useEffect(() => { // mail access tokens 
     if (Authcode !== null) {
       getZOHOmailAccountIDdetail()
-      ZOHOmailFolderDetail()
-      getZOHOmailMessageAccessToken()
-    }
-  }, [undefined])
-
-  useEffect(() => {
-    if (Authcode !== null) {
-      userdefine() // meeting user account
-    }
-  }, [undefined])
-
-  useEffect(() => {
-    if (Authcode !== null) {
-      ZOHO_Meeting_Access_Token() // meeting access token
+      // ZOHOmailFolderDetail()
+      // getZOHOmailMessageAccessToken()
     }
   }, [undefined])
 

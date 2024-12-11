@@ -85,7 +85,7 @@ const DetailEditForm = () => {
         area: lead.area || '',
         state: lead.state || '',
         country: lead.country || '',
-        pincode: lead.pincode || '',
+        pincode: lead.pincode || '',  
         expectedAmount: lead.expectedAmount || '',
         website: lead.website || '',
         description: lead.description || ''

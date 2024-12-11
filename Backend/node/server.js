@@ -10,6 +10,10 @@ require('dotenv').config()
 app.use(express.json()) // Parse incoming JSON
 app.use(cors());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+  });
+
 let a = process.env.MONGODB_PASSWORD
 const uri = `mongodb+srv://vadivel:${process.env.MONGODB_PASSWORD}@crmcluster1.weqo4.mongodb.net/?retryWrites=true&w=majority&appName=CRMcluster1`
 

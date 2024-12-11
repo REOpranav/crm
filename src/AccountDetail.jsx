@@ -76,13 +76,13 @@ const AccountDetail = () => {
   };
 
   // this is for store the Mail log
-  const makeMail = (mailID) => {
+  const makeMail = (number) => {
     const data = {
       id: id,
       date: moment().format('MMMM Do YYYY, h:mm:ss a')
     }
 
-    if (mailID) {
+    if (number) {
       const logPost = async () => {
         try {
           const URL = `http://localhost:3000/emailLogs`
@@ -95,7 +95,7 @@ const AccountDetail = () => {
             message.success('Mail are stored in Mail log')
           }
           if (posting.status === 201) {
-            window.location.href = `mailto:${mailID}`
+            window.location.href = `mailto:${number}`
           }
         } catch (err) {
           if (err.response) {

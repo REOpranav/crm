@@ -1,82 +1,6 @@
 {
   "leads": [
     {
-      "id": "533065960",
-      "leadowner": "dfkv",
-      "firstname": "Chotta ",
-      "lastname": "Bheem",
-      "email": "boosingpranav@gmail.com",
-      "mobile": "9865876967",
-      "date": "2025-11-08",
-      "companyName": "",
-      "annualrevenue": "",
-      "gender": "",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "713268902",
-      "leadowner": "Vadivel",
-      "firstname": "jackie ",
-      "lastname": "chan",
-      "email": "crmchina@srikrishnaandco.com",
-      "mobile": "1222212121",
-      "date": "2024-11-30",
-      "companyName": "Happyworks",
-      "annualrevenue": "",
-      "gender": "Male",
-      "area": "",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "973777977",
-      "leadowner": "Sukesh Kumar",
-      "firstname": "Ben",
-      "lastname": "10",
-      "email": "ben10@gmail.com",
-      "mobile": "1289823883",
-      "date": "2023-12-16",
-      "companyName": "",
-      "annualrevenue": "2000",
-      "gender": "Mouse",
-      "area": "Chennai",
-      "state": "",
-      "country": "",
-      "pincode": "",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
-      "id": "989664781",
-      "leadowner": "Pranav",
-      "firstname": "Vinod",
-      "lastname": "Purvakam",
-      "email": "simple@gmail.com",
-      "mobile": "9812982812",
-      "date": "2024-12-17",
-      "companyName": "ZOHO",
-      "annualrevenue": "",
-      "gender": "Male",
-      "area": "chennai",
-      "state": "",
-      "country": "",
-      "pincode": "9829382",
-      "expectedAmount": "",
-      "website": "",
-      "description": ""
-    },
-    {
       "id": "533065961",
       "leadowner": "john",
       "firstname": "John",
@@ -246,6 +170,25 @@
       "expectedAmount": "70000",
       "website": "https://agromex.mx",
       "description": "Agriculture-focused"
+    },
+    {
+      "id": "92634878",
+      "leadowner": "vadivel",
+      "firstname": "Suriya",
+      "lastname": "kumar",
+      "email": "simple@gmail.com",
+      "mobile": "9898239789",
+      "date": "",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "contacts": [
@@ -343,6 +286,63 @@
       "expectedAmount": "50000",
       "website": "https://eduworld.uk",
       "description": "Educational services provider"
+    },
+    {
+      "id": "533065960",
+      "leadowner": "dfkv",
+      "firstname": "Chotta ",
+      "lastname": "Bheem",
+      "email": "boosingpranav@gmail.com",
+      "mobile": "9865876967",
+      "date": "2025-11-08",
+      "companyName": "",
+      "annualrevenue": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "713268902",
+      "leadowner": "Vadivel",
+      "firstname": "jackie ",
+      "lastname": "chan",
+      "email": "crmchina@srikrishnaandco.com",
+      "mobile": "1222212121",
+      "date": "2024-11-30",
+      "companyName": "Happyworks",
+      "annualrevenue": "",
+      "gender": "Male",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    },
+    {
+      "id": "973777977",
+      "leadowner": "Sukesh Kumar",
+      "firstname": "Ben",
+      "lastname": "10",
+      "email": "ben10@gmail.com",
+      "mobile": "1289823883",
+      "date": "2023-12-16",
+      "companyName": "",
+      "annualrevenue": "2000",
+      "gender": "Mouse",
+      "area": "Chennai",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
     }
   ],
   "accounts": [
@@ -532,6 +532,10 @@
     {
       "id": "973777977",
       "date": "November 18th 2024, 12:07:46 pm"
+    },
+    {
+      "id": "673e44c3617f4b88f2f5a4bc",
+      "date": "November 21st 2024, 1:55:04 am"
     }
   ],
   "emailLogs": [
@@ -854,6 +858,30 @@
     {
       "id": "671456011",
       "date": "November 18th 2024, 1:03:34 pm"
+    },
+    {
+      "id": "973777977",
+      "date": "November 18th 2024, 3:13:54 pm"
+    },
+    {
+      "id": "66f12ed789ab168391a6d282",
+      "date": "November 21st 2024, 12:00:20 am"
+    },
+    {
+      "id": "66e0a9038800779adf139432",
+      "date": "November 21st 2024, 12:18:03 am"
+    },
+    {
+      "id": "66e0a9038800779adf139432",
+      "date": "November 21st 2024, 12:18:21 am"
+    },
+    {
+      "id": "673e36a3fff11de006d3ba4c",
+      "date": "November 21st 2024, 12:51:50 am"
+    },
+    {
+      "id": "331083644",
+      "date": "November 21st 2024, 2:56:38 pm"
     }
   ],
   "formLayout": [
@@ -884,6 +912,14 @@
         "<p draggable=\"true\"><label for=\"firstname\">First Name : </label><input type=\"text\" name=\"firstname\" id=\"firstname\" placeholder=\"First Name *\"></p>",
         "<p draggable=\"true\"><label for=\"email\">Email : </label><input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email *\"></p>",
         "<p draggable=\"true\"><label for=\"companyName\">company Name : </label><input type=\"text\" name=\"companyName\" id=\"companyName\" placeholder=\"company Name\"></p>"
+      ]
+    },
+    {
+      "id": "sukesh Form",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
+        "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>"
       ]
     }
   ],

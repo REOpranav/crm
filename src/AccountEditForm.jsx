@@ -23,7 +23,7 @@ const AccountEditForm = () => {
 
   const fetching = async () => {
     try {
-      const responce = await axios.get(`http://localhost:3000/${moduleName}`) // fethch the data using the module name 
+      const responce = await axios.get(`https://sakthi-crm.vercel.app/mongodb/${moduleName}`) // fethch the data using the module name 
       if (responce.status === 200) {
         setFetchedAccountData(await responce.data);
       }
@@ -47,7 +47,7 @@ const AccountEditForm = () => {
   useEffect(() => {
     let idNUmber = urlParams.split('/').pop() // get the endpoint for filter the partucaular person array       
     fectedaccountDatas.map((e) => {
-      if (e.id === idNUmber) {
+      if (e._id === idNUmber) {
         setActualActualData(e)
       }
     })
@@ -55,10 +55,11 @@ const AccountEditForm = () => {
 
   // set the lead data in secoundary form
   useEffect(() => {
-    if (actualActualData) {
-
+    if (actualActualData) { 
+      console.log(actualActualData);
+      
       setFormData({
-        id: actualActualData.id,
+        id: actualActualData._id,
         accountOwner: actualActualData.accountOwner,
         industry: actualActualData.industry || '',
         employeesCount: actualActualData.employeesCount || '',
@@ -116,7 +117,7 @@ const AccountEditForm = () => {
   const onFinish = (e) => {
     e.preventDefault();
     const queryParam = formData.id // get the id for making Put request    
-    axios.put(`http://localhost:3000/${moduleName}/${queryParam}`, formData)
+    axios.put(`https://sakthi-crm.vercel.app/mongodb/${moduleName}/${queryParam}`, formData)
       .then(res => {
         if (res.status === 200) {
           messageSuccess(res.data);

@@ -67,7 +67,7 @@ const MeetingChart = () => {
         }
       }
       setISLoad(true)
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/meeting/delete`, data)
+      const accessTokenResponce = await axios.post(`http://lo calhost:3002/api/meeting/delete`, data)
       setISLoad(false)
     } catch (err) {
       setISLoad(false)
