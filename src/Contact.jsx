@@ -43,7 +43,8 @@ const Contact = () => {
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get(`${baseUrl.href ? baseUrl.href : 'http://localhost:3002'}/api/mongoDB`)
+      // const responce = await axios.get(`${baseUrl.href ? baseUrl.href : 'http://localhost:3002'}/api/mongoDB`)
+      const responce = await axios.get(`http://localhost:3002/api/mongoDB`)
       console.log(responce.data);
       if (responce.status === 200) {
         setContactData(await responce.data);
