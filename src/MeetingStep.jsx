@@ -63,7 +63,6 @@ const MeetingStep = () => {
     const scope = 'ZohoMeeting.meeting.ALL'
     const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
     const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
-
     getZohoAuth_Code(scope, client_id, redirect_uri)
   }
 

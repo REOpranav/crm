@@ -1,47 +1,32 @@
+const { getDataFromDB } = require('./MongoDB')
 const express = require('express')
+const router = express.Router()
 const axios = require('axios')
 const cors = require('cors')
 const app = express()
 const qs = require('qs')
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const { theme } = require('antd')
 require('dotenv').config()
 
 app.use(express.json()) // Parse incoming JSON
 app.use(cors());
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-  });
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+// });
 
-let a = process.env.MONGODB_PASSWORD
-const uri = `mongodb+srv://vadivel:${process.env.MONGODB_PASSWORD}@crmcluster1.weqo4.mongodb.net/?retryWrites=true&w=majority&appName=CRMcluster1`
-
-// Create an API route to serve the data
-app.get('/api/contacts', async (req, res) => {
+app.use('/mongoDB', async (req, res) => {
     try {
-        // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-        const client = new MongoClient(uri, {
-            serverApi: {
-                version: ServerApiVersion.v1,
-                strict: true,
-                deprecationErrors: true,
-            }
-        });
-
-        await client.connect();
-        const dataBase = client.db('CRMdata')
-        const collection = dataBase.collection('contact')
-
-        // getting data from mongo DB
-        const data = collection.find({}).toArray()
-        data.then((responceData) => {
-            res.json(responceData)
+        getDataFromDB('contacts').then((value) => {
+            res.json(value)
         })
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching contacts' });
+        res.status(error.response ? error.response.status : 500).json({
+            message: error.message,
+            error: error.response ? error.response.data : null
+        });
     }
-});
+})
 
 // this all are meeting intergration code
 // this code for getting the access token

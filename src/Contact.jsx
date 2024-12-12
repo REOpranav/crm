@@ -41,8 +41,9 @@ const Contact = () => {
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3000/contacts')
+      const responce = await axios.get('https://mockcrm.vercel.app/mongoDB')
       if (responce.status === 200) {
+        console.log(responce.data);
         setContactData(await responce.data);
         setsearchBy(await responce.data)
       }
@@ -56,26 +57,6 @@ const Contact = () => {
       }
     }
   }
-
-  //  this code is fethcing from node.js (mongoDB)
-  // const fetching = async () => {
-  //   try {
-  //     const responce = await axios.get(`http://localhost:8000/api/contacts`)
-  //     if (responce.status === 200) {
-  //       setContactData(await responce.data);
-  //       setsearchBy(await responce.data)
-  //     }
-  //   } catch (err) {
-  //     if (err.response) {
-  //       message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-  //     } else if (err.request) {
-  //       message.error('Error: No response from server.');
-  //     } else {
-  //       message.error('Error: ' + err.message);
-  //     }
-  //   }
-  // }
-  // console.log(contactData);
 
   // this function is totally for store call log
   const makeCall = (number, id) => {

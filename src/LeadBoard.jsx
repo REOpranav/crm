@@ -19,7 +19,7 @@ const LeadBoard = () => {
   const [searching, setSearching] = useState('') // this searching for lead
   const [calculateSymbol, setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setselectedRowKeys] = useState([])
-  
+
   const filter = leadData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction = {  // this object for finiding the === object
       'equal to': (a, b) => a == b,
