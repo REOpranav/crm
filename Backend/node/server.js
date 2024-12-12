@@ -9,7 +9,10 @@ const { theme } = require('antd')
 require('dotenv').config()
 
 app.use(express.json()) // Parse incoming JSON
-app.use(cors());
+app.use(cors({
+    origin: ['https://mockcrm.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }));
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
