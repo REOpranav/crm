@@ -1,26 +1,17 @@
 const { getDataFromDB } = require('./MongoDB')
 const express = require('express')
-const router = express.Router()
 const axios = require('axios')
 const cors = require('cors')
 const app = express()
 const qs = require('qs')
-const { theme } = require('antd')
 require('dotenv').config()
 
 app.use(express.json()) // Parse incoming JSON
-app.use(cors({
-    origin: ['https://mockcrm.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  }));
-
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-// });
-
+app.use(cors())
 app.use('/api/mongoDB', async (req, res) => {
     try {
-        getDataFromDB('contacts').then((value) => {
+        console.log('called');
+        getDataFromDB('contacts').then((value) => { 
             res.json(value)
         })
     } catch (error) {

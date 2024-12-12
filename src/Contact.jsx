@@ -9,6 +9,8 @@ import moment from 'moment'
 // this is for getting the code (query param) from URL
 const urlSearch = new URLSearchParams(window.location.search)
 const Authcode = urlSearch.get('code')
+const baseUrl = new URL(window.location.href)
+baseUrl.pathname = ''
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const Contact = () => {
   const [selectedOption, setSelectedOption] = useState('firstname') // option fireld
   const [calculateSymbol, setCalculateSymbol] = useState('equal to')
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-   
+
   const filter = Array.isArray(contactData) && contactData?.filter(value => {  // filtering the data (which are the data are same as selectedOption )
     const comparisonFunction = {  // this object for finiding the === object
       'equal to': (a, b) => a == b,
@@ -36,14 +38,13 @@ const Contact = () => {
     const comparisonFn = comparisonFunction[calculateSymbol]
     const finalValues = comparisonFn(value[selectedOption].toLowerCase(), searching.toString().toLowerCase())
     return finalValues
-  })  
+  })
 
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get('https://mockcrm.vercel.app/api/mongoDB')
+      const responce = await axios.get(`${baseUrl.href ? baseUrl.href : 'http://localhost:3002'}/api/mongoDB`)
       console.log(responce.data);
-      
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
@@ -162,7 +163,7 @@ const Contact = () => {
 
   // this is for set the fethched data into data array (for showing in table)
   const data = []
-  for (const datas of filter.length !== 0 ? filter : Array.isArray(contactData) ? contactData : [] ) { // telling if filtered data are available show that only or show all data in webpage
+  for (const datas of filter?.length !== 0 ? filter : Array.isArray(contactData) ? contactData : []) { // telling if filtered data are available show that only or show all data in webpage
     let changeTOObject = {
       key: datas.id,
       id: datas.id,
