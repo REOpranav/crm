@@ -4,15 +4,6 @@ const uri = `mongodb+srv://mockCRM:infiinfo01@crm2.74ass.mongodb.net/?retryWrite
 const client = new MongoClient(uri);
 const database = client.db('crm')
 
-// export const getDataFromDB = async (collectionName) => {
-//     const collection = database?.collection(collectionName)
-
-//     const data = await collection.find({}).toArray()
-//     data.then((responceData) => {
-//         return responceData
-//     })
-// }
-
 const getDataFromDB = async (collectionName) => {
     const collection = database?.collection(collectionName)
     const data = await collection.find({}).toArray()
