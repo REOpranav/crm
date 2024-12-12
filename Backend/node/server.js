@@ -10,8 +10,7 @@ app.use(express.json()) // Parse incoming JSON
 app.use(cors())
 app.use('/api/mongoDB', async (req, res) => {
     try {
-        console.log('called');
-        getDataFromDB('contacts').then((value) => { 
+        getDataFromDB('contacts').then((value) => {
             res.json(value)
         })
     } catch (error) {
