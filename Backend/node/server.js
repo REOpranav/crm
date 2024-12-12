@@ -18,7 +18,7 @@ app.use(cors({
 //     res.header('Access-Control-Allow-Origin', '*');
 // });
 
-app.use('/mongoDB', async (req, res) => {
+app.use('/api/mongoDB', async (req, res) => {
     try {
         getDataFromDB('contacts').then((value) => {
             res.json(value)

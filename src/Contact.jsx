@@ -41,7 +41,7 @@ const Contact = () => {
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get('https://mockcrm.vercel.app/mongoDB')
+      const responce = await axios.get('https://mockcrm.vercel.app/api/mongoDB')
       console.log(responce.data);
       
       if (responce.status === 200) {
