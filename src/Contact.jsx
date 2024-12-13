@@ -43,7 +43,7 @@ const Contact = () => {
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get(`https://crm-server-opal.vercel.app/api/mongoDB/contacts`)
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/mongoDB/contacts`)
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
