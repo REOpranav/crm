@@ -44,7 +44,7 @@ const LeadBoard = () => {
   // this code for initial load and when lead added
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3000/leads')
+      const responce = await axios.get('https://crm-server-opal.vercel.app/api/mongoDB/leads')
       if (responce.status === 200) {
         setLeadData(await responce.data);
         setSearchBy(await responce.data);
