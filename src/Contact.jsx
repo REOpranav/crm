@@ -43,8 +43,7 @@ const Contact = () => {
   // this functionf fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get(`${baseUrl.href ? baseUrl.href : 'http://localhost:3002'}/api/mongoDB`)
-      console.log(responce.data);
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/api/mongodb`)
       if (responce.status === 200) {
         setContactData(await responce.data);
         setsearchBy(await responce.data)
