@@ -65,7 +65,7 @@ const LeadBoard = () => {
     try {
       let deleting;
       for (const deleteValue of selectedRowKeys) {
-        deleting = await axios.post(`http://localhost:3002/leads/delete`,{          
+        deleting = await axios.post(`https://crm-server-opal.vercel.app/leads/delete`,{          
            id : deleteValue
         })
       }      
