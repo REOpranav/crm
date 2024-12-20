@@ -63,12 +63,13 @@ const LeadBoard = () => {
   // this is for deleting the leads
   const deleteThedata = async () => {
     try {
-      const URL = `http://localhost:3000/leads`
       let deleting;
       for (const deleteValue of selectedRowKeys) {
-        deleting = await axios.delete(`${URL}/${deleteValue}`)
-      }
-      if (deleting.status === 200) {
+        deleting = await axios.post(`http://localhost:3002/leads/delete`,{          
+           id : deleteValue
+        })
+      }      
+      if (deleting.status == 200) {
         message.success("sucessfully Deleted the data")
       }
       setselectedRowKeys(0)
@@ -176,7 +177,6 @@ const LeadBoard = () => {
     }
   };
 
-
   // this refers the column layout for showing data (Antd)
   const column = [
     {
@@ -226,7 +226,6 @@ const LeadBoard = () => {
       label: (<Link to={`./formpage`}>For This CRM</Link>),
     },
   ]
-
 
   return (
     <div>
@@ -302,7 +301,6 @@ const LeadBoard = () => {
           <Table rowSelection={rowSelection} columns={column} dataSource={data} pagination={false} scroll={{ y: 400 }} />
         </Col>
       </Row>
-
     </div>
   )
 }

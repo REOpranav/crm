@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, message, notification, Row, Title, Typography, Menu, Flex, Space, Layout, Col, Dropdown, Popconfirm } from 'antd'
-import { Link } from 'react-router-dom'
+import { json, Link } from 'react-router-dom'
 import axios from 'axios'
 import './Detail.css'
 import Dashboard from './Dashboard'
@@ -29,8 +29,11 @@ const Detail = () => {
   // this code for initial load and when lead added
   const fetching = async () => {
     try {
-      const responce = await axios.get(`http://localhost:3000/leads/${id}`)
-      if (responce.status === 200) {
+      let clientID = { client_ID: id }
+      const responce = await axios.get(`http://localhost:3002/leads/find`, {
+        params: clientID
+      })
+      if (responce.status == 200) {
         setLeadData(await responce.data)
       }
     } catch (err) {
@@ -43,10 +46,6 @@ const Detail = () => {
       }
     }
   }
-
-  useEffect(() => {
-    fetching()
-  }, [undefined])
 
   const converToContact = async () => {
     let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
@@ -187,6 +186,10 @@ const Detail = () => {
     navigation('/accounts')
   }
 
+  useEffect(() => {
+    fetching()
+  }, [])
+
   return (
     <div>
       <Dashboard />
@@ -199,7 +202,7 @@ const Detail = () => {
           <div style={{ backgroundColor: 'rgb(239, 232, 255)', borderRadius: '5px' }}>
             <Button onClick={() => {
               setGmail(true)
-              makeMail(leadData.email)
+              makeMail(...leadData.email)
             }
             } type={gmail ? 'default' : 'text'}>
               <a href={`mailto:${leadData.email}`}>Send Google mail</a>
@@ -231,12 +234,16 @@ const Detail = () => {
         <Col span={20} offset={1} style={{ overflow: 'auto' }}>
           <Row style={{ minHeight: "100vh", maxHeight: '100vh', overflow: 'auto', width: '100%' }}>
             <Col span={24} style={{ backgroundColor: 'white', borderRadius: '10px' }}>
-              {Object.entries(leadData).map(([key, value]) => (
-                <Row style={{ padding: '10px' }} className='leadDetail'>
-                  <Col span={3} style={{ textAlign: 'end', textTransform: 'capitalize', mcolor: 'darkblue' }}> {key} : </Col>
-                  <Col span={20} style={{ textAlign: 'start', color: 'grey', padding: '3px', overflow: 'auto' }} offset={1}> {key.toLocaleLowerCase() === 'email' ? <Popconfirm title={'Are you sure to mail'} okText={'Mail'} cancelText={'No'} onConfirm={() => makeMail(value)} onCancel={() => message.error('Mail Canceled')}> <a> {value} </a> </Popconfirm> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ? <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'} onConfirm={() => makeCall(value)} onCancel={() => message.error('Call Canceled')}> <a> {value} </a> </Popconfirm> : value}</Col>
-                </Row>
-              ))}
+
+              {leadData.map((fetchedDataValues) => {
+                return Object.entries(fetchedDataValues).map(([key, value]) => (
+                  <Row style={{ padding: '10px' }} className='leadDetail'>
+                    <Col span={3} style={{ textAlign: 'end', textTransform: 'capitalize', mcolor: 'darkblue' }}> {key} : </Col>
+                    <Col span={20} style={{ textAlign: 'start', color: 'grey', padding: '3px', overflow: 'auto' }} offset={1}> {key.toLocaleLowerCase() === 'email' ? <Popconfirm title={'Are you sure to mail'} okText={'Mail'} cancelText={'No'} onConfirm={() => makeMail(value)} onCancel={() => message.error('Mail Canceled')}> <a> {value} </a> </Popconfirm> : key.toLocaleLowerCase() == 'website' ? <a href={`${value}`} target='_blank' >{value}</a> : key.toLocaleLowerCase() === 'mobile' ? <Popconfirm title={'Are you sure to call'} okText={'Call'} cancelText={'No'} onConfirm={() => makeCall(value)} onCancel={() => message.error('Call Canceled')}> <a> {value} </a> </Popconfirm> : value}</Col>
+                  </Row>
+                ))
+              }
+              )}
             </Col>
             <Col span={24}>
               <Calllogs callLogs={callLogs} emailLog={mailLog} />

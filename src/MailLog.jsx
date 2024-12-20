@@ -79,8 +79,6 @@ const MailLog = () => {
   const userdefine = async () => {
     try {
       const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)                
-      console.log(accessTokenResponce?.data);
-      return 
       userDeatailAuth(accessTokenResponce?.data)
     } catch (err) {
       console.log(err.message)
@@ -100,7 +98,7 @@ const MailLog = () => {
   // meeting codes (get access token)
   // this function is getting the access token
   const ZOHO_Meeting_Access_Token = async () => {
-    try { 
+    try {
       const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`, accessTokenParams) // this line send the request to node (server.js)      
       if (accessTokenResponce?.data?.scope == 'ZohoMeeting.meeting.ALL') {
         accessTokenData(accessTokenResponce?.data)
@@ -319,7 +317,7 @@ const MailLog = () => {
   useEffect(() => {
     if (Authcode !== null) {
       // userdefine() // meeting user account
-    } 
+    }
   }, [undefined])
 
   useEffect(() => {
