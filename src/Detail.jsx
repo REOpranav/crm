@@ -47,62 +47,46 @@ const Detail = () => {
     }
   }
 
-  const converToContact = async () => {
-    let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
-    await axios.post('http://localhost:3000/contacts', dataFromLead.data) // secound post that contact form
-      .then(res => {
-        if (res.status === 201) {
-          messageSuccess();
-        }
-        axios.delete(`http://localhost:3000/leads/${id}`) // third code for deleting data in lead
+  // converting the lead data to (contact or account)
+  const convertingClientData = async (dbName) => {
+    let clientID = { client_ID: id }
+    let dataFromLead = await axios.get(`https://crm-server-opal.vercel.app/leads/find`, { //  getting the particular lead which is ready for changing
+      params: clientID
+    })
+    await axios.post(`https://crm-server-opal.vercel.app/mongoDB/${dbName}`, { // inserting the data in certain DB
+      indertingData: dataFromLead.data
+    }).then(res => {
+      if (res.status == 200) {
+        messageSuccess();
+      }
+    }).catch(err => {
+      if (err.response) {
+        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response   from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    })
 
-        setTimeout(() => {
-          navigate()
-        }, 1 * 100)
-
-      }).catch(err => {
-        if (err.response) {
-          message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-        } else if (err.request) {
-          message.error('Error: No response   from server.');
-        } else {
-          message.error('Error: ' + err.message);
-        }
-      })
+    await axios.post(`https://crm-server-opal.vercel.app/leads/delete`, { //Deleting the changed data from lead
+      id: clientID.client_ID
+    })
+    setTimeout(() => {
+      navigate()
+    }, 1 * 100)
   }
-
-  // this code for convert lead to contact
-  const convertToAccount = async () => {
-    let dataFromLead = await axios.get(`http://localhost:3000/leads/${id}`) // first getting the particular id
-    await axios.post('http://localhost:3000/accounts', dataFromLead.data) // secound post that contact form
-      .then(res => {
-        if (res.status === 201) {
-          messageSuccess();
-        }
-        axios.delete(`http://localhost:3000/leads/${id}`) // third code for deleting data in lead
-
-        setTimeout(() => {
-          navigateToAccount()
-        }, 1 * 100)
-
-      }).catch(err => {
-        if (err.response) {
-          message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-        } else if (err.request) {
-          message.error('Error: No response from server.');
-        } else {
-          message.error('Error: ' + err.message);
-        }
-      })
-  }
-
 
   // this is simple change lead to contact/account/deal (line number 143)
   const items = [
     {
       key: '1',
-      label: (<Link onClick={converToContact}> Convert to Contact </Link>),
+      label: (<Link onClick={() => convertingClientData('insertContact')}> Convert to Contact </Link>),
     },
+    // {
+    //   key: '2',
+    //   label: (<Link onClick={() => convertingClientData('insertAccount')}> Convert to Account </Link>),
+    // },
   ]
 
   // this is for store the call log

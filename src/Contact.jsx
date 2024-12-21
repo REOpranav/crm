@@ -190,7 +190,7 @@ const Contact = () => {
     try {
       let deleting;
       for (const deleteValue of selectedRowKeys) {        
-        deleting = await axios.post(`http://localhost:3002/contact/delete`,{
+        deleting = await axios.post(`https://crm-server-opal.vercel.app/contact/delete`,{
           id : deleteValue
         })
       }

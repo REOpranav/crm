@@ -24,9 +24,12 @@ const AccountDetail = () => {
   // this code for initial load and when lead added
   const fetching = async () => {
     try {
-      const responce = await axios.get(`http://localhost:3000/accounts/${id}`)
-      if (responce.status === 200) {
-        setAccountData(await responce.data)
+      let clientID = { client_ID: id }
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/account/find`,{
+         params : clientID
+      })
+      if (responce.status == 200) {
+        setAccountData(...await responce.data)
       }
     } catch (err) {
       if (err.response) {
@@ -186,7 +189,7 @@ const AccountDetail = () => {
           </Button>
 
           <Button type='default'>
-            <Link to={'/contacts'}>Back to Account Board</Link>
+            {/* <Link to={'/contacts'}>Back to Account Board</Link> */}
           </Button>
         </Flex>
       </Row>

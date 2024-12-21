@@ -34,7 +34,7 @@ const ContactDetail = () => {
   const fetching = async () => {
     try {
       let clientID = { client_ID: id }
-      const responce = await axios.get(`http://localhost:3002/contacts/find`, {
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/contacts/find`, {
         params: clientID
       })
       if (responce.status === 200) {

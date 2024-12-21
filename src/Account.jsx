@@ -29,14 +29,14 @@ const Account = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol];
-    const finalValues = comparisonFn(value[selectedOption].toLowerCase(), searching.toString().toLowerCase())
+    const finalValues = comparisonFn(value[selectedOption]?.toLowerCase(), searching.toString().toLowerCase())
     return finalValues
   })
 
   // this function fetch the datas from URL/contact 
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3000/accounts')
+      const responce = await axios.get('https://crm-server-opal.vercel.app/mongoDB/accounts')
       if (responce.status === 200) {
         setAccountData(await responce.data);
         setsearchBy(await responce.data)

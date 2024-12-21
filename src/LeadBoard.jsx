@@ -65,7 +65,7 @@ const LeadBoard = () => {
     try {
       let deleting;
       for (const deleteValue of selectedRowKeys) {
-        deleting = await axios.post(`https://crm-server-opal.vercel.app/leads/delete`,{          
+        deleting = await axios.post(`https://crm-server-opal.vercel.app/leads/delete`,{
            id : deleteValue
         })
       }      
@@ -73,7 +73,6 @@ const LeadBoard = () => {
         message.success("sucessfully Deleted the data")
       }
       setselectedRowKeys(0)
-
     } catch (err) {
       if (err.response) {
         message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
