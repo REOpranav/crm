@@ -62,20 +62,27 @@ const FormPage = () => {
   //this function for get data from form and make post request
   const onFinish = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:3000/${moduleName}`, formData)
-      .then(res => {
-        if (res.status === 201) {
-          messageSuccess();
-        }
-      }).catch(err => {
-        if (err.response) {
-          message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-        } else if (err.request) {
-          message.error('Error: No response   from server.');
-        } else {
-          message.error('Error: ' + err.message);
-        }
-      })
+    let actualModuleName;
+    if (moduleName == 'leads') {
+      actualModuleName = 'insertLead'
+    } else if (moduleName == 'contacts') {
+      actualModuleName = 'insertContact'
+    }
+    axios.post(`https://crm-server-opal.vercel.app/mongoDB/${actualModuleName}`, {
+      indertingData: formData
+    }).then(res => {
+      if (res.status === 201) {
+        messageSuccess();
+      }
+    }).catch(err => {
+      if (err.response) {
+        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response   from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    })
     setTimeout(() => {
       navigate()
     }, 1 * 100)
@@ -207,7 +214,7 @@ const FormPage = () => {
           </Popconfirm>
 
           <Popconfirm title={'Are you sure'} okText={'yes'} cancelText={'No'} onConfirm={backFunction} onCancel={() => message.info('Cancelled.Everything stay with us!')}>
-          <Button type='primary'> Back one step </Button>
+            <Button type='primary'> Back one step </Button>
           </Popconfirm>
         </Flex>
       </Row>
@@ -217,7 +224,7 @@ const FormPage = () => {
           <form onSubmit={checkForSubmitting} className='PoppinsFont'>
             <p>
               <label for="leadowner"><span style={required}>* &nbsp;</span>Owner : </label>
-              <input type="text" name="leadowner" id="leadowner" placeholder="Lead Owner" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')} />
+              <input type="text" name="leadowner" id="leadowner" placeholder="Owner" value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')} />
             </p>
 
             <p>

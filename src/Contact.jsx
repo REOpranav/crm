@@ -36,7 +36,7 @@ const Contact = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol]
-    const finalValues = comparisonFn(value[selectedOption].toLowerCase(), searching.toString().toLowerCase())
+    const finalValues = comparisonFn(value[selectedOption]?.toLowerCase(), searching.toString().toLowerCase())
     return finalValues
   })
 
