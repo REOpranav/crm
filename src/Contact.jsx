@@ -188,10 +188,11 @@ const Contact = () => {
   // this is for delete the selected data
   const deleteThedata = async () => {
     try {
-      const URL = `http://localhost:3000/contacts`
       let deleting;
-      for (const deleteValue of selectedRowKeys) {
-        deleting = await axios.delete(`${URL}/${deleteValue}`)
+      for (const deleteValue of selectedRowKeys) {        
+        deleting = await axios.post(`http://localhost:3002/contact/delete`,{
+          id : deleteValue
+        })
       }
       if (deleting.status == 200) {
         message.success("sucessfully Deleted the data")

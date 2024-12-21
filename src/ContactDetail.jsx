@@ -23,7 +23,7 @@ const ContactDetail = () => {
   const [callLogs, setCallLogs] = useState('')
   const [selectRowKey, setSelectedRowKey] = useState('')
   const [loadTime, setLoadTime] = useState(false)
-  const [gmail,setGmail] = useState(false)
+  const [gmail, setGmail] = useState(false)
 
 
   // this is for get the current id
@@ -33,9 +33,12 @@ const ContactDetail = () => {
   // this code for initial load and when lead added
   const fetching = async () => {
     try {
-      const responce = await axios.get(`http://localhost:3000/contacts/${id}`)
+      let clientID = { client_ID: id }
+      const responce = await axios.get(`http://localhost:3002/contacts/find`, {
+        params: clientID
+      })
       if (responce.status === 200) {
-        setContactData(await responce.data)
+        setContactData(...responce.data)
       }
     } catch (err) {
       if (err.response) {
@@ -160,7 +163,7 @@ const ContactDetail = () => {
       label: (<Link to={`/contacts/organizationForm/${id}`}>For organization</Link>),
     },
   ]
-
+  
   return (
     <div>
       <Dashboard />
@@ -182,21 +185,21 @@ const ContactDetail = () => {
             <a href={`mailto:${contactData.email}`} onClick={() => makeMail(contactData.email)}>Send Email</a>
           </Button> */}
 
-          <div style={{backgroundColor:'rgb(239, 232, 255)',borderRadius:'5px'}}>
-              <Button onClick={() => {
-                setGmail(true)
-                makeMail(contactData.email)
-              }}
-                 type={gmail ? 'default' : 'text'}>
-                <a href={`mailto:${contactData.email}`}>Send Google mail</a>
+          <div style={{ backgroundColor: 'rgb(239, 232, 255)', borderRadius: '5px' }}>
+            <Button onClick={() => {
+              setGmail(true)
+              makeMail(contactData.email)
+            }}
+              type={gmail ? 'default' : 'text'}>
+              <a href={`mailto:${contactData.email}`}>Send Google mail</a>
+            </Button>
+
+            <Link to={`/ZOHOmailsend/contact/${id}`}>
+              <Button onClick={() => setGmail(false)} type={gmail ? 'text' : 'default'}>
+                Send Zoho mail
               </Button>
-            
-              <Link to={`/ZOHOmailsend/contact/${id}`}>
-                <Button onClick={() => setGmail(false)} type={gmail ? 'text':'default'}>
-                  Send Zoho mail
-                </Button>
-              </Link>
-           </div>
+            </Link>
+          </div>
 
           <Button type='default'>
             <Link to={`/contacts/contactDetail/contactEditForm/${id}`}>Edit contact</Link>
