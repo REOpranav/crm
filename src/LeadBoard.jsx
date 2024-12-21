@@ -31,7 +31,7 @@ const LeadBoard = () => {
     }
 
     const comparisonFn = comparisonFunction[calculateSymbol];
-    const finalValues = comparisonFn(value[selectedOption].toLowerCase(), searching.toString().toLowerCase())
+    const finalValues = comparisonFn(value[selectedOption]?.toLowerCase(), searching.toString().toLowerCase())
     return finalValues
   })
   // code for navigatingin (react router dom)
