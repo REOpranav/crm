@@ -96,6 +96,10 @@ const LeadBoard = () => {
     fetching()
   }, [undefined, selectedRowKeys])
 
+  useEffect(()=>{
+    fetching()
+  },[])
+
   // this code for appending field name into antd table  
   const data = []
   for (const datas of filter.length !== 0 ? filter : leadData) { // telling if filtered data are available show that only or show all data in webpage
