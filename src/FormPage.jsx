@@ -71,8 +71,11 @@ const FormPage = () => {
     axios.post(`https://crm-server-opal.vercel.app/mongoDB/${actualModuleName}`, {
       indertingData: formData
     }).then(res => {
-      if (res.status === 201) {
+      if (res.status == 200) {
         messageSuccess();
+        setTimeout(() => {
+          navigate()
+        }, 1 * 100)
       }
     }).catch(err => {
       if (err.response) {
@@ -83,9 +86,6 @@ const FormPage = () => {
         message.error('Error: ' + err.message);
       }
     })
-    setTimeout(() => {
-      navigate()
-    }, 1 * 100)
   }
 
   // this for navigation
