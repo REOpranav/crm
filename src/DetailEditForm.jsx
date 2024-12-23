@@ -26,6 +26,9 @@ function messageSuccess(value) {
   message.success(`Sucessfully Update the ${value.firstname} Lead Datas`)
 }
 
+const URL = window.location.href
+const id = URL.split('/').pop()
+
 const DetailEditForm = () => {
   const { Text } = Typography
   const navigation = useNavigate() //this is for navigation   
@@ -36,11 +39,16 @@ const DetailEditForm = () => {
   const [formData, setFormData] = useState({})
 
   const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
+  console.log(`https://crm-server-opal.vercel.app/${moduleName}/find`);
+
   const fetching = async () => {
     try {
-      const responce = await axios.get(`http://localhost:3000/${moduleName}`)
+      let clientID = { client_ID: id }
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/${moduleName}/find`, {
+        params: clientID
+      })
       if (responce.status === 200) {
-        setLeadDatas(await responce.data);
+        setLead(...await responce.data);
       }
     } catch (err) {
       if (err.response) {
@@ -57,16 +65,6 @@ const DetailEditForm = () => {
   useEffect(() => {
     fetching()
   }, [undefined])
-
-  // make filteration after fetching function complete
-  useEffect(() => {
-    let idNUmber = urlParams.split('/').pop() // get the endpoint for filter the partucaular person array       
-    leadDatas.map((e) => {
-      if (e.id === idNUmber) {
-        setLead(e)
-      }
-    })
-  }, [fetching])
 
   // set the lead data in secoundary form
   useEffect(() => {
@@ -85,7 +83,7 @@ const DetailEditForm = () => {
         area: lead.area || '',
         state: lead.state || '',
         country: lead.country || '',
-        pincode: lead.pincode || '',  
+        pincode: lead.pincode || '',
         expectedAmount: lead.expectedAmount || '',
         website: lead.website || '',
         description: lead.description || ''
@@ -140,7 +138,7 @@ const DetailEditForm = () => {
   const onFinish = (e) => {
     e.preventDefault();
     const queryParam = formData.id // get the id for making Put request    
-    axios.put(`http://localhost:3000/${moduleName}/${queryParam}`, formData)
+    axios.put(`http://localhost:3002/${moduleName}/${queryParam}`, formData)
       .then(res => {
         if (res.status === 200) {
           messageSuccess(res.data);
