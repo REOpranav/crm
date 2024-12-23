@@ -39,8 +39,6 @@ const DetailEditForm = () => {
   const [formData, setFormData] = useState({})
 
   const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
-  console.log(`https://crm-server-opal.vercel.app/${moduleName}/find`);
-
   const fetching = async () => {
     try {
       let clientID = { client_ID: id }
