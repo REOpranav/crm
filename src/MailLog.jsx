@@ -41,7 +41,6 @@ let client_secret = process.env.REACT_APP_MAIL_SECRET_ID
 let redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 let grant_type = 'authorization_code'
 let accessTokenParams = getZohoAccessToken_Params(autharizationCode, client_id, client_secret, redirect_uri, grant_type)
-console.log(accessTokenParams);
 
 
 const MailLog = () => {

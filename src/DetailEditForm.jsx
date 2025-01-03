@@ -41,28 +41,21 @@ const DetailEditForm = () => {
   const moduleName = urlParams.split('/').filter(e => e).shift().toLocaleLowerCase()
   const fetching = async () => {
     try {
-      let clientID = { client_ID: id }
-      const responce = await axios.get(`https://crm-server-opal.vercel.app/${moduleName}/find`, {
-        params: clientID
-      })
-      if (responce.status === 200) {
-        setLead(...await responce.data);
+      const response = await axios.get(`https://crm-server-opal.vercel.app/${moduleName}/find`, {
+        params: { client_ID: id }
+      });
+      if (response.data) {
+        setLead(...response.data);
       }
     } catch (err) {
-      if (err.response) {
-        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-      } else if (err.request) {
-        message.error('Error: No response from server.');
-      } else {
-        message.error('Error: ' + err.message);
-      }
+      const errorMsg = err.response?.data?.message || err.message || 'Server Error';
+      message.error(`Error: ${errorMsg}`);
     }
   }
 
-  // initial fetch function occurs
   useEffect(() => {
     fetching()
-  }, [undefined])
+  }, [])
 
   // set the lead data in secoundary form
   useEffect(() => {
@@ -136,7 +129,7 @@ const DetailEditForm = () => {
   const onFinish = (e) => {
     e.preventDefault();
     const queryParam = formData.id // get the id for making Put request    
-    axios.put(`http://localhost:3002/${moduleName}/${queryParam}`, formData)
+    axios.put(`https://crm-server-opal.vercel.app/${moduleName}/${queryParam}`, formData)
       .then(res => {
         if (res.status === 200) {
           messageSuccess(res.data);

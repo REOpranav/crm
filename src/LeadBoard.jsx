@@ -65,10 +65,10 @@ const LeadBoard = () => {
     try {
       let deleting;
       for (const deleteValue of selectedRowKeys) {
-        deleting = await axios.post(`https://crm-server-opal.vercel.app/leads/delete`,{
-           id : deleteValue
+        deleting = await axios.post(`https://crm-server-opal.vercel.app/leads/delete`, {
+          id: deleteValue
         })
-      }      
+      }
       if (deleting.status == 200) {
         message.success("sucessfully Deleted the data")
       }
@@ -96,9 +96,9 @@ const LeadBoard = () => {
     fetching()
   }, [undefined, selectedRowKeys])
 
-  useEffect(()=>{
+  useEffect(() => {
     fetching()
-  },[])
+  }, [])
 
   // this code for appending field name into antd table  
   const data = []
@@ -126,12 +126,14 @@ const LeadBoard = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/callLogs`
-          const posting = await axios.post(URL, data) // post the data
-          if (posting.status === 201) {
+          const URL = `https://crm-server-opal.vercel.app/client/calllogs` // post the data
+          const posting = await axios.post(URL, {
+            callLogData: data
+          })
+          if (posting.status === 200) {
             message.success('Calls are stored in Call log')
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             window.location.href = `tel:${number}` // this is simple call ('this' number)
           }
         } catch (err) {
@@ -158,12 +160,14 @@ const LeadBoard = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/emailLogs`
-          const posting = await axios.post(URL, data) // post the data
-          if (posting.status === 201) {
+          const URL = `https://crm-server-opal.vercel.app/client/maillogs` // posting Call Log Data
+          const posting = await axios.post(URL, {
+            mailLogData: data
+          })
+          if (posting.status === 200) {
             message.success('Mail are stored in mail log')
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             window.location.href = `mailto:${number}` // this is simple call ('this' number)
           }
         } catch (err) {

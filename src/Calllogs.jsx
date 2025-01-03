@@ -15,18 +15,26 @@ const Calllogs = ({ callLogs, emailLog }) => {
 
   //initailly fecthing data using window URL
   const url = window.location.href
-  const endpoint = url.split('/').pop()
+  const endpointID = url.split('/').pop()
   const { Text } = Typography
 
-  const fetching = async () => {
+  const fetching = async () => {    
+    console.log('calling');
+    
     try {
-      const responceForCallLog = await axios.get(`http://localhost:3000/callLogs`) // this get method for call log 
-      const responceForEmailLog = await axios.get(`http://localhost:3000/emailLogs`) // this get method for mail log
+      let Client_ID = { client_id: endpointID }
+      const responceForCallLog = await axios.get(`https://crm-server-opal.vercel.app/calllogs/find`, { // this get method for call log 
+        params: Client_ID
+      })
+
+      const responceForEmailLog = await axios.get(`https://crm-server-opal.vercel.app/emailLogs/find`, { // this get method for mail log
+        params: Client_ID
+      })
       if (responceForCallLog.status === 200) { // this mail for adding mail log
-        setLogData(await responceForCallLog.data);
-      }
-      if (responceForEmailLog.status === 200) { // this mail for adding mail log
-        setMailLog(await responceForEmailLog.data)
+        setLogData( await responceForCallLog.data)
+        if (responceForEmailLog.status === 200) { // this mail for adding mail log
+          setMailLog(await responceForEmailLog.data)
+        }
       }
     } catch (err) {
       if (err.response) {
@@ -41,21 +49,17 @@ const Calllogs = ({ callLogs, emailLog }) => {
 
   useEffect(() => {
     fetching();
-  }, [undefined, endpoint]);
+  }, [undefined, endpointID]);
 
   useEffect(() => {
     if (logData || callLogs) {
-      let filteringKey = callLogs ? callLogs : logData
-      let ans = filteringKey.filter(e => e.id === endpoint)
-      setSeperateCallLogs(ans)
+      setSeperateCallLogs(logData)
     }
 
     if (mailLog || emailLog) {
-      let filteringKey = emailLog ? emailLog : mailLog
-      let ans = filteringKey.filter(e => e.id === endpoint)
-      setSeperateMailLogs(ans)
+      setSeperateMailLogs(mailLog)
     }
-  }, [undefined, callLogs, logData, emailLog])
+  }, [callLogs, logData, emailLog, mailLog])
 
   return (
     <div>
@@ -65,9 +69,8 @@ const Calllogs = ({ callLogs, emailLog }) => {
 
       <Row>
         <Col>
-          <Row style={{ padding: '10px', backgroundColor: '#efe8ff', borderRadius: '5px'}} justify={'space-between'}>
-            <Text style={{ color: 'black', fontWeight: 'lighter'}}>Call log </Text>
-            <Text><FiPhoneCall color='#8550ff'/></Text>
+          <Row style={{ padding: '10px', backgroundColor: '#efe8ff', borderRadius: '5px' }} justify={'space-between'}>
+            <Text style={{ color: 'black', fontWeight: 'lighter' }}>Call log </Text> <Text><FiPhoneCall color='#8550ff' /></Text>
           </Row>
 
           <Row>
@@ -83,7 +86,7 @@ const Calllogs = ({ callLogs, emailLog }) => {
         <Col style={{ marginLeft: '2%' }}>
           <Row style={{ padding: '10px', backgroundColor: '#fef1e1', borderRadius: '5px' }} justify={'space-between'}>
             <Text style={{ color: 'black', fontWeight: 'lighter' }}>Email log</Text>
-            <Text><LuMailCheck color='#faab4d'/></Text>
+            <Text><LuMailCheck color='#faab4d' /></Text>
           </Row>
 
           <Row>
