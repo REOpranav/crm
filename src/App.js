@@ -69,7 +69,6 @@ function App() {
         <Route path='/ZOHOmailsend/contact/:id' element={<SendMail />} />
         <Route path='/ZOHOmailsend/account/:id' element={<SendMail />} />
         <Route path='/maillog/reply/:id' element={<SendMail />} />
-        <Analytics />
       </Routes>
     </div>
   );
