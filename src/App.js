@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import { Analytics } from '@vercel/analytics'
+import { Analytics } from '@vercel/analytics/react'
 import LeadBoard from './LeadBoard';
 import FormPage from './FormPage';
 import Dashboard from './Dashboard';
