@@ -25,8 +25,12 @@ import DealEditForm from './DealEditForm';
 import APIs from './RestAPI/APIs';
 import MailLog from './MailLog';
 import SendMail from './SendMail';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    <Analytics />
+  }, [])
   return (
     <div className="App">
       <Routes>
