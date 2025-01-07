@@ -1,5 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics'
 import LeadBoard from './LeadBoard';
 import FormPage from './FormPage';
 import Dashboard from './Dashboard';
@@ -68,6 +69,7 @@ function App() {
         <Route path='/ZOHOmailsend/contact/:id' element={<SendMail />} />
         <Route path='/ZOHOmailsend/account/:id' element={<SendMail />} />
         <Route path='/maillog/reply/:id' element={<SendMail />} />
+        <Analytics />
       </Routes>
     </div>
   );
