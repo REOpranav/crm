@@ -69,9 +69,9 @@ const Contact = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/logs`
-          const posting = await axios.post(URL, data) // post the data
-          if (posting.status === 201) {
+          const URL = `https://crm-server-opal.vercel.app/client/calllogs`
+          const posting = await axios.post(URL, { callLogData: data })// post the data
+          if (posting.status === 200) {
             message.success('Calls are stored in Call log')
           }
           if (posting.status === 201) {
@@ -101,9 +101,9 @@ const Contact = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/emailLogs`
-          const posting = await axios.post(URL, data) // post the data
-          if (posting.status === 201) {
+          const URL = `https://crm-server-opal.vercel.app/client/maillogs`
+          const posting = await axios.post(URL, { mailLogData: data })
+          if (posting.status === 200) {
             message.success('Mail are stored in mail log')
           }
           if (posting.status === 201) {
@@ -189,9 +189,9 @@ const Contact = () => {
   const deleteThedata = async () => {
     try {
       let deleting;
-      for (const deleteValue of selectedRowKeys) {        
-        deleting = await axios.post(`https://crm-server-opal.vercel.app/contact/delete`,{
-          id : deleteValue
+      for (const deleteValue of selectedRowKeys) {
+        deleting = await axios.post(`https://crm-server-opal.vercel.app/contact/delete`, {
+          id: deleteValue
         })
       }
       if (deleting.status == 200) {

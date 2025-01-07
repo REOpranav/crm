@@ -65,16 +65,16 @@ const ContactDetail = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/callLogs`
-          const posting = await axios.post(URL, data) // post the data
+          const URL = `https://crm-server-opal.vercel.app/client/calllogs`
+          const posting = await axios.post(URL, { callLogData: data })// post the data
           const getCallLogs = await axios.get(URL)
           if (getCallLogs.status === 200) {
             setCallLogs(getCallLogs.data)
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             message.success('Calls are stored in Call log')
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             window.location.href = `tel:${number}`
           }
         } catch (err) {
@@ -101,16 +101,16 @@ const ContactDetail = () => {
     if (mailId) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/emailLogs`
-          const posting = await axios.post(URL, data) // post the data
+          const URL = `https://crm-server-opal.vercel.app/client/maillogs`
+          const posting = await axios.post(URL, { mailLogData: data }) // post the data
           const getMailLog = await axios.get(URL)
           if (getMailLog.status === 200) {
             setMailLogs(getMailLog.data)
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             message.success('Mail are stored in Mail log')
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             window.location.href = `mailto:${mailId}`
           }
         } catch (err) {
@@ -163,7 +163,7 @@ const ContactDetail = () => {
       label: (<Link to={`/contacts/organizationForm/${id}`}>For organization</Link>),
     },
   ]
-  
+
   return (
     <div>
       <Dashboard />

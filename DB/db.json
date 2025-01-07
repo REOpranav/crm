@@ -403,7 +403,29 @@
       "description": ""
     }
   ],
-  "deals": [],
+  "deals": [
+    {
+      "id": "331083644",
+      "key": "250750249",
+      "dealowner": "velu",
+      "dealName": "vadivel",
+      "accountName": "",
+      "amount": "1000000",
+      "Pipeline": "",
+      "stage": "stage 1",
+      "closingDate": "2026-02-08",
+      "companyName": "",
+      "email": "",
+      "gender": "",
+      "area": "",
+      "state": "",
+      "country": "",
+      "pincode": "",
+      "expectedAmount": "",
+      "website": "",
+      "description": ""
+    }
+  ],
   "callLogs": [
     {
       "id": "789012335",
@@ -940,6 +962,14 @@
         "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
         "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
         "<p draggable=\"true\"><label for=\"mobile\">Mobile Number : </label><input type=\"tel\" name=\"mobile\" id=\"mobile\" placeholder=\"Mobile Number *\" minlength=\"10\" maxlength=\"10\"></p>"
+      ]
+    },
+    {
+      "id": "sappc",
+      "inputs": [
+        "<p draggable=\"true\"><label for=\"leadowner\">Lead Owner : </label><input type=\"text\" name=\"leadowner\" id=\"leadowner\" placeholder=\"Lead Owner *\"></p>",
+        "<p draggable=\"true\"><label for=\"lastname\">Last Name : </label><input type=\"text\" name=\"lastname\" id=\"lastname\" placeholder=\"Last Name *\"></p>",
+        "<p draggable=\"true\"><label for=\"firstname\">First Name : </label><input type=\"text\" name=\"firstname\" id=\"firstname\" placeholder=\"First Name *\"></p>"
       ]
     }
   ],
