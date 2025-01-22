@@ -61,23 +61,23 @@ const DetailEditForm = () => {
   useEffect(() => {
     if (lead) {
       setFormData({
-        id: lead.id,
-        leadowner: lead.leadowner,
-        firstname: lead.firstname || '',
-        lastname: lead.lastname || '',
-        email: lead.email || '',
-        mobile: lead.mobile || '',
-        date: lead.date || '',
-        companyName: lead.companyName || '',
-        annualrevenue: lead.annualrevenue || '',
-        gender: lead.gender || '',
-        area: lead.area || '',
-        state: lead.state || '',
-        country: lead.country || '',
-        pincode: lead.pincode || '',
-        expectedAmount: lead.expectedAmount || '',
-        website: lead.website || '',
-        description: lead.description || ''
+        id: lead?.id,
+        leadowner: lead?.leadowner,
+        firstname: lead?.firstname || '',
+        lastname: lead?.lastname || '',
+        email: lead?.email || '',
+        mobile: lead?.mobile || '',
+        date: lead?.date || '',
+        companyName: lead?.companyName || '',
+        annualrevenue: lead?.annualrevenue || '',
+        gender: lead?.gender || '',
+        area: lead?.area || '',
+        state: lead?.state || '',
+        country: lead?.country || '',
+        pincode: lead?.pincode || '',
+        expectedAmount: lead?.expectedAmount || '',
+        website: lead?.website || '',
+        description: lead?.description || ''
       });
     }
   }, [lead]);
@@ -193,73 +193,73 @@ const DetailEditForm = () => {
         <form onSubmit={checkForSubmitting}>
           <p>
             <label for="leadowner">Owner : </label>
-            <input type="text" name="leadowner" id="leadowner" placeholder={`${lead.leadowner} - Owner *`} value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')} />
+            <input type="text" name="leadowner" id="leadowner" placeholder={`${lead?.leadowner ? lead?.leadowner : ''} - Owner *`} value={formData.leadowner} onChange={handleChange} className={getInputClass('leadowner')} />
           </p>
           <p>
             <label for="firstname">First Name : </label>
-            <input type="text" name="firstname" id="firstname" placeholder={`${lead.firstname}* - First Name`} value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')} />
+            <input type="text" name="firstname" id="firstname" placeholder={`${lead?.firstname ? lead?.firstname : ''}* - First Name`} value={formData.firstname} onChange={handleChange} className={getInputClass('firstname')} />
           </p>
 
           <p>
             <label for="lastname">Last Name : </label>
-            <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname} * - Last Name`} value={formData.lastname} onChange={handleChange} className={getInputClass('lastname')} />
+            <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname ? lead.lastname : ''} * - Last Name`} value={formData.lastname} onChange={handleChange} className={getInputClass('lastname')} />
           </p>
 
           <p>
             <label for="email">Email : </label>
-            <input type="email" name="email" id="email" placeholder={`${lead.email} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')} />
+            <input type="email" name="email" id="email" placeholder={`${lead?.email ? lead?.email : ''} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')} />
           </p>
 
           <p>
             <label for="mobile">Mobile : </label>
-            <input type="tel" name="mobile" id="mobile" placeholder={`${lead.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
+            <input type="tel" name="mobile" id="mobile" placeholder={`${lead?.mobile ? lead?.mobile : ''} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
           </p>
 
           <p>
             <label for="date">closing Date : </label>
-            <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} />
+            <input type="date" name="date" id="date" placeholder="closing Date *" value={formData?.date} onChange={handleChange} />
           </p>
 
           <p>
             <label for="companyName">Company Name : </label>
-            <input type="text" name="companyName" id="companyName" placeholder={`${lead.companyName} - Company Name`} value={formData.companyName} onChange={handleChange} />
+            <input type="text" name="companyName" id="companyName" placeholder={`${lead?.companyName ? lead?.companyName : ''} - Company Name`} value={formData.companyName} onChange={handleChange} />
           </p>
 
           <p>
             <label for="annualrevenue">Annual Revenue : </label>
-            <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
+            <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${lead?.annualrevenue ? lead?.annualrevenue : ''} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
           </p>
           <p>
             <label for="gender">Gender : </label>
-            <input type="text" name="gender" id="gender" placeholder={`${lead.gender} - Gender`} value={formData.gender} onChange={handleChange} />
+            <input type="text" name="gender" id="gender" placeholder={`${lead.gender ? lead.gender : ''} - Gender`} value={formData.gender} onChange={handleChange} />
           </p>
           <p>
             <label for="area">Area : </label>
-            <input type="text" name="area" id="area" placeholder={`${lead.area} - Area`} value={formData.area} onChange={handleChange} />
+            <input type="text" name="area" id="area" placeholder={`${lead?.area ? lead?.area : ''} - Area`} value={formData.area} onChange={handleChange} />
           </p>
           <p>
             <label for="pincode">Pincode : </label>
-            <input type="number" name="pincode" id="pincode" placeholder={`${lead.pincode} - Pincode`} value={formData.pincode} onChange={handleChange} />
+            <input type="number" name="pincode" id="pincode" placeholder={`${lead?.pincode ? lead?.pincode : ''} - Pincode`} value={formData.pincode} onChange={handleChange} />
           </p>
           <p>
             <label for="state">state : </label>
-            <input type="text" name="state" id="state" placeholder={`${lead.state} - Pincode`} value={formData.state} onChange={handleChange} />
+            <input type="text" name="state" id="state" placeholder={`${lead?.state ? lead?.state : ''} - Pincode`} value={formData.state} onChange={handleChange} />
           </p>
           <p>
             <label for="country">Country : </label>
-            <input type="text" name="country" id="country" placeholder={`${lead.country} - Country`} value={formData.country} onChange={handleChange} />
+            <input type="text" name="country" id="country" placeholder={`${lead?.country ? lead?.country : ''} - Country`} value={formData.country} onChange={handleChange} />
           </p>
           <p>
             <label for="expectedAmount">Expected Amount : </label>
-            <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${lead.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange} />
+            <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${lead?.expectedAmount ? lead?.expectedAmount : ''} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange} />
           </p>
           <p>
             <label for="website">Websites : </label>
-            <input type="url" name="website" id="website" placeholder={`${lead.website} - Websites`} value={formData.website} onChange={handleChange} />
+            <input type="url" name="website" id="website" placeholder={`${lead?.website ? lead?.website : ''} - Websites`} value={formData.website} onChange={handleChange} />
           </p>
           <p>
             <label for="description">Description : </label>
-            <textarea name="description" id="description" placeholder={`${lead.description}- Description`} value={formData.description} onChange={handleChange} />
+            <textarea name="description" id="description" placeholder={`${lead?.description ? lead?.description : ''}- Description`} value={formData.description} onChange={handleChange} />
           </p>
         </form>
       </Row>

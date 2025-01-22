@@ -30,6 +30,7 @@ const Detail = () => {
   const fetching = async () => {
     try {
       let clientID = { client_ID: id }
+      
       const responce = await axios.get(`https://crm-server-opal.vercel.app/leads/find`, {
         params: clientID
       })

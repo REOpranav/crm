@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Row, message, Table, Space, Typography, Popconfirm, Col, Dropdown } from 'antd'
+import { Button, Row, message, Table, Space, Typography, Popconfirm, Col, Dropdown, Tooltip } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -8,9 +8,17 @@ import { Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Searching from './Searching';
 import moment from 'moment';
+import FastLeadGen from './FastLeadGen';
+import { HiOutlineInformationCircle } from "react-icons/hi2";
+
+// this is message ele from antd
+function messageSuccess() {
+  message.success('Sucessfully created')
+}
 
 const LeadBoard = () => {
   const [leadData, setLeadData] = useState([])
+  const [fastLeadGenData, setFastLeadGenData] = useState([]) // this is the data for fast lead generation 
   const { Text } = Typography
 
   // searching function
@@ -234,6 +242,36 @@ const LeadBoard = () => {
     },
   ]
 
+  // this is for finding the name fron pathname to send  post request in that URL
+  const URL = window.location.pathname
+  const moduleName = URL.split('/').filter(e => e).shift()
+
+  //this function for get data from form and make post request
+  const onFinish = async () => {
+    let actualModuleName;
+    if (moduleName == 'leads') {
+      actualModuleName = 'insertLead'
+    } else if (moduleName == 'contacts') {
+      actualModuleName = 'insertContact'
+    }
+
+    axios.post(`https://crm-server-opal.vercel.app/mongoDB/${actualModuleName}`, {
+      indertingData: fastLeadGenData
+    }).then(res => {
+      if (res.status == 200) {
+        messageSuccess();
+      }
+    }).catch(err => {
+      if (err.response) {
+        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
+      } else if (err.request) {
+        message.error('Error: No response   from server.');
+      } else {
+        message.error('Error: ' + err.message);
+      }
+    })
+  }
+
   return (
     <div>
       <Dashboard />
@@ -242,6 +280,7 @@ const LeadBoard = () => {
           <Text style={{ fontSize: '20px', color: 'red', fontWeight: 'lighter' }}>Lead View</Text>
         </Space>
         <Space>
+          <FastLeadGen setFastLeadGenData={setFastLeadGenData} onFinish={onFinish} />
           {selectedRowKeys.length > 0 && <Popconfirm title="Are you sure to Delete" okText="Yes" cancelText="No" onConfirm={deleteThedata} onCancel={() => message.error('Cancel Delete')}> <Button type='primary'> Delete </Button> </Popconfirm>}
           <Searching setSearchQuery={setSearching} searchQuery={searching} listOfData={searchBy} selectedOption={selectedOption} setSelectedOption={setSelectedOption} setCalculateSymbol={setCalculateSymbol} />
           <Dropdown menu={{ items }} placement='bottomCenter'>

@@ -67,7 +67,7 @@ const FormPage = () => {
       actualModuleName = 'insertLead'
     } else if (moduleName == 'contacts') {
       actualModuleName = 'insertContact'
-    }
+    }    
     axios.post(`https://crm-server-opal.vercel.app/mongoDB/${actualModuleName}`, {
       indertingData: formData
     }).then(res => {
@@ -130,10 +130,6 @@ const FormPage = () => {
     if (!leadFormValues.mobile.trim()) {
       errorvalues.mobile = 'Mobile Number is Required'
     }
-
-
-    console.log(errorvalues);
-
     return errorvalues
   }
 
