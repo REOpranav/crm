@@ -9,7 +9,6 @@ import Dashboard from './Dashboard';
 import Searching from './Searching';
 import moment from 'moment';
 import FastLeadGen from './FastLeadGen';
-import { HiOutlineInformationCircle } from "react-icons/hi2";
 
 // this is message ele from antd
 function messageSuccess() {

@@ -56,8 +56,7 @@ const FastLeadGen = ({ setFastLeadGenData, onFinish }) => {
         inputValue.value = ''
     })
 
-
-    const submitClick = async() => {
+    const submitClick = async () => {
         incomingFormData = {}
         let match;
         const regex = /@(\w+)|#F\s(\w+)|#L\s(\w+)|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi; // regex for seperation each node after the specific symbold
@@ -69,12 +68,11 @@ const FastLeadGen = ({ setFastLeadGenData, onFinish }) => {
             if (match[3]) { incomingFormData.lastname = match[3] }
             if (match[0].includes("@") && !match[1]) { incomingFormData.email = match[0] }
         }
-        incomingFormData.id =  JSON.stringify(Math.floor(Math.random() * 1000000000))
-        
-        await setFastLeadGenData(incomingFormData)
-        await onFinish()
+        incomingFormData.id = JSON.stringify(Math.floor(Math.random() * 1000000000))
+        setFastLeadGenData(incomingFormData)
+        onFinish()
         inputValue.value = ''
-    }
+    }   
 
     return (
         <div>
