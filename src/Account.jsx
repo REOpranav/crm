@@ -70,10 +70,10 @@ const Account = () => {
 
   const deleteThedata = async () => {
     try {
-      const URL = `http://localhost:3000/accounts`
+      const URL = `https://crm-server-opal.vercel.app/account/delete`
       let deleting;
       for (const deleteValue of selectedRowKeys) { // this for loop for multi-delete
-        deleting = await axios.delete(`${URL}/${deleteValue}`)
+        deleting = await axios.post(URL, { id: deleteValue })
       }
       if (deleting.status === 200) {
         message.success("sucessfully Deleted the data")
@@ -137,8 +137,8 @@ const Account = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/callLogs`
-          const posting = await axios.post(URL, data) // post the data
+          const URL = `https://crm-server-opal.vercel.app/client/calllogs`
+          const posting = await axios.post(URL, { callLogData: data }) // post the data
           if (posting.status === 201) {
             message.success('Calls are stored in Call log')
           }
@@ -169,8 +169,8 @@ const Account = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/emailLogs`
-          const posting = await axios.post(URL, data) // post the data
+          const URL = `https://crm-server-opal.vercel.app/client/maillogs`
+          const posting = await axios.post(URL, { mailLogData: data }) // post the data
           if (posting.status === 201) {
             message.success('Mail are stored in mail log')
           }

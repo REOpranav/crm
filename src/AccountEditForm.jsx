@@ -9,12 +9,14 @@ function messageSuccess(value) {
   message.success(`Sucessfully Update the ${value.firstname} Lead Datas`)
 }
 
+const URL = window.location.href
+const id = URL.split('/').pop()
+
 const AccountEditForm = () => {
   const { Text } = Typography
   const navigation = useNavigate() //this is for navigation   
   const urlParams = window.location.pathname //this code for getting url params
 
-  const [fectedaccountDatas, setFetchedAccountData] = useState([])//this will fetch the full data from query param
   const [actualActualData, setActualActualData] = useState([]) // this data is filter data from lead datas
   const [errors, setError] = useState('')
   const [formData, setFormData] = useState({})
@@ -23,9 +25,10 @@ const AccountEditForm = () => {
 
   const fetching = async () => {
     try {
-      const responce = await axios.get(`https://sakthi-crm.vercel.app/mongodb/${moduleName}`) // fethch the data using the module name 
+      let clientID = { client_ID: id }
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/account/find`, { params: clientID }) // fethch the data using the module name 
       if (responce.status === 200) {
-        setFetchedAccountData(await responce.data);
+        setActualActualData(...await responce?.data);
       }
     } catch (err) {
       if (err.response) {
@@ -43,39 +46,27 @@ const AccountEditForm = () => {
     fetching()
   }, [undefined])
 
-  // make filteration after fetching function complete
-  useEffect(() => {
-    let idNUmber = urlParams.split('/').pop() // get the endpoint for filter the partucaular person array       
-    fectedaccountDatas.map((e) => {
-      if (e._id === idNUmber) {
-        setActualActualData(e)
-      }
-    })
-  }, [fetching])
-
   // set the lead data in secoundary form
   useEffect(() => {
-    if (actualActualData) { 
-      console.log(actualActualData);
-      
+    if (actualActualData) {
       setFormData({
-        id: actualActualData._id,
-        accountOwner: actualActualData.accountOwner,
-        industry: actualActualData.industry || '',
-        employeesCount: actualActualData.employeesCount || '',
-        email: actualActualData.email || '',
-        mobile: actualActualData.mobile || '',
-        date: actualActualData.date || '',
-        companyName: actualActualData.companyName || '',
-        annualrevenue: actualActualData.annualrevenue || '',
-        gender: actualActualData.gender || '',
-        area: actualActualData.area || '',
-        state: actualActualData.state || '',
-        country: actualActualData.country || '',
-        pincode: actualActualData.pincode || '',
-        expectedAmount: actualActualData.expectedAmount || '',
-        website: actualActualData.website || '',
-        description: actualActualData.description || ''
+        id: actualActualData?.id,
+        accountOwner: actualActualData?.accountOwner || '',
+        industry: actualActualData?.industry || '',
+        employeesCount: actualActualData?.employeesCount || '',
+        email: actualActualData?.email || '',
+        mobile: actualActualData?.mobile || '',
+        date: actualActualData?.date || '',
+        companyName: actualActualData?.companyName || '',
+        annualrevenue: actualActualData?.annualrevenue || '',
+        gender: actualActualData?.gender || '',
+        area: actualActualData?.area || '',
+        state: actualActualData?.state || '',
+        country: actualActualData?.country || '',
+        pincode: actualActualData?.pincode || '',
+        expectedAmount: actualActualData?.expectedAmount || '',
+        website: actualActualData?.website || '',
+        description: actualActualData?.description || ''
       });
     }
   }, [actualActualData]);
@@ -185,64 +176,64 @@ const AccountEditForm = () => {
           </p>
           <p>
             <label for="industry">Industry : </label>
-            <input type="text" name="industry" id="industry" placeholder={`${actualActualData.industry}* - industry`} value={formData.industry} onChange={handleChange} className={getInputClass('industry')} />
+            <input type="text" name="industry" id="industry" placeholder={`${actualActualData?.industry}* - industry`} value={formData.industry} onChange={handleChange} className={getInputClass('industry')} />
           </p>
 
           <p>
             <label for="employeesCount">Employees Count : </label>
-            <input type="text" name="employeesCount" id="employeesCount" placeholder={`${actualActualData.employeesCount} * - Employees Count`} value={formData.employeesCount} onChange={handleChange} className={getInputClass('employeesCount')} />
+            <input type="text" name="employeesCount" id="employeesCount" placeholder={`${actualActualData?.employeesCount} * - Employees Count`} value={formData.employeesCount} onChange={handleChange} className={getInputClass('employeesCount')} />
           </p>
 
           <p>
             <label for="email">Email : </label>
-            <input type="email" name="email" id="email" placeholder={`${actualActualData.email} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')} />
+            <input type="email" name="email" id="email" placeholder={`${actualActualData?.email} * - Email`} value={formData.email} onChange={handleChange} className={getInputClass('email')} />
           </p>
 
           <p>
             <label for="mobile">Mobile : </label>
-            <input type="tel" name="mobile" id="mobile" placeholder={`${actualActualData.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
+            <input type="tel" name="mobile" id="mobile" placeholder={`${actualActualData?.mobile} * - Mobile`} minLength={10} maxLength={10} value={formData.mobile} onChange={handleChange} className={getInputClass('mobile')} />
           </p>
 
           <p>
             <label for="companyName">Company Name : </label>
-            <input type="text" name="companyName" id="companyName" placeholder={`${actualActualData.companyName} - Company Name`} value={formData.companyName} onChange={handleChange} />
+            <input type="text" name="companyName" id="companyName" placeholder={`${actualActualData?.companyName} - Company Name`} value={formData.companyName} onChange={handleChange} />
           </p>
 
           <p>
             <label for="annualrevenue">Annual Revenue : </label>
-            <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${actualActualData.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
+            <input type="number" name="annualrevenue" id="annualrevenue" placeholder={`${actualActualData?.annualrevenue} - Annual Revenue`} value={formData.annualrevenue} onChange={handleChange} />
           </p>
           <p>
             <label for="gender">Gender : </label>
-            <input type="text" name="gender" id="gender" placeholder={`${actualActualData.gender} - Gender`} value={formData.gender} onChange={handleChange} />
+            <input type="text" name="gender" id="gender" placeholder={`${actualActualData?.gender} - Gender`} value={formData.gender} onChange={handleChange} />
           </p>
           <p>
             <label for="area">Area : </label>
-            <input type="text" name="area" id="area" placeholder={`${actualActualData.area} - Area`} value={formData.area} onChange={handleChange} />
+            <input type="text" name="area" id="area" placeholder={`${actualActualData?.area} - Area`} value={formData.area} onChange={handleChange} />
           </p>
           <p>
             <label for="pincode">Pincode : </label>
-            <input type="number" name="pincode" id="pincode" placeholder={`${actualActualData.pincode} - Pincode`} value={formData.pincode} onChange={handleChange} />
+            <input type="number" name="pincode" id="pincode" placeholder={`${actualActualData?.pincode} - Pincode`} value={formData.pincode} onChange={handleChange} />
           </p>
           <p>
             <label for="state">state : </label>
-            <input type="text" name="state" id="state" placeholder={`${actualActualData.state} - Pincode`} value={formData.state} onChange={handleChange} />
+            <input type="text" name="state" id="state" placeholder={`${actualActualData?.state} - Pincode`} value={formData.state} onChange={handleChange} />
           </p>
           <p>
             <label for="country">Country : </label>
-            <input type="text" name="country" id="country" placeholder={`${actualActualData.country} - Country`} value={formData.country} onChange={handleChange} />
+            <input type="text" name="country" id="country" placeholder={`${actualActualData?.country} - Country`} value={formData.country} onChange={handleChange} />
           </p>
           <p>
             <label for="expectedAmount">Expected Amount : </label>
-            <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${actualActualData.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange} />
+            <input type="text" name="expectedAmount" id="expectedAmount" placeholder={`${actualActualData?.expectedAmount} - Expected Amount`} value={formData.expectedAmount} onChange={handleChange} />
           </p>
           <p>
             <label for="website">Websites : </label>
-            <input type="url" name="website" id="website" placeholder={`${actualActualData.website} - Websites`} value={formData.website} onChange={handleChange} />
+            <input type="url" name="website" id="website" placeholder={`${actualActualData?.website} - Websites`} value={formData.website} onChange={handleChange} />
           </p>
           <p>
             <label for="description">Description : </label>
-            <textarea name="description" id="description" placeholder={`${actualActualData.description}- Description`} value={formData.description} onChange={handleChange} />
+            <textarea name="description" id="description" placeholder={`${actualActualData?.description}- Description`} value={formData.description} onChange={handleChange} />
           </p>
         </form>
       </Row>

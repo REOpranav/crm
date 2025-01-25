@@ -62,9 +62,9 @@ const AccountFormPage = () => {
   //this function for get data from form and make post request
   const onFinish = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:3000/${moduleName}`, accountData)
+    axios.post(`https://crm-server-opal.vercel.app/mongoDB/insertAccount`, { accountData: accountData })
       .then(res => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           messageSuccess();
         }
       }).catch(err => {

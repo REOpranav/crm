@@ -18,9 +18,7 @@ const Calllogs = ({ callLogs, emailLog }) => {
   const endpointID = url.split('/').pop()
   const { Text } = Typography
 
-  const fetching = async () => {    
-    console.log('calling');
-    
+  const fetching = async () => {
     try {
       let Client_ID = { client_id: endpointID }
       const responceForCallLog = await axios.get(`https://crm-server-opal.vercel.app/calllogs/find`, { // this get method for call log 

@@ -75,7 +75,7 @@ const DealForm = () => {
   //this function for get data from form and make post request
   const onFinish = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:3000/deals`, dealdata)
+    axios.post(`https://crm-server-opal.vercel.app/mongoDB/insertDeal`, dealdata)
       .then(res => {
         if (res.status === 201) {
           messageSuccess();
@@ -148,10 +148,10 @@ const DealForm = () => {
     return errors[value] ? 'inputError' : ''
   }
 
-  // fething account data for look ups
+  // fething account data for look-ups
   const fetching = async () => {
     try {
-      const responce = await axios.get(`http://localhost:3000/accounts`)
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/mongoDB/accounts`)
       if (responce.status === 200) {
         setAccountData(await responce.data);
       }

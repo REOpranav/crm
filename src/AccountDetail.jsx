@@ -25,8 +25,8 @@ const AccountDetail = () => {
   const fetching = async () => {
     try {
       let clientID = { client_ID: id }
-      const responce = await axios.get(`https://crm-server-opal.vercel.app/account/find`,{
-         params : clientID
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/account/find`, {
+        params: clientID
       })
       if (responce.status == 200) {
         setAccountData(...await responce.data)
@@ -52,16 +52,16 @@ const AccountDetail = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/callLogs`
-          const posting = await axios.post(URL, data) // post the data
+          const URL = `https://crm-server-opal.vercel.app/client/calllogs`
+          const posting = await axios.post(URL, { callLogData: data }) // post the data
           const getCallLogs = await axios.get(URL)
           if (getCallLogs.status === 200) {
             setCallLogs(getCallLogs.data)
           }
-          if (posting.status == 201) {
+          if (posting.status == 200) {
             message.success('Calls are stored in Call log')
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             window.location.href = `tel:${number}`
           }
         } catch (err) {
@@ -88,16 +88,16 @@ const AccountDetail = () => {
     if (number) {
       const logPost = async () => {
         try {
-          const URL = `http://localhost:3000/emailLogs`
-          const posting = await axios.post(URL, data) // post the data
+          const URL = `https://crm-server-opal.vercel.app/client/maillogs`
+          const posting = await axios.post(URL, { mailLogData: data }) // post the data
           const getMailLog = await axios.get(URL)
           if (getMailLog.status === 200) {
             setMailLogs(getMailLog.data)
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             message.success('Mail are stored in Mail log')
           }
-          if (posting.status === 201) {
+          if (posting.status === 200) {
             window.location.href = `mailto:${number}`
           }
         } catch (err) {
@@ -189,7 +189,7 @@ const AccountDetail = () => {
           </Button>
 
           <Button type='default'>
-            {/* <Link to={'/contacts'}>Back to Account Board</Link> */}
+            <Link to={'/accounts'}>Back to Account Board</Link>
           </Button>
         </Flex>
       </Row>

@@ -41,7 +41,7 @@ const Deal = () => {
   // this code for getting data from deal 
   const fetching = async()=>{
       try {
-          const responce = await axios.get('http://localhost:3000/deals')
+          const responce = await axios.get('https://crm-server-opal.vercel.app/mongoDB/deal')
             if (responce.status === 200) {
                 setDealData(await responce.data);
                 setSearchBy(await responce.data); 
@@ -131,7 +131,7 @@ const Deal = () => {
       },     
     ]   
 
-    const filter = dealData.filter(value => {  // filtering the data (which are the data are same as selectedOption )
+    const filter = dealData?.filter(value => {  // filtering the data (which are the data are same as selectedOption )
       const comparisonFunction  = {  // this object for finiding the === object
         'equal to' : (a,b) => a == b,
         'greater than' : (a,b) => a > b,
