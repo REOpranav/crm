@@ -315,13 +315,13 @@ const MailLog = () => {
 
   useEffect(() => {
     if (Authcode !== null) {
-      // userdefine() // meeting user account
+      userdefine() // meeting user account
     }
   }, [undefined])
 
   useEffect(() => {
     if (Authcode !== null) {
-      // ZOHO_Meeting_Access_Token() // meeting access token
+      ZOHO_Meeting_Access_Token() // meeting access token
     }
   }, [undefined])
 
