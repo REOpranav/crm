@@ -77,7 +77,7 @@ const MailLog = () => {
   // this function is getting the user define in zoho meeting
   const userdefine = async () => {
     try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)                
+      const accessTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)                
       userDeatailAuth(accessTokenResponce?.data)
     } catch (err) {
       console.log(err.message)
@@ -98,7 +98,7 @@ const MailLog = () => {
   // this function is getting the access token
   const ZOHO_Meeting_Access_Token = async () => {
     try {
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/token`, accessTokenParams) // this line send the request to node (server.js)      
+      const accessTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/token`, accessTokenParams) // this line send the request to node (server.js)      
       if (accessTokenResponce?.data?.scope == 'ZohoMeeting.meeting.ALL') {
         accessTokenData(accessTokenResponce?.data)
 
@@ -127,7 +127,7 @@ const MailLog = () => {
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccountIDdetail = async () => {
     try {
-      const ZOHOmailAccountDetailResponce = await axios.post(`http://localhost:3002/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)   
+      const ZOHOmailAccountDetailResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)   
 
       if (ZOHOmailAccountDetailResponce?.data?.getZOHOmeetingAccessToken?.scope == 'ZohoMail.accounts.ALL') {
         sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId)
@@ -157,7 +157,7 @@ const MailLog = () => {
     }
 
     try {
-      const folderTokenResponce = await axios.post(`http://localhost:3002/api/mailFolder`, accessTokenParameter) // this line send the request to node (server.js)
+      const folderTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailFolder`, accessTokenParameter) // this line send the request to node (server.js)
       folderTokenResponce?.data?.getZOHOfolderAccessToken?.scope == "ZohoMail.folders.ALL" && (() => {
         fetchedDataFromZOHOmailFOlder(folderTokenResponce?.data?.getZOHOfolderDetails)
         setTimeout(() => {
@@ -171,7 +171,7 @@ const MailLog = () => {
 
   const getZOHOmailMessageAccessToken = async () => {
     try {
-      const ZOHOmailMessageDetailResponce = await axios.post(`http://localhost:3002/api/ZOHOmailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)      
+      const ZOHOmailMessageDetailResponce = await axios.post(`https://crm-server-opal.vercel.app/api/ZOHOmailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)      
       ZOHOmailMessageDetailResponce?.data?.scope === "ZohoMail.messages.ALL" && (() => {
         sessionStorage.setItem('ZOHOmailMessageAccessToken', ZOHOmailMessageDetailResponce?.data?.access_token)
         setTimeout(() => {
@@ -195,7 +195,7 @@ const MailLog = () => {
           }
         }
         try {
-          const mailListResponce = await axios.post(`http://localhost:3002/api/mailList`, extras)// this line send the request to node (server.js)          
+          const mailListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailList`, extras)// this line send the request to node (server.js)          
           mailListResponce?.status == 200 && (() => {
             setMailList(mailListResponce?.data)
           })()
@@ -222,7 +222,7 @@ const MailLog = () => {
           }
         }
         try {
-          const mailListResponce = await axios.post(`http://localhost:3002/api/maildelete`, extras)// this line send the request to node (server.js)
+          const mailListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/maildelete`, extras)// this line send the request to node (server.js)
           mailListResponce.status == 200 && (() => {
             messageDrop('success', 'Deleted successfully')
             currentZOHOmailList()
@@ -248,7 +248,7 @@ const MailLog = () => {
           }
         }
         try {
-          const mailIndividualResponce = await axios.post(`http://localhost:3002/api/mailDataIndividual`, extras)// this line send the request to node (server.js)
+          const mailIndividualResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailDataIndividual`, extras)// this line send the request to node (server.js)
           if (mailIndividualResponce.status == 200) {
             setIndividualMailMessage_content(mailIndividualResponce?.data?.content)
             setTndividualMailMessage_details(mailIndividualResponce?.data?.detail)
@@ -328,8 +328,8 @@ const MailLog = () => {
   useEffect(() => { // mail access tokens 
     if (Authcode !== null) {
       getZOHOmailAccountIDdetail()
-      // ZOHOmailFolderDetail()
-      // getZOHOmailMessageAccessToken()
+      ZOHOmailFolderDetail()
+      getZOHOmailMessageAccessToken()
     }
   }, [undefined])
 
