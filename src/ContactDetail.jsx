@@ -38,7 +38,7 @@ const ContactDetail = () => {
         params: clientID
       })
       if (responce.status === 200) {
-        setContactData(...responce.data)
+        setContactData(...await responce.data)
       }
     } catch (err) {
       if (err.response) {

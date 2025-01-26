@@ -34,16 +34,19 @@ const SendMail = () => {
     ccAddress: '',
     subject: '',
     content: '',
-  })  
+  })
 
- const fecthingLeadDetailForMail = async () => { // this code for initial load and when lead added
+  const fecthingLeadDetailForMail = async () => { // this code for initial load and when lead added
     try {
       const URL = window.location.href
       const ids = URL.split('/').pop()
-      
-      const responce = await axios.get(`http://localhost:3000/leads/${ids}`)      
+
+      let clientID = { client_ID: ids }
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/leads/find`, {
+        params: clientID
+      })
       if (responce.status === 200) {
-        setSendMailSend(await responce.data.email);
+        setSendMailSend(await responce?.data?.email);
       }
     } catch (err) {
       if (err.response) {
@@ -60,10 +63,12 @@ const SendMail = () => {
     try {
       const URL = window.location.href
       const ids = URL.split('/').pop()
-      
-      const responce = await axios.get(`http://localhost:3000/contacts/${ids}`)      
+      let clientID = { client_ID: ids }
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/contacts/find`, {
+        params: clientID
+      })
       if (responce.status === 200) {
-        setSendMailSend(await responce.data.email);
+        setSendMailSend(await responce?.data?.email);
       }
     } catch (err) {
       if (err.response) {
@@ -80,10 +85,13 @@ const SendMail = () => {
     try {
       const URL = window.location.href
       const ids = URL.split('/').pop()
-      
-      const responce = await axios.get(`http://localhost:3000/accounts/${ids}`)      
+
+      let clientID = { client_ID: ids }
+      const responce = await axios.get(`https://crm-server-opal.vercel.app/account/find`, {
+        params: clientID
+      })
       if (responce.status === 200) {
-        setSendMailSend(await responce.data.email);
+        setSendMailSend(...await responce?.data?.email);
       }
     } catch (err) {
       if (err.response) {
@@ -158,7 +166,7 @@ const SendMail = () => {
     sendMail()
   }
 
-  const sendMail = () => {    
+  const sendMail = () => {
     if (!Array.isArray(ZOHOmailMessageAccessToken)) {
       const mailAccessCredencial = async () => {
         const data = {
@@ -202,9 +210,9 @@ const SendMail = () => {
   useEffect(() => {
     if ((window.location.pathname).includes('lead')) {
       fecthingLeadDetailForMail()
-    }else if ((window.location.pathname).includes('contact')) {
+    } else if ((window.location.pathname).includes('contact')) {
       fecthingContactDetailForMail()
-    }else if ((window.location.pathname).includes('account')) {
+    } else if ((window.location.pathname).includes('account')) {
       fecthingAccountDetailForMail()
     }
   }, [undefined])
