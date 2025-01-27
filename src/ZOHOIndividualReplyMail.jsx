@@ -121,7 +121,7 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, set
                 }
 
                 try {
-                    const mailSendResponce = await axios.post(`http://localhost:3002/api/mailDataIndividualReply`, data, extras)// this line send the request to node (server.js) 
+                    const mailSendResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailDataIndividualReply`, data, extras)// this line send the request to node (server.js) 
                     if (mailSendResponce.data.status.code == 200) {
                         messageDrop('success', 'Replied sent successfully')
                         setReplySendStatus(false)
