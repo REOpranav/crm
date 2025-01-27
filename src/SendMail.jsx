@@ -23,7 +23,7 @@ const required = {
 const SendMail = () => {
   const { Text, Title } = Typography
   const navigate = useNavigate();
-  const [sendLeadMail, setSendMailSend] = useState('')
+  const [sendLeadMail, setSendMailSend] = useState([])
   const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
   const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
   const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
@@ -46,7 +46,7 @@ const SendMail = () => {
         params: clientID
       })
       if (responce.status === 200) {
-        setSendMailSend(await responce?.data?.email);
+        setSendMailSend(await responce?.data?.map(e => e.email));
       }
     } catch (err) {
       if (err.response) {
@@ -68,7 +68,7 @@ const SendMail = () => {
         params: clientID
       })
       if (responce.status === 200) {
-        setSendMailSend(await responce?.data?.email);
+        setSendMailSend(responce?.data?.map(e => e.email));
       }
     } catch (err) {
       if (err.response) {
@@ -91,7 +91,7 @@ const SendMail = () => {
         params: clientID
       })
       if (responce.status === 200) {
-        setSendMailSend(...await responce?.data?.email);
+        setSendMailSend(await responce?.data.map(e => e.email));
       }
     } catch (err) {
       if (err.response) {
