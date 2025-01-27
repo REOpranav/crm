@@ -115,13 +115,13 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, set
                         "extras": {
                             "accountId": ZOHOmailAccountdID && JSON.parse(ZOHOmailAccountdID),
                             "messageId": messageID ? messageID : 0,
-                            "access_token": `${JSON.parse(ZOHOmailMessageAccessToken)}`,
+                            "access_token": `${ZOHOmailMessageAccessToken}`,
                         }
                     }
                 }
 
                 try {
-                    const mailSendResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailDataIndividualReply`, data, extras)// this line send the request to node (server.js) 
+                    const mailSendResponce = await axios.post(`http://localhost:3002/api/mailDataIndividualReply`, data, extras)// this line send the request to node (server.js) 
                     if (mailSendResponce.data.status.code == 200) {
                         messageDrop('success', 'Replied sent successfully')
                         setReplySendStatus(false)
