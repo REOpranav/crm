@@ -190,7 +190,7 @@ const SendMail = () => {
         }
 
         try {
-          const mailSendResponce = await axios.post(`http://localhost:3002/api/sendMail`, data, extras)// this line send the request to node (server.js) 
+          const mailSendResponce = await axios.post(`https://crm-server-opal.vercel.app/api/sendMail`, data, extras)// this line send the request to node (server.js) 
           if (mailSendResponce.data.status.code == 200) {
             messageDrop('success', 'Message sent successfully')
             navigate('/maillog')
