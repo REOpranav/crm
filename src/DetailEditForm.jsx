@@ -94,22 +94,22 @@ const DetailEditForm = () => {
   // validation Form
   function validation(leadFormValues) {
     let errorvalues = {}
-    if (!leadFormValues.firstname.trim()) {
+    if (!leadFormValues?.firstname.trim()) {
       errorvalues.firstname = 'First Name is Required'
     }
-    if (!leadFormValues.leadowner.trim()) {
+    if (!leadFormValues?.leadowner.trim()) {
       errorvalues.firstname = 'owner is Required'
     }
 
-    if (!leadFormValues.lastname.trim()) {
+    if (!leadFormValues?.lastname.trim()) {
       errorvalues.lastname = 'Last Name is Required'
     }
 
-    if (!leadFormValues.email.trim()) {
+    if (!leadFormValues?.email.trim()) {
       errorvalues.email = 'Email Id is Required'
     }
 
-    if (!leadFormValues.mobile.trim()) {
+    if (!leadFormValues?.mobile.trim()) {
       errorvalues.mobile = 'Mobile Number is Required'
     }
     return errorvalues
@@ -129,21 +129,21 @@ const DetailEditForm = () => {
   const onFinish = (e) => {
     e.preventDefault();
     const queryParam = formData.id // get the id for making Put request    
-    axios.put(`https://crm-server-opal.vercel.app/${moduleName}/${queryParam}`, formData)
-      .then(res => {
-        if (res.status === 200) {
-          messageSuccess(res.data);
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          message.error(`Error: ${error.response.status} - ${error.response.data.message || 'Server Error'}`);
-        } else if (error.request) {
-          message.error('Error: No response from server.');
-        } else {
-          message.error(`Error: ${error.message}`);
-        }
-      });
+    axios.post(`https://crm-server-opal.vercel.app/mongoDB/updateClient`,
+      { updatedContent: formData, id: queryParam, collectionName: moduleName }
+    ).then(res => {
+      if (res.status === 200) {
+        messageSuccess(res.data);
+      }
+    }).catch(error => {
+      if (error.response) {
+        message.error(`Error: ${error.response.status} - ${error.response.data.message || 'Server Error'}`);
+      } else if (error.request) {
+        message.error('Error: No response from server.');
+      } else {
+        message.error(`Error: ${error.message}`);
+      }
+    });
 
     setTimeout(() => {
       navigate();
@@ -170,7 +170,7 @@ const DetailEditForm = () => {
         <Col>
           <Flex style={{ padding: '10px', display: 'flex', alignItems: 'center' }} gap={'small'}>
             <Text style={{ fontSize: '20px', fontWeight: 'lighter', color: 'grey', textTransform: 'capitalize' }}>Edit {`${moduleName}`}</Text>
-            <Text style={{ fontSize: '15px', color: 'red' }}>{`(${lead.firstname})`}</Text>
+            <Text style={{ fontSize: '15px', color: 'red' }}>{`(${lead?.firstname})`}</Text>
           </Flex>
         </Col>
         <Col>
@@ -202,7 +202,7 @@ const DetailEditForm = () => {
 
           <p>
             <label for="lastname">Last Name : </label>
-            <input type="text" name="lastname" id="lastname" placeholder={`${lead.lastname ? lead.lastname : ''} * - Last Name`} value={formData.lastname} onChange={handleChange} className={getInputClass('lastname')} />
+            <input type="text" name="lastname" id="lastname" placeholder={`${lead?.lastname ? lead.lastname : ''} * - Last Name`} value={formData.lastname} onChange={handleChange} className={getInputClass('lastname')} />
           </p>
 
           <p>
@@ -217,12 +217,12 @@ const DetailEditForm = () => {
 
           <p>
             <label for="date">closing Date : </label>
-            <input type="date" name="date" id="date" placeholder="closing Date *" value={formData?.date} onChange={handleChange} />
+            <input type="date" name="date" id="date" placeholder="closing Date *" value={formData.date} onChange={handleChange} />
           </p>
 
           <p>
             <label for="companyName">Company Name : </label>
-            <input type="text" name="companyName" id="companyName" placeholder={`${lead?.companyName ? lead?.companyName : ''} - Company Name`} value={formData.companyName} onChange={handleChange} />
+            <input type="text" name="companyName" id="companyName" placeholder={`${lead?.companyName ? lead?.companyName : ''} - Company Name`} value={formData?.companyName} onChange={handleChange} />
           </p>
 
           <p>
@@ -231,7 +231,7 @@ const DetailEditForm = () => {
           </p>
           <p>
             <label for="gender">Gender : </label>
-            <input type="text" name="gender" id="gender" placeholder={`${lead.gender ? lead.gender : ''} - Gender`} value={formData.gender} onChange={handleChange} />
+            <input type="text" name="gender" id="gender" placeholder={`${lead?.gender ? lead.gender : ''} - Gender`} value={formData.gender} onChange={handleChange} />
           </p>
           <p>
             <label for="area">Area : </label>
