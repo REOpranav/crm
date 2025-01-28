@@ -60,7 +60,7 @@ const MeetingStep = () => {
   }
 
   const GetZOHO_MeetingAccessToken = () => { // this code for getting access token
-    const scope = 'ZohoMeeting.meeting.ALL'
+    const scope = 'ZohoMeeting.meeting'
     const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
     const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
     getZohoAuth_Code(scope, client_id, redirect_uri)
@@ -69,32 +69,7 @@ const MeetingStep = () => {
 
   // ZOHO mail integration code
   const fetchZOHOMailAccountDetail = () => { // This is for getting mail account_id.
-    const scope = 'ZohoMail.accounts.ALL'
-    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
-    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
-
-    getZohoAuth_Code(scope, client_id, redirect_uri)
-  }
-
-  // This is ZOHO mail integration code
-  const fetchZOHOMailFolders = () => { // This is for getting mail account_id. 
-    const scope = 'ZohoMail.folders.ALL'
-    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
-    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
-
-    getZohoAuth_Code(scope, client_id, redirect_uri)
-  }
-
-  const fetchZOHOMailAccessToken = () => {
-    messageLoading()
-    setTimeout(() => {
-      getZOHOmailMessageAccessToken()
-    }, [1 * 1000])
-  }
-
-  // This for getting ZOHO mail access token
-  const getZOHOmailMessageAccessToken = () => {
-    const scope = 'ZohoMail.messages.ALL'
+    const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL'
     const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
     const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 
@@ -195,8 +170,6 @@ const MeetingStep = () => {
 
           <Row justify={'space-evenly'} style={{ padding: '30px' }}>
             <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}> MAIL ACCOUNT ACCESS</span>TOKEN </Button>
-            <Button onClick={fetchZOHOMailFolders} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}> MAIL FOLDER ACCESS</span>TOKEN</Button>
-            <Button onClick={fetchZOHOMailAccessToken} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}>MAIL MESSAGE ACCESS </span>TOKEN</Button>
           </Row>
         </>
       }

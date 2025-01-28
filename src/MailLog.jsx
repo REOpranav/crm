@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
 import { Button, Col, Image, message, Popconfirm, Row, Space, Tooltip, Typography, Spin } from 'antd'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { json, Link, useNavigate } from 'react-router-dom'
 import './MailLog.css'
 import { CiMail } from "react-icons/ci";
 import { MdOutlineAirlineSeatLegroomReduced, MdOutlineDeleteOutline } from "react-icons/md";
@@ -10,7 +10,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { RxArrowLeft } from "react-icons/rx";
 import SendMail from './SendMail'
 import ZOHOIndividualReplyMail from './ZOHOIndividualReplyMail'
-import { getZohoAccessToken_Params } from 'api-auth-zoho'
+import { getZohoAccessToken_Params, getZohoAuth_Code } from 'api-auth-zoho'
 
 // this is for finding the name fron pathname to send  post request in that URL
 const URL = window.location.pathname
@@ -33,6 +33,10 @@ const messageDrop = (type, content) => {
 
 const replyHeading = {
   padding: '10px'
+}
+
+const stylesForPadding = {
+  "padding": '20px'
 }
 
 let autharizationCode = Authcode
@@ -60,18 +64,12 @@ const MailLog = () => {
   const individual = document.getElementById('individualMessage')
 
   // accessing the zoho Mail Account detail from session storage
-  const ZOHOmailFoldersDetails = JSON.parse(sessionStorage.getItem('mailFolderDetails')) || []
+
+  const [ZOHOmailFoldersDetails, setZOHOmailFoldersDetails] = useState(JSON.parse(sessionStorage.getItem('mailFolderDetails')) || [])
   const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
   const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
   const ZOHOmailAccountDetailResponceAccountName = sessionStorage.getItem('ZOHOmailAccountDetailResponceAccountName') || []
   const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
-
-  // this code are ZOHO MAIL intregreation codes 
-  const fetchedDataFromZOHOmailFOlder = async (token) => { // if account Token will get ,stored in session storage        
-    sessionStorage.setItem('mailFolderDetails', JSON.stringify(token)) // stroing the api data in sessiong storage
-    const checkmailAccountdDetailForDropMessage = await JSON.parse(sessionStorage.getItem('mailFolderDetails')) || [] //checking if there have meetingAccessTokenData in session storage for showing the success message
-    checkmailAccountdDetailForDropMessage !== null ? message.success('Mail Folder Detail Retrieved') : message.warning('Failed to retrive,Pleace Retry the same process')
-  }
 
   // meeting codes (get user token)
   // this function is getting the user define in zoho meeting
@@ -127,57 +125,30 @@ const MailLog = () => {
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccountIDdetail = async () => {
     try {
-      const ZOHOmailAccountDetailResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailAccountToken`, accessTokenParams) // this line send the request to node (server.js)   
-
-      if (ZOHOmailAccountDetailResponce?.data?.getZOHOmeetingAccessToken?.scope == 'ZohoMail.accounts.ALL') {
-        sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId)
-        sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountName)
-        sessionStorage.setItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress', ZOHOmailAccountDetailResponce.data?.fecthingZOHOmeetingAccountDetails[0]?.primaryEmailAddress)
-
-        ZOHOmailAccountDetailResponce?.data?.fecthingZOHOmeetingAccountDetails[0]?.accountId && messageDrop('success', 'Account Details getted')
-
-        setTimeout(() => {
-          navigate('/maillog') // this is for getting out of that section
-        }, 100);
+      const ZOHOmailAccountDetailResponce = await axios.post('https://crm-server-opal.vercel.app/api/mailAccountToken', accessTokenParams)
+      if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.scope?.toString().includes('ZohoMail.accounts.ALL')) {
+        sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountId)
+        sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountName)
+        sessionStorage.setItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress', ZOHOmailAccountDetailResponce.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.primaryEmailAddress)
       }
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
 
-  // this function is getting the zoho mail Account detail (Account ID) 
-  const ZOHOmailFolderDetail = async () => {
-    let accessTokenParameter = {
-      code: Authcode,
-      client_id: process.env.REACT_APP_MAIL_CLIENT_ID,
-      client_secret: process.env.REACT_APP_MAIL_SECRET_ID,
-      redirect_uri: process.env.REACT_APP_MAIL_REDIRECT_URI,
-      grant_type: 'authorization_code',
-      ZOHOmailAccountID: ZOHOmailAccountdID && ZOHOmailAccountdID
-    }
+      ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderAccessToken?.scope?.toString().includes("ZohoMail.folders.ALL") && (() => {
+        if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderDetails) {
+          setZOHOmailFoldersDetails(ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderDetails)
+          sessionStorage.setItem('mailFolderDetails', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderDetails)) // stroing the api data in sessiong storage
+        } else {
 
-    try {
-      const folderTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailFolder`, accessTokenParameter) // this line send the request to node (server.js)
-      folderTokenResponce?.data?.getZOHOfolderAccessToken?.scope == "ZohoMail.folders.ALL" && (() => {
-        fetchedDataFromZOHOmailFOlder(folderTokenResponce?.data?.getZOHOfolderDetails)
-        setTimeout(() => {
-          navigate('/maillog') // this is for getting out of that section
-        }, 100);
+        }
+
       })()
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
 
-  const getZOHOmailMessageAccessToken = async () => {
-    try {
-      const ZOHOmailMessageDetailResponce = await axios.post(`https://crm-server-opal.vercel.app/api/ZOHOmailMessageAccessToken`, accessTokenParams) // this line send the request to node (server.js)      
-      ZOHOmailMessageDetailResponce?.data?.scope === "ZohoMail.messages.ALL" && (() => {
-        sessionStorage.setItem('ZOHOmailMessageAccessToken', ZOHOmailMessageDetailResponce?.data?.access_token)
+      ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderAccessToken?.scope?.toString().includes("ZohoMail.folders.ALL") && sessionStorage.setItem('ZOHOmailMessageAccessToken', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.access_token); // This store the access token  
+
+      if (ZOHOmailAccountDetailResponce?.status) {
         setTimeout(() => {
           navigate('/maillog')
         }, 100);
-      })()
+      }
     } catch (err) {
       console.log(err.message);
     }
@@ -273,6 +244,9 @@ const MailLog = () => {
     setFolderID(folderID)
   }
 
+  let mailFolderData = parsingFunction(ZOHOmailFoldersDetails) // this send this mail data  
+  const [folderID, setFolderID] = useState(mailFolderData ? mailFolderData[0]?.folderId : 0)
+
   const ccAddressCovertToHumanReadable = (ccAddesss) => { // this is for convert cc address to normal human readable email string    
     const parser = new DOMParser();
     const decodedString = parser.parseFromString(ccAddesss, 'text/html').body.textContent;
@@ -315,21 +289,19 @@ const MailLog = () => {
 
   useEffect(() => {
     if (Authcode !== null) {
-      userdefine() // meeting user account
+      // userdefine() // meeting user account
     }
   }, [undefined])
 
   useEffect(() => {
     if (Authcode !== null) {
-      ZOHO_Meeting_Access_Token() // meeting access token
+      // ZOHO_Meeting_Access_Token() // meeting access token
     }
   }, [undefined])
 
   useEffect(() => { // mail access tokens 
     if (Authcode !== null) {
       getZOHOmailAccountIDdetail()
-      ZOHOmailFolderDetail()
-      getZOHOmailMessageAccessToken()
     }
   }, [undefined])
 
@@ -351,9 +323,6 @@ const MailLog = () => {
     setZohoIndividualForwardMail(false)
   }
   const back = () => window.history.back() // this is for back one step
-  let mailFolderData = parsingFunction(ZOHOmailFoldersDetails) // this send this mail data  
-  const [folderID, setFolderID] = useState(mailFolderData ? mailFolderData[0]?.folderId : 0)
-
   individual !== null && (individual.innerHTML = individualMailMessage_content?.data?.content)
 
   return (
@@ -484,10 +453,10 @@ const MailLog = () => {
             <span>
 
               <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/social/real-estate/zh-real-estate.png' height={'200px'} preview={false} /></Row>
-              <Row justify={'center'}> <Title level={4}>  Click the <span style={{ color: '#5a3bb6' }}> Re-Generate Tokens </span> button to generate new tokens.</Title> </Row>
-              {Array.isArray(ZOHOmailAccountdID) && <Row className='PoppinsFont'> <Col span={7} style={{ textAlign: 'right' }}>1.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Account Access </span> Token</Col> </Row>}
-              {ZOHOmailFoldersDetails.length <= 0 && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>2.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Folder Access </span> Token</Col> </Row>}
-              {Array.isArray(ZOHOmailMessageAccessToken) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>3.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Message Access </span> Token</Col> </Row>}
+              <Row justify={'center'}> <Title level={4}>  Click the <span style={{ color: '#5a3bb6' }}> <Button onClick={fetchZOHOMailAccountDetail}><span style={{ color: 'red' }}>ZOHO MAIL ACCESS</span></Button> </span> for Zoho Mail Access.</Title> </Row>
+              {/* {Array.isArray(ZOHOmailAccountdID) && <Row className='PoppinsFont'> <Col span={7} style={{ textAlign: 'right' }}>1.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Account Access </span> Token</Col> </Row>} */}
+              {/* {ZOHOmailFoldersDetails.length <= 0 && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>2.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Folder Access </span> Token</Col> </Row>} */}
+              {/* {Array.isArray(ZOHOmailMessageAccessToken) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>3.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Message Access </span> Token</Col> </Row>} */}
             </span>
           </Col>
         </>}
@@ -496,3 +465,12 @@ const MailLog = () => {
 }
 
 export default MailLog
+
+// ZOHO mail integration code
+const fetchZOHOMailAccountDetail = () => { // This is for getting mail account_id.
+  const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL'
+  const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
+  const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
+
+  getZohoAuth_Code(scope, client_id, redirect_uri)
+}
