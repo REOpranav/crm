@@ -125,7 +125,7 @@ const MailLog = () => {
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccountIDdetail = async () => {
     try {
-      const ZOHOmailAccountDetailResponce = await axios.post('https://crm-server-opal.vercel.app/api/mailAccountToken', accessTokenParams)
+      const ZOHOmailAccountDetailResponce = await axios.post('https://crm-server-opal.vercel.app/mailAccountToken', accessTokenParams)
       if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.scope?.toString().includes('ZohoMail.accounts.ALL')) {
         sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountId)
         sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountName)
@@ -136,14 +136,10 @@ const MailLog = () => {
         if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderDetails) {
           setZOHOmailFoldersDetails(ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderDetails)
           sessionStorage.setItem('mailFolderDetails', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderDetails)) // stroing the api data in sessiong storage
-        } else {
-
+          sessionStorage.setItem('ZOHOmailMessageAccessToken', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.access_token);
         }
-
       })()
-
-      ZOHOmailAccountDetailResponce?.data?.getTokensAndFolderDetail?.getZOHOfolderAccessToken?.scope?.toString().includes("ZohoMail.folders.ALL") && sessionStorage.setItem('ZOHOmailMessageAccessToken', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.access_token); // This store the access token  
-
+      ZOHOmailAccountDetailResponce?.data?.meetingUserDetail?.getZOHOMeetingAccessToken?.scope?.toString().includes("ZohoMeeting.manageOrg.READ") && sessionStorage.setItem('userdatail', JSON.stringify(ZOHOmailAccountDetailResponce?.data?.meetingUserDetail?.getZOHOMeetingUserDetails)); // This store the Meeting User Detail  
       if (ZOHOmailAccountDetailResponce?.status) {
         setTimeout(() => {
           navigate('/maillog')
@@ -286,18 +282,6 @@ const MailLog = () => {
     }
     setISload(false)
   }
-
-  useEffect(() => {
-    if (Authcode !== null) {
-      // userdefine() // meeting user account
-    }
-  }, [undefined])
-
-  useEffect(() => {
-    if (Authcode !== null) {
-      // ZOHO_Meeting_Access_Token() // meeting access token
-    }
-  }, [undefined])
 
   useEffect(() => { // mail access tokens 
     if (Authcode !== null) {
@@ -453,7 +437,7 @@ const MailLog = () => {
             <span>
 
               <Row justify={'center'}> <Image src='https://www.zohowebstatic.com/sites/zweb/images/social/real-estate/zh-real-estate.png' height={'200px'} preview={false} /></Row>
-              <Row justify={'center'}> <Title level={4}>  Click the <span style={{ color: '#5a3bb6' }}> <Button onClick={fetchZOHOMailAccountDetail}><span style={{ color: 'red' }}>ZOHO MAIL ACCESS</span></Button> </span> for Zoho Mail Access.</Title> </Row>
+              <Row justify={'center'}> <Title level={4}><span style={{ color: '#5a3bb6' }}> <Button onClick={fetchZOHOMailAccountDetail}><span style={{ color: 'red' }}> INTEGRATE ZOHO MAIL</span></Button> </span></Title> </Row>
               {/* {Array.isArray(ZOHOmailAccountdID) && <Row className='PoppinsFont'> <Col span={7} style={{ textAlign: 'right' }}>1.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Account Access </span> Token</Col> </Row>} */}
               {/* {ZOHOmailFoldersDetails.length <= 0 && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>2.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Folder Access </span> Token</Col> </Row>} */}
               {/* {Array.isArray(ZOHOmailMessageAccessToken) && <Row className='PoppinsFont'><Col span={7} style={{ textAlign: 'right' }}>3.</Col> <Col span={17} style={{ textAlign: 'left' }}>Generate <span style={{ color: 'red', marginLeft: '5px', marginRight: '5px' }}>Zoho Message Access </span> Token</Col> </Row>} */}

@@ -15,9 +15,6 @@ const id = URL.split('/').pop()
 const messageDrop = (type, content) => {
   message.open({
     type: type,
-    style: {
-      padding: '20px',
-    },
     content: content
   })
 }
@@ -34,8 +31,8 @@ const contactButton = {
 const ScheduleMeeting = () => {
   const navigate = useNavigate();
   // accessing rhe access tokena and user detail from session storage
-  const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []
-  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
+  const meetingAccessTokenData = sessionStorage.getItem('ZOHOmailMessageAccessToken') ?? []
+  const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []  
 
   const { Title } = Typography
   const [error, setError] = useState({})
@@ -111,7 +108,6 @@ const ScheduleMeeting = () => {
     return errorvalues
   }
 
-  console.log(error);
 
   // this function for "to see if the input value is in error or not , if it in error ,it will change the class name into inputerror"
   function getInputClass(value) {
@@ -130,7 +126,7 @@ const ScheduleMeeting = () => {
       "session": {
         "topic": `${meetingData.topic}`,
         "agenda": `${meetingData.agenda}`,
-        "presenter": meetingUserDetail.userDetails.zuid,
+        "presenter": meetingUserDetail?.zuid,
         "startTime": `${moment(meetingData.statrDate).format('ll')} ${meetingData.time} ${meetingData.meridiem}`,
         "duration": 3600000,
         "timezone": "Asia/Calcutta",
@@ -141,8 +137,8 @@ const ScheduleMeeting = () => {
     const extras = {
       "params": {
         "extras": {
-          "zsoid": meetingUserDetail.userDetails.zsoid,
-          "access_token": `${meetingAccessTokenData.access_token}`,
+          "zsoid": meetingUserDetail?.zsoid,
+          "access_token": `${meetingAccessTokenData}`,
         }
       }
     }
@@ -150,7 +146,7 @@ const ScheduleMeeting = () => {
     try {
       const accessTokenResponce = await axios.post(`http://localhost:3002/api/create`, data, extras)// this line send the request to node (server.js)      
       if (accessTokenResponce.status == 200) {
-        createMeetingInDb(accessTokenResponce.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server                
+        createMeetingInDb(accessTokenResponce?.data) // This is for showing "sussessfully created message" and store the responce sesssion in mock server                
 
         if (window.location.pathname == '/ScheduleMeeting') {
           setTimeout(() => {
@@ -224,7 +220,7 @@ const ScheduleMeeting = () => {
   // this function fetch the datas from contact (only when url == schdule meeting)
   const fetching = async () => {
     try {
-      const responce = await axios.get('http://localhost:3000/contacts')
+      const responce = await axios.get('https://crm-server-opal.vercel.app/mongoDB/contacts')
       if (responce.status === 200) {
         setContactData(await responce.data);
       }

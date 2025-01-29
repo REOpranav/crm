@@ -43,33 +43,9 @@ const MeetingStep = () => {
     setMailInt(true)
   }
 
-  // this is zoho meeting integration code
-  const fetchZOHOmeetingUserDetail = async () => { // this code for getting org id
-    const scope = 'ZohoMeeting.manageOrg.READ'
-    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
-    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
-
-    getZohoAuth_Code(scope, client_id, redirect_uri)
-  }
-
-  const fetchZOHOmeetingAccessToken = () => {
-    messageLoading()
-    setTimeout(() => {
-      GetZOHO_MeetingAccessToken()
-    }, [1 * 1000])
-  }
-
-  const GetZOHO_MeetingAccessToken = () => { // this code for getting access token
-    const scope = 'ZohoMeeting.meeting'
-    const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
-    const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
-    getZohoAuth_Code(scope, client_id, redirect_uri)
-  }
-
-
   // ZOHO mail integration code
   const fetchZOHOMailAccountDetail = () => { // This is for getting mail account_id.
-    const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL'
+    const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL,ZohoMeeting.manageOrg.READ,ZohoMeeting.meeting.ALL'
     const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
     const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 
@@ -130,8 +106,7 @@ const MeetingStep = () => {
 
           <Row justify={'center'} style={{ padding: '30px' }}>
             <Space>
-              <Button onClick={fetchZOHOmeetingUserDetail} style={stylesForPadding}>GET USER TOKEN FOR ZOHO MEETING</Button>
-              <Button onClick={fetchZOHOmeetingAccessToken} style={stylesForPadding} type='primary'>GET ACCESS TOKEN FOR ZOHO MEETING</Button>
+              <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>GET ZOHO MEETING ACCESS</Button>
             </Space>
           </Row>
         </>
@@ -169,7 +144,7 @@ const MeetingStep = () => {
           </Row>
 
           <Row justify={'space-evenly'} style={{ padding: '30px' }}>
-            <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>GET ZOHO <span style={{ color: 'red' }}> MAIL ACCOUNT ACCESS</span>TOKEN </Button>
+            <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>INTEGRATE <span style={{ color: 'red' }}> ZOHO MAIL</span></Button>
           </Row>
         </>
       }

@@ -1014,6 +1014,47 @@
         "removedParticipants": "[]",
         "startDate": "Jan 13, 2025 03:33 AM"
       }
+    },
+    {
+      "id": "377457881",
+      "key": 768292078,
+      "session": {
+        "dialinUrl": "https://help.zoho.com/portal/kb/articles/zoho-meeting-dial-in-numbers",
+        "timezone": "Asia/Calcutta",
+        "departmentId": "1879993000000006065",
+        "addedParticipants": "[]",
+        "webServer": "meeting.zoho.com",
+        "creatorZuid": "856782203",
+        "isDepartmentAdmin": false,
+        "source": "Meeting Create page",
+        "endTimeMillisec": 1770677400000,
+        "encryptPwd": "afaca343859e807b0e5adcc385372f4251259a1793e6a0e17faaba35f1e7e54c",
+        "duration": 3600000,
+        "sys_id": "1879993000005369259",
+        "accessCode": "10155 14332 #",
+        "sessionType": "meeting",
+        "startTime": "Feb 10, 2026 03:20 AM IST",
+        "meeting": {
+          "zsoid": "689897284"
+        },
+        "participants": [],
+        "departmentName": "My Department",
+        "creator": "856782203",
+        "presenter": 856782203,
+        "offset": "19800000",
+        "isRecurring": false,
+        "joinLink": "https://meet.zoho.com/iv5xmw2Qn7",
+        "agenda": "Simple Testing ",
+        "startLink": "https://meeting.zoho.com/meeting/meeting-start?key=1015514332&x-meeting-org=689897284",
+        "UID": 1879993000005369300,
+        "startTimeMillisec": 1770673800000,
+        "topic": "Testing",
+        "endTime": "Feb 10, 2026 04:20 AM IST",
+        "pwd": "UreTBk",
+        "meetingKey": "1015514332",
+        "removedParticipants": "[]",
+        "startDate": "Feb 10, 2026 03:20 AM"
+      }
     }
   ]
 }
