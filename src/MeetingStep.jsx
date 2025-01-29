@@ -106,7 +106,7 @@ const MeetingStep = () => {
 
           <Row justify={'center'} style={{ padding: '30px' }}>
             <Space>
-              <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>GET ZOHO MEETING ACCESS</Button>
+              <Button onClick={fetchZOHOMailAccountDetail} style={stylesForPadding}>INTEGRATE <span style={{ color: 'red' }}> ZOHO METTING</span></Button>
             </Space>
           </Row>
         </>

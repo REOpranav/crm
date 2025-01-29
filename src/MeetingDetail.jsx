@@ -58,7 +58,7 @@ const MeetingDetail = () => {
   const pastData = []
 
   // accessing rhe access tokena and user detail from session storage
-  const meetingAccessTokenData = sessionStorage.getItem('ZOHOmailMessageAccessToken') ?? []  
+  const meetingAccessTokenData = sessionStorage.getItem('ZOHOmailMessageAccessToken') ?? []
   const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
 
   // this is for showing upcoming and past detail
@@ -161,7 +161,7 @@ const MeetingDetail = () => {
     window.history.back()
   }
 
-  
+
   return (
     <div>
       <Dashboard />
@@ -307,7 +307,7 @@ export default MeetingDetail
 
 // ZOHO mail integration code
 const fetchZOHOMailAccountDetail = () => { // This is for getting mail account_id.
-  const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL'
+  const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL,ZohoMeeting.manageOrg.READ,ZohoMeeting.meeting.ALL'
   const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
   const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 
