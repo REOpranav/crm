@@ -174,12 +174,12 @@ const Dashboard = ({ count }) => {
             </Row>
 
             {/* this code are dash baord */}
-            {(window.location.href == 'http://localhost:3001/' || window.location.href == 'https://lite-crm.vercel.app/') &&
+            {(window.location.href == 'http://localhost:3000/' || window.location.href == 'https://lite-crm.vercel.app/') &&
                 <div className='totalDashboard'>
                     <Row justify={'space-between'}>
                         <Col span={24}>
                             <Row id='welcome-row'>
-                                <Col id='welcome-message'>Welcome</Col>
+                                {/* <Col id='welcome-message'>Welcome</Col> */}
                                 <Col id='api-navigation-button'><Button onClick={restAPiPage}>Explore Zoho REST APIs</Button></Col>
                             </Row>
                             <Row id='totalViewOfDashboard'>

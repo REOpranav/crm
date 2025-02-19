@@ -307,7 +307,8 @@
 }
 
 #welcome-row>#api-navigation-button {
-    margin-right: 23px;
+    padding: 10px 0;
+    margin-top: -10px;
 }
 
 #chart_head {
