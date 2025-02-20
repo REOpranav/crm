@@ -83,7 +83,7 @@ const MeetingDetail = () => {
           }
         }
         try {
-          const meetingListResponce = await axios.post(`http://localhost:3002/api/list`, extras)// this line send the request to node (server.js)      
+          const meetingListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/list`, extras)// this line send the request to node (server.js)      
           if (meetingListResponce?.status == 200) {
             setMeetingList(meetingListResponce?.data)
           }
@@ -132,7 +132,7 @@ const MeetingDetail = () => {
         }
       }
       setISLoad(true)
-      const accessTokenResponce = await axios.post(`http://localhost:3002/api/meeting/delete`, data)
+      const accessTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/meeting/delete`, data)
       setISLoad(false)
     } catch (err) {
       setISLoad(false)
