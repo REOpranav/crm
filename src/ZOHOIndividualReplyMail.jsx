@@ -28,7 +28,7 @@ const greyColor = {
 const URL = window.location.href
 const id = URL.split('/').pop()
 
-const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, setReplySendStatus, content }) => {
+const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, setReplySendStatus, content, location }) => {
     const { Text, Title } = Typography
     const navigate = useNavigate();
     const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
@@ -116,6 +116,7 @@ const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, set
                             "accountId": ZOHOmailAccountdID && JSON.parse(ZOHOmailAccountdID),
                             "messageId": messageID ? messageID : 0,
                             "access_token": `${ZOHOmailMessageAccessToken}`,
+                            "location" : location
                         }
                     }
                 }

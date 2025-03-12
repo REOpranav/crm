@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from './Dashboard'
-import { Button, Col, Image, message, Popconfirm, Row, Space, Tooltip, Typography, Spin } from 'antd'
+import { Button, Col, Image, message, Row, Space, Typography } from 'antd'
 import axios from 'axios'
-import { json, Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './MailLog.css'
 import { CiMail } from "react-icons/ci";
-import { MdOutlineAirlineSeatLegroomReduced, MdOutlineDeleteOutline } from "react-icons/md";
-import { AiOutlineClose } from 'react-icons/ai'
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { RxArrowLeft } from "react-icons/rx";
-import SendMail from './SendMail'
 import ZOHOIndividualReplyMail from './ZOHOIndividualReplyMail'
 import { getZohoAccessToken_Params, getZohoAuth_Code } from 'api-auth-zoho'
 
@@ -19,6 +17,11 @@ const id = URL.split('/').pop()
 // this is for getting the code (query param) from URL
 const urlSearch = new URLSearchParams(window.location.search)
 const Authcode = urlSearch.get('code') ?? null
+const dataLocation = urlSearch.get('location') === 'us' ? 'com' : urlSearch.get('location')
+if (!sessionStorage.getItem('dataCenterRegion') || sessionStorage.getItem('dataCenterRegion') == 'null') {
+  sessionStorage.setItem('dataCenterRegion', dataLocation)
+}
+const dataCenterRegion = sessionStorage.getItem('dataCenterRegion')
 
 // this is message setup (ant design)
 const messageDrop = (type, content) => {
@@ -44,7 +47,7 @@ let client_id = process.env.REACT_APP_MAIL_CLIENT_ID
 let client_secret = process.env.REACT_APP_MAIL_SECRET_ID
 let redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 let grant_type = 'authorization_code'
-let accessTokenParams = getZohoAccessToken_Params(autharizationCode, client_id, client_secret, redirect_uri, grant_type)
+let accessTokenParams = getZohoAccessToken_Params(autharizationCode, client_id, client_secret, redirect_uri, grant_type, dataCenterRegion)
 
 
 const MailLog = () => {
@@ -71,61 +74,13 @@ const MailLog = () => {
   const ZOHOmailAccountDetailResponceAccountName = sessionStorage.getItem('ZOHOmailAccountDetailResponceAccountName') || []
   const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
 
-  // meeting codes (get user token)
-  // this function is getting the user define in zoho meeting
-  const userdefine = async () => {
-    try {
-      const accessTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/userdetail`, accessTokenParams) // this line send the request to node (server.js)                
-      userDeatailAuth(accessTokenResponce?.data)
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-
-  // if user datail are get ,it store in session storage
-  const userDeatailAuth = (token) => {
-    sessionStorage.setItem('userdatail', JSON.stringify(token)) // stroing thr api data in sessiong storage
-    const meetingUserDetail = JSON.parse(sessionStorage.getItem('userdatail')) ?? []
-    meetingUserDetail !== null && message.success('User Token Retrieved') //checking if there have meetingUserDetail for showing the success message
-    setTimeout(() => {
-      navigate('/maillog') // this is for getting out of that section
-    }, 100)
-  }
-
-  // meeting codes (get access token)
-  // this function is getting the access token
-  const ZOHO_Meeting_Access_Token = async () => {
-    try {
-      const accessTokenResponce = await axios.post(`https://crm-server-opal.vercel.app/api/token`, accessTokenParams) // this line send the request to node (server.js)      
-      if (accessTokenResponce?.data?.scope == 'ZohoMeeting.meeting.ALL') {
-        accessTokenData(accessTokenResponce?.data)
-
-        setTimeout(() => {
-          navigate('/maillog') // this is for getting out of that section
-        }, 300);
-      }
-    } catch (err) {
-      if (err.response) {
-        message.error('Error: ' + err.response.status + ' - ' + (err.response.data.message || 'Server Error'));
-      } else if (err.request) {
-        message.error('Error: No response from server.');
-      } else {
-        message.error('Error: ' + err.message);
-      }
-    }
-  }
-
-  // if accesstoken are getted ,stored in session storage
-  const accessTokenData = (token) => {
-    sessionStorage.setItem('accessToken', JSON.stringify(token)) // stroing thr api data in sessiong storage
-    const meetingAccessTokenData = JSON.parse(sessionStorage.getItem('accessToken')) ?? []  //checking if there have meetingAccessTokenData in session storage for showing the success message
-    meetingAccessTokenData !== null && message.success('Access Token Retrieved')
-  }
 
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccountIDdetail = async () => {
     try {
-      const ZOHOmailAccountDetailResponce = await axios.post('https://crm-server-opal.vercel.app/api/mailAccountToken', accessTokenParams)
+      console.log(accessTokenParams);
+
+      const ZOHOmailAccountDetailResponce = await axios.post('http://localhost:3002/api/mailAccountToken', accessTokenParams)
       if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.scope?.toString().includes('ZohoMail.accounts.ALL')) {
         sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountId)
         sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountName)
@@ -159,10 +114,11 @@ const MailLog = () => {
             "mailAccountID": ZOHOmailAccountdID ? `${ZOHOmailAccountdID}` : 0,
             "mailFolderID": ZOHOmailFolderID ? ZOHOmailFolderID : 0,
             "mailAccess_token": ZOHOmailMessageAccessToken,
+            "location": dataCenterRegion
           }
         }
         try {
-          const mailListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailList`, extras)// this line send the request to node (server.js)          
+          const mailListResponce = await axios.post(`http://localhost:3002/api/mailList`, extras)// this line send the request to node (server.js)          
           mailListResponce?.status == 200 && (() => {
             setMailList(mailListResponce?.data)
           })()
@@ -185,11 +141,12 @@ const MailLog = () => {
             "mailAccountID": ZOHOmailAccountdID ? ZOHOmailAccountdID : 0,
             "mailFolderID": ZOHOmailFolderID ? ZOHOmailFolderID : 0,
             "mailAccess_token": ZOHOmailMessageAccessToken,
-            "deletingMailFolder_ID": ZOHOmessageID && ZOHOmessageID
+            "deletingMailFolder_ID": ZOHOmessageID && ZOHOmessageID,
+            "location": dataCenterRegion
           }
         }
         try {
-          const mailListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/maildelete`, extras)// this line send the request to node (server.js)
+          const mailListResponce = await axios.post(`http://localhost:3002/api/maildelete`, extras)// this line send the request to node (server.js)
           mailListResponce.status == 200 && (() => {
             messageDrop('success', 'Deleted successfully')
             currentZOHOmailList()
@@ -211,11 +168,12 @@ const MailLog = () => {
             "mailAccountID": ZOHOmailAccountdID ? ZOHOmailAccountdID : 0,
             "mailFolderID": ZOHOmailFolderID ? ZOHOmailFolderID : 0,
             "mailAccess_token": ZOHOmailMessageAccessToken,
-            "showZOHOMailMessage": ZOHOmessageID && ZOHOmessageID
+            "showZOHOMailMessage": ZOHOmessageID && ZOHOmessageID,
+            "location": dataCenterRegion
           }
         }
         try {
-          const mailIndividualResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailDataIndividual`, extras)// this line send the request to node (server.js)
+          const mailIndividualResponce = await axios.post(`http://localhost:3002/api/mailDataIndividual`, extras) // this line send the request to node (server.js)
           if (mailIndividualResponce.status == 200) {
             setIndividualMailMessage_content(mailIndividualResponce?.data?.content)
             setTndividualMailMessage_details(mailIndividualResponce?.data?.detail)
@@ -233,7 +191,7 @@ const MailLog = () => {
     return data.length > 0 ? data : ""
   }
 
-  const sendFolderID = (folderID) => {  // Getting spacific Mail Folder ID 
+  const sendFolderID = (folderID) => {  // Getting spacific Mail Folder ID ;
     setISload(true)
     setProfileView(false) // closong rhe preview (message showing in side)
     setZOHOmailFolderID(folderID)
@@ -320,9 +278,9 @@ const MailLog = () => {
           <Link to={'/mailsend'}><Button type='primary' style={{ width: '305px' }} >Send mail</Button></Link>{/* we want to create a send mail code */}
         </Space>
       </Row>
-      <Row justify={'space-between'} style={{ backgroundColor: 'transparent', outline: 'none', border: 'none' }}>
+      <Row justify={'space-between'} style={{ backgroundColor: 'transparent', outline: 'none' }}>
         <Col span={16}>
-          <Row className='mailFolderOuterBox' justify={'space-around'}>
+          <Row className='mailFolderOuterBox' justify={'space-around'} style={{ display: 'flex', flexWrap: 'nowrap', overflowX: 'scroll' }}>
             {Array.isArray(mailFolderData) && mailFolderData.length > 0 && mailFolderData?.map(e =>
               <Col className='Mailfolders' onClick={() => sendFolderID(e?.folderId)}> <span> {e.folderId == folderID ?? 0 ? <span style={{ color: 'blueviolet', transition: 'all 0.3s ease-in-out' }}>{e?.folderName}</span> : e?.folderName} </span></Col>
             )}
@@ -368,6 +326,7 @@ const MailLog = () => {
                           toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
                           messageID={individualMailMessage_details?.data?.messageId}
                           subject={individualMailMessage_details?.data?.subject}
+                          location={dataCenterRegion}
                           setReplySendStatus={setProfileView}
                         />
                       </Col>
@@ -381,6 +340,7 @@ const MailLog = () => {
                           toAddress={individualMailMessage_details?.data?.fromAddress} // while sending reply message from address change into to address
                           messageID={individualMailMessage_details?.data?.messageId}
                           subject={individualMailMessage_details?.data?.subject}
+                          location={dataCenterRegion}
                           ccAddress={ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) !== 'Not Provided' ? ccAddressCovertToHumanReadable(individualMailMessage_details?.data?.ccAddress) : ''}
                           setReplySendStatus={setProfileView}
                         />
@@ -396,6 +356,7 @@ const MailLog = () => {
                           messageID={individualMailMessage_details?.data?.messageId}
                           subject={individualMailMessage_details?.data?.subject}
                           content={individualMailMessage_details?.data?.summary}
+                          location={dataCenterRegion}
                           setReplySendStatus={setProfileView}
                         />
                       </Col>
