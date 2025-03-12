@@ -38,9 +38,6 @@ const replyHeading = {
   padding: '10px'
 }
 
-const stylesForPadding = {
-  "padding": '20px'
-}
 
 let autharizationCode = Authcode
 let client_id = process.env.REACT_APP_MAIL_CLIENT_ID
@@ -80,7 +77,7 @@ const MailLog = () => {
     try {
       console.log(accessTokenParams);
 
-      const ZOHOmailAccountDetailResponce = await axios.post('http://localhost:3002/api/mailAccountToken', accessTokenParams)
+      const ZOHOmailAccountDetailResponce = await axios.post('https://crm-server-opal.vercel.app/api/mailAccountToken', accessTokenParams)
       if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.scope?.toString().includes('ZohoMail.accounts.ALL')) {
         sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountId)
         sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountName)
@@ -118,7 +115,7 @@ const MailLog = () => {
           }
         }
         try {
-          const mailListResponce = await axios.post(`http://localhost:3002/api/mailList`, extras)// this line send the request to node (server.js)          
+          const mailListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailList`, extras)// this line send the request to node (server.js)          
           mailListResponce?.status == 200 && (() => {
             setMailList(mailListResponce?.data)
           })()
@@ -146,7 +143,7 @@ const MailLog = () => {
           }
         }
         try {
-          const mailListResponce = await axios.post(`http://localhost:3002/api/maildelete`, extras)// this line send the request to node (server.js)
+          const mailListResponce = await axios.post(`https://crm-server-opal.vercel.app/api/maildelete`, extras)// this line send the request to node (server.js)
           mailListResponce.status == 200 && (() => {
             messageDrop('success', 'Deleted successfully')
             currentZOHOmailList()
@@ -173,7 +170,7 @@ const MailLog = () => {
           }
         }
         try {
-          const mailIndividualResponce = await axios.post(`http://localhost:3002/api/mailDataIndividual`, extras) // this line send the request to node (server.js)
+          const mailIndividualResponce = await axios.post(`https://crm-server-opal.vercel.app/api/mailDataIndividual`, extras) // this line send the request to node (server.js)
           if (mailIndividualResponce.status == 200) {
             setIndividualMailMessage_content(mailIndividualResponce?.data?.content)
             setTndividualMailMessage_details(mailIndividualResponce?.data?.detail)

@@ -29,8 +29,6 @@ const URL = window.location.href
 const id = URL.split('/').pop()
 
 const ZOHOIndividualReplyMail = ({ toAddress, messageID, subject, ccAddress, setReplySendStatus, content, location }) => {
-    const { Text, Title } = Typography
-    const navigate = useNavigate();
     const ZOHOmailAccountDetailResponcePrimaryEmailAddress = sessionStorage.getItem('ZOHOmailAccountDetailResponcePrimaryEmailAddress') || []
     const ZOHOmailMessageAccessToken = sessionStorage.getItem('ZOHOmailMessageAccessToken') || []
     const ZOHOmailAccountdID = sessionStorage.getItem('ZOHOmailAccountID') || []
