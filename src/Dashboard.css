@@ -150,7 +150,7 @@
     height: 30px;
     border-radius: 6px;
     position: relative;
-    border: 2px solid red;
+    border: 2px solid #FD9257;
     transform: rotate(-10deg);
     margin-left: -3px;
     z-index: 1;
@@ -160,7 +160,7 @@
     width: 30px;
     height: 30px;
     border-radius: 6px;
-    border: 2px solid green;
+    border: 2px solid yellow;
     transform: rotate(20deg);
     margin-left: -3px;
     z-index: 11;
@@ -170,7 +170,7 @@
     width: 30px;
     height: 30px;
     border-radius: 6px;
-    border: 2px solid blue;
+    border: 2px solid red;
     transform: rotate(-10deg);
     margin-left: -3px;
     z-index: 1;
@@ -181,7 +181,7 @@
     height: 30px;
     border-radius: 6px;
     animation-fill-mode: forwards;
-    border: 2px solid gold;
+    border: 2px solid saddlebrown;
     transform: rotate(0deg);
     margin-left: -4px;
     z-index: 1;
