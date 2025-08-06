@@ -133,12 +133,13 @@ const Dashboard = ({ count }) => {
                     {/* <Menu.Item> */}
                     <div class="topHead" onClick={home}>
                         <div class="logohead1">
-                            <div class="logoBox1"></div>
-                            <div class="logoBox2"></div>
+                            {/* <div class="logoBox1"></div> */}
+                            {/* <div class="logoBox2"></div> */}
                         </div>
                         <div class="logohead2">
                             <div class="logoBox3"></div>
-                            <div class="logoBox4"></div>
+                            <div class="logoBox3"></div>
+                            {/* <div class="logoBox4"></div> */}
                         </div>
                     </div>
                     {/* </Menu.Item> */}

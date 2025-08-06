@@ -75,9 +75,7 @@ const MailLog = () => {
   // this function is getting the zoho mail Account detail (Account ID) 
   const getZOHOmailAccountIDdetail = async () => {
     try {
-      console.log(accessTokenParams);
-
-      const ZOHOmailAccountDetailResponce = await axios.post('https://crm-server-opal.vercel.app/api/mailAccountToken', accessTokenParams)
+      const ZOHOmailAccountDetailResponce = await axios.post('http://localhost:3002/api/mailAccountToken', accessTokenParams)
       if (ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.getZOHOmailAccessToken?.scope?.toString().includes('ZohoMail.accounts.ALL')) {
         sessionStorage.setItem('ZOHOmailAccountID', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountId)
         sessionStorage.setItem('ZOHOmailAccountDetailResponceAccountName', ZOHOmailAccountDetailResponce?.data?.getTokensAndFetchedAccountDetail?.fecthingZOHOmailAccountDetails[0]?.accountName)
@@ -410,7 +408,7 @@ export default MailLog
 
 // ZOHO mail integration code
 const fetchZOHOMailAccountDetail = () => { // This is for getting mail account_id.
-  const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL,ZohoMeeting.manageOrg.READ,ZohoMeeting.meeting.ALL'
+  const scope = 'ZohoMail.accounts.ALL,ZohoMail.folders.ALL,ZohoMail.messages.ALL,ZohoMeeting.manageOrg.READ,ZohoMeeting.meeting.ALL,ZOHOPEOPLE.attendance.ALL'
   const client_id = process.env.REACT_APP_MAIL_CLIENT_ID
   const redirect_uri = process.env.REACT_APP_MAIL_REDIRECT_URI
 
