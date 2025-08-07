@@ -137,8 +137,8 @@ const Dashboard = ({ count }) => {
                             {/* <div class="logoBox2"></div> */}
                         </div>
                         <div class="logohead2">
-                            <div class="logoBox3"></div>
-                            <div class="logoBox3"></div>
+                            {/* <div class="logoBox3"></div> */}
+                            {/* <div class="logoBox3"></div> */}
                             {/* <div class="logoBox4"></div> */}
                         </div>
                     </div>
